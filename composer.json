@@ -20,14 +20,26 @@
         "php": ">=5.3.9",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
+        "friendsofsymfony/elastica-bundle": "^4.0",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "friendsofsymfony/user-bundle": "dev-master",
+        "hwi/oauth-bundle": "^0.5.3",
         "incenteev/composer-parameter-handler": "~2.0",
+        "jms/security-extra-bundle": "^1.6",
+        "knplabs/knp-menu": "^2.2",
+        "knplabs/knp-menu-bundle": "^2.1",
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "mopa/bootstrap-bundle": "^3.1",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "symfony/assetic-bundle": "~2.3",
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "symfony/assetic-bundle": "^2.8",
         "symfony/monolog-bundle": "^3.0.2",
         "symfony/swiftmailer-bundle": "~2.3,>=2.3.10",
         "symfony/symfony": "2.8.*",
-        "twig/twig": "^1.0||^2.0"
+        "twbs/bootstrap": "^3.3",
+        "twig/twig": "^1.0||^2.0",
+        "willdurand/js-translation-bundle": "^2.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
@@ -43,17 +55,16 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
-            "@symfony-scripts"
+            "@symfony-scripts",
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ],
         "post-update-cmd": [
-            "@symfony-scripts"
+            "@symfony-scripts",
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ]
     },
     "config": {
         "bin-dir": "bin",
-        "platform": {
-            "php": "5.3.9"
-        },
         "sort-packages": true
     },
     "extra": {

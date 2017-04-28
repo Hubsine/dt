@@ -1,0 +1,3 @@
+dt_o_auth_homepage:
+    path:     /
+    defaults: { _controller: DtOAuthBundle:Default:index }

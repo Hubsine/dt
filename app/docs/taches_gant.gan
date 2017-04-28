@@ -34,19 +34,13 @@
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
         <task id="0" name="Installer SF2" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="38" name="Initialiser Git dans le projet" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="17" name="Faire la liste de nos bundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="16" name="Créer nos propres bundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        <task id="1" name="Installation de Bundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true">
-            <task id="2" name="Assetic Bundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="9" name="MopaBootstrapBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="4" name="StofDoctrineExtensionsBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="5" name="FOSJsRoutingBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="6" name="JMSSecurtyExtraBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="7" name="KNPPaginatorBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="10" name="BazingaJsTranslationBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="8" name="Installer FOSUserBundlle et créer un bundle override" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        </task>
+        <task id="39" name="onfigurer SF2 (fichier dans config)" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="1" name="Installation et configuration de Bundle (cf fichier liste bundle)" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="14" name="Faire la liste des entité" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="40" name="Créer un mind Node ?" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="15" name="Faire chaque entité dans son bundle en générant les CRUD" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true">
             <task id="19" name="Les champs" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
             <task id="20" name="Les asserts et msg de validation" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>

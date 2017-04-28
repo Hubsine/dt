@@ -1,0 +1,3 @@
+dt_search_homepage:
+    path:     /
+    defaults: { _controller: DtSearchBundle:Default:index }

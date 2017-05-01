@@ -1,0 +1,10 @@
+dt_user:
+    slug:
+        blank: Le slug ne peux pas être vide
+    phone:
+        blank: 'Entrez un numéro mobile s''il vous plait.'
+        already_used: 'Le numéro de mobile est déjà utilisé.'
+    gender:
+        choices: 'Vous devez choisir si vous êtes une femme ou un homme.'
+    birthday:
+        date: 'Entrez une date de naissance valide.'

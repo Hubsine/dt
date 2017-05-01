@@ -142,12 +142,13 @@ assetic:
     filters:
         cssrewrite: ~
         less:
-            node: /usr/bin/node
-            node_paths: [/opt/lessc/lib, /usr/lib/node_modules]
+            node: /usr/local/bin/node
+            node_paths: [/opt/local/lib/node_modules]
             apply_to: "\.less$"
-        cssembed:
-            jar: %kernel.root_dir%/Resources/java/cssembed-0.3.6.jar
-            apply_to: "\.css$|\.less$"
+#        Ce block génère une erreur 
+#        cssembed:
+#            jar: %kernel.root_dir%/Resources/java/cssembed-0.3.6.jar
+#            apply_to: "\.css$|\.less$"
         yui_css:
             jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
             apply_to: "\.css$"
@@ -155,6 +156,30 @@ assetic:
             jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
 mopa_bootstrap:
+    icons:
+        icon_set: fontawesome4
+        shortcut: icon
+    navbar: ~
+    initializr:
+        meta:
+            title:                MopaBootstrapBundle
+            description:          MopaBootstrapBundle
+            keywords:             MopaBootstrapBundle, Twitter Bootstrap, HTML5 Boilerplate
+            author_name:          My name
+#            author_url:           http://...
+            feed_atom:            ~
+            feed_rss:             ~
+            sitemap:              ~
+            nofollow:             false
+            noindex:              false
+        dns_prefetch:
+            # Default:
+            - //ajax.googleapis.com
+        google:
+            wt:                   ~
+            analytics:            ~
+            extendedanalytics:    false
+        diagnostic_mode:      false
     form: ~  # Adds twig form theme  support
     menu: ~  # enables twig helpers for menu       
     form:
@@ -209,13 +234,19 @@ bazinga_js_translation:
     
 
 hwi_oauth:
+    connect:
+        account_connector: dt.oauth.user_provider
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook:    facebook_id    
     # list of names of the firewalls in which this bundle is active, this setting MUST be set
-    firewall_names: [secured_area]
+    firewall_names: [main]
     resource_owners:
         facebook:
             type:                facebook
-            client_id:           <client_id>
-            client_secret:       <client_secret>
+            client_id:           '%fb_client_id%'
+            client_secret:       '%fb_client_secret%'
             scope:         "email"
             options:
                 display: popup #dialog is optimized for popup window
@@ -223,6 +254,6 @@ hwi_oauth:
 
 fos_elastica:
     clients:
-        default: { host: donneton06.com, port:  }
+        default: { host: donneton06.com, port: null }
     indexes:
         app: ~                

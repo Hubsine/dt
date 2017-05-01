@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets
+        '@DtUserBundle/Resources/public/css/*.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock head_style %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts
+    '@DtUserBundle/Resources/public/js/*.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock foot_script_assetic %}
+
+
+
+{% block content_page %}
+    
+{% endblock content_page %}    

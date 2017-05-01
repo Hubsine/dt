@@ -1,3 +1,7 @@
 dt_user_homepage:
-    path:     /
-    defaults: { _controller: DtUserBundle:Default:index }
+    path:     /members
+    defaults: { _controller: DtUserBundle:Members:index }
+
+dt_user_member_history:
+    path: history
+    defaults: { _controller: DtUserBundle:Members:history }

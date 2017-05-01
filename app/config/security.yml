@@ -18,20 +18,18 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        secured_area:
-            anonymous: ~
-            oauth:
-                resource_owners:
-                    facebook:           "/login/check-facebook"
-                    google:             "/login/check-google"
-                    my_custom_provider: "/login/check-custom"
-                    my_github:          "/login/check-github"
-                login_path:        /login
-                use_forward:       false
-                failure_path:      /login
-
-                oauth_user_provider:
-                    service: hwi_oauth.user.provider.entity
+#        social_login:
+#            anonymous: ~
+#            oauth:
+#                resource_owners:
+#                    facebook:           "/social-login/check-facebook"
+#                    #google:             "/login/check-google"
+#                login_path:        /login
+#                use_forward:       false
+#                failure_path:      /login
+#
+#                oauth_user_provider:
+#                    service: dt.oauth.user_provider
         main:
             pattern: ^/
             form_login:
@@ -41,7 +39,17 @@ security:
                 # csrf_provider: form.csrf_provider
 
             logout:       true
-            anonymous:    true
+            anonymous:    ~
+            oauth:
+                resource_owners:
+                    facebook:           "/social-login/check-facebook"
+                    #google:             "/login/check-google"
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: dt.oauth.user_provider
             # activate different ways to authenticate
 
             # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

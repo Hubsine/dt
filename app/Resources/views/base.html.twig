@@ -1,13 +1,66 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
+    
+{% block navbar %}
+
+    {% block container_header_start %} 
+        <header id="main-header"> 
+    {% endblock container_header_start %}
+    
+    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, inverse: true, id: 'navbar-example' } %}
+
+        {% block brand %}
+            <a class="navbar-brand" href="#">Mopa Bootstrap</a>
+        {% endblock %}
+
+
+        {% block menu %}
+            {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createMainMenu') }}
+            {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLoginMenu', {'automenu': 'navbar', 'pull-right': true}) }}
+            {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLogoutMenu', {'automenu': 'navbar', 'pull-right': true}) }}
+        {% endblock menu %}
+
+    {% endembed %}
+
+
+    {% block container_header_end %} 
+        </header> 
+    {% endblock container_header_end %}
+
+{% endblock navbar %}
+
+{% block content %}
+    <div class="col-sm-12">
+        {% block content_page %}
+            
+        {% endblock content_page %}    
+    </div>
+{% endblock %}    
+    
+{% block body_start %}
+    {{ parent() }}
+    
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+{% endblock body_start %}
+
+{% block foot_script_assetic %}
+
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    
+    
+{% endblock foot_script_assetic %}

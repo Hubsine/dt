@@ -211,7 +211,7 @@ fos_user:
             validation_groups:  [Registration]        
     resetting:
         email:
-            template:   email/password_resetting.email.twig
+            #template:   email/password_resetting.email.twig
             from_email:
                 address:        resetting@donneton06.com
                 sender_name:    Demo Resetting            

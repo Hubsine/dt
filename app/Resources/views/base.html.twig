@@ -1,5 +1,11 @@
 {% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
-    
+
+{% block head_script %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+{% endblock head_script %}
+
 {% block navbar %}
 
     {% block container_header_start %} 

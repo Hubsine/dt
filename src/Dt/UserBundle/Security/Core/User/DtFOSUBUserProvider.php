@@ -1,10 +1,11 @@
 <?php 
 
-namespace Dt\OAuthBundle\Security\Core\User;
+namespace Dt\UserBundle\Security\Core\User;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseFOSUBProvider;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Dt\UserBundle\Entity\User;
 
 class DtFOSUBUserProvider extends BaseFOSUBProvider
 {

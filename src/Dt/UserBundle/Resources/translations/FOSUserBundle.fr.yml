@@ -1,0 +1,33 @@
+login_with_fb: 'Se connecter avec Facebook'
+login_width_google: 'Se connecter avec Google'
+register_with_fb: 'S''inscrire avec Facebook'
+register_width_google: 'S''inscre avec Google'
+
+registration:
+    flash:
+        user_created: 'Félicitation, votre compte a été créé avec succès.'
+    email:
+        message: |
+            Bonjour %username% !
+
+            Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
+            
+            Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.
+            
+            Une fois votre compte validé, vous pouvez vous connecter avec votre adresse email et le mot de passe suivant : 
+                
+            Mot de passe : %plainPassword%    
+
+            Cordialement,
+            L'équipe
+form:
+    email_confirmation: 'Répéter l''adresse e-mail'
+    gender: 'Vous êtes'
+    gender_male: 'Un homme'
+    gender_female: 'Une femme'
+    birthday: 'Date de naissance'
+    year: 'Année'
+    month: 'Mois'
+    day: 'Jour'
+    
+    

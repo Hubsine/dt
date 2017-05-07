@@ -180,9 +180,11 @@ mopa_bootstrap:
             analytics:            ~
             extendedanalytics:    false
         diagnostic_mode:      false
-    form: ~  # Adds twig form theme  support
     menu: ~  # enables twig helpers for menu       
     form:
+        horizontal:           false
+        templating:           false
+        render_required_asterisk:  false
         show_legend: false # default is true
         show_child_legend: false # default is true
         error_type: block # or inline which is default
@@ -194,9 +196,31 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: Dt\UserBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    registration:
+        confirmation:
+            enabled: true
+            #template:   '@FOSUser/Registration/email.txt.twig'
+            from_email:
+                address:        registration@donneton06.com
+                sender_name:    Demo Registration
+        form:
+            type:               Dt\UserBundle\Form\Type\RegistrationFormType 
+            #name:               fos_user_registration_form
+            validation_groups:  [Registration]        
+    resetting:
+        email:
+            template:   email/password_resetting.email.twig
+            from_email:
+                address:        resetting@donneton06.com
+                sender_name:    Demo Resetting            
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+
+fos_js_routing:
+    routes_to_expose: [hwi_oauth_service_redirect]        
         
 # JMS Security Extra Bundle
 jms_security_extra:
@@ -247,7 +271,8 @@ hwi_oauth:
             type:                facebook
             client_id:           '%fb_client_id%'
             client_secret:       '%fb_client_secret%'
-            scope:         "email"
+            # See https://developers.facebook.com/docs/facebook-login/permissions
+            scope:         "public_profile,email" 
             options:
                 display: popup #dialog is optimized for popup window
                 auth_type: rerequest

@@ -2,13 +2,38 @@
 
 function FbLogin(){
     
-    FB.login(function(response) {
+    FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
-            // Logged into your app and Facebook.
+            // connected
+            alert('Already connected, redirect to login page to create token.');
+            document.location = Routing.generate('hwi_oauth_service_redirect', { service: "facebook" }, true);
         } else {
-            // The person is not logged into this app or we are unable to tell. 
+            // not_authorized
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    document.location = Routing.generate('hwi_oauth_service_redirect', { service: "facebook" }, true);
+                } else {
+                    alert('Cancelled.');
+                }
+            }, {scope: 'public_profile,email'});
         }
     });
+    
+//    FB.login(function(response) {
+//        if (response.status === 'connected') {
+//            alert('Already connected, redirect to login page to create token.');
+//            document.location = Routing.generate('hwi_oauth_service_redirect', { service: "facebook" }, true);
+//        } else {
+//            // The person is not logged into this app or we are unable to tell. 
+//            FB.login(function(response){
+//               if (response.authResponse) {
+//                   document.location = Routing.generate('hwi_oauth_service_redirect', { service: "facebook" }, true);
+//               } else {
+//                   alert('Cancelled.');
+//               } 
+//            }, {scope: 'public_profile,email,user_about_me,user_birthday,user_location'});
+//        }
+//    }, {scope: 'public_profile,email,user_about_me,user_birthday,user_location'});
     
 }
 

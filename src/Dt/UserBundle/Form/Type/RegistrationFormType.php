@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\UserBundle\Util\LegacyFormHelper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -15,27 +18,47 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('username', null, 
+                ->add('username', TextType::class, 
                         array(
                             'label' => 'form.username', 
-                            'translation_domain' => 'FOSUserBundle')
-                        )
-                ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), 
-                        array(
-                            'label' => 'form.email', 
-                            'translation_domain' => 'FOSUserBundle')
-                        )    
-                ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), 
-                        array(
-                            'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
-                            'options' => array('translation_domain' => 'FOSUserBundle'),
-                            'first_options' => array('label' => 'form.password'),
-                            'second_options' => array('label' => 'form.password_confirmation'),
-                            'invalid_message' => 'fos_user.password.mismatch',
+                            #'label_attr'    => array('class' => 'label-control'),
+                            'translation_domain' => 'FOSUserBundle',
+                            'required'  => false
                             )
                         )
-                ->add('gender')
-                ->add('birthday')
+                ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), 
+                        array(
+                            'translation_domain' => 'FOSUserBundle',
+                            'type'  => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'),
+                            'first_options' => array('label' => 'form.email'),
+                            'second_options' => array('label' => 'form.email_confirmation'),
+                            'invalid_message' => 'dt_user.email.mismatch',
+                            'required'  => false
+                            )
+                        )    
+                ->add('birthday', BirthdayType::class, 
+                        array(
+                            'translation_domain' => 'FOSUserBundle',
+                            'label' => 'form.birthday', 
+                            'required'  => false,
+                            'placeholder' => array(
+                                'year' => 'form.year', 'month' => 'form.month', 'day' => 'form.day'
+                            )
+                        ))
+                ->add('gender', ChoiceType::class,
+                        array(
+                            'translation_domain' => 'FOSUserBundle',
+                            'label' => 'form.gender',
+                            'required'  => true,
+                            'expanded'  => true,
+                            'multiple'  => false,
+                            'choices_as_values' => true,
+                            'choice_attr' => function($val, $key, $index) {
+                                // adds a class like attending_yes, attending_no, etc
+                                return ['class' => ''];
+                            },
+                            'choices'  => array('form.gender_male' => 'male', 'form.gender_female' => 'female')
+                        ))
                 ;
     }
     

@@ -38,11 +38,12 @@
         <task id="17" name="Faire la liste de nos bundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="16" name="Créer nos propres bundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="39" name="configurer SF2 (fichier dans config)" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="44" name="Créer et init ACL" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="1" name="Installation et configuration de Bundle (cf fichier liste bundle)" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="14" name="Faire la liste des entité" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="41" name="Extend la class Gedmo\Timestampable\Traits\TimestampableEntity ?" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="42" name="configurer et organiser les templates" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        <task id="40" name="Créer un mind Node ?" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="40" name="Créer toutes les routes dans routing" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="15" name="Faire chaque entité dans son bundle en générant les CRUD" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true">
             <task id="19" name="Les champs" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
             <task id="20" name="Les asserts et msg de validation" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>

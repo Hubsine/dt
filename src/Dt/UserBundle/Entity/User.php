@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as DtAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 
@@ -36,16 +37,15 @@ class User extends BaseUser
 
     /**
      * 
-     * @ORM\Column(unique=true, name="slug")
+     * @ORM\Column(unique=true, name="slug", nullable=false)
      * @Gedmo\Slug(fields={"username", "id"})
-     * @Assert\NotBlank(message="dt_user.slug.blank", groups={"Registration"})
      * 
      * @var string
      */
     protected $slug;
     
     /**
-     * @ORM\Column(unique=true, type="integer", name="phone")
+     * @ORM\Column(unique=true, type="integer", name="phone", nullable=true)
      * @Assert\NotBlank(message="dt_user.phone.blank", groups={})
      * 
      * @var integer
@@ -54,7 +54,7 @@ class User extends BaseUser
     
     /**
      * @ORM\Column(type="string", length=10, name="gender")
-     * @Assert\Choice(choices = {"male", "female"}, message="dt_user.gender.choice", groups={"Registration"})
+     * @Assert\Choice(choices = {"male", "female"}, message="dt_user.gender.choice", groups={"Registration", "SocialRegistration"})
      * 
      * @var string
      */
@@ -62,13 +62,22 @@ class User extends BaseUser
     
     /**
      * @ORM\Column(type="date", name="birthday")
+     * @Assert\NotBlank(message="dt_user.birthday.blank", groups={"Registration"})
      * @Assert\Date(message="dt_user.birthday.date", groups={"Registration"})
-     * Assert\NotBlank(message="dt_user.birthday.blank", groups={"Registration"})
+     * @Assert\LessThanOrEqual("-18 years", groups={"Registration"}, message="dt_user.birthday.less_than_or_equal")
      * 
      * @var date
      */
     protected $birthday;
     
+    /**
+     * ORM\Column(type="string", name="about")
+     * 
+     * @var string
+     */
+    protected $about;
+
+
     /**
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
      */

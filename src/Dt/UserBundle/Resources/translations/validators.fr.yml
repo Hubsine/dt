@@ -7,4 +7,8 @@ dt_user:
     gender:
         choices: 'Vous devez choisir si vous êtes une femme ou un homme.'
     birthday:
+        blank: 'Selectionnez une date de naissance.'
         date: 'Entrez une date de naissance valide.'
+        less_than_or_equal: 'Vous devez avoir plus de 18 ans pour pouvoir vous inscrire sur donneton06.com'
+    email:
+        mismatch: 'Les deux adresses e-mail ne sont pas identiques.'    

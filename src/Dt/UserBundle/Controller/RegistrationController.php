@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Controller\RegistrationController as ExtendedController;
+use FOS\UserBundle\Util\TokenGenerator;
 
 /**
  * Controller managing the registration.
@@ -51,6 +52,11 @@ class RegistrationController extends ExtendedController
 
         $user = $userManager->createUser();
         $user->setEnabled(true);
+      
+        $tokenGenerator = new TokenGenerator();
+        $userPlainPassword = $tokenGenerator->generateToken();
+        
+        $user->setPlainPassword(substr($userPlainPassword,0, 15));
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -77,7 +83,7 @@ class RegistrationController extends ExtendedController
                 }
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
+                
                 return $response;
             }
 

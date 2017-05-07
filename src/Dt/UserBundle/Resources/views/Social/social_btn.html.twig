@@ -1,11 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if app.request.get('_route') == 'fos_user_registration_register' %}
-    {% set with_fb = 'register_with_fb'|trans %}
-    {% set with_google = 'register_width_google'|trans %}
+    {% set with_fb = 'layout.register_with_fb'|trans %}
+    {% set with_google = 'layout.register_width_google'|trans %}
 {% elseif app.request.get('_route') == 'fos_user_security_login' %}
-    {% set with_fb = 'login_with_fb'|trans %}
-    {% set with_google = 'login_with_fb'|trans %}
+    {% set with_fb = 'layout.login_with_fb'|trans %}
+    {% set with_google = 'layout.login_with_fb'|trans %}
 {% endif %}    
 
 <div class="row">

@@ -10,12 +10,14 @@
 {% endblock head_style %}
 
 {% block foot_script_assetic %}
-    {{ parent() }}
+    
     {% javascripts
     '@DtUserBundle/Resources/public/js/*.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    
+    {{ parent() }}
 {% endblock foot_script_assetic %}
 
 

@@ -23,3 +23,11 @@ parameters:
 
     fb_client_id: 466419016852413
     fb_client_secret: 67e17a3c53c0addb577747b3c9c721d7
+
+    test_fb_client_id: 745081585652820
+    test_fb_client_secret: 8df4754d8c2da60c426ab6d840eef458
+
+    fb_client_id: 416091748765235
+    fb_client_secret: 42b9c13d2379ac060279438db339bcc5
+    test_fb_client_id: 416100258764384
+    test_fb_client_secret: bf7443e02cbed7db12e6a9309c5aa71c

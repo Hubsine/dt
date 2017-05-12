@@ -11,4 +11,10 @@ dt_user:
         date: 'Entrez une date de naissance valide.'
         less_than_or_equal: 'Vous devez avoir plus de 18 ans pour pouvoir vous inscrire sur donneton06.com'
     email:
-        mismatch: 'Les deux adresses e-mail ne sont pas identiques.'    
+        mismatch: 'Les deux adresses e-mail ne sont pas identiques.'  
+    first_name:
+        blank: 'Entrez un prénom s''il vous plait.'
+        type: 'Le prénom comporte des caractères non autorisé.'
+    last_name:
+        blank: 'Entrez un nom s''il vous plait.'
+        type: 'Le nom comporte des caractères non autorisé.'    

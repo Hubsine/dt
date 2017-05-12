@@ -37,6 +37,9 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
+        var_dump($response->getResponse());
+        
+        die(0);
         $userEmail = $response->getEmail();
         $user = $this->userManager->findUserByEmail($userEmail);
 
@@ -56,5 +59,11 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
         $user->$setter($response->getAccessToken());//update access token
 
         return $user;
+    }
+    
+    public function hydrateUserFromFacebook(UserResponseInterface $response){
+        
+        $user = new User();
+        $fbDatas = $response->getResponse();
     }
 }

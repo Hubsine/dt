@@ -269,13 +269,19 @@ hwi_oauth:
     resource_owners:
         facebook:
             type:                facebook
-            client_id:           '%fb_client_id%'
-            client_secret:       '%fb_client_secret%'
+            client_id:           '%test_fb_client_id%'
+            client_secret:       '%test_fb_client_secret%'
             # See https://developers.facebook.com/docs/facebook-login/permissions
-            scope:         "public_profile,email" 
+            #scope: "id,age_range,link,gender,picture,email"
+            infos_url:     "https://graph.facebook.com/me?fields=id,name,first_name,last_name,link,gender,email,age_range,picture"
+            paths: 
+                picture: picture.data.url
+                age_range: age_range.min
             options:
-                display: popup #dialog is optimized for popup window
+                #dialog is optimized for popup window
+                display: popup 
                 auth_type: rerequest
+                csrf: true
 
 fos_elastica:
     clients:

@@ -42,7 +42,7 @@ security:
             anonymous:    ~
             oauth:
                 resource_owners:
-                    facebook:           "/social-login/check-facebook"
+                    facebook:           "/login/check-facebook"
                     #google:             "/login/check-google"
                 login_path:        /login
                 use_forward:       false

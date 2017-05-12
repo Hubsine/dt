@@ -5,11 +5,11 @@
     {% set with_google = 'layout.register_width_google'|trans %}
 {% elseif app.request.get('_route') == 'fos_user_security_login' %}
     {% set with_fb = 'layout.login_with_fb'|trans %}
-    {% set with_google = 'layout.login_with_fb'|trans %}
+    {% set with_google = 'layout.login_with_google'|trans %}
 {% endif %}    
 
 <div class="row">
-    <a onclick="FbLogin()" class="fb-login-btn btn btn-md col-sm-12">{{ with_fb }}</a>
+    <a onclick="FbLogin();" class="fb-login-btn btn btn-md col-sm-12">{{ with_fb }}</a>
     <a class="google-login-btn btn-md col-sm-12">{{ with_google }}</a>
 </div>
 <div id="status">

@@ -11,6 +11,7 @@
                 <option name="message">fos_user.username.blank</option>
                 <option name="groups">
                     <value>Registration</value>
+                    <value>FbRegistration</value>
                     <value>Profile</value>
                 </option>
             </constraint>
@@ -21,6 +22,7 @@
                 <option name="maxMessage">fos_user.username.long</option>
                 <option name="groups">
                     <value>Registration</value>
+                    <value>FbRegistration</value>
                     <value>Profile</value>
                 </option>
             </constraint>
@@ -31,6 +33,7 @@
                 <option name="message">fos_user.email.blank</option>
                 <option name="groups">
                     <value>Registration</value>
+                    <value>FbRegistration</value>
                     <value>Profile</value>
                 </option>
             </constraint>
@@ -41,6 +44,7 @@
                 <option name="maxMessage">fos_user.email.long</option>
                 <option name="groups">
                     <value>Registration</value>
+                    <value>FbRegistration</value>
                     <value>Profile</value>
                 </option>
             </constraint>
@@ -48,6 +52,7 @@
                 <option name="message">fos_user.email.invalid</option>
                 <option name="groups">
                     <value>Registration</value>
+                    <value>FbRegistration</value>
                     <value>Profile</value>
                 </option>
             </constraint>

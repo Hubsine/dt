@@ -4,13 +4,15 @@ namespace Dt\UserBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * @ORM\Entity(name="profile_picture")
+ * @ORM\Entity
+ * @ORM\Table(name="profile_picture")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
- * @Gedmo\Uploadable(pathMethod="getPath", allowedTypes="jpg,jpeg,png", maxSize="16777216", path="/my/path", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)
+ * @Gedmo\Uploadable(pathMethod="getPathFolder", allowedTypes="jpg,jpeg,png", maxSize="16777216", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)
  */
 class ProfilePicture
 {
@@ -21,6 +23,7 @@ class ProfilePicture
      */
     protected $id;
     
+    use SoftDeleteableEntity;
     use TimestampableEntity;
 
     /**
@@ -47,14 +50,63 @@ class ProfilePicture
      */
     protected $size;
 
-
-    public function myCallbackMethod(array $info)
-    {
-        // Do some stuff with the file..
+    /**
+     * 
+     * @param string $defaultPath
+     * @return string
+     */
+    public function getPathFolder($defaultPath){
+        return '/uploads';
     }
     
-    public function getPath($defaultPath){
-        
+    /**
+     * 
+     * @param string $defaultPath
+     * @return string
+     */
+    public function getPath(){
+        return $this->path;
     }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getMimeType() {
+        return $this->mimeType;
+    }
+
+    public function getSize() {
+        return $this->size;
+    }
+    
+    public function setPath($path){
+        $this->path = $path;
+        
+        return $this;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+        
+        return $this;
+    }
+
+    public function setMimeType($mimeType) {
+        $this->mimeType = $mimeType;
+        
+        return $this;
+    }
+
+    public function setSize($size) {
+        $this->size = $size;
+        
+        return $this;
+    }
+
 
 }

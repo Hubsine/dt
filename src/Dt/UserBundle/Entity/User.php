@@ -5,6 +5,7 @@ namespace Dt\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Dt\UserBundle\Entity\ProfilePicture;
@@ -28,6 +29,7 @@ class User extends BaseUser
         $this->setRoles(array('ROLE_USER'));
     }
     
+    use SoftDeleteableEntity;
     use TimestampableEntity;
     
     /**
@@ -40,8 +42,8 @@ class User extends BaseUser
     /**
      * @ORM\Column(name="first_name", nullable=true)
      * 
-     * @Assert\NotBlank(groups={"FbRegistration", "test"}, message="dt_user.first_name.blank")
-     * @Assert\Type(type="alpha", groups={"FbRegistration", "test"}, message="dt_user.first_name.type")
+     * @Assert\NotBlank(groups={}, message="dt_user.first_name.blank")
+     * @Assert\Type(type="alpha", groups={"FbRegistration"}, message="dt_user.first_name.type")
      * 
      * @var string
      */
@@ -50,7 +52,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(name="last_name", nullable=true)
      * 
-     * @Assert\NotBlank(groups={"FbRegistration"}, message="dt_user.last_name.blank")
+     * @Assert\NotBlank(groups={}, message="dt_user.last_name.blank")
      * @Assert\Type(type="alpha", groups={"FbRegistration"}, message="dt_user.last_name.type")
      * 
      * @var string
@@ -112,7 +114,19 @@ class User extends BaseUser
     protected $facebookAccessToken;
     
     /**
-     * @ORM\OneToOne(name="profile_picture", targetEntity="Dt\UserBundle\Entity\ProfilePicture", cascade={"persist", "remove"})
+     * @Assert\GreaterThanOrEqual(
+     *      value=18, 
+     *      message="dt_user.age_range.greater_than_or_equal",
+     *      groups={"FbRegistration"})
+     * 
+     * @var integer
+     */
+    protected $ageRange;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\ProfilePicture", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      * 
      * @var Dt\UserBundle\Entity\ProfilePicture
      */
@@ -316,4 +330,24 @@ class User extends BaseUser
     {
         return $this->profilePicture;
     }
+    
+    /**
+     * Get ageRange
+     * 
+     * @return integer
+     */
+    public function getAgeRange() {
+        return $this->ageRange;
+    }
+
+    /**
+     * Set ageRange 
+     * 
+     * @param integer $ageRange
+     */
+    public function setAgeRange($ageRange) {
+        $this->ageRange = $ageRange;
+    }
+
+
 }

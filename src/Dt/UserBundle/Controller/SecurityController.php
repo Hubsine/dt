@@ -17,6 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use FOS\UserBundle\Controller\SecurityController as ExtendedController;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use Dt\UserBundle\Entity\User;
+use FOS\UserBundle\FOSUserEvents;
+use Dt\UserBundle\DtUserEvents;
 
 class SecurityController extends ExtendedController
 {
@@ -29,6 +33,15 @@ class SecurityController extends ExtendedController
     {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
+        /** @var $dispatcher EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+        
+        $event = new GetResponseUserEvent(new User(), $request);
+        $dispatcher->dispatch(DtUserEvents::USER_LOGIN_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
 
         $authErrorKey = Security::AUTHENTICATION_ERROR;
         $lastUsernameKey = Security::LAST_USERNAME;

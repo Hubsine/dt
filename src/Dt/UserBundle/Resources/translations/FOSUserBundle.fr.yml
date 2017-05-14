@@ -3,6 +3,7 @@ layout:
     login_with_google: 'Se connecter avec Google'
     register_with_fb: 'S''inscrire avec Facebook'
     register_with_google: 'S''inscre avec Google'
+    login_in: 'Content de vous revoir.'
 
 security:
     password_forget: 'Mot de passe oublié ?'

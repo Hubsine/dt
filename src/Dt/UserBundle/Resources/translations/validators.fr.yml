@@ -10,6 +10,8 @@ dt_user:
         blank: 'Selectionnez une date de naissance.'
         date: 'Entrez une date de naissance valide.'
         less_than_or_equal: 'Vous devez avoir plus de 18 ans pour pouvoir vous inscrire sur donneton06.com'
+    age_range:
+        greater_than_or_equal: 'Vous devez avoir plus de 18 ans pour pouvoir vous inscrire sur donneton06.com'
     email:
         mismatch: 'Les deux adresses e-mail ne sont pas identiques.'  
     first_name:

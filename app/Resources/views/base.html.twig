@@ -21,8 +21,15 @@
 
         {% block menu %}
             {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createMainMenu') }}
-            {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLoginMenu', {'automenu': 'navbar', 'pull-right': true}) }}
-            {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLogoutMenu', {'automenu': 'navbar', 'pull-right': true}) }}
+            
+            {% if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLoginMenu', {'automenu': 'navbar', 'pull-right': true}) }}
+            {% endif %}
+            
+            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLogoutMenu', {'automenu': 'navbar', 'pull-right': true}) }}
+            {% endif %}
+            
         {% endblock menu %}
 
     {% endembed %}

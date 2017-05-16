@@ -1,6 +1,4 @@
-# This file is a "template" of what your parameters.yml file should look like
-# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
-# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+# This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
@@ -11,23 +9,16 @@ parameters:
 
     encryption: ssl
     auth_mode: login
-    
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
     mailer_user: shonen.shojo@gmail.com
     mailer_password: 16781741
-    
     secret: 81914aeb848449b8f000368dd4c977392a421edd
-
-    mailer_user: shonen.shojo@gmail.com
-
-    fb_client_id: 466419016852413
-    fb_client_secret: 67e17a3c53c0addb577747b3c9c721d7
-
-    test_fb_client_id: 745081585652820
-    test_fb_client_secret: 8df4754d8c2da60c426ab6d840eef458
 
     fb_client_id: 416091748765235
     fb_client_secret: 42b9c13d2379ac060279438db339bcc5
     test_fb_client_id: 416100258764384
     test_fb_client_secret: bf7443e02cbed7db12e6a9309c5aa71c
+
+    google_client_id:  392314135321-b2uun47jopmnvp16np3llejerqqvvtp2.apps.googleusercontent.com 
+    google_client_secret:  3miqgGwipNohXqDVxtNeWJ0X 

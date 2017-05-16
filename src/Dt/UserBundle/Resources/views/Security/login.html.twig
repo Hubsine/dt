@@ -1,10 +1,12 @@
 {% extends "DtUserBundle::layout.html.twig" %}
 
 {% block content_page %}
-    <div class="col-md-6">
+    <div class="row">
+    <div class="col-md-6 social-connect-buttons">
     {{ include('DtUserBundle:Social:social_btn.html.twig') }}
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 social-connect-buttons">
     {{ include('DtUserBundle:Security:login_content.html.twig') }}
     </div>
+    </diV>
 {% endblock content_page %}

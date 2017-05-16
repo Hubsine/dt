@@ -7,7 +7,7 @@ parameters:
 services:
     dt.oauth.user_provider:
         class: %dt.oauth.user_provider.class%
-        arguments: ['@fos_user.user_manager', { facebook: facebook_id }, '@event_dispatcher', '@validator', '@session']
+        arguments: ['@fos_user.user_manager', { facebook: facebookId, google: googleId }, '@event_dispatcher', '@validator', '@session']
 
     # Listener
     dt_user.listener.oauth_user:

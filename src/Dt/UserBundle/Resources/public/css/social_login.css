@@ -1,5 +1,15 @@
 
 .fb-login-btn{
     background-color: #3B5998;
-    color: #FFF;
 }
+
+.google-login-btn{
+    background-color: #D91E00;
+    width: 100%;
+}
+
+a[class*="-login-btn"], a[class*="-login-btn"]:hover{
+    color: #FFF;
+    margin-bottom: 40px;
+}
+

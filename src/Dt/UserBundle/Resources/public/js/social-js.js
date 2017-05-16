@@ -1,3 +1,49 @@
+function googleSignInOnSuccess(googleUser) {
+
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    
+    //var id_token = googleUser.getAuthResponse().id_token;
+    //var xhr = new XMLHttpRequest();
+    //var url = Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true);
+    
+//    xhr.open('POST', 'Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true)');
+//    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//    xhr.onload = function() {
+//      console.log('Signed in as: ' + xhr.responseText);
+//    };
+//    xhr.send('idtoken=' + id_token);
+
+    //document.location = Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true);
+    
+    console.log(id_token);
+}
+
+function googleSignInOnError(error){
+    console.log(error);
+}
+
+function attachSignin(element) {
+    auth2.attachClickHandler(element, {}, googleSignInOnSuccess, googleSignInOnError);
+}
+  
+gapi.load('auth2', function(){
+    auth2 = gapi.auth2.init({
+        client_id: '392314135321-b2uun47jopmnvp16np3llejerqqvvtp2.apps.googleusercontent.com',
+        ux_mode: 'redirect', // Or redirect
+        redirect_uri: Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true),
+        cookiepolicy: 'single_host_origin'
+    });
+    attachSignin(document.getElementById('google-login-btn'));
+});
+    
+   
+
+
+
 
 
 function FbLogin(){
@@ -19,23 +65,6 @@ function FbLogin(){
             }, {scope: 'email'});
         }
     });
-    
-//    FB.login(function(response) {
-//        if (response.status === 'connected') {
-//            alert('Already connected, redirect to login page to create token.');
-//            document.location = Routing.generate('hwi_oauth_service_redirect', { service: "facebook" }, true);
-//        } else {
-//            // The person is not logged into this app or we are unable to tell. 
-//            FB.login(function(response){
-//               if (response.authResponse) {
-//                   document.location = Routing.generate('hwi_oauth_service_redirect', { service: "facebook" }, true);
-//               } else {
-//                   alert('Cancelled.');
-//               } 
-//            }, {scope: 'public_profile,email,user_about_me,user_birthday,user_location'});
-//        }
-//    }, {scope: 'public_profile,email,user_about_me,user_birthday,user_location'});
-    
 }
 
 function statusChangeCallback(response) {

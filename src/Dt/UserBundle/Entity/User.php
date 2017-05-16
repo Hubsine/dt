@@ -114,6 +114,13 @@ class User extends BaseUser
     protected $facebookAccessToken;
     
     /**
+     * @ORM\Column(name="google_id", type="string", length=255, nullable=true)
+     */
+    protected $gooleId;
+
+    protected $googleAccessToken;
+    
+    /**
      * @Assert\GreaterThanOrEqual(
      *      value=18, 
      *      message="dt_user.age_range.greater_than_or_equal",
@@ -349,5 +356,42 @@ class User extends BaseUser
         $this->ageRange = $ageRange;
     }
 
+    /**
+     * @param string $googleId
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleId()
+    {
+        return $this->googleId;
+    }
+
+    /**
+     * @param string $googleAccessToken
+     * @return User
+     */
+    public function setGoogleAccessToken($googleAccessToken)
+    {
+        $this->googleAccessToken = $googleAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->googleAccessToken;
+    }
 
 }

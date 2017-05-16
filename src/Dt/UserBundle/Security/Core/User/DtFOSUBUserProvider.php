@@ -24,7 +24,7 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
     public $eventDispatcher;
     
     /**
-     * @var  ValidatorInterface
+     * @var ValidatorInterface
      */
     public $validator;
     
@@ -50,29 +50,6 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function connect(UserInterface $user, UserResponseInterface $response)
-    {
-        // get property from provider configuration by provider name
-        // , it will return `facebook_id` in that case (see service definition below)
-        $property = $this->getProperty($response);
-        $username = $response->getUsername(); // get the unique user identifier
-
-        //we "disconnect" previously connected users
-        $existingUser = $this->userManager->findUserBy(array($property => $username));
-        if (null !== $existingUser) {
-            // set current user id and token to null for disconnect
-            // ...
-
-            $this->userManager->updateUser($existingUser);
-        }
-        // we connect current user, set current user id and token
-        // ...
-        $this->userManager->updateUser($user);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
@@ -80,6 +57,9 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
         $userEmail = $response->getEmail();
         $user = $this->userManager->findUserByEmail($userEmail);
 
+        var_dump($response->getResponse());
+        die(0);
+        
         // if null just create new user and set it properties
         if (null === $user) {
 

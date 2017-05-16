@@ -2,15 +2,12 @@
 
 {% if app.request.get('_route') == 'fos_user_registration_register' %}
     {% set with_fb = 'layout.register_with_fb'|trans %}
-    {% set with_google = 'layout.register_width_google'|trans %}
+    {% set with_google = 'layout.register_with_google'|trans %}
 {% elseif app.request.get('_route') == 'fos_user_security_login' %}
     {% set with_fb = 'layout.login_with_fb'|trans %}
     {% set with_google = 'layout.login_with_google'|trans %}
 {% endif %}    
 
-<div class="row">
-    <a onclick="FbLogin();" class="fb-login-btn btn btn-md col-sm-12">{{ with_fb }}</a>
-    <a class="google-login-btn btn-md col-sm-12">{{ with_google }}</a>
-</div>
-<div id="status">
-</div>
+    <a href="#" onclick="FbLogin();" class="fb-login-btn btn btn-md col-sm-12">{{ with_fb }}</a>
+    <a href="#" id="google-login-btn" class="google-login-btn btn btn-md col-sm-12">{{ with_google }}</a>
+    

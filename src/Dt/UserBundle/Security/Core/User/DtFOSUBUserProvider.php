@@ -94,9 +94,9 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
                 }
             }else{
                 $user->setEnabled(true);
+                $this->userManager->updateUser($user);
+                $user->setUsername($user->getUsername() . '-' . $user->getId());
             }
-            
-            $this->userManager->updateUser($user);
             
             return $user;
         }

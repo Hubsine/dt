@@ -43,7 +43,7 @@ class User extends BaseUser
      * @ORM\Column(name="first_name", nullable=true)
      * 
      * @Assert\NotBlank(groups={}, message="dt_user.first_name.blank")
-     * @Assert\Type(type="alpha", groups={"FbRegistration"}, message="dt_user.first_name.type")
+     * @Assert\Type(type="alpha", groups={"FbRegistration", "GoogleRegistration"}, message="dt_user.first_name.type")
      * 
      * @var string
      */
@@ -53,7 +53,7 @@ class User extends BaseUser
      * @ORM\Column(name="last_name", nullable=true)
      * 
      * @Assert\NotBlank(groups={}, message="dt_user.last_name.blank")
-     * @Assert\Type(type="alpha", groups={"FbRegistration"}, message="dt_user.last_name.type")
+     * @Assert\Type(type="alpha", groups={"FbRegistration", "GoogleRegistration"}, message="dt_user.last_name.type")
      * 
      * @var string
      */
@@ -79,7 +79,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=10, name="gender", nullable=true)
      * 
-     * @Assert\Choice(choices = {"male", "female"}, message="dt_user.gender.choice", groups={"Registration", "FbRegistration"})
+     * @Assert\Choice(choices = {"male", "female"}, message="dt_user.gender.choice", groups={"Registration", "FbRegistration", "GoogleRegistration"})
      * 
      * @var string
      */
@@ -130,6 +130,14 @@ class User extends BaseUser
      */
     protected $ageRange;
 
+    /**
+     * Vérifie que l'adresse gmail est validée par Google pour l'inscription via google
+     * 
+     * @Assert\IsTrue(message = "dt_user.verified_email.is_true", groups={"GoogleRegistration"})
+     * 
+     * @var boolean
+     */
+    protected $verifiedEmail;
 
     /**
      * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\ProfilePicture", cascade={"persist", "remove"})
@@ -349,11 +357,13 @@ class User extends BaseUser
 
     /**
      * Set ageRange 
-     * 
      * @param integer $ageRange
+     * @return User 
      */
     public function setAgeRange($ageRange) {
         $this->ageRange = $ageRange;
+        
+        return $this;
     }
 
     /**
@@ -393,5 +403,27 @@ class User extends BaseUser
     {
         return $this->googleAccessToken;
     }
+    
+    /**
+     * Get verifiedEmail
+     * 
+     * @return boolean
+     */
+    public function getVerifiedEmail() {
+        return $this->verifiedEmail;
+    }
+
+    /**
+     * @param type $verifiedEmail
+     * @return User
+     */
+    public function setVerifiedEmail($verifiedEmail) {
+    
+        $this->verifiedEmail = $verifiedEmail;
+        
+        return $this;
+    }
+
+
 
 }

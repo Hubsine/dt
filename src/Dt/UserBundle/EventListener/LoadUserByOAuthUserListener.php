@@ -45,7 +45,7 @@ class LoadUserByOAuthUserListener implements EventSubscriberInterface{
             break;
 
             case 'google':
-                
+                $this->hydrateByGoogle($event);
             break;
         
             default:
@@ -57,9 +57,8 @@ class LoadUserByOAuthUserListener implements EventSubscriberInterface{
     public function hydrateByFacebook(OAuthUserEvent $event)
     {
         $user = $event->getUser();
-        $profilePicture = $event->getProfilePicture();
         $ownerResponse = $event->getUserResponse();
-        $fbDatas = $event->getUserResponse()->getResponse();
+        $fbDatas = $ownerResponse->getResponse();
 
         // Set User
         $user->setFirstName($ownerResponse->getFirstName());
@@ -70,7 +69,22 @@ class LoadUserByOAuthUserListener implements EventSubscriberInterface{
         $user->setGender($fbDatas['gender']);
         $user->setAgeRange($fbDatas['age_range']['min']);
         
-        
     }   
+    
+    public function hydrateByGoogle(OAuthUserEvent $event){
+        
+        $user = $event->getUser();
+        $ownerResponse = $event->getUserResponse();
+        $googleData = $event->getUserResponse()->getResponse();
+        
+        $user->setFirstName($ownerResponse->getFirstName());
+        $user->setLastName($ownerResponse->getLastName());
+        $user->setEmail($ownerResponse->getEmail());
+        $user->setUsername($ownerResponse->getFirstName());
+        $user->setGoogleId($googleData['id']);
+        $user->setGender($googleData['gender']);
+        $user->setVerifiedEmail($googleData['verified_email']);
+        
+    }
           
 }

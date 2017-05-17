@@ -19,4 +19,6 @@ dt_user:
         type: 'Le prénom comporte des caractères non autorisé.'
     last_name:
         blank: 'Entrez un nom s''il vous plait.'
-        type: 'Le nom comporte des caractères non autorisé.'    
+        type: 'Le nom comporte des caractères non autorisé.'  
+    verified_email:
+        is_true: 'Votre adresse e-mail ne semble pas être validé par Google.'

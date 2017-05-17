@@ -1,25 +1,13 @@
 function googleSignInOnSuccess(googleUser) {
 
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+//    var profile = googleUser.getBasicProfile();
+//    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//    console.log('Name: ' + profile.getName());
+//    console.log('Image URL: ' + profile.getImageUrl());
+//    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     
-    //var id_token = googleUser.getAuthResponse().id_token;
-    //var xhr = new XMLHttpRequest();
-    //var url = Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true);
+    document.location = Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true);
     
-//    xhr.open('POST', 'Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true)');
-//    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//    xhr.onload = function() {
-//      console.log('Signed in as: ' + xhr.responseText);
-//    };
-//    xhr.send('idtoken=' + id_token);
-
-    //document.location = Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true);
-    
-    console.log(id_token);
 }
 
 function googleSignInOnError(error){
@@ -33,9 +21,10 @@ function attachSignin(element) {
 gapi.load('auth2', function(){
     auth2 = gapi.auth2.init({
         client_id: '392314135321-b2uun47jopmnvp16np3llejerqqvvtp2.apps.googleusercontent.com',
-        ux_mode: 'redirect', // Or redirect
-        redirect_uri: Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true),
+        ux_mode: 'popup', // Or redirect
+        //redirect_uri: Routing.generate('hwi_oauth_service_redirect', { service: "google" }, true),
         cookiepolicy: 'single_host_origin'
+        //include_granted_scopes: true
     });
     attachSignin(document.getElementById('google-login-btn'));
 });

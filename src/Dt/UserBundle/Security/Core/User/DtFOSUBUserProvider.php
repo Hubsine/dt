@@ -57,8 +57,8 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
         $userEmail = $response->getEmail();
         $user = $this->userManager->findUserByEmail($userEmail);
 
-        var_dump($response->getResponse());
-        die(0);
+        #var_dump($response->getResponse());
+        #die(0);
         
         // if null just create new user and set it properties
         if (null === $user) {
@@ -74,7 +74,19 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
             $this->eventDispatcher->dispatch(DtUserEvents::HYDRATE_USER_FROM, $hydrateUserEvent);
 
             // Validation of User
-            $errors = $this->validator->validate($user, null, array('FbRegistration'));
+            $groupValidation = null;
+            switch ($response->getResourceOwner()->getName()){
+                
+                case 'facebook':
+                    $groupValidation = 'FbRegistration';
+                    break;
+                
+                case 'google':
+                    $groupValidation = 'GoogleRegistration';
+                    break;
+                
+            }
+            $errors = $this->validator->validate($user, null, array($groupValidation));
             
             if($errors->count() > 0){
                 foreach ($errors as $key => $violation) {

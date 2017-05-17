@@ -77,6 +77,7 @@ class LoadUserByOAuthUserListener implements EventSubscriberInterface{
         $ownerResponse = $event->getUserResponse();
         $googleData = $event->getUserResponse()->getResponse();
         
+        // Set User
         $user->setFirstName($ownerResponse->getFirstName());
         $user->setLastName($ownerResponse->getLastName());
         $user->setEmail($ownerResponse->getEmail());

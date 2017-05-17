@@ -108,16 +108,24 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
+     * 
+     * @Assert\NotBlank(groups={"FbRegistration"})
+     * 
+     * @var string 
      */
     protected $facebookId;
 
-    protected $facebookAccessToken;
-    
     /**
      * @ORM\Column(name="google_id", type="string", length=255, nullable=true)
+     * 
+     * @Assert\NotBlank(groups={"GoogleRegistration"})
+     * 
+     * @var string
      */
-    protected $gooleId;
+    protected $googleId;
 
+    protected $facebookAccessToken;
+    
     protected $googleAccessToken;
     
     /**

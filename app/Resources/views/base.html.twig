@@ -1,5 +1,16 @@
 {% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
 
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets
+        '@AppBundle/Resources/public/less/variables.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+    
+    
+{% endblock head_style %}
+
 {% block head_script %}
     {{ parent() }}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -12,7 +23,7 @@
         <header id="main-header"> 
     {% endblock container_header_start %}
     
-    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, inverse: true, id: 'navbar-example' } %}
+    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: false, inverse: true, id: 'navbar-example' } %}
 
         {% block brand %}
             <a class="navbar-brand" href="#">Mopa Bootstrap</a>
@@ -20,20 +31,22 @@
 
 
         {% block menu %}
-            {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createMainMenu') }}
+            {{ mopa_bootstrap_menu('main') }}
+            {#{ knp_menu_render('main') }#}
             
             {% if is_granted('IS_AUTHENTICATED_FULLY') == true %}
-                {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLoginMenu', {'automenu': 'navbar', 'pull-right': true}) }}
+                {#{ knp_menu_render('login', {'automenu': 'navbar', 'pull-right': true}) }#}
+                {{ mopa_bootstrap_menu('login', {'automenu': 'navbar', 'pull-right': true}) }}
             {% endif %}
             
             {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-                {{ mopa_bootstrap_menu('AppBundle:MenuBuilder:createLogoutMenu', {'automenu': 'navbar', 'pull-right': true}) }}
+                {#{ knp_menu_render('logout', {'automenu': 'navbar', 'pull-right': true}) }#}
+                {{ mopa_bootstrap_menu('logout', {'automenu': 'navbar', 'pull-right': true}) }}
             {% endif %}
             
         {% endblock menu %}
 
     {% endembed %}
-
 
     {% block container_header_end %} 
         </header> 
@@ -41,13 +54,80 @@
 
 {% endblock navbar %}
 
-{% block content %}
-    <div class="col-sm-12">
-        {% block content_page %}
-            
-        {% endblock content_page %}    
-    </div>
-{% endblock %}    
+
+{% block container %}
+    {% block page_main_content %}
+        
+        {% block container_div_start %}<div id="mainContent" class="{% block container_class %}{% endblock container_class %}">{% endblock container_div_start %}
+    
+            <div id="pageMainContent">
+            {% block page_header %}
+
+                <div class="page-header">
+                    <div class="container">
+                    {% block breadcrumb %}
+                        <section id="page-breadcrumb">
+                            <ol class="breadcrumb">
+                            {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('main')) %}
+                                {% if not loop.last %}
+                                <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label }}</a></li>
+                                {% else %}
+                                <li class="active">{{ breadcrumb_item.label }}</li>
+                                {% endif %}
+                            {% endfor %}
+                            </ol>
+                        </section>
+                     {% endblock breadcrumb %}
+
+                     {% block page_title %}
+                        <section id="page-title">
+                             <h1>{% block headline %}Mopa Bootstrap Bundle{% endblock headline %}</h1>
+                        </section>
+                     {% endblock page_title %}
+                    </div>
+                </div>
+            {% endblock page_header %}
+
+            {% block page_content %}
+                {% block content_row %}
+                <div id="page-content">    
+                    <div class="container">
+                        {% block content %}
+                            {% block content_content %}
+                                {% block content_page %}
+                                {% endblock content_page %}
+                            {% endblock content_content %} 
+                        {% endblock content %} 
+                    </div>
+                </div><!-- end #page-content -->    
+                {% endblock content_row %}
+            {% endblock page_content %}
+            </div><!-- end #pageMainContent -->
+
+            {% block footer_tag_start %}
+            {% endblock footer_tag_start %}
+            {% block footer %}
+            {% endblock footer %}
+            {% block footer_tag_end %}
+            {% endblock footer_tag_end %}
+
+        {% block content_div_end %}</div>{% endblock content_div_end %}
+    
+    {% endblock page_main_content %}
+    
+    {% block main_footer %}
+        <footer>
+            <div class="container">
+                {% block footer_content %}
+                    <p>&copy; <a href="http://www.mohrenweiserpartner.de" target="_blank">Mohrenweiser & Partner</a> 2011-2015</p>
+                {% endblock footer_content %}
+            </div>
+        </footer>
+    {% endblock main_footer%}
+    
+{% endblock container %}    
+
+
     
 {% block body_start %}
     {{ parent() }}

@@ -1,0 +1,10 @@
+parameters:
+    app.menu_builder.class: AppBundle\Menu\MenuBuilder
+services:
+    app.menu_builder:
+        class: '%app.menu_builder.class%'
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: createLoginMenu, alias: login }
+            - { name: knp_menu.menu_builder, method: createLogoutMenu, alias: logout }

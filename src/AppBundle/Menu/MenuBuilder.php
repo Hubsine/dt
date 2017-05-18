@@ -11,31 +11,46 @@ use Knp\Menu\FactoryInterface;
  */
 class MenuBuilder {
 
-    public function createMainMenu(FactoryInterface $factory, array $options){
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+    
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory) {
+        $this->factory = $factory;
+    }
+
+    public function createMainMenu(array $options){
         
-        $menu = $factory->createItem('root', array(
+        $menu = $this->factory->createItem('root', array(
             'navbar' => true,
         ));
 
-        $menu->addChild('Members', array(
+        $menu->addChild('members', array(
             'icon' => 'users',
             'route' => 'dt_user_homepage',
-        ));
-        $menu->addChild('Profile', array(
+        ))->setExtra('translation_domain', 'menu');
+        
+        $menu->addChild('profile', array(
             'route' => 'fos_user_profile_show'
-        ));
+        ))->setExtra('translation_domain', 'menu');
 
-        $menu->addChild('Mes demandes', array(
+        $menu->addChild('demandes', array(
             'route' => 'dt_user_member_history'
-        ));
+        ))->setExtra('translation_domain', 'menu');
 
+        $menu->setExtra('translation_domain', 'menu');
+        
         return $menu;
         
     }
     
-    public function createLogoutMenu(FactoryInterface $factory, array $options){
+    public function createLogoutMenu(array $options){
         
-        $menu = $factory->createItem('root');
+        $menu = $this->factory->createItem('root');
         
         $menu->addChild('Connexion', array(
             'route' => 'fos_user_security_login'
@@ -48,9 +63,9 @@ class MenuBuilder {
         return $menu;
     }
     
-    public function createLoginMenu(FactoryInterface $factory, array $options){
+    public function createLoginMenu(array $options){
         
-        $menu = $factory->createItem('root');
+        $menu = $this->factory->createItem('root');
         
         $profil = $menu->addChild('Picture', array(
             'dropdown' => true,

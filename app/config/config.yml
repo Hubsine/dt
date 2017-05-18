@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@AppBundle/Resources/config/services.yml"}
     - { resource: "@DtUserBundle/Resources/config/services.yml" }
     - { resource: "@DtSearchBundle/Resources/config/services.yml" }
     - { resource: "@DtOAuthBundle/Resources/config/services.yml" }

@@ -138,6 +138,7 @@ swiftmailer:
 
 #AsseticBundle
 assetic:
+    bundle: ['DtUserBundle', 'MopaBootstrapBundle']
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
     filters:

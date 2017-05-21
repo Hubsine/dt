@@ -1,0 +1,40 @@
+{% extends "DtUserBundle::layout.html.twig" %}
+
+{% block foot_script_assetic %}
+    
+    
+    {% javascripts
+    '@AppBundle/Resources/public/js/anchor.min.js'
+    '@DtUserBundle/Resources/public/js/dt_user.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {{ parent() }}
+    
+{% endblock foot_script_assetic %}
+
+
+
+{% block headline %}
+{% trans from 'layout' %} mon_compte {% endtrans %}    
+{% endblock headline %}
+
+{% block content_page_sidebar %}
+    {{ mopa_bootstrap_menu('sidebar', {'automenu': 'pills', 'stacked':true }) }}
+{% endblock content_page_sidebar %}    
+
+{% block content_page_content %}
+    
+    <div class="section-anchor-js passwordSection">
+        <h3 class="page-header" id="password">
+            <a class="anchorjs-link " href="#password"></a>
+            Mot de passe
+        </h3>
+        
+        <div id="passwordContent" class="anchors-js-content">
+        {{ render(controller('FOSUserBundle:ChangePassword:changePassword')) }}
+        </div>
+    </div>
+{% endblock content_page_content %}
+

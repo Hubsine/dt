@@ -1,5 +1,32 @@
 {% extends "DtUserBundle::layout.html.twig" %}
 
+{% block head_style %}
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="392314135321-b2uun47jopmnvp16np3llejerqqvvtp2.apps.googleusercontent.com">
+    {{ parent() }}
+    
+{% endblock head_style %}
+
+
+{% block head_script %}
+    {{ parent() }}
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+
+{% endblock head_script %}
+
+{% block foot_script_assetic %}
+    
+    {% javascripts
+    '@DtUserBundle/Resources/public/js/social-js.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    
+    {{ parent() }}
+    
+    
+{% endblock foot_script_assetic %}
 
 {% block content_page %}
     <div class="col-md-6">

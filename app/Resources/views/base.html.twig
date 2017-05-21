@@ -3,6 +3,7 @@
 {% block head_style %}
     {{ parent() }}
     {% stylesheets
+        '@AppBundle/Resources/public/css/*.css'
         '@AppBundle/Resources/public/less/variables.less'
     %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
@@ -23,7 +24,7 @@
         <header id="main-header"> 
     {% endblock container_header_start %}
     
-    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: false, inverse: true, id: 'navbar-example' } %}
+    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: false, inverse: true, id: 'mainNavbar' } %}
 
         {% block brand %}
             <a class="navbar-brand" href="#">Mopa Bootstrap</a>
@@ -34,12 +35,10 @@
             {{ mopa_bootstrap_menu('main') }}
             {#{ knp_menu_render('main') }#}
             
-            {% if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+            {% if app.user %}
                 {#{ knp_menu_render('login', {'automenu': 'navbar', 'pull-right': true}) }#}
                 {{ mopa_bootstrap_menu('login', {'automenu': 'navbar', 'pull-right': true}) }}
-            {% endif %}
-            
-            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+            {% else %}
                 {#{ knp_menu_render('logout', {'automenu': 'navbar', 'pull-right': true}) }#}
                 {{ mopa_bootstrap_menu('logout', {'automenu': 'navbar', 'pull-right': true}) }}
             {% endif %}
@@ -68,11 +67,11 @@
                     {% block breadcrumb %}
                         <section id="page-breadcrumb">
                             <ol class="breadcrumb">
-                            {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('main')) %}
+                            {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('login')) %}
                                 {% if not loop.last %}
-                                <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label }}</a></li>
+                                    <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label|trans({}, 'menu') }}</a></li>
                                 {% else %}
-                                <li class="active">{{ breadcrumb_item.label }}</li>
+                                <li class="active">{{ breadcrumb_item.label|trans({}, 'menu') }}</li>
                                 {% endif %}
                             {% endfor %}
                             </ol>
@@ -95,6 +94,28 @@
                         {% block content %}
                             {% block content_content %}
                                 {% block content_page %}
+                                    
+                                    {% block content_page_div_start %}<div class="row">{% endblock content_page_div_start %}
+                                    
+                                        {% block sidebar %}
+                                            <div class="col-sm-3" role="complementary">
+                                                {% block content_page_sidebar %}
+                                                    sidebar
+                                                {% endblock content_page_sidebar %}
+                                            </div>
+                                        {% endblock sidebar %}
+                                        
+                                        {% block _content_page %}
+                                            <div class="col-sm-9" role="main">
+                                                {% block content_page_content %}
+
+                                                {% endblock content_page_content %}
+                                            </div>
+                                        {% endblock _content_page %}
+                                                
+                                    {% block content_page_div_end %}</div>{% endblock content_page_div_end %}
+                                    
+                                    
                                 {% endblock content_page %}
                             {% endblock content_content %} 
                         {% endblock content %} 
@@ -160,10 +181,9 @@
     '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js'
     '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
     '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    '@AppBundle/Resources/public/js/app.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    
-    
 {% endblock foot_script_assetic %}

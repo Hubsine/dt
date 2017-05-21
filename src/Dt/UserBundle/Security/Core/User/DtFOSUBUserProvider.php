@@ -14,6 +14,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use FOS\UserBundle\Util\TokenGenerator;
+use Oneup\AclBundle\Security\Acl\Manager\AclManager;
 
 class DtFOSUBUserProvider extends BaseFOSUBProvider
 {
@@ -32,6 +33,11 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
      * @var Session
      */
     public $session;
+    
+    /**
+     * @var AclManager
+     */
+    public $aclManager;
 
     /**
      * 
@@ -40,13 +46,15 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
      * @param TraceableEventDispatcher $eventDispatcher
      */
     public function __construct(UserManagerInterface $userManager, array $properties, 
-            TraceableEventDispatcher $eventDispatcher, ValidatorInterface $validator, Session $session) {
+            TraceableEventDispatcher $eventDispatcher, ValidatorInterface $validator, Session $session
+            /*AclManager $aclManager*/) {
         
         parent::__construct($userManager, $properties);
         
         $this->eventDispatcher = $eventDispatcher;
         $this->validator = $validator;
         $this->session = $session;
+        #$this->aclManager = $aclManager;
     }
 
     /**
@@ -96,6 +104,8 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
                 $user->setEnabled(true);
                 $this->userManager->updateUser($user);
                 $user->setUsername($user->getUsername() . '-' . $user->getId());
+                
+                #$this->aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, null);
             }
             
             return $user;

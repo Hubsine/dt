@@ -1,6 +1,8 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
+    acl:
+        connection: default
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
         
@@ -31,6 +33,7 @@ security:
 #                oauth_user_provider:
 #                    service: dt.oauth.user_provider
         main:
+            switch_user: { role: ROLE_USER, parameter: _want_to_be_this_user }
             pattern: ^/
             form_login:
                 provider: fos_userbundle

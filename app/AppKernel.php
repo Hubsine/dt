@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
+            new Oneup\AclBundle\OneupAclBundle(),
             //My Bundle
             new AppBundle\AppBundle(),
             new Dt\UserBundle\DtUserBundle(),

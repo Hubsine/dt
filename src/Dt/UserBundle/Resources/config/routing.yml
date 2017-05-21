@@ -1,7 +1,11 @@
-dt_user_homepage:
-    path:     /members
-    defaults: { _controller: DtUserBundle:Members:index }
-
-dt_user_member_history:
-    path: history
+dt_user_members:
+    path:     /
+    defaults: { _controller: DtUserBundle:Members:members }
+    
+dt_user_members_history:
+    path: /{username}/historique
     defaults: { _controller: DtUserBundle:Members:history }
+    
+dt_user_members_mon_compte:
+    path: /{username}/mon-compte
+    defaults: { _controller: DtUserBundle:Compte:view }

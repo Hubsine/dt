@@ -4,13 +4,15 @@ namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Description of MenuBuilder
  *
  * @author Hubsine
  */
-class MenuBuilder {
+class MenuBuilder{
 
     /**
      * @var FactoryInterface
@@ -21,6 +23,16 @@ class MenuBuilder {
      * @var TokenStorage
      */
     private $securityTokenStorage;
+    
+    /**
+     * @var Request
+     */
+    private $requestStack;
+    
+    /**
+     * @var Request
+     */
+    private $request;
 
     /**
      * @var string
@@ -31,10 +43,12 @@ class MenuBuilder {
     /**
      * @param FactoryInterface $factory
      */
-    public function __construct(FactoryInterface $factory, TokenStorage $securityTokenStorage) {
+    public function __construct(FactoryInterface $factory, TokenStorage $securityTokenStorage, RequestStack $requestStack) {
         
         $this->factory = $factory;
         $this->securityTokenStorage = $securityTokenStorage;
+        $this->requestStack = $requestStack;
+        $this->request = $requestStack->getCurrentRequest();
         
         if($this->securityTokenStorage->getToken()->getUser()){
             $this->usernameSlug = $this->securityTokenStorage->getToken()->getUser();
@@ -121,37 +135,97 @@ class MenuBuilder {
     
     public function createSidebarMenu(array $options){
         
-        $menu = $this->factory->createItem('accueil', array(
-            'attributes' => array('class' => 'nav')
-        ));
+        $tab = $this->request->query->get('tab', 'profile');
         
-        $profile = $menu->addChild('profile')->setUri('#');
+        $menu = $this->factory->createItem('sidebar.accueil', array(
+            #'childrenAttributes'    => array('class', 'hidden-print hidden-sm hidden-xs affix')
+        ))->setAttribute('class', 'hidden-print hidden-sm hidden-xs affix');
         
-        $profile->addChild('photos', array(
+        ###
+        # Profile 
+        ###
+        $profile = $menu->addChild('sidebar.profile', array(
+        ))
+            ->setExtra('translation_domain', 'menu')
+            ->setUri('?tab=profile')
+            ->setChildrenAttribute('class', 'nav hasSubLi');
+        
+        if($tab === 'profile'){
             
-        ))->setExtra('translation_domain', 'menu')->setUri('#');
-        
-        
-        /// Parametres menu 
-        $parametres = $menu->addChild('parameters', array(
-        ))->setExtra('translation_domain', 'menu')->setUri('#parametres');
-        
-        $parametres->addChild('password', array(
+            $profile->setCurrent(true);
             
-        ))->setExtra('translation_domain', 'menu')->setUri('#parameters-password');
-        
-        $parametres->addChild('email', array(
+            $profile->addChild('sidebar.moi', array(
+            ))
+                ->setExtra('translation_domain', 'menu')
+                ->setUri('#profile-moi')
+                ->setAttribute('class', 'active');    
             
-        ))->setExtra('translation_domain', 'menu')->setUri('#parameters-email');
-        
-        $parametres->addChild('autorisation', array(
+            $profile->addChild('sidebar.reseaux_sociaux', array(
+            ))
+                ->setExtra('translation_domain', 'menu')
+                ->setUri('#profile-reseaux-sociaux');
             
-        ))->setExtra('translation_domain', 'menu')->setUri('#parameters-autorisation');
+            $profile->addChild('sidebar.localisation', array(
+            ))
+                ->setExtra('translation_domain', 'menu')
+                ->setUri('#profile-localisation');
+        }
         
-        $parametres->addChild('delete_compte', array(
+        ###
+        # Matching
+        ###
+        $matching = $menu->addChild('sidebar.matching', array(
+        ))
+                ->setExtra('translation_domain', 'menu')
+                ->setUri('?tab=matching')
+                ->setChildrenAttribute('class', 'nav hasSubLi');
+        
+        if($tab === 'matching'){
             
-        ))->setExtra('translation_domain', 'menu')->setUri('#parameters_delete');
+            $matching->setCurrent(true);
+            
+            $matching->addChild('sidebar.qui', array(
+            ))
+                ->setExtra('translation_domain', 'menu')
+                ->setUri('#matching-qui-suis-je')
+                ->setAttribute('class', 'active');
+            
+            $matching->addChild('sidebar.cherche', array(
+            ))
+               ->setExtra('translation_domain', 'menu')
+               ->setUri('#matching-je-cherche');
+        }
         
+        ###
+        # Photos
+        ###
+        $photos = $menu->addChild('sidebar.photos', array(
+        ))
+            ->setExtra('translation_domain', 'menu')
+            ->setUri('?tab=photos');
+        
+        ###
+        # Parametres menu 
+        ###
+        $parametres = $menu->addChild('sidebar.parameters', array(
+        ))
+                ->setExtra('translation_domain', 'menu')
+                ->setUri('?tab=parametres')
+                ->setChildrenAttribute('class', 'nav hasSubLi');
+        
+        if($tab === 'parametres'){
+            
+            $parametres->setCurrent(true);
+            
+            $parametres->addChild('sidebar.password', array(
+            ))->setExtra('translation_domain', 'menu')->setUri('#parameters-password')->setAttribute('class', 'active');
+            $parametres->addChild('sidebar.email', array(
+            ))->setExtra('translation_domain', 'menu')->setUri('#parameters-email');
+            $parametres->addChild('sidebar.autorisation', array(
+            ))->setExtra('translation_domain', 'menu')->setUri('#parameters-autorisation');
+            $parametres->addChild('sidebar.delete_compte', array(
+            ))->setExtra('translation_domain', 'menu')->setUri('#parameters-delete');
+        }
         return $menu;
     }
 }

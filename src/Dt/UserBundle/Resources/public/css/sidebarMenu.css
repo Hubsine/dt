@@ -1,0 +1,72 @@
+#sidebarMenu .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #767676;
+    border-radius: 0;
+}
+
+#sidebarMenu .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+#sidebarMenu .nav .nav > li:not(.active) > a:hover{
+    border-left: 1px solid #563d7c;
+}
+
+#sidebarMenu .nav > .active:focus > a, 
+#sidebarMenu .nav > .active:hover > a, 
+#sidebarMenu .nav > .active > a {
+    padding-left: 18px;
+    font-weight: 700;
+    color: #563d7c;
+    background-color: transparent;
+    border-left: 2px solid #563d7c;
+}
+
+#sidebarMenu .nav .nav > .active:focus > a, 
+#sidebarMenu .nav .nav > .active:hover > a, 
+#sidebarMenu .nav .nav > .active > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/*#sidebarMenu .nav > li > a{
+    color: #767676;
+    border-radius: 0;
+    padding: 4px 15px;
+}
+
+#sidebarMenu ul.hasSubLi > li > a{
+    padding-left: 30px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+#sidebarMenu > .nav-pills > li.active a{
+    background-color: transparent;
+}
+
+#sidebarMenu .nav > li a:hover, #sidebarMenu .nav > li > a:focus{
+    border-left: 1px solid #563d7c;
+    background-color: #eee;
+}
+
+#sidebarMenu .nav > .active:focus > a, 
+#sidebarMenu .nav > .active:hover > a, 
+#sidebarMenu .nav > .active > a{
+    color: #563d7c;
+    border-left: 2px solid #563d7c;
+    font-weight: 700;
+}
+
+#sidebarMenu .nav .nav > li.active > a{
+    font-weight: 500;
+    font-size: 12px;
+}*/
+

@@ -22,3 +22,5 @@ parameters:
 
     google_client_id:  392314135321-b2uun47jopmnvp16np3llejerqqvvtp2.apps.googleusercontent.com 
     google_client_secret:  3miqgGwipNohXqDVxtNeWJ0X 
+
+    knp_menu.renderer.twig.template: MopaBootstrapBundle:Menu:menu.html.twig

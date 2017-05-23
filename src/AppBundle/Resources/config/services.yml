@@ -3,7 +3,7 @@ parameters:
 services:
     app.menu_builder:
         class: '%app.menu_builder.class%'
-        arguments: ["@knp_menu.factory", "@security.token_storage"]
+        arguments: ["@knp_menu.factory", "@security.token_storage", "@request_stack"]
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
             - { name: knp_menu.menu_builder, method: createLoginMenu, alias: login }

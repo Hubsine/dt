@@ -17,24 +17,39 @@
 
 
 {% block headline %}
-{% trans from 'layout' %} mon_compte {% endtrans %}    
+{% trans from 'FOSUserBundle' %} mon_compte {% endtrans %}    
 {% endblock headline %}
 
 {% block content_page_sidebar %}
-    {{ mopa_bootstrap_menu('sidebar', {'automenu': 'pills', 'stacked':true }) }}
+    <div id="sidebarMenu">
+        {{ mopa_bootstrap_menu('sidebar', {'automenu': 'pills', 'stacked':true }) }}
+    </div>
 {% endblock content_page_sidebar %}    
 
 {% block content_page_content %}
     
-    <div class="section-anchor-js passwordSection">
-        <h3 class="page-header" id="password">
-            <a class="anchorjs-link " href="#password"></a>
-            Mot de passe
+    <div class="section-anchor-js">
+        <h3 class="page-header" id="photo">
+            <a class="anchorjs-link " href="#photo"></a>
+            {% trans from 'FOSUserBundle' %} layout.compte.photo {% endtrans %}
         </h3>
         
-        <div id="passwordContent" class="anchors-js-content">
+        <div id="photoContent">
+            Photos content
+        </div>
+    </div>
+        
+    <div class="section-anchor-js">
+        <h3 class="page-header" id="password">
+            <a class="anchorjs-link " href="#password"></a>
+            {% trans from 'FOSUserBundle' %} layout.compte.password {% endtrans %}
+        </h3>
+        
+        <div id="passwordContent">
         {{ render(controller('FOSUserBundle:ChangePassword:changePassword')) }}
         </div>
     </div>
+        
+    
 {% endblock content_page_content %}
 

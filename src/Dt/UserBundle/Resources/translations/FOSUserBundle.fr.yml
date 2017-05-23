@@ -4,6 +4,10 @@ layout:
     register_with_fb: 'S''inscrire avec Facebook'
     register_with_google: 'S''inscre avec Google'
     login_in: 'Content de vous revoir.'
+    compte:
+        mon_compte: 'Compte'
+        password: 'Mot de passe'
+        photo: 'Photos'
 
 security:
     password_forget: 'Mot de passe oublié ?'

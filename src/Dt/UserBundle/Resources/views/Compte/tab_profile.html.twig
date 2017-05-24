@@ -1,0 +1,24 @@
+
+{% set tabsContent = 
+{
+    'moi': {
+        'sectionId': 'profile-moi',
+        'href': 'moi',
+        'sectionTitle': 'layout.compte.moi',
+        'contentId': 'moiContent',
+    }
+}
+%}
+
+{% for content in tabsContent %}
+
+    <div class="section-anchor-js" id="">
+        <h3 class="page-header" id="{{ content.sectionId }}">
+            {{ content.sectionTitle|trans({}, 'FOSUserBundle') }}
+        </h3>
+        <div id="moiContent">
+            {{ render(controller('DtUserBundle:Compte:editMoi')) }}
+        </div>
+    </div>
+    
+{% endfor %}    

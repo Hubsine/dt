@@ -9,3 +9,10 @@ dt_user_members_history:
 dt_user_members_mon_compte:
     path: /{username}/mon-compte
     defaults: { _controller: DtUserBundle:Compte:view }
+    
+###
+# Edit dans mon compte - Toutes editions se fait en js 
+###
+dt_user_edit_profile_moi: 
+    path: /{username}/mon-compte/profile-edit-moi
+    defaults: { _controller: DtUserBundle:Compte:editMoi }

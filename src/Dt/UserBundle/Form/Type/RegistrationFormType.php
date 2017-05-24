@@ -21,7 +21,6 @@ class RegistrationFormType extends AbstractType
                 ->add('username', TextType::class, 
                         array(
                             'label' => 'form.username', 
-                            #'label_attr'    => array('class' => 'label-control'),
                             'translation_domain' => 'FOSUserBundle',
                             'required'  => false
                             )
@@ -33,14 +32,14 @@ class RegistrationFormType extends AbstractType
                             'first_options' => array('label' => 'form.email'),
                             'second_options' => array('label' => 'form.email_confirmation'),
                             'invalid_message' => 'dt_user.email.mismatch',
-                            'required'  => false
+                            'required'  => true
                             )
                         )    
                 ->add('birthday', BirthdayType::class, 
                         array(
                             'translation_domain' => 'FOSUserBundle',
                             'label' => 'form.birthday', 
-                            'required'  => false,
+                            'required'  => true,
                             'placeholder' => array(
                                 'year' => 'form.year', 'month' => 'form.month', 'day' => 'form.day'
                             )

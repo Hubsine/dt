@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+
+{% if message is defined %}    
+        {{ advanced_flash('success', message, '', true, false, '') }}    
+{% endif %}
+
+
+{{ form_start(form, { 'action': path('dt_user_edit_profile_moi', { 'username': app.user.username } ), 'attr': { 'class': 'ajaxForm' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <button id="passwordSubmit" type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
+    </div>
+{{ form_end(form) }}
+
+

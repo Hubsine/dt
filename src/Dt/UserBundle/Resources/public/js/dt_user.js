@@ -1,5 +1,4 @@
-//var sidebarAnchors = new AnchorJS();
-//sidebarAnchors.add('');
+
 
 function initAjaxForm()
 {

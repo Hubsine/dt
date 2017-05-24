@@ -6,9 +6,13 @@ layout:
     login_in: 'Content de vous revoir.'
     compte:
         mon_compte: 'Compte'
+        moi: 'Moi'
         password: 'Mot de passe'
         photo: 'Photos'
 
+change_profile:
+    update: 'Mettre à jour'
+    success: "Informations mise à jour avec succès."
 security:
     password_forget: 'Mot de passe oublié ?'
     
@@ -38,5 +42,6 @@ form:
     year: 'Année'
     month: 'Mois'
     day: 'Jour'
+    phone: 'Numéro de mobile'
     
     

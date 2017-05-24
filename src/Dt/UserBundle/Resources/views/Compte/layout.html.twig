@@ -17,7 +17,9 @@
 
 
 {% block headline %}
-{% trans from 'FOSUserBundle' %} mon_compte {% endtrans %}    
+{% trans from 'FOSUserBundle' %} layout.compte.mon_compte {% endtrans %}   
+{{ '- mettre le menu en affix : voir bootstrap affix (js)' }}
+{{ '- desactiver le formulaire courant quand il est soumis' }}
 {% endblock headline %}
 
 {% block content_page_sidebar %}
@@ -28,17 +30,9 @@
 
 {% block content_page_content %}
     
-    <div class="section-anchor-js">
-        <h3 class="page-header" id="photo">
-            <a class="anchorjs-link " href="#photo"></a>
-            {% trans from 'FOSUserBundle' %} layout.compte.photo {% endtrans %}
-        </h3>
-        
-        <div id="photoContent">
-            Photos content
-        </div>
-    </div>
-        
+    {% include 'FOSUserBundle:Compte:tab_profile.html.twig' %}
+    
+    {#    
     <div class="section-anchor-js">
         <h3 class="page-header" id="password">
             <a class="anchorjs-link " href="#password"></a>
@@ -49,7 +43,7 @@
         {{ render(controller('FOSUserBundle:ChangePassword:changePassword')) }}
         </div>
     </div>
-        
+    #}    
     
 {% endblock content_page_content %}
 

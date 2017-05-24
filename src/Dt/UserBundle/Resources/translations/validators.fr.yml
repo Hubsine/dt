@@ -4,6 +4,7 @@ dt_user:
     phone:
         blank: 'Entrez un numéro mobile s''il vous plait.'
         already_used: 'Le numéro de mobile est déjà utilisé.'
+        phone_number: 'Le numéro de mobile est incorrect.'
     gender:
         choices: 'Vous devez choisir si vous êtes une femme ou un homme.'
     birthday:

@@ -15,7 +15,7 @@
     font-weight: 400;
 }
 
-#sidebarMenu .nav .nav > li:not(.active) > a:hover{
+#sidebarMenu .nav > li:not(.active) > a:hover{
     border-left: 1px solid #563d7c;
 }
 

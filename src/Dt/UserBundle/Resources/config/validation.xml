@@ -13,6 +13,7 @@
                     <value>Registration</value>
                     <value>FbRegistration</value>
                     <value>Profile</value>
+                    <value>ProfileMoi</value>
                 </option>
             </constraint>
             <constraint name="Length">

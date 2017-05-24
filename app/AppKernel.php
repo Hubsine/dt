@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Oneup\AclBundle\OneupAclBundle(),
+            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
             //My Bundle
             new AppBundle\AppBundle(),
             new Dt\UserBundle\DtUserBundle(),

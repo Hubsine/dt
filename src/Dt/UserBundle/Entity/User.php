@@ -10,6 +10,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Dt\UserBundle\Entity\ProfilePicture;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation\Type;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 
 
 /**
@@ -69,8 +71,12 @@ class User extends BaseUser
     protected $slug;
     
     /**
-     * @ORM\Column(unique=true, type="integer", name="phone", nullable=true)
-     * @Assert\NotBlank(message="dt_user.phone.blank", groups={})
+     * @ORM\Column(unique=true, type="phone_number", name="phone", nullable=true)
+     * @Assert\NotBlank(message="dt_user.phone.blank", groups={"ProfileMoi"})
+     * @AssertPhoneNumber(message="dt_user.phone.phone_number", defaultRegion="FR", type="mobile")
+     * 
+     * @Type("libphonenumber\PhoneNumber")
+     * mettre AssertPhoneNumber avec le bundle
      * 
      * @var integer
      */

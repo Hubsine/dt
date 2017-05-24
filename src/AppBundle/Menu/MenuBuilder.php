@@ -165,6 +165,16 @@ class MenuBuilder{
                 ->setExtra('translation_domain', 'menu')
                 ->setUri('#profile-reseaux-sociaux');
             
+            $profile->addChild('sidebar.qui', array(
+            ))
+                ->setExtra('translation_domain', 'menu')
+                ->setUri('#profile-qui-suis-je');
+            
+            $profile->addChild('sidebar.cherche', array(
+            ))
+               ->setExtra('translation_domain', 'menu')
+               ->setUri('#profile-je-cherche');
+            
             $profile->addChild('sidebar.localisation', array(
             ))
                 ->setExtra('translation_domain', 'menu')
@@ -174,27 +184,27 @@ class MenuBuilder{
         ###
         # Matching
         ###
-        $matching = $menu->addChild('sidebar.matching', array(
-        ))
-                ->setExtra('translation_domain', 'menu')
-                ->setUri('?tab=matching')
-                ->setChildrenAttribute('class', 'nav hasSubLi');
-        
-        if($tab === 'matching'){
-            
-            $matching->setCurrent(true);
-            
-            $matching->addChild('sidebar.qui', array(
-            ))
-                ->setExtra('translation_domain', 'menu')
-                ->setUri('#matching-qui-suis-je')
-                ->setAttribute('class', 'active');
-            
-            $matching->addChild('sidebar.cherche', array(
-            ))
-               ->setExtra('translation_domain', 'menu')
-               ->setUri('#matching-je-cherche');
-        }
+//        $matching = $menu->addChild('sidebar.matching', array(
+//        ))
+//                ->setExtra('translation_domain', 'menu')
+//                ->setUri('?tab=matching')
+//                ->setChildrenAttribute('class', 'nav hasSubLi');
+//        
+//        if($tab === 'matching'){
+//            
+//            $matching->setCurrent(true);
+//            
+//            $matching->addChild('sidebar.qui', array(
+//            ))
+//                ->setExtra('translation_domain', 'menu')
+//                ->setUri('#matching-qui-suis-je')
+//                ->setAttribute('class', 'active');
+//            
+//            $matching->addChild('sidebar.cherche', array(
+//            ))
+//               ->setExtra('translation_domain', 'menu')
+//               ->setUri('#matching-je-cherche');
+//        }
         
         ###
         # Photos

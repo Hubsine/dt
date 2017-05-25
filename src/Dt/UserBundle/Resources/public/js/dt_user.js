@@ -10,25 +10,31 @@ function initAjaxForm()
         $.ajax({
             type: $(this).attr('method'),
             url: $(this).attr('action'),
-            data: $(this).serialize()
+            data: $(this).serialize(),
+            form: $(this),
+            beforeSend: function(jqXHR, settings){
+                $(settings.form).find(":input", ":select", ":textarea", ":button").attr("disabled", "disabled");
+            }
         })
         .done(function (data) {
+            
+            $(this.form.context).find(":input", ":select", ":textarea", ":button").removeAttr("disabled");
+    
             if (typeof data.form !== 'undefined') {
                 $('#'+data.contentId).html(data.form);
-                //alert(data.message);
             }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
+            
+            $(this.form.context).find(":input", ":select", ":textarea", ":button").removeAttr("disabled");
+    
             if (typeof jqXHR.responseJSON !== 'undefined') {
                 if (jqXHR.responseJSON.hasOwnProperty('form')) {
                     $('#'+jqXHR.responseJSON.contentId).html(jqXHR.responseJSON.form);
-                    
                 }
  
-                //$('.form_error').html(jqXHR.responseJSON.message);
- 
             } else {
-                alert(errorThrown);
+                console.log(errorThrown);
             }
  
         });

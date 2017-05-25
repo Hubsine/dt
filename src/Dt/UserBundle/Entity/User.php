@@ -19,8 +19,8 @@ use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumbe
  * @ORM\Table(name="dt_user")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
- * 
  * @UniqueEntity("phone", message="dt_user.phone.already_used")
+ * 
  */
 class User extends BaseUser
 {

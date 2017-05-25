@@ -16,10 +16,13 @@ use Dt\UserBundle\Form\Type\MoiFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer;
+use Dt\UserBundle\Entity\User;
+use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * Controller managing the user profile.
- *
+ * 
  * @author Christophe Coevoet <stof@notk.org>
  */
 class CompteController extends Controller
@@ -29,12 +32,21 @@ class CompteController extends Controller
      * 
      * - check permisssion pour OWNER
      */
-    public function viewAction($username)
+    public function viewAction(User $user)
     {
+        #$aclManager = $this->get('oneup_acl.manager');
+        #$aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, $identity = null);
+        
         return $this->render('DtUserBundle:Compte:layout.html.twig');
     }
 
-    public function editMoiAction(Request $request)
+    /**
+     * PreAuthorize("hasPermission(#user, ‘OWNER’)")
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function editMoiAction(Request $request, User $user)
     {
         /** @var $userManager UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');

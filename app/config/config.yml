@@ -247,7 +247,10 @@ jms_security_extra:
 
     # Allows you to specify access control rules for specific methods, such
     # as controller actions
-    method_access_control: { }
+    method_access_control:
+        'DtUserBundle:Compte:*': 'hasPermission(#user, "OWNER") or hasRole("ROLE_ADMIN")'
+        #'DtUserBundle:Compte:editMoi$': 'hasPermission(#user, "OWNER")'
+        'DtUserBundle:ChangePassword:*': 'hasRole("ROLE_USER")'
 
     #util:
         #secure_random:

@@ -41,7 +41,6 @@ class CompteController extends Controller
     }
 
     /**
-     * PreAuthorize("hasPermission(#user, ‘OWNER’)")
      * 
      * @param Request $request
      * @return JsonResponse
@@ -53,7 +52,7 @@ class CompteController extends Controller
         
         $user = $this->getUser();
         
-        $form = $this->createForm(MoiFormType::class, $user, array('usernameTransformer' => new UserToUsernameTransformer($userManager)));
+        $form = $this->createForm(MoiFormType::class, $user);
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){

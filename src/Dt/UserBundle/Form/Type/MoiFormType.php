@@ -74,7 +74,6 @@ class MoiFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => User::class,
             'validation_groups' => array('ProfileMoi'),
-            'usernameTransformer'   => null,
             'translation_domain'    => 'FOSUserBundle'
         ));
     }

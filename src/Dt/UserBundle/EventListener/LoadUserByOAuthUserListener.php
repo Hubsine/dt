@@ -5,10 +5,9 @@ namespace Dt\UserBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Dt\UserBundle\Event\OAuthUserEvent;
 use Dt\UserBundle\DtUserEvents;
-use Dt\UserBundle\Entity\User;
-use Dt\UserBundle\Entity\ProfilePicture;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
-use AppBundle\FileInfo;
+use Oneup\AclBundle\Security\Acl\Manager\AclManager;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * Description of LoadUserByOAuthUserListener
@@ -18,10 +17,12 @@ use AppBundle\FileInfo;
 class LoadUserByOAuthUserListener implements EventSubscriberInterface{
 
     public $uploadableManager; 
-    
-    public function __construct(UploadableManager $uploadableManager) {
+    public $aclManager;
+
+    public function __construct(UploadableManager $uploadableManager, AclManager $aclManager) {
         
         $this->uploadableManager = $uploadableManager;
+        $this->aclManager = $aclManager;
     }
 
     /**
@@ -31,6 +32,7 @@ class LoadUserByOAuthUserListener implements EventSubscriberInterface{
     {
         return array(
             DtUserEvents::HYDRATE_USER_FROM => 'hydrateByResourceOwners',
+            DtUserEvents::OAUTH_REGISTRATION_SUCCESS => 'oauthUserRegistrationSuccess'
         );
     }
     
@@ -87,5 +89,11 @@ class LoadUserByOAuthUserListener implements EventSubscriberInterface{
         $user->setVerifiedEmail($googleData['verified_email']);
         
     }
-          
+        
+    public function oauthUserRegistrationSuccess(OAuthUserEvent $event){
+        
+        $user = $event->getUser();
+        $this->aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, null);
+        
+    }
 }

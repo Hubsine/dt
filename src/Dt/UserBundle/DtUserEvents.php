@@ -25,5 +25,7 @@ final class DtUserEvents {
     const HYDRATE_USER_FROM = 'dt_user.hydrate.fos_user.from_resource_owners';
     
     const USER_LOGIN_INITIALIZE = 'dt_user.login.initialize';
+    
+    const OAUTH_REGISTRATION_SUCCESS = 'dt_user.oauth_registration.success';
 
 }

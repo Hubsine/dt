@@ -35,11 +35,6 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
     public $session;
     
     /**
-     * @var AclManager
-     */
-    public $aclManager;
-
-    /**
      * 
      * @param UserManagerInterface $userManager
      * @param array $properties
@@ -47,14 +42,13 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
      */
     public function __construct(UserManagerInterface $userManager, array $properties, 
             TraceableEventDispatcher $eventDispatcher, ValidatorInterface $validator, Session $session
-            /*AclManager $aclManager*/) {
+            ) {
         
         parent::__construct($userManager, $properties);
         
         $this->eventDispatcher = $eventDispatcher;
         $this->validator = $validator;
         $this->session = $session;
-        #$this->aclManager = $aclManager;
     }
 
     /**
@@ -78,8 +72,8 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
         
             $user->setPlainPassword(substr($userPlainPassword,0, 15));
             
-            $hydrateUserEvent = new OAuthUserEvent($user, $profilePicture, $response);
-            $this->eventDispatcher->dispatch(DtUserEvents::HYDRATE_USER_FROM, $hydrateUserEvent);
+            $userEvent = new OAuthUserEvent($user, $profilePicture, $response);
+            $this->eventDispatcher->dispatch(DtUserEvents::HYDRATE_USER_FROM, $userEvent);
 
             // Validation of User
             $groupValidation = null;
@@ -105,7 +99,7 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
                 $this->userManager->updateUser($user);
                 $user->setUsername($user->getUsername() . '-' . $user->getId());
                 
-                #$this->aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, null);
+                $this->eventDispatcher->dispatch(DtUserEvents::OAUTH_REGISTRATION_SUCCESS, $userEvent);
             }
             
             return $user;

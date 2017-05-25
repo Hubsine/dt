@@ -12,7 +12,7 @@ services:
     # Listener
     dt_user.listener.oauth_user:
         class: %dt_user.listener.oauth_user.class%
-        arguments: ['@stof_doctrine_extensions.uploadable.manager']
+        arguments: ['@stof_doctrine_extensions.uploadable.manager', '@oneup_acl.manager']
         tags:
             - { name: kernel.event_subscriber }
             

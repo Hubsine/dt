@@ -87,7 +87,7 @@ class CompteController extends Controller
                 'contentId' => 'moiContent',
                 'newCompteUrl'  => $newCompteUrl,
                 'data'  => $currentUser->getUsername() . '/'. $user->getUsername(),
-                'form'  => $this->renderView('DtUserBundle:Compte:tab_profile_moi.html.twig', array(
+                'form'  => $this->renderView('DtUserBundle:Compte:Moi/show.html.twig', array(
                     'form' => $form->createView(),
                     'message'   => $message
                      ))
@@ -99,7 +99,7 @@ class CompteController extends Controller
             if($request->getMethod() === 'POST' and !$form->isValid()){
                 $response = new JsonResponse(array(
                     'contentId' => 'moiContent',
-                    'form'  => $this->renderView('DtUserBundle:Compte:tab_profile_moi.html.twig', array(
+                    'form'  => $this->renderView('DtUserBundle:Compte:Moi/edit.html.twig', array(
                         'form' => $form->createView(),
                          ))
                 ), 400);
@@ -108,7 +108,7 @@ class CompteController extends Controller
             }
         }
         
-        return $this->render('DtUserBundle:Compte:tab_profile_moi.html.twig', array(
+        return $this->render('DtUserBundle:Compte:Moi/show.html.twig', array(
             'form' => $form->createView(),
         ));
     }

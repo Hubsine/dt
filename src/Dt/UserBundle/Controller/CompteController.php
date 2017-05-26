@@ -42,6 +42,11 @@ class CompteController extends Controller
         return $this->render('DtUserBundle:Compte:layout.html.twig');
     }
 
+    public function showMoiAction(Request $request, User $user){
+        
+        return $this->render('DtUserBundle:Compte:Moi/show.html.twig');
+    }
+    
     /**
      * 
      * @param Request $request
@@ -58,58 +63,65 @@ class CompteController extends Controller
         $form = $this->createForm(MoiFormType::class, $user);
         $form->handleRequest($request);
         
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted()){
             
-            /** @var $userManager UserManagerInterface */
-            $userManager = $this->get('fos_user.user_manager');
-            
-            $user->setSlug($form->getData()->getUsername());
-            $userManager->updateUser($user);
-            
-            $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
-            $newCompteUrl = null;
-            
-            if($currentUser->getUsername() !== $user->getUsername()){
+            if($form->isValid()){
                 
-                $newCompteUrl = $this->generateUrl('dt_user_members_mon_compte', array('slug'=> $user->getSlug()));
-            
-            
-                $aclManager = $this->get('oneup_acl.manager');
-                $aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, UserSecurityIdentity::fromAccount($user));
-            
-                /** @var \Oneup\AclBundle\Security\Authorization\Acl\AclProvider */
-                $securityAclProvider = $this->get('security.acl.provider');
-                $securityAclProvider->deleteSecurityIdentity( UserSecurityIdentity::fromAccount($currentUser) );
+                /** @var $userManager UserManagerInterface */
+                $userManager = $this->get('fos_user.user_manager');
+
+                $user->setSlug($form->getData()->getUsername());
+                $userManager->updateUser($user);
+
+                $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+                $newCompteUrl = null;
+
+                if($currentUser->getUsername() !== $user->getUsername()){
+
+                    $newCompteUrl = $this->generateUrl('dt_user_members_mon_compte', array('slug'=> $user->getSlug()));
+
+
+                    $aclManager = $this->get('oneup_acl.manager');
+                    $aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, UserSecurityIdentity::fromAccount($user));
+
+                    /** @var \Oneup\AclBundle\Security\Authorization\Acl\AclProvider */
+                    $securityAclProvider = $this->get('security.acl.provider');
+                    $securityAclProvider->deleteSecurityIdentity( UserSecurityIdentity::fromAccount($currentUser) );
+
+                }
+
+                $response = new JsonResponse(array(
+                    'contentId' => 'moiContent',
+                    'newCompteUrl'  => $newCompteUrl,
+                    'data'  => $currentUser->getUsername() . '/'. $user->getUsername(), // Supprimer cette liste test
+                    'form'  => $this->renderView('DtUserBundle:Compte:Moi/show.html.twig', array(
+                        'message'   => $message
+                         ))
+                ), 200);
+
+                return $response;
                 
-            }
-            
-            $response = new JsonResponse(array(
-                'contentId' => 'moiContent',
-                'newCompteUrl'  => $newCompteUrl,
-                'data'  => $currentUser->getUsername() . '/'. $user->getUsername(),
-                'form'  => $this->renderView('DtUserBundle:Compte:Moi/show.html.twig', array(
-                    'form' => $form->createView(),
-                    'message'   => $message
-                     ))
-            ), 200);
-            
-            return $response;
-        }else{
-            
-            if($request->getMethod() === 'POST' and !$form->isValid()){
+            }else{
+                
                 $response = new JsonResponse(array(
                     'contentId' => 'moiContent',
                     'form'  => $this->renderView('DtUserBundle:Compte:Moi/edit.html.twig', array(
                         'form' => $form->createView(),
                          ))
                 ), 400);
-            
+
                 return $response;
             }
         }
         
-        return $this->render('DtUserBundle:Compte:Moi/show.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        $response = new JsonResponse(
+            array(
+                'contentId' => 'moiContent',
+                'form'  => $this->renderView('DtUserBundle:Compte:Moi/edit.html.twig', array(
+                    'form' => $form->createView(),
+                     ))
+            ), 200);
+        
+        return $response;
     }
 }

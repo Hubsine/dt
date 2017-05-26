@@ -1,8 +1,30 @@
-
+/***
+/ Nav Bar
+***/
 #mainNavbar{
     margin-bottom: 0;
 }
 
 .page-header{
     margin-top: 0;
+}
+
+/***
+/ Mon compte
+***/
+.section-anchor-js .viewContent,
+.section-achor-js .formContent{
+    position: relative;
+}
+
+/***
+/ Spinner
+***/
+.hasSpinner .spinner{
+    background-color: #eee;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
 }

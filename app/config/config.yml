@@ -161,8 +161,8 @@ assetic:
 
 mopa_bootstrap:
     icons:
-        icon_set: fontawesome4
-        shortcut: icon
+        icon_set: fontawesome
+        shortcut: fa
     navbar: ~
     initializr:
         meta:

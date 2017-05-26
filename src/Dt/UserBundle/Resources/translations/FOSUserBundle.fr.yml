@@ -4,6 +4,14 @@ layout:
     register_with_fb: 'S''inscrire avec Facebook'
     register_with_google: 'S''inscre avec Google'
     login_in: 'Content de vous revoir.'
+    username: 'Nom d''utilisateur'
+    birthday: 'Date de naissance'
+    phone: 'Numéro de mobile'
+    gender: 'Sexe'
+    male: "Homme"
+    update: 'Modifier'
+    cancel: 'Annuler'
+    female: "Femme"
     compte:
         mon_compte: 'Compte'
         moi: 'Moi'

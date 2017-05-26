@@ -1,6 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
 {% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
 
 {% if message is defined %}    
@@ -8,6 +7,34 @@
 {% endif %}
 
 
-show content
+<table class="table table-condensed">
+    <tbody> 
+        <tr> 
+            <th scope="row">{% trans %} layout.username {% endtrans %}</th> 
+            <td>{{ app.user.username }}</td> 
+        </tr> 
+        <tr> 
+            <th scope="row">{% trans %} layout.birthday {% endtrans %}</th> 
+            <td>{{ app.user.birthday|date("d-m-y") }}</td> 
+        <tr> 
+            <th scope="row">{% trans %} layout.phone {% endtrans %}</th>
+            <td>{{ app.user.phone|phone_number_format('INTERNATIONAL') }}</td> 
+        </tr> 
+        <tr> 
+            <th scope="row">{% trans %} layout.gender {% endtrans %}</th>
+            <td>{{ ('layout.' ~ app.user.gender)|trans({}, 'FOSUserBundle') }}</td> 
+        </tr> 
+    </tbody>
+</table>
+        
+<div>
+    <button 
+        data-action="{{ path('dt_user_edit_profile_moi', { 'slug': app.user.slug } ) }}" 
+        data-container="moiContent"
+        class="updateFormToUpdateInAjax pull-right btn btn-danger">
+        {% trans %} layout.update {% endtrans %}
+    </button>
+        
+</div>
 
 

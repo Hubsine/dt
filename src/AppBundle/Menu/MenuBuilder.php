@@ -71,12 +71,12 @@ class MenuBuilder{
         
         $menu->addChild('my_profile', array(
             'route' => 'fos_user_profile_show', // Il s'agit de montrer le profile public que tout le monde peut voir
-            'routeParameters'   => array('username' => $this->usernameSlug)
+            'routeParameters'   => array('slug' => $this->usernameSlug)
         ))->setExtra('translation_domain', 'menu');
 
         $menu->addChild('demandes', array(
             'route' => 'dt_user_members_history',
-            'routeParameters'   => array('username' => $this->usernameSlug)
+            'routeParameters'   => array('slug' => $this->usernameSlug)
         ))->setExtra('translation_domain', 'menu');
 
         return $menu;
@@ -108,22 +108,22 @@ class MenuBuilder{
             'icon' => 'user',
             'caret' => true, 
             'route' => 'dt_user_members_mon_compte',
-            'routeParameters'   => array('username' => $this->usernameSlug)
+            'routeParameters'   => array('slug' => $this->usernameSlug)
         ))->setExtra('translation_domain', 'menu');
         
 //        $profil->addChild('profile', array(
 //            'route' => 'fos_user_profile_show',
-//            'routeParameters'   => array('username' => $this->usernameSlug)
+//            'routeParameters'   => array('slug' => $this->usernameSlug)
 //        ))->setExtra('translation_domain', 'menu');
 //        
 //        $profil->addChild('mes_demandes', array(
 //            'route' => 'dt_user_members_history',
-//            'routeParameters'   => array('username' => $this->usernameSlug)
+//            'routeParameters'   => array('slug' => $this->usernameSlug)
 //        ))->setExtra('translation_domain', 'menu');
 //        
 //        $profil->addChild('parametres', array(
 //            'route' => 'dt_user_members_mon_compte',
-//            'routeParameters'   => array('username' => $this->usernameSlug)
+//            'routeParameters'   => array('slug' => $this->usernameSlug)
 //        ))->setExtra('translation_domain', 'menu');
 //        
 //        $profil->addChild('logout', array(

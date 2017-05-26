@@ -5,14 +5,42 @@
         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="FOS\UserBundle\Model\User">
+        
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">usernameCanonical</option>
+            <option name="errorPath">username</option>
+            <option name="message">fos_user.username.already_used</option>
+            <option name="groups">
+                <value>Registration</value>
+                <value>Profile</value>
+                <value>FbRegistration</value>
+                <value>GoogleRegistration</value>
+                <value>ProfileMoi</value>
+            </option>
+        </constraint>
 
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">emailCanonical</option>
+            <option name="errorPath">email</option>
+            <option name="message">fos_user.email.already_used</option>
+            <option name="groups">
+                <value>Registration</value>
+                <value>Profile</value>
+                <value>FbRegistration</value>
+                <value>GoogleRegistration</value>
+                <value>ProfileMoi</value>
+            </option>
+        </constraint>
+        
+        
         <property name="username">
             <constraint name="NotBlank">
                 <option name="message">fos_user.username.blank</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>FbRegistration</value>
                     <value>Profile</value>
+                    <value>FbRegistration</value>
+                    <value>GoogleRegistration</value>
                     <value>ProfileMoi</value>
                 </option>
             </constraint>
@@ -23,8 +51,10 @@
                 <option name="maxMessage">fos_user.username.long</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>FbRegistration</value>
                     <value>Profile</value>
+                    <value>FbRegistration</value>
+                    <value>GoogleRegistration</value>
+                    <value>ProfileMoi</value>
                 </option>
             </constraint>
         </property>
@@ -34,8 +64,10 @@
                 <option name="message">fos_user.email.blank</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>FbRegistration</value>
                     <value>Profile</value>
+                    <value>FbRegistration</value>
+                    <value>GoogleRegistration</value>
+                    <value>ProfileMoi</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -45,16 +77,20 @@
                 <option name="maxMessage">fos_user.email.long</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>FbRegistration</value>
                     <value>Profile</value>
+                    <value>FbRegistration</value>
+                    <value>GoogleRegistration</value>
+                    <value>ProfileMoi</value>
                 </option>
             </constraint>
             <constraint name="Email">
                 <option name="message">fos_user.email.invalid</option>
                 <option name="groups">
                     <value>Registration</value>
-                    <value>FbRegistration</value>
                     <value>Profile</value>
+                    <value>FbRegistration</value>
+                    <value>GoogleRegistration</value>
+                    <value>ProfileMoi</value>
                 </option>
             </constraint>
         </property>
@@ -83,6 +119,14 @@
     </class>
 
     <class name="FOS\UserBundle\Model\Group">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">name</option>
+            <option name="errorPath">name</option>
+            <option name="message">fos_group.name.already_used</option>
+            <option name="groups">
+                <value>Registration</value>
+            </option>
+        </constraint>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">fos_user.group.blank</option>

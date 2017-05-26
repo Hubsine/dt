@@ -8,7 +8,7 @@
 {% endif %}
 
 
-{{ form_start(form, { 'action': path('dt_user_edit_profile_moi', { 'username': app.user.username } ), 'attr': { 'class': 'ajaxForm' } }) }}
+{{ form_start(form, { 'action': path('dt_user_edit_profile_moi', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm' } }) }}
     {{ form_widget(form) }}
     <div>
         <button id="passwordSubmit" type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>

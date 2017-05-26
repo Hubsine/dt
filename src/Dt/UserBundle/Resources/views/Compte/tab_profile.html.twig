@@ -17,7 +17,7 @@
             {{ content.sectionTitle|trans({}, 'FOSUserBundle') }}
         </h3>
         <div id="moiContent">
-            {{ render(controller('DtUserBundle:Compte:editMoi', {'username': app.request.get('username') })) }}
+            {{ render(controller('DtUserBundle:Compte:editMoi', {'slug': app.request.get('slug') })) }}
         </div>
     </div>
     

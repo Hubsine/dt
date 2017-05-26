@@ -19,7 +19,7 @@ use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumbe
  * @ORM\Table(name="dt_user")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
- * @UniqueEntity("phone", message="dt_user.phone.already_used")
+ * @UniqueEntity("phone", message="dt_user.phone.already_used", groups={"ProfileMoi"})
  * 
  */
 class User extends BaseUser
@@ -73,7 +73,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(unique=true, type="phone_number", name="phone", nullable=true)
      * @Assert\NotBlank(message="dt_user.phone.blank", groups={"ProfileMoi"})
-     * @AssertPhoneNumber(message="dt_user.phone.phone_number", defaultRegion="FR", type="mobile")
+     * @AssertPhoneNumber(message="dt_user.phone.phone_number", defaultRegion="FR", type="mobile", groups={"ProfileMoi"})
      * 
      * @Type("libphonenumber\PhoneNumber")
      * mettre AssertPhoneNumber avec le bundle
@@ -85,7 +85,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=10, name="gender", nullable=true)
      * 
-     * @Assert\Choice(choices = {"male", "female"}, message="dt_user.gender.choice", groups={"Registration", "FbRegistration", "GoogleRegistration"})
+     * @Assert\Choice(choices = {"male", "female"}, message="dt_user.gender.choice", groups={"ProfileMoi", "Registration", "FbRegistration", "GoogleRegistration"})
      * 
      * @var string
      */
@@ -96,7 +96,7 @@ class User extends BaseUser
      * 
      * @Assert\NotBlank(message="dt_user.birthday.blank", groups={"Registration"})
      * @Assert\Date(message="dt_user.birthday.date", groups={"Registration"})
-     * @Assert\LessThanOrEqual("-18 years", groups={"Registration"}, message="dt_user.birthday.less_than_or_equal")
+     * @Assert\LessThanOrEqual("-18 years", groups={"Registration", "ProfileMoi"}, message="dt_user.birthday.less_than_or_equal")
      * 
      * @var date
      */

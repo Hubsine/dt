@@ -6,6 +6,7 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Description of MenuBuilder
@@ -50,10 +51,13 @@ class MenuBuilder{
         $this->requestStack = $requestStack;
         $this->request = $requestStack->getCurrentRequest();
         
-        if($this->securityTokenStorage->getToken()->getUser()){
-            $this->usernameSlug = $this->securityTokenStorage->getToken()->getUser();
+        $user = $this->securityTokenStorage->getToken()->getUser();
+        
+        // anon.
+        if($user instanceof UserInterface){
+            $this->usernameSlug = $this->securityTokenStorage->getToken()->getUser()->getSlug();
         }else{
-            $this->usernameSlug = null;
+            $this->usernameSlug = 'anon.';
         }
         
     }

@@ -20,6 +20,11 @@ function initAjaxForm()
             
             $(this.form.context).find(":input", ":select", ":textarea", ":button").removeAttr("disabled");
     
+    console.log(data.data);
+            if(typeof data.newCompteUrl !== 'undefined' && data.newCompteUrl !== null){
+                document.location = data.newCompteUrl;
+            }
+            
             if (typeof data.form !== 'undefined') {
                 $('#'+data.contentId).html(data.form);
             }

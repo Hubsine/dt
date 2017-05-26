@@ -8,6 +8,7 @@ use Dt\UserBundle\DtUserEvents;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Oneup\AclBundle\Security\Acl\Manager\AclManager;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 
 /**
  * Description of LoadUserByOAuthUserListener
@@ -93,7 +94,9 @@ class LoadUserByOAuthUserListener implements EventSubscriberInterface{
     public function oauthUserRegistrationSuccess(OAuthUserEvent $event){
         
         $user = $event->getUser();
-        $this->aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, null);
+        $securityIdentity = UserSecurityIdentity::fromAccount($user);
+            
+        $this->aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, $securityIdentity);
         
     }
 }

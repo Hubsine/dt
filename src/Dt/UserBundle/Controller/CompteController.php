@@ -19,6 +19,8 @@ use FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer;
 use Dt\UserBundle\Entity\User;
 use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Util\ClassUtils;
 
 /**
  * Controller managing the user profile.
@@ -35,7 +37,7 @@ class CompteController extends Controller
     public function viewAction(User $user)
     {
         #$aclManager = $this->get('oneup_acl.manager');
-        #$aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, $identity = null);
+        #$aclManager->setObjectPermission($user, MaskBuilder::MASK_OWNER, UserSecurityIdentity::fromAccount($user));
         
         return $this->render('DtUserBundle:Compte:layout.html.twig');
     }
@@ -49,6 +51,7 @@ class CompteController extends Controller
     {
         /** @var $userManager UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
+        $currentUser = clone $user; 
         
         $user = $this->getUser();
         
@@ -60,13 +63,33 @@ class CompteController extends Controller
             /** @var $userManager UserManagerInterface */
             $userManager = $this->get('fos_user.user_manager');
             
+            $user->setSlug($form->getData()->getUsername());
             $userManager->updateUser($user);
+            
+            $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+            $newCompteUrl = null;
+            
+            if($currentUser->getUsername() !== $user->getUsername()){
+                
+                $newCompteUrl = $this->generateUrl('dt_user_members_mon_compte', array('slug'=> $user->getSlug()));
+            
+            
+                $aclManager = $this->get('oneup_acl.manager');
+                $aclManager->addObjectPermission($user, MaskBuilder::MASK_OWNER, UserSecurityIdentity::fromAccount($user));
+            
+                /** @var \Oneup\AclBundle\Security\Authorization\Acl\AclProvider */
+                $securityAclProvider = $this->get('security.acl.provider');
+                $securityAclProvider->deleteSecurityIdentity( UserSecurityIdentity::fromAccount($currentUser) );
+                
+            }
             
             $response = new JsonResponse(array(
                 'contentId' => 'moiContent',
+                'newCompteUrl'  => $newCompteUrl,
+                'data'  => $currentUser->getUsername() . '/'. $user->getUsername(),
                 'form'  => $this->renderView('DtUserBundle:Compte:tab_profile_moi.html.twig', array(
                     'form' => $form->createView(),
-                    'message'   => $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle')
+                    'message'   => $message
                      ))
             ), 200);
             

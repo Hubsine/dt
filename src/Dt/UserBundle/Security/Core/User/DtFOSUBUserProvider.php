@@ -96,10 +96,17 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
                 }
             }else{
                 $user->setEnabled(true);
+                
                 $this->userManager->updateUser($user);
+                
                 $user->setUsername($user->getUsername() . '-' . $user->getId());
+                $user->setSlug($user->getUsername());
+                
+                $this->userManager->updateUser($user);
                 
                 $this->eventDispatcher->dispatch(DtUserEvents::OAUTH_REGISTRATION_SUCCESS, $userEvent);
+                
+                #$this->userManager->reloadUser($user);
             }
             
             return $user;

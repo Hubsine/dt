@@ -305,4 +305,7 @@ fos_elastica:
     clients:
         default: { host: donneton06.com, port: null }
     indexes:
-        app: ~                
+        app: ~  
+        
+oneup_acl:
+    remove_orphans: true        

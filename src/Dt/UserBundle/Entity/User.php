@@ -64,7 +64,7 @@ class User extends BaseUser
     /**
      * 
      * @ORM\Column(unique=true, name="slug", nullable=false)
-     * @Gedmo\Slug(fields={"username", "id"})
+     * @Gedmo\Slug(fields={"username"})
      * 
      * @var string
      */

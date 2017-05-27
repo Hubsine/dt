@@ -4,22 +4,29 @@
 {
     'moi': {
         'sectionId': 'profile-moi',
-        'href': 'moi',
         'sectionTitle': 'layout.compte.moi',
         'contentId': 'moiContent',
+        'content': controller('DtUserBundle:Compte:showMoi', {'slug': app.request.get('slug') })
+    },
+    'rseaux_sociaux': {
+        'sectionId': 'profile-reseaux-sociaux',
+        'sectionTitle': 'layout.compte.reseaux_sociaux',
+        'contentId': 'reseauxSociauxContent',
+        'content': controller('DtUserBundle:Compte:showReseauxSociaux', {'slug': app.request.get('slug') })
     }
+    
 }
 %}
 
 {% for content in tabsContent %}
 
-    <div class="section-anchor-js" id="">
+    <div class="section-anchor-js">
         <h3 class="page-header" id="{{ content.sectionId }}">
             {{ content.sectionTitle|trans({}, 'FOSUserBundle') }}
         </h3>
-        <div id="moiContent">
+        <div id="{{ content.contentId }}">
             <div class="viewContent">
-                {{ render(controller('DtUserBundle:Compte:showMoi', {'slug': app.request.get('slug') })) }}
+                {{ render(content.content) }}
             </div>
             <div class="formContent hidden">
             </div>

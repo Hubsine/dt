@@ -14,5 +14,9 @@ dt_user_members_mon_compte:
 # Edit dans mon compte - Toutes editions se fait en js 
 ###
 dt_user_edit_profile_moi: 
-    path: /{slug}/mon-compte/profile-edit-moi
+    path: /{slug}/mon-compte/profile/edit/moi
     defaults: { _controller: DtUserBundle:Compte:editMoi }
+
+dt_user_edit_profile_reseaux_sociaux: 
+    path: /{slug}/mon-compte/profile/edit/reseaux-sociaux
+    defaults: { _controller: DtUserBundle:Compte:editReseauxSociaux }

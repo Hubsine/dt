@@ -17,6 +17,7 @@ layout:
         moi: 'Moi'
         password: 'Mot de passe'
         photo: 'Photos'
+        reseaux_sociaux: 'Réseaux sociaux'
 
 change_profile:
     update: 'Mettre à jour'

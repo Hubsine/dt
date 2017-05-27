@@ -47,7 +47,11 @@ class CompteController extends Controller
         return $this->render('DtUserBundle:Compte:Moi/show.html.twig');
     }
     
-    /**
+    public function showReseauxSociauxAction(Request $request, User $user){
+        return $this->render('DtUserBundle:Compte:ReseauxSociaux/show.html.twig');
+    }
+
+        /**
      * 
      * @param Request $request
      * @return JsonResponse

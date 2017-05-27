@@ -14,9 +14,10 @@ function initAjaxCancelBtn(){
 
     $('body').on('click', '.cancelFormToUpdateInAjax', function(e){
         
-        var elmt = $(this).data('container');
-        $("#"+elmt + ' .viewContent').removeClass('hidden');
-        $("#"+elmt + ' .formContent').addClass('hidden').html("");
+        var container = "#"+$(this).data('container');
+        
+        $(container + ' .viewContent').removeClass('hidden');
+        $(container + ' .formContent').addClass('hidden').html("");
         
     });
     
@@ -35,22 +36,25 @@ function initAjaxUpdateBtn(){
         $.ajax({
             type: 'GET',
             url: $(this).data('action'),
-            container: $(this).data('container'),
+            container: "#"+$(this).data('container'),
             beforeSend: function(jqXHR, settings){
                 
-                startAjaxSpinner('#'+settings.container + ' .viewContent');
-                //$('#'+settings.container + ' .viewContent').addClass('hidden');
-                //$('#'+settings.container + ' .formContent').removeClass('hidden');
+                var container = settings.container;
+                
+                startAjaxSpinner(container + ' .viewContent');
+                
             }
         })
         .done(function (data) {
             
+            var container = "#"+data.contentId;
+    
             if (typeof data.form !== 'undefined') {
                 
-                stopAjaxSpinner('#'+data.contentId + ' .viewContent');
+                stopAjaxSpinner(container + ' .viewContent');
                 
-                $('#'+data.contentId + ' .viewContent').addClass('hidden');
-                $('#'+data.contentId + ' .formContent').html(data.form).removeClass('hidden');
+                $(container + ' .viewContent').addClass('hidden');
+                $(container + ' .formContent').html(data.form).removeClass('hidden');
             }
         })
         ;
@@ -76,12 +80,20 @@ function initAjaxForm()
             url: $(this).attr('action'),
             data: $(this).serialize(),
             form: $(this),
+            container: "#"+$(this).data('container'),
             beforeSend: function(jqXHR, settings){
+                
+                var container = "#"+$(this.form).data('container');
+                
+                startAjaxSpinner(container + ' .formContent');
                 $(settings.form).find(":input", ":select", ":textarea", ":button").attr("disabled", "disabled");
+                
             }
         })
         .done(function (data) {
             
+            var container = "#"+$(this.form).data('container');
+    
             $(this.form.context).find(":input", ":select", ":textarea", ":button").removeAttr("disabled");
     
             if(typeof data.newCompteUrl !== 'undefined' && data.newCompteUrl !== null){
@@ -89,21 +101,31 @@ function initAjaxForm()
             }
             
             if (typeof data.form !== 'undefined') {
-                $('#'+data.contentId + ' .viewContent').html(data.form).removeClass('hidden');
-                $('#'+data.contentId + ' .formContent').html('').addClass('hidden');
+                
+                $(container + ' .viewContent').html(data.form).removeClass('hidden');
+                $(container + ' .formContent').html('').addClass('hidden');
+                
+                stopAjaxSpinner(container + ' .formContent');
             }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-            
+    
+            var container = "#"+$(this.form).data('container');
+    
             $(this.form.context).find(":input", ":select", ":textarea", ":button").removeAttr("disabled");
     
             if (typeof jqXHR.responseJSON !== 'undefined') {
                 if (jqXHR.responseJSON.hasOwnProperty('form')) {
                     $('#'+jqXHR.responseJSON.contentId + ' .formContent').html(jqXHR.responseJSON.form);
+                    stopAjaxSpinner('#'+jqXHR.responseJSON.contentId + ' .formContent');
                 }
  
             } else {
+                
+                stopAjaxSpinner(container + ' .formContent');
+                
                 console.log(errorThrown);
+                
             }
  
         });

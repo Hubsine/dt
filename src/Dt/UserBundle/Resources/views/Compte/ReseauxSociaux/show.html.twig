@@ -10,27 +10,27 @@
 <table class="table table-condensed">
     <tbody> 
         <tr> 
-            <th scope="row">{% trans %} layout.username {% endtrans %}</th> 
-            <td>{{ app.user.username }}</td> 
+            <th scope="row">{% trans %} layout.facebook_url {% endtrans %}</th> 
+            <td><a target="_blank" href="{{ app.user.facebookUrl|default('#') }}">{{ app.user.facebookUrl }}</a></td> 
         </tr> 
         <tr> 
-            <th scope="row">{% trans %} layout.birthday {% endtrans %}</th> 
-            <td>{{ app.user.birthday|date("d-m-y") }}</td> 
+            <th scope="row">{% trans %} layout.twitter_url {% endtrans %}</th> 
+            <td><a target="_blank" href="{{ app.user.twitterUrl|default('#') }}">{{ app.user.twitterUrl }}</a></td> 
         <tr> 
-            <th scope="row">{% trans %} layout.phone {% endtrans %}</th>
-            <td>{{ app.user.phone|phone_number_format('INTERNATIONAL') }}</td> 
+            <th scope="row">{% trans %} layout.instagram_url {% endtrans %}</th>
+            <td><a target="_blank" href="{{ app.user.instagramUrl|default('#') }}">{{ app.user.instagramUrl }}</a></td> 
         </tr> 
         <tr> 
-            <th scope="row">{% trans %} layout.gender {% endtrans %}</th>
-            <td>{{ ('layout.' ~ app.user.gender)|trans({}, 'FOSUserBundle') }}</td> 
+            <th scope="row">{% trans %} layout.snapchat_name {% endtrans %}</th>
+            <td><a target="_blank" href="{{ app.user.snapchatName|default('#') }}">{{ app.user.snapchatName }}</a></td> 
         </tr> 
     </tbody>
 </table>
         
 <div>
     <button 
-        data-action="{{ path('dt_user_edit_profile_moi', { 'slug': app.user.slug } ) }}" 
-        data-container="moiContent"
+        data-action="{{ path('dt_user_edit_profile_reseaux_sociaux', { 'slug': app.user.slug } ) }}" 
+        data-container="reseauxSociauxContent"
         class="updateFormToUpdateInAjax pull-right btn btn-danger">
         {% trans %} layout.update {% endtrans %}
     </button>

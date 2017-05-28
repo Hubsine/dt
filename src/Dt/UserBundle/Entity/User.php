@@ -13,7 +13,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\Type;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="dt_user")
@@ -131,7 +130,7 @@ class User extends BaseUser
     protected $googleId;
     
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * @Assert\Url(
      *      message="dt_user.url.url", 
@@ -145,7 +144,7 @@ class User extends BaseUser
     protected $facebookUrl;
     
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * @Assert\Url(
      *      message="dt_user.url.url", 
@@ -159,7 +158,7 @@ class User extends BaseUser
     protected $twitterUrl;
     
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * @Assert\Url(
      *      message="dt_user.url.url", 
@@ -173,16 +172,17 @@ class User extends BaseUser
     protected $instagramUrl;
     
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * @Assert\Type(
      *      type="string",
-     *      message="dt_user.snapchat_name.type"
+     *      message="dt_user.snapchat_name.type",
+     *      groups={"ProfileReseauxSociaux"},
      * )
      * 
      * @var string
      */
-    protected $snapschatName;
+    protected $snapchatName;
 
     protected $facebookAccessToken;
     
@@ -562,14 +562,14 @@ class User extends BaseUser
     }
 
     /**
-     * Set snapschatName
+     * Set snapchatName
      *
-     * @param string $snapschatName
+     * @param string $snapchatName
      * @return User
      */
-    public function setSnapschatName($snapschatName)
+    public function setSnapchatName($snapchatName)
     {
-        $this->snapschatName = $snapschatName;
+        $this->snapchatName = $snapchatName;
 
         return $this;
     }
@@ -579,8 +579,8 @@ class User extends BaseUser
      *
      * @return string 
      */
-    public function getSnapschatName()
+    public function getSnapchatName()
     {
-        return $this->snapschatName;
+        return $this->snapchatName;
     }
 }

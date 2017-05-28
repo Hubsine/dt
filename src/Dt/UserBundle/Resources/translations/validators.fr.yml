@@ -24,7 +24,7 @@ dt_user:
     verified_email:
         is_true: 'Votre adresse e-mail ne semble pas être validé par Google.'
     url:
-        url: 'The url "{{ value }}" is not a valid url'
+        url: 'L''url "{{ value }}" n''est pas une url valide.'
         dns: 'l''hôte "{{ value }}" n''est pas valide.'
     snapchat_name:
-       type: 'The value {{ value }} is not a valid {{ type }}.'
+       type: 'la valeure {{ value }} n''est pas une valeur de type {{ type }}.'

@@ -12,6 +12,10 @@ layout:
     update: 'Modifier'
     cancel: 'Annuler'
     female: "Femme"
+    facebook_url: 'Profile Facebook'
+    twitter_url: 'Profile Twitter'
+    instagram_url: 'Profile instagram'
+    snapchat_name: 'Nom d''utilisateur SnapChat'
     compte:
         mon_compte: 'Compte'
         moi: 'Moi'
@@ -52,5 +56,9 @@ form:
     month: 'Mois'
     day: 'Jour'
     phone: 'Numéro de mobile'
+    facebook_url: 'Profile Facebook'
+    twitter_url: 'Profile Twitter'
+    instagram_url: 'Profile instagram'
+    snapchat_name: 'Nom d''utilisateur SnapChat'
     
     

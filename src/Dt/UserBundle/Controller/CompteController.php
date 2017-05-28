@@ -13,6 +13,7 @@ namespace Dt\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Dt\UserBundle\Form\Type\MoiFormType;
+use Dt\UserBundle\Form\Type\ReseauxSociauxFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer;
@@ -51,13 +52,63 @@ class CompteController extends Controller
         return $this->render('DtUserBundle:Compte:ReseauxSociaux/show.html.twig');
     }
 
-        /**
+    public function editReseauxSociauxAction(Request $request, User $user){
+        
+        $codeResponse = 200;
+        $contentId = 'reseauxSociauxContent';
+        
+        $user = $this->getUser();
+        $form = $this->createForm(ReseauxSociauxFormType::class, $user);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted()){
+            
+            if($form->isValid()){
+                
+                /** @var $userManager UserManagerInterface */
+                $userManager = $this->get('fos_user.user_manager');
+                
+                $userManager->updateUser($user);
+                
+                $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+                
+                $response = new JsonResponse(array(
+                    'contentId' => $contentId,
+                    'form'  => $this->renderView('DtUserBundle:Compte:ReseauxSociaux/show.html.twig', array(
+                        'message'   => $message
+                         ))
+                ), $codeResponse );
+
+                return $response;
+                
+            }else{
+                $codeResponse = 400;
+            }
+        }
+        
+        $response = new JsonResponse(
+            array(
+                'contentId' => $contentId,
+                'form'  => $this->renderView('DtUserBundle:Compte:ReseauxSociaux/edit.html.twig', array(
+                    'form' => $form->createView(),
+                     ))
+            ), $codeResponse );
+        
+        return $response;
+        
+    }
+    
+    /**
      * 
      * @param Request $request
      * @return JsonResponse
      */
     public function editMoiAction(Request $request, User $user)
     {
+        
+        $codeResponse = 400;
+        
         /** @var $userManager UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
         $currentUser = clone $user; 
@@ -70,10 +121,8 @@ class CompteController extends Controller
         if($form->isSubmitted()){
             
             if($form->isValid()){
-                
-                /** @var $userManager UserManagerInterface */
-                $userManager = $this->get('fos_user.user_manager');
 
+                $codeResponse = 200;
                 $user->setSlug($form->getData()->getUsername());
                 $userManager->updateUser($user);
 
@@ -101,7 +150,7 @@ class CompteController extends Controller
                     'form'  => $this->renderView('DtUserBundle:Compte:Moi/show.html.twig', array(
                         'message'   => $message
                          ))
-                ), 200);
+                ), $codeResponse);
 
                 return $response;
                 

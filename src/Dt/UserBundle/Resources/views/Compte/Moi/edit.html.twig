@@ -5,7 +5,7 @@
 {{ form_start(form, { 'action': path('dt_user_edit_profile_moi', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'moiContent' } }) }}
     {{ form_widget(form) }}
     <div>
-        <button id="passwordSubmit" type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
+        <button type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
         <div
             data-action="{{ path('dt_user_edit_profile_moi', { 'slug': app.user.slug } ) }}" 
             data-container="moiContent"

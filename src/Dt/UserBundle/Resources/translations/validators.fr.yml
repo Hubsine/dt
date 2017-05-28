@@ -23,3 +23,8 @@ dt_user:
         type: 'Le nom comporte des caractères non autorisé.'  
     verified_email:
         is_true: 'Votre adresse e-mail ne semble pas être validé par Google.'
+    url:
+        url: 'The url "{{ value }}" is not a valid url'
+        dns: 'l''hôte "{{ value }}" n''est pas valide.'
+    snapchat_name:
+       type: 'The value {{ value }} is not a valid {{ type }}.'

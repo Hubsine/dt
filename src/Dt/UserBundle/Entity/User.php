@@ -129,6 +129,60 @@ class User extends BaseUser
      * @var string
      */
     protected $googleId;
+    
+    /**
+     * @ORM\Column()
+     * 
+     * @Assert\Url(
+     *      message="dt_user.url.url", 
+     *      groups={"ProfileReseauxSociaux"},
+     *      protocols = {"http", "https"},
+     *      checkDNS = true,
+     *      dnsMessage = "dt_user.url.dns")
+     * 
+     * @var string
+     */
+    protected $facebookUrl;
+    
+    /**
+     * @ORM\Column()
+     * 
+     * @Assert\Url(
+     *      message="dt_user.url.url", 
+     *      groups={"ProfileReseauxSociaux"},
+     *      protocols = {"http", "https"},
+     *      checkDNS = true,
+     *      dnsMessage = "dt_user.url.dns")
+     * 
+     * @var string
+     */
+    protected $twitterUrl;
+    
+    /**
+     * @ORM\Column()
+     * 
+     * @Assert\Url(
+     *      message="dt_user.url.url", 
+     *      groups={"ProfileReseauxSociaux"},
+     *      protocols = {"http", "https"},
+     *      checkDNS = true,
+     *      dnsMessage = "dt_user.url.dns")
+     * 
+     * @var string
+     */
+    protected $instagramUrl;
+    
+    /**
+     * @ORM\Column()
+     * 
+     * @Assert\Type(
+     *      type="string",
+     *      message="dt_user.snapchat_name.type"
+     * )
+     * 
+     * @var string
+     */
+    protected $snapschatName;
 
     protected $facebookAccessToken;
     
@@ -438,6 +492,95 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * Set facebookUrl
+     *
+     * @param string $facebookUrl
+     * @return User
+     */
+    public function setFacebookUrl($facebookUrl)
+    {
+        $this->facebookUrl = $facebookUrl;
 
+        return $this;
+    }
 
+    /**
+     * Get facebookUrl
+     *
+     * @return string 
+     */
+    public function getFacebookUrl()
+    {
+        return $this->facebookUrl;
+    }
+
+    /**
+     * Set twitterUrl
+     *
+     * @param string $twitterUrl
+     * @return User
+     */
+    public function setTwitterUrl($twitterUrl)
+    {
+        $this->twitterUrl = $twitterUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get twitterUrl
+     *
+     * @return string 
+     */
+    public function getTwitterUrl()
+    {
+        return $this->twitterUrl;
+    }
+
+    /**
+     * Set instagramUrl
+     *
+     * @param string $instagramUrl
+     * @return User
+     */
+    public function setInstagramUrl($instagramUrl)
+    {
+        $this->instagramUrl = $instagramUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get instagramUrl
+     *
+     * @return string 
+     */
+    public function getInstagramUrl()
+    {
+        return $this->instagramUrl;
+    }
+
+    /**
+     * Set snapschatName
+     *
+     * @param string $snapschatName
+     * @return User
+     */
+    public function setSnapschatName($snapschatName)
+    {
+        $this->snapschatName = $snapschatName;
+
+        return $this;
+    }
+
+    /**
+     * Get snapschatName
+     *
+     * @return string 
+     */
+    public function getSnapschatName()
+    {
+        return $this->snapschatName;
+    }
 }

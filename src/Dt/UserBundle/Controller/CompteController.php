@@ -51,11 +51,17 @@ class CompteController extends Controller
     public function showReseauxSociauxAction(Request $request, User $user){
         return $this->render('DtUserBundle:Compte:ReseauxSociaux/show.html.twig');
     }
+    
+    public function showQuiSuisJeAction(Request $request, User $user){
+        return $this->render('DtUserBundle:Compte:QuiSuisJe/show.html.twig');
+    }
 
-    public function editReseauxSociauxAction(Request $request, User $user){
+    public function editQuiSuisJeAction(Request $request, User $user){
         
         $codeResponse = 200;
-        $contentId = 'reseauxSociauxContent';
+        $contentId = 'quiSuisJeContent';
+        $templateToShow = 'DtUserBundle:Compte:QuiSuisJe/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:QuiSuisJe/edit.html.twig';
         
         $user = $this->getUser();
         $form = $this->createForm(ReseauxSociauxFormType::class, $user);
@@ -75,7 +81,7 @@ class CompteController extends Controller
                 
                 $response = new JsonResponse(array(
                     'contentId' => $contentId,
-                    'form'  => $this->renderView('DtUserBundle:Compte:ReseauxSociaux/show.html.twig', array(
+                    'form'  => $this->renderView($templateToShow, array(
                         'message'   => $message
                          ))
                 ), $codeResponse );
@@ -90,7 +96,56 @@ class CompteController extends Controller
         $response = new JsonResponse(
             array(
                 'contentId' => $contentId,
-                'form'  => $this->renderView('DtUserBundle:Compte:ReseauxSociaux/edit.html.twig', array(
+                'form'  => $this->renderView($templateToEdit, array(
+                    'form' => $form->createView(),
+                     ))
+            ), $codeResponse );
+        
+        return $response;
+        
+    }
+    
+    public function editReseauxSociauxAction(Request $request, User $user){
+        
+        $codeResponse = 200;
+        $contentId = 'quiSuisJeContent';
+        $templateToShow = 'DtUserBundle:Compte:ReseauxSociaux/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:ReseauxSociaux/edit.html.twig';
+        
+        $user = $this->getUser();
+        $form = $this->createForm(ReseauxSociauxFormType::class, $user);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted()){
+            
+            if($form->isValid()){
+                
+                /** @var $userManager UserManagerInterface */
+                $userManager = $this->get('fos_user.user_manager');
+                
+                $userManager->updateUser($user);
+                
+                $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+                
+                $response = new JsonResponse(array(
+                    'contentId' => $contentId,
+                    'form'  => $this->renderView($templateToShow, array(
+                        'message'   => $message
+                         ))
+                ), $codeResponse );
+
+                return $response;
+                
+            }else{
+                $codeResponse = 400;
+            }
+        }
+        
+        $response = new JsonResponse(
+            array(
+                'contentId' => $contentId,
+                'form'  => $this->renderView($templateToEdit, array(
                     'form' => $form->createView(),
                      ))
             ), $codeResponse );

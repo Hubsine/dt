@@ -102,16 +102,6 @@ class User extends BaseUser
     protected $birthday;
     
     /**
-     * ORM\Column(type="string", name="about")
-     * 
-     * @Assert\NotBlank(groups={""}, message="dt_user.about.blank")
-     * @Assert\Type(type="string", groups={""}, message="dt_user.about.type")
-     * 
-     * @var string
-     */
-    protected $about;
-
-    /**
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
      * 
      * @Assert\NotBlank(groups={"FbRegistration"})
@@ -207,6 +197,21 @@ class User extends BaseUser
      */
     protected $verifiedEmail;
 
+    /**
+     * ORM\Column(type="string", name="about")
+     * 
+     * @Assert\NotBlank(groups={""}, message="dt_user.about.blank")
+     * @Assert\Type(type="string", groups={""}, message="dt_user.about.type")
+     * 
+     * @var string
+     */
+    protected $about;
+    
+    protected $aboutUser;
+
+
+    protected $size; 
+    
     /**
      * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\ProfilePicture", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)

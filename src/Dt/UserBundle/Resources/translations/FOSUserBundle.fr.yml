@@ -22,6 +22,7 @@ layout:
         password: 'Mot de passe'
         photo: 'Photos'
         reseaux_sociaux: 'Réseaux sociaux'
+        qui_suis_je: 'Qui suis-je ?'
 
 change_profile:
     update: 'Mettre à jour'

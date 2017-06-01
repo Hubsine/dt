@@ -13,8 +13,13 @@
         'sectionTitle': 'layout.compte.reseaux_sociaux',
         'contentId': 'reseauxSociauxContent',
         'content': controller('DtUserBundle:Compte:showReseauxSociaux', {'slug': app.request.get('slug') })
+    },
+    'qui_suis_je': {
+        'sectionId': 'profile-qui-suis-je',
+        'sectionTitle': 'layout.compte.qui_suis_je',
+        'contentId': 'quiSuisJeContent',
+        'content': controller('DtUserBundle:Compte:showQuiSuisJe', {'slug': app.request.get('slug') })
     }
-    
 }
 %}
 

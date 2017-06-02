@@ -1,0 +1,17 @@
+accueil: 'Accueil'
+members: 'Membres'
+profile: 'Profile'
+my_profile: 'Mon profile'
+mon_compte: 'Mon compte'
+demandes: 'Mes demandes'
+login: 'Connexion'
+inscription: 'Inscription'
+mes_demandes: 'Mes demandes'
+logout: 'Déconnexion'
+admin_sidebar: 
+    users: 'Utilisateurs'
+    user: 'Utilisateurs'
+    about_user: 'About user'
+    
+    
+    

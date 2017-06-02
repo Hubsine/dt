@@ -1,0 +1,8 @@
+parameters:
+    dt_admin.menu_builder.class: Dt\AdminBundle\Menu\MenuBuilder
+services:
+    app.menu_builder:
+        class: '%dt_admin.menu_builder.class%'
+        arguments: ["@knp_menu.factory", "@security.token_storage", "@request_stack"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: admin_sidebar }

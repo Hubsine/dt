@@ -2,17 +2,11 @@
 
 namespace Dt\UserBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Dt\UserBundle\Traits\Detail;
 use Symfony\Component\Validator\Constraints as Assert;
-use Dt\UserBundle\Entity\ProfilePicture;
 use Gedmo\Mapping\Annotation as Gedmo;
-use JMS\Serializer\Annotation\Type;
-use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use Gedmo\Translatable\Translatable;
 
 /**
@@ -50,16 +44,7 @@ class AboutUser implements Translatable
     protected $label;
     
     /**
-     * @ORM\Column(unique=true)
-     * 
-     * @Gedmo\Slug(fields={"label"})
-     * 
-     * @var string
-     */
-    protected $slug;
-    
-    /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * @Assert\NotBlank(message="dt_about_user.value.blank", groups={"Profile"})
      * @Assert\Type(type="string", message="dt_about_user.value.type", groups={"Profile"})
@@ -76,7 +61,7 @@ class AboutUser implements Translatable
      * @Assert\NotBlank(message="dt_about_user.value_form_type.blank", groups={"Profile"})
      * @Assert\Type(type="string", message="dt_about_user.value_form_type.type", groups={"Profile"})
      * 
-     * @var \Symfony\Component\Form\FormTypeInterface
+     * @var string Value must be a class name who implement \Symfony\Component\Form\FormTypeInterface
      */
     protected $valueFormType;
     
@@ -128,4 +113,169 @@ class AboutUser implements Translatable
      */
     protected $children;
     
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set label
+     *
+     * @param string $label
+     * @return AboutUser
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Get label
+     *
+     * @return string 
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return AboutUser
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set value
+     *
+     * @param string $value
+     * @return AboutUser
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return string 
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set valueFormType
+     *
+     * @param string $valueFormType
+     * @return AboutUser
+     */
+    public function setValueFormType($valueFormType)
+    {
+        $this->valueFormType = $valueFormType;
+
+        return $this;
+    }
+
+    /**
+     * Get valueFormType
+     *
+     * @return string 
+     */
+    public function getValueFormType()
+    {
+        return $this->valueFormType;
+    }
+
+    /**
+     * Set isValue
+     *
+     * @param string $isValue
+     * @return AboutUser
+     */
+    public function setIsValue($isValue)
+    {
+        $this->isValue = $isValue;
+
+        return $this;
+    }
+
+    /**
+     * Get isValue
+     *
+     * @return string 
+     */
+    public function getIsValue()
+    {
+        return $this->isValue;
+    }
+
+    /**
+     * Get root
+     *
+     * @return \Dt\UserBundle\Entity\AboutUser 
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Dt\UserBundle\Entity\AboutUser $parent
+     * @return AboutUser
+     */
+    public function setParent(\Dt\UserBundle\Entity\AboutUser $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Dt\UserBundle\Entity\AboutUser 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
 }

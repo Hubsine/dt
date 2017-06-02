@@ -6,6 +6,7 @@ imports:
     - { resource: "@DtUserBundle/Resources/config/services.yml" }
     - { resource: "@DtSearchBundle/Resources/config/services.yml" }
     - { resource: "@DtOAuthBundle/Resources/config/services.yml" }
+    - { resource: "@DtAdminBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -140,7 +141,7 @@ swiftmailer:
 
 #AsseticBundle
 assetic:
-    bundle: ['DtUserBundle', 'MopaBootstrapBundle']
+    bundle: ['DtAdminBundle', 'DtUserBundle', 'MopaBootstrapBundle']
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
     filters:
@@ -309,3 +310,8 @@ fos_elastica:
         
 oneup_acl:
     remove_orphans: true        
+    
+knp_menu:
+    # use "twig: false" to disable the Twig extension and the TwigRenderer
+    #twig:
+        #template: KnpMenuBundle::menu.html.twig    

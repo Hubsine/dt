@@ -1,0 +1,7 @@
+dt_admin_homepage:
+    path:     /
+    defaults: { _controller: DtAdminBundle:Admin:index }
+
+dt_admin_about_user:
+    path: /about-user
+    defaults: { _controller: DtAdminBundle:AboutUser:index }

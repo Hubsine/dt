@@ -28,6 +28,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Controller\RegistrationController as ExtendedController;
 use FOS\UserBundle\Util\TokenGenerator;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 
 /**
  * Controller managing the registration.
@@ -86,7 +87,8 @@ class RegistrationController extends ExtendedController
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
                 
                 $acl = $this->get('oneup_acl.manager');
-                $acl->addObjectPermission($user, MaskBuilder::MASK_OWNER, null);
+                $securityIdentite = UserSecurityIdentity::fromAccount($user);
+                $acl->addObjectPermission($user, MaskBuilder::MASK_OWNER, $securityIdentite);
                 
                 return $response;
             }

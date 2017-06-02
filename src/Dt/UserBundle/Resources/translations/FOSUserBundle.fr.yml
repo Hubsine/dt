@@ -29,6 +29,8 @@ change_profile:
     success: "Informations mise à jour avec succès."
 security:
     password_forget: 'Mot de passe oublié ?'
+    login: 
+        email: 'Votre adresse e-mail'
     
 registration:
     flash:

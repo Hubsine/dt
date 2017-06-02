@@ -108,7 +108,7 @@ class CompteController extends Controller
     public function editReseauxSociauxAction(Request $request, User $user){
         
         $codeResponse = 200;
-        $contentId = 'quiSuisJeContent';
+        $contentId = 'reseauxSociauxContent';
         $templateToShow = 'DtUserBundle:Compte:ReseauxSociaux/show.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:ReseauxSociaux/edit.html.twig';
         

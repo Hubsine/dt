@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Dt\UserBundle\DtUserBundle(),
             new Dt\SearchBundle\DtSearchBundle(),
             new Dt\OAuthBundle\DtOAuthBundle(),
+            new Dt\AdminBundle\DtAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

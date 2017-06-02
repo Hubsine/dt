@@ -1,0 +1,104 @@
+{% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets
+        '@DtAdminBundle/Resources/public/css/*.css'
+        '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle-fa.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+    
+    
+{% endblock head_style %}
+
+{% block head_script %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+{% endblock head_script %}
+
+{% block body_tag %}
+<body class="admin-body">
+{% endblock body_tag %}
+
+{% block navbar %}
+
+    {% block container_header_start %} 
+        <header id="main-header" class="admin-nav"> 
+    {% endblock container_header_start %}
+        
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        {% block brand %}
+            <a class="navbar-brand" href="#">Admin back office</a>
+        {% endblock %}
+    </nav>
+
+    {% block container_header_end %} 
+        </header> 
+    {% endblock container_header_end %}
+
+{% endblock navbar %}
+
+
+{% block container %}
+    
+    {% block page_content %}
+     
+        <div class="container-fluid admin-container">
+
+            <div class="col-sm-3 col-md-2 sidebar admin-sidebar">
+                {{ knp_menu_render('admin_sidebar', {'currentClass': 'active'}) }}
+            </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main admin-main">
+
+                {% block page_header %}
+                    <div class="page-header">
+                        {% block breadcrumb %}
+                            <section id="page-breadcrumb">
+                                <ol class="breadcrumb">
+                                {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('admin_sidebar')) %}
+                                    {% if not loop.last %}
+                                        <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label|trans({}, 'menu') }}</a></li>
+                                    {% else %}
+                                        <li class="active">{{ breadcrumb_item.label|trans({}, 'menu') }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                                </ol>
+                            </section>
+                         {% endblock breadcrumb %}
+
+                         {% block page_title %}
+                            <section id="page-title">
+                                 <h1>{% block headline %}Mopa Bootstrap Bundle{% endblock headline %}</h1>
+                            </section>
+                         {% endblock page_title %}
+                    </div>
+                {% endblock page_header %}
+            
+                {% block content_page_content %}
+                    Content Dashboard admin_base.html.twig
+                {% endblock content_page_content %}
+
+            </div>
+        </div>
+
+    {% endblock page_content %}   
+     
+{% endblock container %}    
+
+    
+{% block foot_script_assetic %}
+
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    '@AppBundle/Resources/public/js/app.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock foot_script_assetic %}

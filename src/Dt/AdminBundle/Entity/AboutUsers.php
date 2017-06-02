@@ -1,6 +1,6 @@
 <?php 
 
-namespace Dt\UserBundle\Entity;
+namespace Dt\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -10,14 +10,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 
 /**
- * @ORM\Entity(repositoryClass="Dt\UserBundle\Repository\AboutUserRepository")
- * @ORM\Table(name="dt_about_user")
+ * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUsersRepository")
+ * @ORM\Table(name="dt_about_users")
  * 
  * @Gedmo\Tree(type="nested")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
  */
-class AboutUser implements Translatable
+class AboutUsers implements Translatable
 {
     
     
@@ -95,20 +95,20 @@ class AboutUser implements Translatable
 
     /**
      * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="AboutUser")
+     * @ORM\ManyToOne(targetEntity="AboutUsers")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      */
     protected $root;
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="AboutUser", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="AboutUsers", inversedBy="children")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      */
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="AboutUser", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="AboutUsers", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;

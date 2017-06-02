@@ -1,3 +1,4 @@
 dashboard:
     dashboard: 'Tableau de bord'
-    about_user: 'About user'
+    about_users: 'About user'
+    about_users_add: 'Ajouter'

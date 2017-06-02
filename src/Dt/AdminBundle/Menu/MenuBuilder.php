@@ -64,7 +64,8 @@ class MenuBuilder{
     
     public function createSidebarMenu(array $options){
         
-        $menu = $this->factory->createItem('sidebar.admin', array(
+        $menu = $this->factory->createItem('admin_sidebar.admin', array(
+            'route' => 'dt_admin_homepage',
             'childrenAttributes'    => array(
                 'class'             => 'nav nav-sidebar',
             )
@@ -74,20 +75,33 @@ class MenuBuilder{
         # Users
         ###
         $users = $menu->addChild('admin_sidebar.users', array(
+            'route' => 'dt_admin_users',
             'childrenAttributes'    => array('class'    => 'nav')
         ))
             ->setExtra('translation_domain', 'menu')
             ->setUri('#');
         
         $users->addChild('admin_sidebar.users', array(
+            'route' => 'dt_admin_users'
         ))
             ->setExtra('translation_domain', 'menu')
             ->setUri('#');
         
-        $users->addChild('admin_sidebar.about_user', array(
-            'route' => 'dt_admin_about_user'
+        ###
+        # About Users
+        ###
+        $aboutUsers = $menu->addChild('admin_sidebar.about_users', array(
+            'route' => 'dt_admin_about_users',
+            'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');
         
+        $aboutUsers->addChild('admin_sidebar.about_users', array(
+            'route' => 'dt_admin_about_users'
+        ))->setExtra('translation_domain', 'menu');
+        
+        $aboutUsers->addChild('admin_sidebar.about_users_add', array(
+            'route' => 'dt_admin_about_users_add'
+        ))->setExtra('translation_domain', 'menu');
         
         return $menu;
     }

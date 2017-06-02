@@ -9,9 +9,11 @@ inscription: 'Inscription'
 mes_demandes: 'Mes demandes'
 logout: 'Déconnexion'
 admin_sidebar: 
+    admin: 'Dashbord'
     users: 'Utilisateurs'
     user: 'Utilisateurs'
-    about_user: 'About user'
+    about_users: 'About users'
+    about_users_add: 'Ajouter'
     
     
     

@@ -1,0 +1,9 @@
+about_users:
+    label: 
+        label: 'Label'
+    value_form_type:
+        label: 'Type de form'
+        help_text: 'Déterminez le type de champ de formulaire lorsque le user doit choisir.'
+    parent:
+        label: 'Parent'
+    

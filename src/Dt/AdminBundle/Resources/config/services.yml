@@ -1,8 +1,13 @@
 parameters:
     dt_admin.menu_builder.class: Dt\AdminBundle\Menu\MenuBuilder
+    dt_admin.about_users.manager.class: Dt\AdminBundle\Doctrine\AboutUsersManager
+    dt_admin.about_users.entity.class: Dt\AdminBundle\Entity\AboutUsers
 services:
     dt_admin.menu_builder:
         class: '%dt_admin.menu_builder.class%'
         arguments: ["@knp_menu.factory", "@security.token_storage", "@request_stack"]
         tags:
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: admin_sidebar }
+    about_users.manager:
+        class: '%dt_admin.about_users.manager.class%'
+        arguments: ["@app.object_manager", "dt_admin.about_users.entity.class"]

@@ -8,7 +8,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
-use AppBundle\Model\EntityInterface;
+use AppBundle\Doctrine\EntityInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUsersRepository")

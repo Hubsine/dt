@@ -8,6 +8,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use AppBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUsersRepository")
@@ -17,7 +18,7 @@ use Gedmo\Translatable\Translatable;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
  */
-class AboutUsers implements Translatable
+class AboutUsers implements Translatable, EntityInterface
 {
     
     

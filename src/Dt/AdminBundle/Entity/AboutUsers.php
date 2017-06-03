@@ -44,12 +44,12 @@ class AboutUsers implements Translatable
     protected $label;
     
     /**
-     * @ORM\Column(nullable=true)
+     * ORM\Column(nullable=true)
      * 
-     * @Assert\NotBlank(message="dt_about_user.value.blank", groups={"Profile"})
-     * @Assert\Type(type="string", message="dt_about_user.value.type", groups={"Profile"})
+     * Assert\NotBlank(message="dt_about_user.value.blank", groups={"Profile"})
+     * Assert\Type(type="string", message="dt_about_user.value.type", groups={"Profile"})
      * 
-     * @Gedmo\Translatable
+     * Gedmo\Translatable
      * 
      * @var mixe
      */
@@ -66,10 +66,10 @@ class AboutUsers implements Translatable
     protected $valueFormType;
     
     /**
-     * @ORM\Column()
+     * ORM\Column()
      * 
-     * @Assert\NotBlank(message="dt_about_user.is_value.blank", groups={"Profile"})
-     * @Assert\Type(type="string", message="dt_about_user.is_value.type", groups={"Profile"})
+     * Assert\NotBlank(message="dt_about_user.is_value.blank", groups={"Profile"})
+     * Assert\Type(type="string", message="dt_about_user.is_value.type", groups={"Profile"})
      * 
      * @var boolean
      */

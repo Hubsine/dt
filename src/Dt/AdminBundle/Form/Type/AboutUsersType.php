@@ -32,11 +32,13 @@ class AboutUsersType extends AbstractType
                     'required'  => true
                 ))
                 ->add('valueFormType', ChoiceType::class, array(
-                    'label' => 'about_users.value_form_type.label',
+                    'label' => 'form.about_users.value_form_type.label',
                     'help_block'    => 'form.about_users.value_form_type.help_text',
-                    'required'  => true,
+                    'required'  => false,
                     'choices'   => AboutUsersType::$valueFormType,
-                    'choices_as_values' => true
+                    'choices_as_values' => true,
+                    'multiple'  => false,
+                    'expanded'  => true
                 ))
                 ->add('parent', EntityType::class, array(
                     'label' => 'form.about_users.parent.label',

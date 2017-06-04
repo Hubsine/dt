@@ -1,5 +1,7 @@
 {% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
 
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+
 {% block head_style %}
     {{ parent() }}
     {% stylesheets
@@ -74,6 +76,16 @@
                                  <h1>{% block headline %}Mopa Bootstrap Bundle{% endblock headline %}</h1>
                             </section>
                          {% endblock page_title %}
+                         
+                         {% block flashes %}
+                            {% if app.session.flashbag.peekAll|length > 0 %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                {{ session_flash() }}
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endblock flashes %}
                     </div>
                 {% endblock page_header %}
             

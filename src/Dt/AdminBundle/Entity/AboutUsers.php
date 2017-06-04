@@ -57,9 +57,8 @@ class AboutUsers implements Translatable, EntityInterface
     protected $value;
     
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
-     * @Assert\NotBlank(message="dt_about_user.value_form_type.blank", groups={"Profile"})
      * @Assert\Type(type="string", message="dt_about_user.value_form_type.type", groups={"Profile"})
      * 
      * @var string Value must be a class name who implement \Symfony\Component\Form\FormTypeInterface
@@ -119,7 +118,6 @@ class AboutUsers implements Translatable, EntityInterface
      */
     public function __construct()
     {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -263,7 +261,7 @@ class AboutUsers implements Translatable, EntityInterface
      * @param \Dt\UserBundle\Entity\AboutUser $parent
      * @return AboutUser
      */
-    public function setParent(\Dt\UserBundle\Entity\AboutUser $parent = null)
+    public function setParent(AboutUsers $parent = null)
     {
         $this->parent = $parent;
 
@@ -273,7 +271,7 @@ class AboutUsers implements Translatable, EntityInterface
     /**
      * Get parent
      *
-     * @return \Dt\UserBundle\Entity\AboutUser 
+     * @return \Dt\UserBundle\Entity\AboutUsers 
      */
     public function getParent()
     {

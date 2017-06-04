@@ -189,7 +189,8 @@ mopa_bootstrap:
     form:
         horizontal:           false
         templating:           false
-        render_required_asterisk:  false
+        render_required_asterisk:  true
+        render_optional_text: false
         show_legend: false # default is true
         show_child_legend: false # default is true
         error_type: block # or inline which is default

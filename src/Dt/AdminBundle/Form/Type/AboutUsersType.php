@@ -28,18 +28,18 @@ class AboutUsersType extends AbstractType
     {
         $builder
                 ->add('label', TextType::class, array(
-                    'label' => 'about_users.label.label',
+                    'label' => 'form.about_users.label.label',
                     'required'  => true
                 ))
                 ->add('valueFormType', ChoiceType::class, array(
                     'label' => 'about_users.value_form_type.label',
-                    'help_block'    => 'about_users.value_form_type.help_text',
+                    'help_block'    => 'form.about_users.value_form_type.help_text',
                     'required'  => true,
                     'choices'   => AboutUsersType::$valueFormType,
                     'choices_as_values' => true
                 ))
                 ->add('parent', EntityType::class, array(
-                    'label' => 'about_users.parent.label',
+                    'label' => 'form.about_users.parent.label',
                     'required'  =>  false,
                     'class' => 'DtAdminBundle:AboutUsers',
                     'choice_label'  => 'label',
@@ -56,7 +56,6 @@ class AboutUsersType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Dt\AdminBundle\Entity\AboutUsers',
             'validation_groups' => array('Profile'),
-            'translation_domain'    => 'form'
         ));
     }
 

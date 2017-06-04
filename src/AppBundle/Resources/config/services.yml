@@ -1,9 +1,6 @@
 parameters:
     app.menu_builder.class: AppBundle\Menu\MenuBuilder
-    app.orm.object_manager: Doctrine\Common\Persistence\ObjectManager
 services:
-    app.object_manager:
-        class: '%app.orm.object_manager%'
     app.menu_builder:
         class: '%app.menu_builder.class%'
         arguments: ["@knp_menu.factory", "@security.token_storage", "@request_stack"]

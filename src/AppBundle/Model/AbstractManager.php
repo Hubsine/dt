@@ -34,7 +34,7 @@ abstract class AbstractManager implements ManagerInterface{
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function createEntity()
     {
         $class = $this->class;
         $object = new $class();
@@ -45,7 +45,7 @@ abstract class AbstractManager implements ManagerInterface{
     /**
      * {@inheritdoc}
      */
-    public function delete(EntityInterface $entity)
+    public function deleteEntity(EntityInterface $entity)
     {
         $this->objectManager->remove($entity);
         $this->objectManager->flush();
@@ -54,7 +54,7 @@ abstract class AbstractManager implements ManagerInterface{
     /**
      * {@inheritdoc}
      */
-    public function reload(EntityInterface $entity)
+    public function reloadEntity(EntityInterface $entity)
     {
         $this->objectManager->refresh($entity);
     }
@@ -62,7 +62,7 @@ abstract class AbstractManager implements ManagerInterface{
     /**
      * {@inheritdoc}
      */
-    public function update(EntityInterface $entity, $andFlush = true)
+    public function updateEntity(EntityInterface $entity, $andFlush = true)
     {
         $this->objectManager->persist($entity);
         if ($andFlush) {

@@ -10,4 +10,4 @@ services:
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: admin_sidebar }
     about_users.manager:
         class: '%dt_admin.about_users.manager.class%'
-        arguments: ["@app.object_manager", "dt_admin.about_users.entity.class"]
+        arguments: ["@doctrine.orm.entity_manager", "%dt_admin.about_users.entity.class%"]

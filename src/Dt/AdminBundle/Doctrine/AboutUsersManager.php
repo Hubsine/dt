@@ -4,7 +4,6 @@ namespace Dt\AdminBundle\Doctrine;
 
 use AppBundle\Model\AbstractManager;
 use Doctrine\Common\Persistence\ObjectManager;
-use Dt\AdminBundle\Entity\AboutUsers;
 
 /**
  * Description of AboutUserInterface

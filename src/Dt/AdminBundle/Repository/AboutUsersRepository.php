@@ -1,6 +1,6 @@
 <?php
 
-namespace Dt\UserBundle\Repository;
+namespace Dt\AdminBundle\Repository;
 
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 

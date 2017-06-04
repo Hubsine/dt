@@ -16,11 +16,11 @@ interface ManagerInterface {
 
     public function getRepository();
     
-    public function create();
+    public function createEntity();
     
-    public function delete(EntityInterface $entity);
+    public function deleteEntity(EntityInterface $entity);
     
-    public function reload(EntityInterface $entity);
+    public function reloadEntity(EntityInterface $entity);
     
-    public function update(EntityInterface $entity);
+    public function updateEntity(EntityInterface $entity);
 }

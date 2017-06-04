@@ -1,4 +1,19 @@
 dashboard:
     dashboard: 'Tableau de bord'
-    about_users: 'About user'
-    about_users_add: 'Ajouter'
+    about_users:
+        about_users: 'About Users'
+        add: 'Ajouter un about users'
+                
+form:
+    about_users:
+        submit: 'Ajouter'
+        flash:
+            add_success: 'About user ajouter avec succès.'
+        label: 
+            label: 'Label'
+        value_form_type:
+            label: 'Type de form'
+            help_text: 'Déterminez le type de champ de formulaire lorsque le user doit choisir.'
+        parent:
+            label: 'Parent'
+    

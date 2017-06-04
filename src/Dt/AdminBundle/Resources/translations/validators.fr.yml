@@ -1,2 +1,16 @@
-## YAML Template.
----
+dt_about_user:
+    label:
+        blank: 'Ce champ ne peux pas être vide.'
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
+    value:
+        blank: 'Ce champ ne peux pas être vide.'
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'    
+    label:
+        blank: 'Ce champ ne peux pas être vide.'
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
+    value_form_type:
+        blank: 'Ce champ ne peux pas être vide.'
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'    
+    is_value:
+        blank: 'Ce champ ne peux pas être vide.'
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'  

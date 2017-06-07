@@ -11,8 +11,8 @@ form:
             add_success: 'About user ajouter avec succès.'
         label: 
             label: 'Label'
-        value_form_type:
-            label: 'Type de form'
+        expected_reply_type:
+            label: 'Type de réponse attendu'
             help_text: 'Déterminez le type de champ de formulaire lorsque le user doit choisir.'
         parent:
             label: 'Parent'

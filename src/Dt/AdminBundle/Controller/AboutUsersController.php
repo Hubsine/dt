@@ -21,12 +21,13 @@ class AboutUsersController extends Controller
         
         /** @var $aboutUsersManager AboutUsersManager */
         $aboutUsersManager = $this->get('about_users.manager');
+        /** @var aboutUsersFormType AboutUsersFormType */
+        $aboutUsersFormType = $this->get('dt_admin.form.type.about_users_type');
         
         $view = 'DtAdminBundle:AboutUsers:add.html.twig';
-        $aboutUsersType = new AboutUsersType();
         $aboutUsers = $aboutUsersManager->createEntity(); 
         
-        $form = $this->createForm($aboutUsersType, $aboutUsers);
+        $form = $this->createForm($aboutUsersFormType, $aboutUsers);
         
         $form->handleRequest($request);
         
@@ -38,6 +39,7 @@ class AboutUsersController extends Controller
             
             $this->addFlash('success', $message);
             
+            $form = $this->createForm($aboutUsersFormType, $aboutUsersManager->createEntity());
         }
         
         return $this->render($view, array(

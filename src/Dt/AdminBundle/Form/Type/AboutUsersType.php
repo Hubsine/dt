@@ -11,16 +11,23 @@ use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Dt\AdminBundle\Entity\AboutUsers;
+use AppBundle\Form\Tree\TreeType;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;;
 
 class AboutUsersType extends AbstractType
 {
-    public static $valueFormType = array(
-        'RadioType' => RadioType::class, 
-        'CheckboxType' => CheckboxType::class, 
-        'TextType' => TextType::class,
-        'CollectionType'   => CollectionType::class
-    );
+    
+    private $em;
+    private $repo;
             
+    public function __construct(EntityManager $em) {
+        
+        $this->em = $em;
+        $this->repo = $this->em->getRepository('DtAdminBundle:AboutUsers');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,25 +38,47 @@ class AboutUsersType extends AbstractType
                     'label' => 'form.about_users.label.label',
                     'required'  => true
                 ))
-                ->add('valueFormType', ChoiceType::class, array(
-                    'label' => 'form.about_users.value_form_type.label',
-                    'help_block'    => 'form.about_users.value_form_type.help_text',
+                ->add('expectedReplyType', ChoiceType::class, array(
+                    'label' => 'form.about_users.expected_reply_type.label',
+                    'help_block'    => 'form.about_users.expected_reply_type.help_text',
                     'required'  => false,
-                    'choices'   => AboutUsersType::$valueFormType,
+                    'choices'   => AboutUsers::getExpectedReplyTypeArray(),
                     'choices_as_values' => true,
                     'multiple'  => false,
-                    'expanded'  => true
+                    'expanded'  => true,
+                    'choice_label'  => function($value, $key, $index){
+                        if($value == null){
+                            return 'Null';
+                        }else{
+                            return $value;
+                        }
+                    }
                 ))
                 ->add('parent', EntityType::class, array(
                     'label' => 'form.about_users.parent.label',
                     'required'  =>  false,
                     'class' => 'DtAdminBundle:AboutUsers',
-                    'choice_label'  => 'label',
+                    'choice_label'  => function(AboutUsers $aboutUsers){
+                        
+                        $parentCount = count($this->repo->getPath($aboutUsers));
+                        $prefix = str_repeat('-', $parentCount - 1);
+                        
+                        return $prefix . ' ' . $aboutUsers->getLabel();
+                    },
                     'multiple'  => false,
-                    'expanded'  => false
+                    'expanded'  => false,
+//                    'choices'   => function(){
+//                    
+//                    },
+                    'query_builder' => function(EntityRepository $er){
+                        
+                        return $er
+                                ->createQueryBuilder('node')
+                                ->orderBy('node.root, node.lft', 'ASC');
+                    }
                 ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

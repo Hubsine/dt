@@ -30,7 +30,7 @@ class AboutUsers implements Translatable, EntityInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
     
     /**
      * @ORM\Column()
@@ -45,35 +45,10 @@ class AboutUsers implements Translatable, EntityInterface
     protected $label;
     
     /**
-     * ORM\Column(nullable=true)
-     * 
-     * Assert\NotBlank(message="dt_about_user.value.blank", groups={"Profile"})
-     * Assert\Type(type="string", message="dt_about_user.value.type", groups={"Profile"})
-     * 
-     * Gedmo\Translatable
-     * 
-     * @var mixe
-     */
-    protected $value;
-    
-    /**
      * @ORM\Column(nullable=true)
-     * 
-     * @Assert\Type(type="string", message="dt_about_user.value_form_type.type", groups={"Profile"})
-     * 
-     * @var string Value must be a class name who implement \Symfony\Component\Form\FormTypeInterface
+     * @Assert\Choice(callback= "getExpectedReplyTypeArray", groups={"Profile"}, message="dt_about_user.expected_reply_type.choice")
      */
-    protected $valueFormType;
-    
-    /**
-     * ORM\Column()
-     * 
-     * Assert\NotBlank(message="dt_about_user.is_value.blank", groups={"Profile"})
-     * Assert\Type(type="string", message="dt_about_user.is_value.type", groups={"Profile"})
-     * 
-     * @var boolean
-     */
-    protected $isValue;
+    protected $expectedReplyType;
    
     /**
      * @Gedmo\TreeLeft
@@ -113,12 +88,6 @@ class AboutUsers implements Translatable, EntityInterface
      */
     protected $children;
     
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-    }
 
     /**
      * Get id
@@ -154,98 +123,6 @@ class AboutUsers implements Translatable, EntityInterface
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return AboutUser
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set value
-     *
-     * @param string $value
-     * @return AboutUser
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return string 
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Set valueFormType
-     *
-     * @param string $valueFormType
-     * @return AboutUser
-     */
-    public function setValueFormType($valueFormType)
-    {
-        $this->valueFormType = $valueFormType;
-
-        return $this;
-    }
-
-    /**
-     * Get valueFormType
-     *
-     * @return string 
-     */
-    public function getValueFormType()
-    {
-        return $this->valueFormType;
-    }
-
-    /**
-     * Set isValue
-     *
-     * @param string $isValue
-     * @return AboutUser
-     */
-    public function setIsValue($isValue)
-    {
-        $this->isValue = $isValue;
-
-        return $this;
-    }
-
-    /**
-     * Get isValue
-     *
-     * @return string 
-     */
-    public function getIsValue()
-    {
-        return $this->isValue;
-    }
-
-    /**
      * Get root
      *
      * @return \Dt\UserBundle\Entity\AboutUser 
@@ -277,4 +154,42 @@ class AboutUsers implements Translatable, EntityInterface
     {
         return $this->parent;
     }
+    
+    
+
+    /**
+     * Set expectedReplyType
+     *
+     * @param string $expectedReplyType
+     * @return AboutUsers
+     */
+    public function setExpectedReplyType($expectedReplyType)
+    {
+        $this->expectedReplyType = $expectedReplyType;
+
+        return $this;
+    }
+
+    /**
+     * Get expectedReplyType
+     *
+     * @return string 
+     */
+    public function getExpectedReplyType()
+    {
+        return $this->expectedReplyType;
+    }
+
+    public static function getExpectedReplyTypeArray(){
+        
+        return array(
+            '',
+            'checkbox', 'radio',
+            'text', // One input type
+            'textCollection', // 0 à 5 input text
+            'textValCollection', // Une liste de valeur saisit dans un champ input
+            'textarea'
+        );
+    }
+    
 }

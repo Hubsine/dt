@@ -2,6 +2,7 @@ parameters:
     dt_admin.menu_builder.class: Dt\AdminBundle\Menu\MenuBuilder
     dt_admin.about_users.manager.class: Dt\AdminBundle\Doctrine\AboutUsersManager
     dt_admin.about_users.entity.class: Dt\AdminBundle\Entity\AboutUsers
+    dt_admin.about_users.form.type.class: Dt\AdminBundle\Form\Type\AboutUsersType
 services:
     dt_admin.menu_builder:
         class: '%dt_admin.menu_builder.class%'
@@ -11,3 +12,9 @@ services:
     about_users.manager:
         class: '%dt_admin.about_users.manager.class%'
         arguments: ["@doctrine.orm.entity_manager", "%dt_admin.about_users.entity.class%"]
+    dt_admin.form.type.about_users_type:
+        class: '%dt_admin.about_users.form.type.class%'
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }    
+        

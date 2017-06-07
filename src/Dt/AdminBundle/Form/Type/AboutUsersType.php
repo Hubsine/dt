@@ -60,8 +60,7 @@ class AboutUsersType extends AbstractType
                     'class' => 'DtAdminBundle:AboutUsers',
                     'choice_label'  => function(AboutUsers $aboutUsers){
                         
-                        $parentCount = count($this->repo->getPath($aboutUsers));
-                        $prefix = str_repeat('-', $parentCount - 1);
+                        $prefix = str_repeat('-', $aboutUsers->getLvl());
                         
                         return $prefix . ' ' . $aboutUsers->getLabel();
                     },

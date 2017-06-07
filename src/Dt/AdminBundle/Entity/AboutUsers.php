@@ -192,4 +192,12 @@ class AboutUsers implements Translatable, EntityInterface
         );
     }
     
+    /**
+     * Get lvl
+     * 
+     * @return integer
+     */
+    public function getLvl(){
+        return $this->lvl;
+    }
 }

@@ -27,7 +27,24 @@ dt_user:
         url: 'L''url "{{ value }}" n''est pas une url valide.'
         dns: 'l''hôte "{{ value }}" n''est pas valide.'
     snapchat_name:
-       type: 'la valeure {{ value }} n''est pas une valeur de type {{ type }}.'
+       type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+       
+dt_about_users_reply:
+    about_users:
+        expression: 'Cette valeur n''est pas valide, le type de réponse autorisé doit être "checkbox", "radio", "text", "textCollection", "textValCollection" ou "textarea".'
+    response_checkbox:
+        expression: 'La propriété "expectedReplyType" du parent doit être "checkbox".'
+    response_radio:
+        expression: 'La propriété "expectedReplyType" du parent doit être "radio".'    
+    response_text:
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
+    response_text_collection:
+        extra_fields_message: 'Les champs {{ fields }} ne sont pas attendus.'
+    response_text_val_collection:
+        type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+    response_textarea:
+        type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+        
 
   
         

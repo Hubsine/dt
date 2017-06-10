@@ -1,3 +1,7 @@
+dt_user_aboutusersreply:
+    resource: "@DtUserBundle/Resources/config/routing/aboutusersreply.yml"
+    prefix:   /aboutusersreply
+
 dt_user_members:
     path:     /
     defaults: { _controller: DtUserBundle:Members:members }

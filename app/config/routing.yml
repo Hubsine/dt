@@ -1,3 +1,7 @@
+dt_user_about_users_reply:
+    resource: "@DtUserBundle/Controller/AboutUsersReplyController.php"
+    type:     annotation
+
 dt_admin:
     resource: "@DtAdminBundle/Resources/config/routing.yml"
     prefix:   /admin

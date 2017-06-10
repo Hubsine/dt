@@ -1,7 +1,8 @@
-dt_about_user:
+dt_about_users:
     label:
         blank: 'Ce champ ne peux pas être vide.'
         type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
     expected_reply_type:
+        expression: 'L''élément enfant dont le expectedReplyType du parent n''est pas vide ne peut pas avoir de expectedReplyType.'
         choice: 'La valeur que vous avez sélectionnée n''est pas un choix valide.'
     

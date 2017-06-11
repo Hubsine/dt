@@ -9,7 +9,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="profile_picture")
+ * @ORM\Table(name="dt_profile_picture")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @Gedmo\Uploadable(pathMethod="getPathFolder", allowedTypes="jpg,jpeg,png", maxSize="16777216", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)

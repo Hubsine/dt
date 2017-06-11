@@ -66,9 +66,9 @@ class AboutUsers implements Translatable, EntityInterface
     /**
      * @var Dt\UserBundle\Entity\AboutUserReply
      * 
-     * @ORM\ManyToOne(targetEntity="Dt\UserBundle\Entity\AboutUsersReply", cascade={"remove"},
+     * ORM\ManyToOne(targetEntity="Dt\UserBundle\Entity\AboutUsersReply", cascade={"remove"},
      * inversedBy="responseCheckbox")
-     * @ORM\JoinColumn(nullable=true)
+     * ORM\JoinColumn(nullable=true)
      */
     protected $aboutUsersReplyCheckbox;
     

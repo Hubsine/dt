@@ -30,6 +30,7 @@ dt_user:
        type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
        
 dt_about_users_reply:
+    unique_entity: 'Vous ne pouvez pas avoir deux réponse pour le même élément. DUPLICATA.'
     about_users:
         expression: 'Cette valeur n''est pas valide, le type de réponse autorisé doit être "checkbox", "radio", "text", "textCollection", "textValCollection" ou "textarea".'
     response_checkbox:
@@ -39,7 +40,11 @@ dt_about_users_reply:
     response_text:
         type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
     response_text_collection:
+        array: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         extra_fields_message: 'Les champs {{ fields }} ne sont pas attendus.'
+        count:
+            min: 'Cette collection devrait contenir {{limit}} éléments ou plus.'
+            max: 'Cette collection devrait contenir {{limit}} éléments ou mois'
     response_text_val_collection:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
     response_textarea:

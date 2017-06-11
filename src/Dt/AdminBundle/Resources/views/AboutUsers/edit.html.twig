@@ -1,0 +1,25 @@
+{% extends "DtAdminBundle::layout.html.twig" %}
+
+{% form_theme edit_form 'MopaBootstrapBundle:form:fields.html.twig' %}
+{% form_theme delete_form 'MopaBootstrapBundle:form:fields.html.twig' %}
+
+{% block headline %}{% trans %} dashboard.about_users.edit {% endtrans %}{% endblock headline %}
+
+{% block content_page_content %}
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('dt_admin_about_users_index') }}">{% trans %} dashboard.about_users.back {% endtrans %}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock content_page_content %}

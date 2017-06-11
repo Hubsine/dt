@@ -1,8 +1,12 @@
 parameters:
     dt.oauth.user_provider.class: Dt\UserBundle\Security\Core\User\DtFOSUBUserProvider
     dt_user.mailer.twig_swift.class: Dt\UserBundle\Mailer\TwigSwiftMailer
+    # Listener
     dt_user.listener.oauth_user.class: Dt\UserBundle\EventListener\LoadUserByOAuthUserListener
     dt_user.listener.redirect.class: Dt\UserBundle\EventListener\RedirectListener
+    # Manager
+    dt_user.about_users_reply.entity.class: Dt\UserBundle\Entity\AboutUsersReply
+    dt_user.about_users_reply.manager.class: Dt\UserBundle\Doctrine\AboutUsersReplyManager
 
 services:
     dt.oauth.user_provider:
@@ -21,3 +25,8 @@ services:
         arguments: ['@security.authorization_checker', '@router']
         tags:
             - { name: kernel.event_subscriber }    
+            
+    # Manager
+    about_users_reply.manager:
+        class: '%dt_user.about_users_reply.manager.class%'
+        arguments: ["@doctrine.orm.entity_manager", "%dt_user.about_users_reply.entity.class%"]

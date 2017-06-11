@@ -1,0 +1,22 @@
+{% extends "DtAdminBundle::layout.html.twig" %}
+
+{% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
+
+{% block headline %}{% trans %} dashboard.about_users.new {% endtrans %}{% endblock headline %}
+
+{% block content_page_content %}
+
+    {{ form_start(form, {'method': 'post', 'action': path('dt_admin_about_users_new'), 'attr': {'class': ''}}) }}
+
+    {{ form_widget(form)}}
+    <div>
+        <button type="submit" class="btn btn-default">{{ 'form.about_users.submit'|trans }}</button>
+    </div>
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('dt_admin_about_users_index') }}">{% trans %} dashboard.about_users.back {% endtrans %}</a>
+        </li>
+    </ul>
+{% endblock content_page_content %}

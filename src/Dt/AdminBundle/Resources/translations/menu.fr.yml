@@ -13,7 +13,8 @@ admin_sidebar:
     users: 'Utilisateurs'
     user: 'Utilisateurs'
     about_users: 'About users'
-    about_users_add: 'Ajouter'
+    about_users_new: 'Ajouter'
+    about_users_edit: 'Editer'
     
     
     

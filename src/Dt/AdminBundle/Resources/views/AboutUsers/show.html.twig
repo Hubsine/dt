@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Aboutuser</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ aboutUser.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ aboutUser.label }}</td>
+            </tr>
+            <tr>
+                <th>Expectedreplytype</th>
+                <td>{{ aboutUser.expectedReplyType }}</td>
+            </tr>
+            <tr>
+                <th>Lft</th>
+                <td>{{ aboutUser.lft }}</td>
+            </tr>
+            <tr>
+                <th>Lvl</th>
+                <td>{{ aboutUser.lvl }}</td>
+            </tr>
+            <tr>
+                <th>Rgt</th>
+                <td>{{ aboutUser.rgt }}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if aboutUser.deletedAt %}{{ aboutUser.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if aboutUser.createdAt %}{{ aboutUser.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if aboutUser.updatedAt %}{{ aboutUser.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('about-users_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('about-users_edit', { 'id': aboutUser.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

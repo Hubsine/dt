@@ -1,8 +1,10 @@
 dashboard:
     dashboard: 'Tableau de bord'
     about_users:
+        back: 'Back to the list'
         about_users: 'About Users'
-        add: 'Ajouter un about users'
+        new: 'Ajouter un about users'
+        edit: 'Editer AboutUsers'
                 
 form:
     about_users:

@@ -1,0 +1,26 @@
+dt_admin_about_users_index:
+    path:     /
+    defaults: { _controller: "DtAdminBundle:AboutUsers:index" }
+    methods:  GET
+
+dt_admin_about_users_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtAdminBundle:AboutUsers:show" }
+    methods:  GET
+
+dt_admin_about_users_new:
+    path:     /new
+    defaults: { _controller: "DtAdminBundle:AboutUsers:new" }
+    methods:  [GET, POST]
+
+dt_admin_about_users_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtAdminBundle:AboutUsers:edit" }
+    methods:  [GET, POST]
+
+dt_admin_about_users_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtAdminBundle:AboutUsers:delete" }
+    methods:  DELETE
+
+      

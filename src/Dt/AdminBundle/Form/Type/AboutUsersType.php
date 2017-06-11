@@ -66,9 +66,6 @@ class AboutUsersType extends AbstractType
                     },
                     'multiple'  => false,
                     'expanded'  => false,
-//                    'choices'   => function(){
-//                    
-//                    },
                     'query_builder' => function(EntityRepository $er){
                         
                         return $er

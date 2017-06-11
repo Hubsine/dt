@@ -18,12 +18,26 @@ class AboutUsersReplyController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        /** @var $aboutUsersManager Dt\AdminBundle\Doctrine\AboutUsersManager */
+        $aboutUsersManager = $this->get('about_users.manager');
+        /** @var $aboutUsersReplyManager Dt\UserBundle\Doctrine\AboutUsersReplyManager */
+        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
 
-        $aboutUsersReplies = $em->getRepository('DtUserBundle:AboutUsersReply')->findAll();
+        $aboutUsers = $aboutUsersManager->getRepository()->childrenHierarchy(
+            null, false,    
+            array(
+                array(
+                    'decorate' => true,
+                    'representationField' => 'slug',
+                    'html' => true
+                )
+        ));
+        $aboutUsersReplies = $aboutUsersReplyManager->getRepository()->findAll();
+      
 
-        return $this->render('aboutusersreply/index.html.twig', array(
+        return $this->render('DtUserBundle:Compte:aboutusersreply/index.html.twig', array(
             'aboutUsersReplies' => $aboutUsersReplies,
+            'aboutUsers'    => $aboutUsers
         ));
     }
 

@@ -91,17 +91,18 @@ class MenuBuilder{
         # About Users
         ###
         $aboutUsers = $menu->addChild('admin_sidebar.about_users', array(
-            'route' => 'dt_admin_about_users',
+            'route' => 'dt_admin_about_users_index',
             'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');
         
         $aboutUsers->addChild('admin_sidebar.about_users', array(
-            'route' => 'dt_admin_about_users'
+            'route' => 'dt_admin_about_users_index'
         ))->setExtra('translation_domain', 'menu');
         
-        $aboutUsers->addChild('admin_sidebar.about_users_add', array(
-            'route' => 'dt_admin_about_users_add'
+        $aboutUsers->addChild('admin_sidebar.about_users_new', array(
+            'route' => 'dt_admin_about_users_new'
         ))->setExtra('translation_domain', 'menu');
+        
         
         return $menu;
     }

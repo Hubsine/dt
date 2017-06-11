@@ -4,6 +4,7 @@ namespace AppBundle\Model;
 
 use AppBundle\Doctrine\EntityInterface;
 use AppBundle\Model\ManagerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Description of AbstractManager

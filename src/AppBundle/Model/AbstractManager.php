@@ -25,6 +25,14 @@ abstract class AbstractManager implements ManagerInterface{
     protected $class;
     
     /**
+     * @return objectManager
+     */
+    public function getEntityManager()
+    {
+        return $this->objectManager;
+    }
+    
+    /**
      * @return ObjectRepository
      */
     public function getRepository()

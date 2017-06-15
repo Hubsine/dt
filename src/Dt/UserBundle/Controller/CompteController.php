@@ -43,19 +43,92 @@ class CompteController extends Controller
         return $this->render('DtUserBundle:Compte:layout.html.twig');
     }
 
-    public function showMoiAction(Request $request, User $user){
+    public function showMoiAction(Request $request, User $user)
+    {
         
         return $this->render('DtUserBundle:Compte:Moi/show.html.twig');
     }
     
-    public function showReseauxSociauxAction(Request $request, User $user){
+    public function showReseauxSociauxAction(Request $request, User $user)
+    {
         return $this->render('DtUserBundle:Compte:ReseauxSociaux/show.html.twig');
     }
     
-    public function showQuiSuisJeAction(Request $request, User $user){
+    public function showQuiSuisJeAction(Request $request, User $user)
+    {
         return $this->render('DtUserBundle:Compte:QuiSuisJe/show.html.twig');
     }
+    
+    public function showAboutUsersReplyAction(Request $request, User $user){
+        
+        /** @var $aboutUsersManager AboutUsersManager */
+        $aboutUsersManager = $this->get('about_users.manager');
+        
+//        $aboutUsers = $aboutUsersManager
+//                        ->getRepository()
+//                        ->childrenHierarchy();
 
+        $aboutUsers = $aboutUsersManager->getUsersReplyView($this->getTreeOptions());
+        return $this->render('DtUserBundle:Compte:AboutUsersReply/show.html.twig', array(
+            'aboutUsers'    => $aboutUsers
+        ));
+    }
+
+    public function editAboutUsersReplyAction(Request $request, User $user)
+    {
+        
+        /** @var $aboutUsersManager AboutUsersManager */
+        $aboutUsersManager = $this->get('about_users.manager');
+        /** @var aboutUsersFormType AboutUsersFormType */
+        $aboutUsersFormType = $this->get('dt_admin.form.type.about_users_type');
+        
+        $codeResponse = 200;
+        $contentId = 'aboutUsersReplyContent';
+        $templateToShow = 'DtUserBundle:Compte:AboutUsersReply/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:AboutUsersReply/edit.html.twig';
+        
+        $user = $this->getUser();
+        $form = $this->createForm(ReseauxSociauxFormType::class, $user);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted()){
+            
+            if($form->isValid()){
+                
+                /** @var $userManager UserManagerInterface */
+                $userManager = $this->get('fos_user.user_manager');
+                
+                $userManager->updateUser($user);
+                
+                $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+                
+                $response = new JsonResponse(array(
+                    'contentId' => $contentId,
+                    'form'  => $this->renderView($templateToShow, array(
+                        'message'   => $message
+                         ))
+                ), $codeResponse );
+
+                return $response;
+                
+            }else{
+                $codeResponse = 400;
+            }
+        }
+        
+        $response = new JsonResponse(
+            array(
+                'contentId' => $contentId,
+                'form'  => $this->renderView($templateToEdit, array(
+                    'form' => $form->createView(),
+                     ))
+            ), $codeResponse );
+        
+        return $response;
+        
+    }
+    
     public function editQuiSuisJeAction(Request $request, User $user){
         
         $codeResponse = 200;
@@ -231,5 +304,33 @@ class CompteController extends Controller
             ), 200);
         
         return $response;
+    }
+    
+    public function getTreeOptions(){
+        
+        $treeOptions = array(
+            'rootOpen' => '<div>',
+            'rootClose' => '</div>',
+            'childOpen' => function($tree){
+//                if($tree['lvl'] == 0){
+//                    return '<h3 class="aboutUserstopLvl">';
+//                }
+                return '';
+            },
+            'childClose' => function($tree){
+//                if($tree['lvl'] == 0){
+//                    return '</h3>';
+//                }
+                return '';
+            },
+            'nodeDecorator' => function($node) {
+                if($node['lvl'] === 0){
+                    return '<h3>' . $node['label'] . '</h3>';
+                }
+                return $node['label'];
+            }
+         );
+         
+         return $treeOptions;
     }
 }

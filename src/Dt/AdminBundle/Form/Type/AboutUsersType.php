@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Dt\AdminBundle\Entity\AboutUsers;
 use AppBundle\Form\Tree\TreeType;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\EntityManager;;
+use Doctrine\ORM\EntityManager;
 
 class AboutUsersType extends AbstractType
 {

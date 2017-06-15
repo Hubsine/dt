@@ -31,6 +31,6 @@ jQuery(function($){
     sidebarAnchors.options = { 
         visible: 'always'
     };
-    sidebarAnchors.add('.section-anchor-js h3');
+    sidebarAnchors.add('.section-anchor-js > h3');
     
 });

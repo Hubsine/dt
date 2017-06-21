@@ -32,7 +32,7 @@ class AboutUsersController extends Controller
                 'html' => true,
                 'nodeDecorator' => function($node) {
                     $url = $this->generateUrl('dt_admin_about_users_edit', array('id' => $node['id']));
-                    return '<a href="'.$url.'">'.$node['label'].'</a>';
+                    return '<a href="'.$url.'">'.$node['label'].'</a> ' . $node['expectedReplyType'];
                 }
             )
         );

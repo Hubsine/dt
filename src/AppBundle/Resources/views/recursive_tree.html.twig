@@ -1,0 +1,23 @@
+{% macro recursiveTree(node, form) %}
+    {% import _self as self %}
+    
+    {% if node.__children|length > 0 %}
+    <li>
+        
+            {{ node.label }}
+        
+        
+        {% if node.expectedReplyType == "radio" %}
+            {{ form_row( attribute(form, 'aboutUsers' ~ node.id) ) }}
+        {% endif %}     
+        
+        {% if node.__children|length %}
+            <ul>
+                {% for nodeChild in node.__children %}
+                    {{ self.recursiveTree(nodeChild, form) }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+    {% endif %}
+{% endmacro %}

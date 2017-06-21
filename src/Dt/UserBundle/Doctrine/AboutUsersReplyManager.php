@@ -4,6 +4,7 @@ namespace Dt\UserBundle\Doctrine;
 
 use AppBundle\Model\AbstractManager;
 use Doctrine\Common\Persistence\ObjectManager;
+use Dt\UserBundle\Entity\User;
 
 /**
  * Description of AboutUsersReplyManager
@@ -19,5 +20,8 @@ class AboutUsersReplyManager extends AbstractManager{
         
     }
     
-    
+    public function getUserReply(User $user){
+        
+        return $this->getRepository()->findBy(array('user' => $user));
+    }
 }

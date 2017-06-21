@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 use AppBundle\Doctrine\EntityInterface;
+use Dt\UserBundle\Entity\AboutUsersReply;
 
 /**
  * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUsersRepository")
@@ -120,6 +121,13 @@ class AboutUsers implements Translatable, EntityInterface
      */
     protected $children;
     
+    /**
+     *
+     * @var \AboutUsersReply
+     */
+    protected $reply;
+    
+    protected $__childrens;
 
     /**
      * Get id
@@ -231,5 +239,28 @@ class AboutUsers implements Translatable, EntityInterface
      */
     public function getLvl(){
         return $this->lvl;
+    }
+    
+    /**
+     * 
+     * @return \AboutUsersReply
+     */
+    public function getReply(){
+        return $this->reply;
+    }
+    
+    /**
+     * 
+     * @param AboutUsersReply $reply
+     * @return $this
+     */
+    public function setReply(AboutUsersReply $reply)
+    {
+        $this->reply = $reply;
+        return $this;
+    }
+    
+    public function getChildren(){
+        
     }
 }

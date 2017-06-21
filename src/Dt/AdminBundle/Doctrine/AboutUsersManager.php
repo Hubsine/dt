@@ -31,15 +31,36 @@ class AboutUsersManager extends AbstractManager{
         );
     }
     
-    public function getUsersReplyView(array $options = array()){
+    public function getUsersReplyView($node = null, $direct = false, array $options = array(), $includeNode = false){
         
         $options = array_replace($this->treeOptions, $options);
             
         $aboutUsers = $this->getRepository()->childrenHierarchy(
-            null, false,    
-            $options
+            $node, $direct, $options, $includeNode
         );
             
        return $aboutUsers;
+    }
+    
+    public function childrenHierarchyEntity($node = null, $direct = false, array $options = array(), $includeNode = false){
+        
+        $aboutUsers = $this->getRepository()->getNodesHierarchy($node, $direct, $options, $includeNode);
+        $nestedTree = array();
+        
+        $iterator = function($aboutUsers){
+            
+            foreach ($aboutUsers as $key => $aboutUser) {
+                
+            }
+        };
+        
+       
+        foreach ($aboutUsers as $key => $aboutUser) {
+            
+            if($aboutUser->getLvl() == 0){
+                
+            }
+        }
+        
     }
 }

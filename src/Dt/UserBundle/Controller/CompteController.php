@@ -14,14 +14,15 @@ namespace Dt\UserBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dt\UserBundle\Form\Type\MoiFormType;
 use Dt\UserBundle\Form\Type\ReseauxSociauxFormType;
+use Dt\UserBundle\Form\Type\AboutUsersReplyType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer;
 use Dt\UserBundle\Entity\User;
-use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
+use Dt\UserBundle\Entity\AboutUsersReply;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Util\ClassUtils;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Controller managing the user profile.
@@ -63,32 +64,32 @@ class CompteController extends Controller
         
         /** @var $aboutUsersManager AboutUsersManager */
         $aboutUsersManager = $this->get('about_users.manager');
-        
-//        $aboutUsers = $aboutUsersManager
-//                        ->getRepository()
-//                        ->childrenHierarchy();
 
-        $aboutUsers = $aboutUsersManager->getUsersReplyView($this->getTreeOptions());
+        $ab = $aboutUsersManager->getRepository()->childrenHierarchy(null, false, array('decorate'  => false));
+        $form = $this->getAboutUsersReplyForm($ab);
+        
+        $aboutUsers = $aboutUsersManager->getUsersReplyView(null, false, $this->getTreeOptions());
+
         return $this->render('DtUserBundle:Compte:AboutUsersReply/show.html.twig', array(
-            'aboutUsers'    => $aboutUsers
+            'aboutUsers'    => $aboutUsers,
+            'ab'    => $ab,
+            'form'  => $form
         ));
     }
 
     public function editAboutUsersReplyAction(Request $request, User $user)
     {
         
-        /** @var $aboutUsersManager AboutUsersManager */
-        $aboutUsersManager = $this->get('about_users.manager');
-        /** @var aboutUsersFormType AboutUsersFormType */
-        $aboutUsersFormType = $this->get('dt_admin.form.type.about_users_type');
+        /** aboutUsersReplyManager \Dt\UserBundle\Doctrine\AboutUsersReplyManager */
+        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
         
         $codeResponse = 200;
         $contentId = 'aboutUsersReplyContent';
         $templateToShow = 'DtUserBundle:Compte:AboutUsersReply/show.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:AboutUsersReply/edit.html.twig';
         
-        $user = $this->getUser();
-        $form = $this->createForm(ReseauxSociauxFormType::class, $user);
+        $aboutUsersReply = $aboutUsersReplyManager->createEntity();
+        $form = $this->createForm(AboutUsersReplyType::class, $aboutUsersReply);
         
         $form->handleRequest($request);
         
@@ -308,29 +309,163 @@ class CompteController extends Controller
     
     public function getTreeOptions(){
         
+        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
+        $controller = $this;
+        #$replies = $aboutUsersReplyManager->getUserReply($this->getUser());
+        
         $treeOptions = array(
-            'rootOpen' => '<div>',
-            'rootClose' => '</div>',
-            'childOpen' => function($tree){
-//                if($tree['lvl'] == 0){
-//                    return '<h3 class="aboutUserstopLvl">';
-//                }
-                return '';
+            'rootOpen' => function($tree){
+            
+                $node = $tree[0];
+                
+                // On affiche pas les derniers elements dont le parent a un expectedReplyType autre que text, textarea
+                if(empty($node['__children']) && 
+                        !in_array($node['expectedReplyType'], array('text', 'textarea', 'textCollection', 'textValCollection'))){
+                    return '';
+                }
+                
+                $class = '';
+                if($node['lvl'] === 0){
+                    $class .= "list-unstyled list-group";
+                }
+                
+                return '<ul class="'.$class.'">';
+            },
+            'rootClose' => '</ul>',
+            'childOpen' => function($node){
+                
+                // On affiche pas les derniers elements dont le parent a un expectedReplyType autre que text, textarea
+                if(empty($node['__children']) && 
+                        !in_array($node['expectedReplyType'], array('text', 'textarea', 'textCollection', 'textValCollection'))){
+                    return '';
+                }
+                
+                $class = '';
+                if(empty($node['__children'])){
+                    $class .= 'nodeLastChild ';
+                }
+
+                if($node['lvl'] === 0){
+                    $class .= 'list-group-item ';
+                }
+
+                return '<li class="'.$class.'">';
             },
             'childClose' => function($tree){
 //                if($tree['lvl'] == 0){
 //                    return '</h3>';
 //                }
-                return '';
+                return '</li>';
             },
-            'nodeDecorator' => function($node) {
-                if($node['lvl'] === 0){
-                    return '<h3>' . $node['label'] . '</h3>';
+            'nodeDecorator' => function($node) use (&$controller, $aboutUsersReplyManager) {
+
+                $html = '';
+                
+                // On affiche pas les derniers elements dont le parent a un expectedReplyType autre que text, textarea
+                if(empty($node['__children']) && 
+                        !in_array($node['expectedReplyType'], array('text', 'textarea', 'textCollection', 'textValCollection'))){
+                    return '';
                 }
-                return $node['label'];
+                
+                #if(empty($node['__children'])){
+                    
+                    switch ($node['expectedReplyType']){
+
+                        case '':
+                            
+                            break;
+                        
+                        case 'textarea':
+
+                            break;
+
+                        case 'radio':
+                            $start = '<ul>';
+                            $end = '</ul>';
+                            $lis = '';
+                            foreach ($node['__children'] as $key => $children) {
+                                $lis .= '<li class="radioReply">'.$children['label'].'</li>';
+                            }
+                            $html = $start . $lis . $end;
+                            break;
+                        
+                        case 'checkbox':
+                            break;
+                    }
+                #}
+
+                if($node['lvl'] === 0){
+                    return '<h4 class="text-center list-group-item-heading">' . $node['label'] . '</h4>';
+                }
+
+                return '<span class="">' . $node['label'] . '</span>' . $html;
             }
-         );
+        );
          
          return $treeOptions;
+    }
+    
+    public function getAboutUsersReplyForm(array $tree){
+        
+        /** @var $aboutUsersManager AboutUsersManager */
+        $aboutUsersManager = $this->get('about_users.manager');
+        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
+        
+        $aboutUsers = $aboutUsersManager->getRepository()->getChildren();
+        #$replies = $aboutUsersReplyManager->getUserReply($this->getUser());
+        $form = $this->createFormBuilder();
+        
+        function iterator($tree, $form, $aboutUsers){
+            
+            foreach ($tree as $key => $node) 
+            {
+                //echo $node['label'];
+                
+                switch ($node['expectedReplyType'])
+                {
+                    case 'radio':
+                        if(count($node['__children']) > 0){
+                            $choices = array();
+                            foreach($aboutUsers as $aboutUsersKey => $aboutUser) {
+                                
+                                if($aboutUser->getId() == $node['id']){
+                                    echo $aboutUser->getParent()->getLabel();
+                                    $choices[] = $aboutUser;
+                                }
+                            }
+                            //echo count($choices);
+                            foreach ($node['__children'] as $childrenKey => $children) {
+                                $choices[]  = (object) $children;
+                            }
+
+                            //var_dump($choices);
+                            //var_dump($node['__children']);
+                            $form->add('aboutUsers'.$node['id'], EntityType::class, array(
+                                'choices'   => array($aboutUsers[8]),
+                                'multiple'  => false,
+                                'expanded'  => true,
+                                'choices_as_values' => true,
+                                'class' => 'DtAdminBundle:AboutUsers',
+                                //'label_attr'    => array('class'    => 'hidden'),
+                                'choice_label' => function ($value, $key, $index) {
+
+                                    return $value->getLabel();
+
+                                },
+                            ));
+                        }
+                        break;
+                }
+            
+                if (count($node['__children']) > 0) 
+                {
+                    iterator($node['__children'], $form, $aboutUsers);
+                }
+            }
+        }
+        
+        iterator($tree, $form, $aboutUsers);
+        
+        return $form->getForm()->createView();
     }
 }

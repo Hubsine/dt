@@ -2,13 +2,13 @@
 
 {% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
 
-{{ form_start(form, { 'action': path('dt_user_edit_profile_about_users_reply', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'aboutUsersReplyContent' } }) }}
+{{ form_start(form, { 'action': path('dt_user_edit_profile_about_user_reply', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'aboutUserReplyContent' } }) }}
     {{ form_widget(form) }}
     <div>
         <button type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
         <div
-            data-action="{{ path('dt_user_edit_profile_about_users_reply', { 'slug': app.user.slug } ) }}" 
-            data-container="aboutUsersReplyContent"
+            data-action="{{ path('dt_user_edit_profile_about_user_reply', { 'slug': app.user.slug } ) }}" 
+            data-container="aboutUserReplyContent"
             class="cancelFormToUpdateInAjax btn btn-warning">
             {% trans %} layout.cancel {% endtrans %}
         </div>

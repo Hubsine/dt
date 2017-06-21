@@ -29,9 +29,9 @@ dt_user:
     snapchat_name:
        type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
        
-dt_about_users_reply:
+dt_about_user_reply:
     unique_entity: 'Vous ne pouvez pas avoir deux réponse pour le même élément. DUPLICATA.'
-    about_users:
+    about_user:
         expression: 'Cette valeur n''est pas valide, le type de réponse autorisé doit être "checkbox", "radio", "text", "textCollection", "textValCollection" ou "textarea".'
     response_checkbox:
         expression: 'La propriété "expectedReplyType" du parent doit être "checkbox".'

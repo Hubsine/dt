@@ -5,11 +5,11 @@ namespace Dt\AdminBundle\Repository;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
- * Description of AboutUsersRepository
+ * Description of AboutUserRepository
  *
  * @author Hubsine
  */
-class AboutUsersRepository extends NestedTreeRepository {
+class AboutUserRepository extends NestedTreeRepository {
 
     
     

@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author Hubsine
  */
-class AboutUsersManager extends AbstractManager{
+class AboutUserManager extends AbstractManager{
     
     private $treeOptions = array();
     
@@ -35,27 +35,27 @@ class AboutUsersManager extends AbstractManager{
         
         $options = array_replace($this->treeOptions, $options);
             
-        $aboutUsers = $this->getRepository()->childrenHierarchy(
+        $aboutUser = $this->getRepository()->childrenHierarchy(
             $node, $direct, $options, $includeNode
         );
             
-       return $aboutUsers;
+       return $aboutUser;
     }
     
     public function childrenHierarchyEntity($node = null, $direct = false, array $options = array(), $includeNode = false){
         
-        $aboutUsers = $this->getRepository()->getNodesHierarchy($node, $direct, $options, $includeNode);
+        $aboutUser = $this->getRepository()->getNodesHierarchy($node, $direct, $options, $includeNode);
         $nestedTree = array();
         
-        $iterator = function($aboutUsers){
+        $iterator = function($aboutUser){
             
-            foreach ($aboutUsers as $key => $aboutUser) {
+            foreach ($aboutUser as $key => $aboutUser) {
                 
             }
         };
         
        
-        foreach ($aboutUsers as $key => $aboutUser) {
+        foreach ($aboutUser as $key => $aboutUser) {
             
             if($aboutUser->getLvl() == 0){
                 

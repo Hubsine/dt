@@ -2,7 +2,7 @@
 
 namespace Dt\AdminBundle\Controller;
 
-use Dt\AdminBundle\Entity\AboutUsers;
+use Dt\AdminBundle\Entity\AboutUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Aboutuser controller.
  *
  */
-class AboutUsersController extends Controller
+class AboutUserController extends Controller
 {
     /**
      * Lists all aboutUser entities.
@@ -18,10 +18,10 @@ class AboutUsersController extends Controller
      */
     public function indexAction()
     {
-        /** @var $aboutUsersManager AboutUsersManager */
-        $aboutUsersManager = $this->get('about_users.manager');
+        /** @var $aboutUserManager AboutUserManager */
+        $aboutUserManager = $this->get('about_user.manager');
         
-        $aboutUsers = $aboutUsersManager->getRepository()->childrenHierarchy(
+        $aboutUser = $aboutUserManager->getRepository()->childrenHierarchy(
             null, false,    
             array(
                 'decorate' => true,
@@ -31,14 +31,14 @@ class AboutUsersController extends Controller
 //                'childClose' => '</li>',
                 'html' => true,
                 'nodeDecorator' => function($node) {
-                    $url = $this->generateUrl('dt_admin_about_users_edit', array('id' => $node['id']));
+                    $url = $this->generateUrl('dt_admin_about_user_edit', array('id' => $node['id']));
                     return '<a href="'.$url.'">'.$node['label'].'</a> ' . $node['expectedReplyType'];
                 }
             )
         );
 
-        return $this->render('DtAdminBundle:AboutUsers:index.html.twig', array(
-            'aboutUsers' => $aboutUsers,
+        return $this->render('DtAdminBundle:AboutUser:index.html.twig', array(
+            'aboutUser' => $aboutUser,
         ));
     }
 
@@ -48,33 +48,31 @@ class AboutUsersController extends Controller
      */
     public function newAction(Request $request)
     {
-        /** @var $aboutUsersManager AboutUsersManager */
-        $aboutUsersManager = $this->get('about_users.manager');
-        /** @var aboutUsersFormType AboutUsersFormType */
-        $aboutUsersFormType = $this->get('dt_admin.form.type.about_users_type');
+        /** @var $aboutUserManager AboutUserManager */
+        $aboutUserManager = $this->get('about_user.manager');
+        /** @var aboutUserFormType AboutUserFormType */
+        $aboutUserFormType = $this->get('dt_admin.form.type.about_user_type');
         
-        $view = 'DtAdminBundle:AboutUsers:new.html.twig';
-        $aboutUsers = $aboutUsersManager->createEntity(); 
+        $view = 'DtAdminBundle:AboutUser:new.html.twig';
+        $aboutUser = $aboutUserManager->createEntity(); 
         
-        $form = $this->createForm($aboutUsersFormType, $aboutUsers);
+        $form = $this->createForm($aboutUserFormType, $aboutUser);
         
         $form->handleRequest($request);
         
         ###
         # ATTENTION : prendre en compte les cas suivants (créer des constraints)
         # - un tree qui a un "expectedReplyType" text, textCollection, textValCollection ou textara ne peut pas avoir de child
-        # - un tree qui a un "expectedReplyType" checkbox ou radio doit obligatoiremnt avoir des enfants 
-        # - et ces mêmes enfants ne peuvent avoir d'enfants
         ###
         if( $form->isSubmitted() && $form->isValid() ){
             
-            $aboutUsersManager->updateEntity($aboutUsers);
+            $aboutUserManager->updateEntity($aboutUser);
             
-            $message = $this->get('translator')->trans('form.about_users.flash.add_success');
+            $message = $this->get('translator')->trans('form.about_user.flash.add_success');
             
             $this->addFlash('success', $message);
             
-            $form = $this->createForm($aboutUsersFormType, $aboutUsersManager->createEntity());
+            $form = $this->createForm($aboutUserFormType, $aboutUserManager->createEntity());
         }
         
         return $this->render($view, array(
@@ -87,7 +85,7 @@ class AboutUsersController extends Controller
      * Finds and displays a aboutUser entity.
      *
      */
-    public function showAction(AboutUsers $aboutUser)
+    public function showAction(AboutUser $aboutUser)
     {
         $deleteForm = $this->createDeleteForm($aboutUser);
 
@@ -101,25 +99,25 @@ class AboutUsersController extends Controller
      * Displays a form to edit an existing aboutUser entity.
      *
      */
-    public function editAction(Request $request, AboutUsers $aboutUser)
+    public function editAction(Request $request, AboutUser $aboutUser)
     {
         
-        /** @var $aboutUsersManager AboutUsersManager */
-        $aboutUsersManager = $this->get('about_users.manager');
-        /** @var aboutUsersFormType AboutUsersFormType */
-        $aboutUsersFormType = $this->get('dt_admin.form.type.about_users_type');
+        /** @var $aboutUserManager AboutUserManager */
+        $aboutUserManager = $this->get('about_user.manager');
+        /** @var aboutUserFormType AboutUserFormType */
+        $aboutUserFormType = $this->get('dt_admin.form.type.about_user_type');
         
         $deleteForm = $this->createDeleteForm($aboutUser);
-        $editForm = $this->createForm($aboutUsersFormType, $aboutUser);
+        $editForm = $this->createForm($aboutUserFormType, $aboutUser);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $aboutUsersManager->updateEntity($aboutUser);
+            $aboutUserManager->updateEntity($aboutUser);
 
-            return $this->redirectToRoute('dt_admin_about_users_edit', array('id' => $aboutUser->getId()));
+            return $this->redirectToRoute('dt_admin_about_user_edit', array('id' => $aboutUser->getId()));
         }
 
-        return $this->render('DtAdminBundle:AboutUsers:edit.html.twig', array(
+        return $this->render('DtAdminBundle:AboutUser:edit.html.twig', array(
             'aboutUser' => $aboutUser,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -130,7 +128,7 @@ class AboutUsersController extends Controller
      * Deletes a aboutUser entity.
      *
      */
-    public function deleteAction(Request $request, AboutUsers $aboutUser)
+    public function deleteAction(Request $request, AboutUser $aboutUser)
     {
         $form = $this->createDeleteForm($aboutUser);
         $form->handleRequest($request);
@@ -141,20 +139,20 @@ class AboutUsersController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('about-users_index');
+        return $this->redirectToRoute('dt_admin_about_user_index');
     }
 
     /**
      * Creates a form to delete a aboutUser entity.
      *
-     * @param AboutUsers $aboutUser The aboutUser entity
+     * @param AboutUser $aboutUser The aboutUser entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(AboutUsers $aboutUser)
+    private function createDeleteForm(AboutUser $aboutUser)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('dt_admin_about_users_delete', array('id' => $aboutUser->getId())))
+            ->setAction($this->generateUrl('dt_admin_about_user_delete', array('id' => $aboutUser->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

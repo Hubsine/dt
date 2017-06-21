@@ -1,0 +1,24 @@
+aboutusermeta_index:
+    path:     /
+    defaults: { _controller: "DtAdminBundle:AboutUserMeta:index" }
+    methods:  GET
+
+aboutusermeta_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtAdminBundle:AboutUserMeta:show" }
+    methods:  GET
+
+aboutusermeta_new:
+    path:     /new
+    defaults: { _controller: "DtAdminBundle:AboutUserMeta:new" }
+    methods:  [GET, POST]
+
+aboutusermeta_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtAdminBundle:AboutUserMeta:edit" }
+    methods:  [GET, POST]
+
+aboutusermeta_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtAdminBundle:AboutUserMeta:delete" }
+    methods:  DELETE

@@ -5,8 +5,8 @@ parameters:
     dt_user.listener.oauth_user.class: Dt\UserBundle\EventListener\LoadUserByOAuthUserListener
     dt_user.listener.redirect.class: Dt\UserBundle\EventListener\RedirectListener
     # Manager
-    dt_user.about_users_reply.entity.class: Dt\UserBundle\Entity\AboutUsersReply
-    dt_user.about_users_reply.manager.class: Dt\UserBundle\Doctrine\AboutUsersReplyManager
+    dt_user.about_user_reply.entity.class: Dt\UserBundle\Entity\AboutUserReply
+    dt_user.about_user_reply.manager.class: Dt\UserBundle\Doctrine\AboutUserReplyManager
 
 services:
     dt.oauth.user_provider:
@@ -27,6 +27,6 @@ services:
             - { name: kernel.event_subscriber }    
             
     # Manager
-    about_users_reply.manager:
-        class: '%dt_user.about_users_reply.manager.class%'
-        arguments: ["@doctrine.orm.entity_manager", "%dt_user.about_users_reply.entity.class%"]
+    about_user_reply.manager:
+        class: '%dt_user.about_user_reply.manager.class%'
+        arguments: ["@doctrine.orm.entity_manager", "%dt_user.about_user_reply.entity.class%"]

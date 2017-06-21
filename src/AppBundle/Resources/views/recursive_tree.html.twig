@@ -8,7 +8,7 @@
         
         
         {% if node.expectedReplyType == "radio" %}
-            {{ form_row( attribute(form, 'aboutUsers' ~ node.id) ) }}
+            {{ form_row( attribute(form, 'aboutUser' ~ node.id) ) }}
         {% endif %}     
         
         {% if node.__children|length %}

@@ -1,24 +1,24 @@
 aboutusersreply_index:
     path:     /
-    defaults: { _controller: "DtUserBundle:AboutUsersReply:index" }
+    defaults: { _controller: "DtUserBundle:AboutUserReply:index" }
     methods:  GET
 
 aboutusersreply_show:
     path:     /{id}/show
-    defaults: { _controller: "DtUserBundle:AboutUsersReply:show" }
+    defaults: { _controller: "DtUserBundle:AboutUserReply:show" }
     methods:  GET
 
 aboutusersreply_new:
     path:     /new
-    defaults: { _controller: "DtUserBundle:AboutUsersReply:new" }
+    defaults: { _controller: "DtUserBundle:AboutUserReply:new" }
     methods:  [GET, POST]
 
 aboutusersreply_edit:
     path:     /{id}/edit
-    defaults: { _controller: "DtUserBundle:AboutUsersReply:edit" }
+    defaults: { _controller: "DtUserBundle:AboutUserReply:edit" }
     methods:  [GET, POST]
 
 aboutusersreply_delete:
     path:     /{id}/delete
-    defaults: { _controller: "DtUserBundle:AboutUsersReply:delete" }
+    defaults: { _controller: "DtUserBundle:AboutUserReply:delete" }
     methods:  DELETE

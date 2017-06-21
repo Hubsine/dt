@@ -3,7 +3,7 @@
 {% form_theme edit_form 'MopaBootstrapBundle:form:fields.html.twig' %}
 {% form_theme delete_form 'MopaBootstrapBundle:form:fields.html.twig' %}
 
-{% block headline %}{% trans %} dashboard.about_users.edit {% endtrans %}{% endblock headline %}
+{% block headline %}{% trans %} dashboard.about_user.edit {% endtrans %}{% endblock headline %}
 
 {% block content_page_content %}
 
@@ -14,7 +14,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('dt_admin_about_users_index') }}">{% trans %} dashboard.about_users.back {% endtrans %}</a>
+            <a href="{{ path('dt_admin_about_user_index') }}">{% trans %} dashboard.about_user.back {% endtrans %}</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

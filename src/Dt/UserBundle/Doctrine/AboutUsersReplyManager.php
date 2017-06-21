@@ -7,11 +7,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Dt\UserBundle\Entity\User;
 
 /**
- * Description of AboutUsersReplyManager
+ * Description of AboutUserReplyManager
  *
  * @author Hubsine
  */
-class AboutUsersReplyManager extends AbstractManager{
+class AboutUserReplyManager extends AbstractManager{
     
     public function __construct(ObjectManager $om, $class) {
         

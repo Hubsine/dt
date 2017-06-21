@@ -12,9 +12,9 @@ admin_sidebar:
     admin: 'Dashbord'
     users: 'Utilisateurs'
     user: 'Utilisateurs'
-    about_users: 'About users'
-    about_users_new: 'Ajouter'
-    about_users_edit: 'Editer'
+    about_user: 'About users'
+    about_user_new: 'Ajouter'
+    about_user_edit: 'Editer'
     
     
     

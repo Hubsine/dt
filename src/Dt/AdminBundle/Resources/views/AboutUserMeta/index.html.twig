@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Aboutusermetas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Label</th>
+                <th>Deletedat</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for aboutUserMetum in aboutUserMetas %}
+            <tr>
+                <td><a href="{{ path('aboutusermeta_show', { 'id': aboutUserMetum.id }) }}">{{ aboutUserMetum.id }}</a></td>
+                <td>{{ aboutUserMetum.label }}</td>
+                <td>{% if aboutUserMetum.deletedAt %}{{ aboutUserMetum.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if aboutUserMetum.createdAt %}{{ aboutUserMetum.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if aboutUserMetum.updatedAt %}{{ aboutUserMetum.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('aboutusermeta_show', { 'id': aboutUserMetum.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('aboutusermeta_edit', { 'id': aboutUserMetum.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('aboutusermeta_new') }}">Create a new aboutUserMetum</a>
+        </li>
+    </ul>
+{% endblock %}

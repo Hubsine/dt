@@ -1,5 +1,5 @@
 #dt_user_about_users_reply:
-#    resource: "@DtUserBundle/Controller/AboutUsersReplyController.php"
+#    resource: "@DtUserBundle/Controller/AboutUserReplyController.php"
 #    type:     annotation
 
 dt_admin:

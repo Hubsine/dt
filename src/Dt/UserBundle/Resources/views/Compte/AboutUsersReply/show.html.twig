@@ -7,7 +7,7 @@
         {{ advanced_flash('success', message, '', true, false, '') }}    
 {% endif %}
 
-{#{ dump(aboutUsers) }#}
+{#{ dump(aboutUser) }#}
 {{ dump(ab) }}
 
 {% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
@@ -39,13 +39,13 @@
 {{ form_end(form) }}
 
 <div class="mainNode">
-{{ aboutUsers|raw }}
+{{ aboutUser|raw }}
 </div>
         
 <div>
     <button 
-        data-action="{{ path('dt_user_edit_profile_about_users_reply', { 'slug': app.user.slug } ) }}" 
-        data-container="aboutUsersReplyContent"
+        data-action="{{ path('dt_user_edit_profile_about_user_reply', { 'slug': app.user.slug } ) }}" 
+        data-container="aboutUserReplyContent"
         class="updateFormToUpdateInAjax pull-right btn btn-danger">
         {% trans %} layout.update {% endtrans %}
     </button>

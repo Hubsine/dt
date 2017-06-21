@@ -1,7 +1,3 @@
-dt_admin_about-users:
-    resource: "@DtAdminBundle/Resources/config/routing/aboutusers.yml"
-    prefix:   /about-users
-
 dt_admin_homepage:
     path:     /
     defaults: { _controller: DtAdminBundle:Admin:index }
@@ -9,5 +5,14 @@ dt_admin_homepage:
 dt_admin_users:
     path: /users
     defaults: { _controller: DtAdminBundle:Users:index }
+    
+dt_admin_about_user:
+    resource: "@DtAdminBundle/Resources/config/routing/aboutuser.yml"
+    prefix:   /about-user
+
+dt_admin_aboutusermeta:
+        resource: "@DtAdminBundle/Resources/config/routing/aboutusermeta.yml"
+        prefix:   /about-user-meta
+
     
 

@@ -6,17 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AboutUserType extends AbstractType
+class AboutUserMetaType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('label')
-            ->add('expectedReplyType')
-            ->add('parent');
+        $builder->add('label')->add('deletedAt')->add('createdAt')->add('updatedAt');
     }
     
     /**
@@ -25,7 +22,7 @@ class AboutUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Dt\AdminBundle\Entity\AboutUser'
+            'data_class' => 'Dt\AdminBundle\Entity\AboutUserMeta'
         ));
     }
 
@@ -34,7 +31,7 @@ class AboutUserType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dt_adminbundle_aboutusers';
+        return 'dt_adminbundle_aboutusermeta';
     }
 
 

@@ -14,11 +14,11 @@ namespace Dt\UserBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dt\UserBundle\Form\Type\MoiFormType;
 use Dt\UserBundle\Form\Type\ReseauxSociauxFormType;
-use Dt\UserBundle\Form\Type\AboutUsersReplyType;
+use Dt\UserBundle\Form\Type\AboutUserReplyType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dt\UserBundle\Entity\User;
-use Dt\UserBundle\Entity\AboutUsersReply;
+use Dt\UserBundle\Entity\AboutUserReply;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -60,36 +60,36 @@ class CompteController extends Controller
         return $this->render('DtUserBundle:Compte:QuiSuisJe/show.html.twig');
     }
     
-    public function showAboutUsersReplyAction(Request $request, User $user){
+    public function showAboutUserReplyAction(Request $request, User $user){
         
-        /** @var $aboutUsersManager AboutUsersManager */
-        $aboutUsersManager = $this->get('about_users.manager');
+        /** @var $aboutUserManager AboutUserManager */
+        $aboutUserManager = $this->get('about_user.manager');
 
-        $ab = $aboutUsersManager->getRepository()->childrenHierarchy(null, false, array('decorate'  => false));
-        $form = $this->getAboutUsersReplyForm($ab);
+        $ab = $aboutUserManager->getRepository()->childrenHierarchy(null, false, array('decorate'  => false));
+        $form = $this->getAboutUserReplyForm($ab);
         
-        $aboutUsers = $aboutUsersManager->getUsersReplyView(null, false, $this->getTreeOptions());
+        $aboutUser = $aboutUserManager->getUsersReplyView(null, false, $this->getTreeOptions());
 
-        return $this->render('DtUserBundle:Compte:AboutUsersReply/show.html.twig', array(
-            'aboutUsers'    => $aboutUsers,
+        return $this->render('DtUserBundle:Compte:AboutUserReply/show.html.twig', array(
+            'aboutUser'    => $aboutUser,
             'ab'    => $ab,
             'form'  => $form
         ));
     }
 
-    public function editAboutUsersReplyAction(Request $request, User $user)
+    public function editAboutUserReplyAction(Request $request, User $user)
     {
         
-        /** aboutUsersReplyManager \Dt\UserBundle\Doctrine\AboutUsersReplyManager */
-        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
+        /** aboutUserReplyManager \Dt\UserBundle\Doctrine\AboutUserReplyManager */
+        $aboutUserReplyManager = $this->get('about_user_reply.manager');
         
         $codeResponse = 200;
-        $contentId = 'aboutUsersReplyContent';
-        $templateToShow = 'DtUserBundle:Compte:AboutUsersReply/show.html.twig';
-        $templateToEdit = 'DtUserBundle:Compte:AboutUsersReply/edit.html.twig';
+        $contentId = 'aboutUserReplyContent';
+        $templateToShow = 'DtUserBundle:Compte:AboutUserReply/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:AboutUserReply/edit.html.twig';
         
-        $aboutUsersReply = $aboutUsersReplyManager->createEntity();
-        $form = $this->createForm(AboutUsersReplyType::class, $aboutUsersReply);
+        $aboutUserReply = $aboutUserReplyManager->createEntity();
+        $form = $this->createForm(AboutUserReplyType::class, $aboutUserReply);
         
         $form->handleRequest($request);
         
@@ -309,9 +309,9 @@ class CompteController extends Controller
     
     public function getTreeOptions(){
         
-        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
+        $aboutUserReplyManager = $this->get('about_user_reply.manager');
         $controller = $this;
-        #$replies = $aboutUsersReplyManager->getUserReply($this->getUser());
+        #$replies = $aboutUserReplyManager->getUserReply($this->getUser());
         
         $treeOptions = array(
             'rootOpen' => function($tree){
@@ -357,7 +357,7 @@ class CompteController extends Controller
 //                }
                 return '</li>';
             },
-            'nodeDecorator' => function($node) use (&$controller, $aboutUsersReplyManager) {
+            'nodeDecorator' => function($node) use (&$controller, $aboutUserReplyManager) {
 
                 $html = '';
                 
@@ -405,17 +405,17 @@ class CompteController extends Controller
          return $treeOptions;
     }
     
-    public function getAboutUsersReplyForm(array $tree){
+    public function getAboutUserReplyForm(array $tree){
         
-        /** @var $aboutUsersManager AboutUsersManager */
-        $aboutUsersManager = $this->get('about_users.manager');
-        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
+        /** @var $aboutUserManager AboutUserManager */
+        $aboutUserManager = $this->get('about_user.manager');
+        $aboutUserReplyManager = $this->get('about_user_reply.manager');
         
-        $aboutUsers = $aboutUsersManager->getRepository()->getChildren();
-        #$replies = $aboutUsersReplyManager->getUserReply($this->getUser());
+        $aboutUser = $aboutUserManager->getRepository()->getChildren();
+        #$replies = $aboutUserReplyManager->getUserReply($this->getUser());
         $form = $this->createFormBuilder();
         
-        function iterator($tree, $form, $aboutUsers){
+        function iterator($tree, $form, $aboutUser){
             
             foreach ($tree as $key => $node) 
             {
@@ -426,7 +426,7 @@ class CompteController extends Controller
                     case 'radio':
                         if(count($node['__children']) > 0){
                             $choices = array();
-                            foreach($aboutUsers as $aboutUsersKey => $aboutUser) {
+                            foreach($aboutUser as $aboutUserKey => $aboutUser) {
                                 
                                 if($aboutUser->getId() == $node['id']){
                                     echo $aboutUser->getParent()->getLabel();
@@ -440,12 +440,12 @@ class CompteController extends Controller
 
                             //var_dump($choices);
                             //var_dump($node['__children']);
-                            $form->add('aboutUsers'.$node['id'], EntityType::class, array(
-                                'choices'   => array($aboutUsers[8]),
+                            $form->add('aboutUser'.$node['id'], EntityType::class, array(
+                                'choices'   => array($aboutUser[8]),
                                 'multiple'  => false,
                                 'expanded'  => true,
                                 'choices_as_values' => true,
-                                'class' => 'DtAdminBundle:AboutUsers',
+                                'class' => 'DtAdminBundle:AboutUser',
                                 //'label_attr'    => array('class'    => 'hidden'),
                                 'choice_label' => function ($value, $key, $index) {
 
@@ -459,12 +459,12 @@ class CompteController extends Controller
             
                 if (count($node['__children']) > 0) 
                 {
-                    iterator($node['__children'], $form, $aboutUsers);
+                    iterator($node['__children'], $form, $aboutUser);
                 }
             }
         }
         
-        iterator($tree, $form, $aboutUsers);
+        iterator($tree, $form, $aboutUser);
         
         return $form->getForm()->createView();
     }

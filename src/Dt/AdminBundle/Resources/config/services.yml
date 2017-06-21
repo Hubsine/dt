@@ -1,19 +1,19 @@
 parameters:
     dt_admin.menu_builder.class: Dt\AdminBundle\Menu\MenuBuilder
-    dt_admin.about_users.manager.class: Dt\AdminBundle\Doctrine\AboutUsersManager
-    dt_admin.about_users.entity.class: Dt\AdminBundle\Entity\AboutUsers
-    dt_admin.about_users.form.type.class: Dt\AdminBundle\Form\Type\AboutUsersType
+    dt_admin.about_user.manager.class: Dt\AdminBundle\Doctrine\AboutUserManager
+    dt_admin.about_user.entity.class: Dt\AdminBundle\Entity\AboutUser
+    dt_admin.about_user.form.type.class: Dt\AdminBundle\Form\Type\AboutUserType
 services:
     dt_admin.menu_builder:
         class: '%dt_admin.menu_builder.class%'
         arguments: ["@knp_menu.factory", "@security.token_storage", "@request_stack"]
         tags:
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: admin_sidebar }
-    about_users.manager:
-        class: '%dt_admin.about_users.manager.class%'
-        arguments: ["@doctrine.orm.entity_manager", "%dt_admin.about_users.entity.class%"]
-    dt_admin.form.type.about_users_type:
-        class: '%dt_admin.about_users.form.type.class%'
+    about_user.manager:
+        class: '%dt_admin.about_user.manager.class%'
+        arguments: ["@doctrine.orm.entity_manager", "%dt_admin.about_user.entity.class%"]
+    dt_admin.form.type.about_user_type:
+        class: '%dt_admin.about_user.form.type.class%'
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type }    

@@ -88,19 +88,19 @@ class MenuBuilder{
             ->setUri('#');
         
         ###
-        # About Users
+        # About User
         ###
-        $aboutUsers = $menu->addChild('admin_sidebar.about_users', array(
-            'route' => 'dt_admin_about_users_index',
+        $aboutUser = $menu->addChild('admin_sidebar.about_user', array(
+            'route' => 'dt_admin_about_user_index',
             'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');
         
-        $aboutUsers->addChild('admin_sidebar.about_users', array(
-            'route' => 'dt_admin_about_users_index'
+        $aboutUser->addChild('admin_sidebar.about_user', array(
+            'route' => 'dt_admin_about_user_index'
         ))->setExtra('translation_domain', 'menu');
         
-        $aboutUsers->addChild('admin_sidebar.about_users_new', array(
-            'route' => 'dt_admin_about_users_new'
+        $aboutUser->addChild('admin_sidebar.about_user_new', array(
+            'route' => 'dt_admin_about_user_new'
         ))->setExtra('translation_domain', 'menu');
         
         

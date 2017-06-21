@@ -8,21 +8,21 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Dt\AdminBundle\Entity\AboutUsers;
+use Dt\AdminBundle\Entity\AboutUser;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * AboutUsersReply
+ * AboutUserReply
  *
- * @ORM\Table(name="dt_about_users_reply")
- * @ORM\Entity(repositoryClass="Dt\UserBundle\Repository\AboutUsersReplyRepository")
+ * @ORM\Table(name="dt_about_user_reply")
+ * @ORM\Entity(repositoryClass="Dt\UserBundle\Repository\AboutUserReplyRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
  * Permet d'avoir une seule réponse, pas de duplicata
- * @UniqueEntity(fields={"user", "aboutUsers"}, message="dt_about_users_reply.unique_entity")
+ * @UniqueEntity(fields={"user", "aboutUser"}, message="dt_about_user_reply.unique_entity")
  */
-class AboutUsersReply
+class AboutUserReply
 {
     
     use SoftDeleteableEntity;
@@ -45,54 +45,54 @@ class AboutUsersReply
     protected $user;
     
     /**
-     * Contient un elements de type AboutUsers 
+     * Contient un elements de type AboutUser 
      * 
-     * Seul les éléments dont on attend une réponse (AboutUsers::expectedReplyType in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']) sont accépter
+     * Seul les éléments dont on attend une réponse (AboutUser::expectedReplyType in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']) sont accépter
      * 
-     * @var Dt\AdminBundle\Entity\AboutUsers
+     * @var Dt\AdminBundle\Entity\AboutUser
      * 
-     * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUsers")
+     * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
      * 
      * @Assert\Expression(
      *      "value.getExpectedReplyType() in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
-     *      message="dt_about_users.about_users.expression"
+     *      message="dt_about_user.about_user.expression"
      * )
      */
-    protected $aboutUsers;
+    protected $aboutUser;
     
     /**
-     * Peut contenir plusieurs éléments de type AboutUsers de derniers niveau (last child) 
-     * et dont le AboutUsers::expectedReplyType du parent a la valeur "checkbox"
+     * Peut contenir plusieurs éléments de type AboutUser de derniers niveau (last child) 
+     * et dont le AboutUser::expectedReplyType du parent a la valeur "checkbox"
      * 
-     * @var Dt\AdminBundle\Entity\AboutUsers 
+     * @var Dt\AdminBundle\Entity\AboutUser 
      *
-     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\AboutUsers")
-     * @ORM\JoinColumn(nullable=true, name="dt_about_users_reply_checkbox")
+     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\AboutUser")
+     * @ORM\JoinColumn(nullable=true, name="dt_about_user_reply_checkbox")
      * 
      * @Assert\Expression(
      *      "value.getParent().getExpectedReplyType() == checkbox",
-     *      message="dt_about_users_reply.response_checkbox.expression"
+     *      message="dt_about_user_reply.response_checkbox.expression"
      * )
      */
     protected $responseCheckbox;
     
     /**
-     * Peut contenir qu'un élément de type AboutUsers de derniers niveau (last child)
-     * et dont le AboutUsers::expectedReplyType du parent a la valeur "radio"
+     * Peut contenir qu'un élément de type AboutUser de derniers niveau (last child)
+     * et dont le AboutUser::expectedReplyType du parent a la valeur "radio"
      * 
      * Exemple : Yeux > Couleur > Marron
      * -- Marron : est le dernier élèment 
      * -- Couleur : le "expectedReplyType" du parent doit avoir la valeur "radio"
      * 
      * 
-     * @var Dt\AdminBundle\Entity\AboutUsers 
+     * @var Dt\AdminBundle\Entity\AboutUser 
      * 
-     * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUsers")
+     * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
      * @ORM\JoinColumn(nullable=true)
      * 
      * @Assert\Expression(
      *      "value.getParent().getExpectedReplyType() == radio",
-     *      message="dt_about_users_reply.response_radio.expression"
+     *      message="dt_about_user_reply.response_radio.expression"
      * )
      * 
      */
@@ -103,7 +103,7 @@ class AboutUsersReply
      * 
      * ORM\Column(nullable=true)
      * 
-     * @Assert\Type(type="string", message="dt_about_users_reply.response_text.type")
+     * @Assert\Type(type="string", message="dt_about_user_reply.response_text.type")
      */
     protected $responseText;
     
@@ -113,33 +113,33 @@ class AboutUsersReply
      * @ORM\Column(nullable=true, type="array")
      * 
      * 
-     * @Assert\Type(type="array", message="dt_about_users_reply.response_text_collection.array")
+     * @Assert\Type(type="array", message="dt_about_user_reply.response_text_collection.array")
      * @Assert\Count(
      *      min = 0,
      *      max = 4,
-     *      minMessage = "dt_about_users_reply.response_text_collection.count.min",
-     *      maxMessage = "dt_about_users_reply.response_text_collection.count.max"
+     *      minMessage = "dt_about_user_reply.response_text_collection.count.min",
+     *      maxMessage = "dt_about_user_reply.response_text_collection.count.max"
      * )
      * @Assert\Collection(
      *      fields={
      *          "response_0" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_users_reply.response_text_collection.string")
+     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
      *          ),
      *          "response_1" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_users_reply.response_text_collection.string")
+     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
      *          ),
      *          "response_2" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_users_reply.response_text_collection.string")
+     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
      *          ),
      *          "response_3" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_users_reply.response_text_collection.string")
+     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
      *          ),
      *          "response_4" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_users_reply.response_text_collection.string")
+     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
      *          )
      *      },
      *      allowMissingFields=true,
-     *      extraFieldsMessage="dt_about_users_reply.response_text_collection.extra_fields_message"
+     *      extraFieldsMessage="dt_about_user_reply.response_text_collection.extra_fields_message"
      * )
      */
     protected $responseTextCollection = array(
@@ -151,7 +151,7 @@ class AboutUsersReply
      * 
      * @ORM\Column(nullable=true, type="simple_array")
      * 
-     * @Assert\Type(type="string", message="dt_about_users_reply.response_text_val_collection.type")
+     * @Assert\Type(type="string", message="dt_about_user_reply.response_text_val_collection.type")
      */
     protected $responseTextValCollection;
     
@@ -160,7 +160,7 @@ class AboutUsersReply
      * 
      * @ORM\Column(nullable=true)
      * 
-     * @Assert\Type(type="string", message="dt_about_users_reply.response_textarea.type")
+     * @Assert\Type(type="string", message="dt_about_user_reply.response_textarea.type")
      */
     protected $responseTextarea;
 
@@ -186,7 +186,7 @@ class AboutUsersReply
      * Set responseTextCollection
      *
      * @param array $responseTextCollection
-     * @return AboutUsersReply
+     * @return AboutUserReply
      */
     public function setResponseTextCollection($key, $value)
     {
@@ -209,7 +209,7 @@ class AboutUsersReply
      * Set responseTextValCollection
      *
      * @param array $responseTextValCollection
-     * @return AboutUsersReply
+     * @return AboutUserReply
      */
     public function setResponseTextValCollection($responseTextValCollection)
     {
@@ -232,7 +232,7 @@ class AboutUsersReply
      * Set responseTextarea
      *
      * @param string $responseTextarea
-     * @return AboutUsersReply
+     * @return AboutUserReply
      */
     public function setResponseTextarea($responseTextarea)
     {
@@ -255,7 +255,7 @@ class AboutUsersReply
      * Set user
      *
      * @param \Dt\UserBundle\Entity\User $user
-     * @return AboutUsersReply
+     * @return AboutUserReply
      */
     public function setUser(\Dt\UserBundle\Entity\User $user = null)
     {
@@ -275,35 +275,35 @@ class AboutUsersReply
     }
 
     /**
-     * Set aboutUsers
+     * Set aboutUser
      *
-     * @param \Dt\AdminBundle\Entity\AboutUsers $aboutUsers
-     * @return AboutUsersReply
+     * @param \Dt\AdminBundle\Entity\AboutUser $aboutUser
+     * @return AboutUserReply
      */
-    public function setAboutUsers(\Dt\AdminBundle\Entity\AboutUsers $aboutUsers = null)
+    public function setAboutUser(\Dt\AdminBundle\Entity\AboutUser $aboutUser = null)
     {
-        $this->aboutUsers = $aboutUsers;
+        $this->aboutUser = $aboutUser;
 
         return $this;
     }
 
     /**
-     * Get aboutUsers
+     * Get aboutUser
      *
-     * @return \Dt\AdminBundle\Entity\AboutUsers 
+     * @return \Dt\AdminBundle\Entity\AboutUser 
      */
-    public function getAboutUsers()
+    public function getAboutUser()
     {
-        return $this->aboutUsers;
+        return $this->aboutUser;
     }
 
     /**
      * Add responseCheckbox
      *
-     * @param \Dt\AdminBundle\Entity\AboutUsers $responseCheckbox
-     * @return AboutUsersReply
+     * @param \Dt\AdminBundle\Entity\AboutUser $responseCheckbox
+     * @return AboutUserReply
      */
-    public function addResponseCheckbox(\Dt\AdminBundle\Entity\AboutUsers $responseCheckbox)
+    public function addResponseCheckbox(\Dt\AdminBundle\Entity\AboutUser $responseCheckbox)
     {
         $this->responseCheckbox[] = $responseCheckbox;
 
@@ -313,9 +313,9 @@ class AboutUsersReply
     /**
      * Remove responseCheckbox
      *
-     * @param \Dt\AdminBundle\Entity\AboutUsers $responseCheckbox
+     * @param \Dt\AdminBundle\Entity\AboutUser $responseCheckbox
      */
-    public function removeResponseCheckbox(\Dt\AdminBundle\Entity\AboutUsers $responseCheckbox)
+    public function removeResponseCheckbox(\Dt\AdminBundle\Entity\AboutUser $responseCheckbox)
     {
         $this->responseCheckbox->removeElement($responseCheckbox);
     }
@@ -333,10 +333,10 @@ class AboutUsersReply
     /**
      * Set responseRadio
      *
-     * @param \Dt\AdminBundle\Entity\AboutUsers $responseRadio
-     * @return AboutUsersReply
+     * @param \Dt\AdminBundle\Entity\AboutUser $responseRadio
+     * @return AboutUserReply
      */
-    public function setResponseRadio(\Dt\AdminBundle\Entity\AboutUsers $responseRadio = null)
+    public function setResponseRadio(\Dt\AdminBundle\Entity\AboutUser $responseRadio = null)
     {
         $this->responseRadio = $responseRadio;
 
@@ -346,7 +346,7 @@ class AboutUsersReply
     /**
      * Get responseRadio
      *
-     * @return \Dt\AdminBundle\Entity\AboutUsers 
+     * @return \Dt\AdminBundle\Entity\AboutUser 
      */
     public function getResponseRadio()
     {

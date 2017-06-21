@@ -7,7 +7,7 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ aboutUsersReply.id }}</td>
+                <td>{{ aboutUserReply.id }}</td>
             </tr>
         </tbody>
     </table>
@@ -17,7 +17,7 @@
             <a href="{{ path('aboutusersreply_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('aboutusersreply_edit', { 'id': aboutUsersReply.id }) }}">Edit</a>
+            <a href="{{ path('aboutusersreply_edit', { 'id': aboutUserReply.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

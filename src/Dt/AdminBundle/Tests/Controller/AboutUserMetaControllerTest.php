@@ -4,7 +4,7 @@ namespace Dt\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class AboutUserControllerTest extends WebTestCase
+class AboutUserMetaControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class AboutUserControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/about-users/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /about-users/");
+        $crawler = $client->request('GET', '/aboutusermeta/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /aboutusermeta/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'dt_adminbundle_aboutusers[field_name]'  => 'Test',
+            'dt_adminbundle_aboutusermeta[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class AboutUserControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'dt_adminbundle_aboutusers[field_name]'  => 'Foo',
+            'dt_adminbundle_aboutusermeta[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

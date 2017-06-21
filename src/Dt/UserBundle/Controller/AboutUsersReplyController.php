@@ -2,7 +2,7 @@
 
 namespace Dt\UserBundle\Controller;
 
-use Dt\UserBundle\Entity\AboutUsersReply;
+use Dt\UserBundle\Entity\AboutUserReply;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -10,20 +10,20 @@ use Symfony\Component\HttpFoundation\Request;
  * Aboutusersreply controller.
  *
  */
-class AboutUsersReplyController extends Controller
+class AboutUserReplyController extends Controller
 {
     /**
-     * Lists all aboutUsersReply entities.
+     * Lists all aboutUserReply entities.
      *
      */
     public function indexAction()
     {
-        /** @var $aboutUsersManager Dt\AdminBundle\Doctrine\AboutUsersManager */
-        $aboutUsersManager = $this->get('about_users.manager');
-        /** @var $aboutUsersReplyManager Dt\UserBundle\Doctrine\AboutUsersReplyManager */
-        $aboutUsersReplyManager = $this->get('about_users_reply.manager');
+        /** @var $aboutUserManager Dt\AdminBundle\Doctrine\AboutUserManager */
+        $aboutUserManager = $this->get('about_user.manager');
+        /** @var $aboutUserReplyManager Dt\UserBundle\Doctrine\AboutUserReplyManager */
+        $aboutUserReplyManager = $this->get('about_user_reply.manager');
 
-        $aboutUsers = $aboutUsersManager->getRepository()->childrenHierarchy(
+        $aboutUser = $aboutUserManager->getRepository()->childrenHierarchy(
             null, false,    
             array(
                 array(
@@ -32,88 +32,88 @@ class AboutUsersReplyController extends Controller
                     'html' => true
                 )
         ));
-        $aboutUsersReplies = $aboutUsersReplyManager->getRepository()->findAll();
+        $aboutUserReplies = $aboutUserReplyManager->getRepository()->findAll();
       
 
         return $this->render('DtUserBundle:Compte:aboutusersreply/index.html.twig', array(
-            'aboutUsersReplies' => $aboutUsersReplies,
-            'aboutUsers'    => $aboutUsers
+            'aboutUserReplies' => $aboutUserReplies,
+            'aboutUser'    => $aboutUser
         ));
     }
 
     /**
-     * Creates a new aboutUsersReply entity.
+     * Creates a new aboutUserReply entity.
      *
      */
     public function newAction(Request $request)
     {
-        $aboutUsersReply = new Aboutusersreply();
-        $form = $this->createForm('Dt\UserBundle\Form\AboutUsersReplyType', $aboutUsersReply);
+        $aboutUserReply = new Aboutusersreply();
+        $form = $this->createForm('Dt\UserBundle\Form\AboutUserReplyType', $aboutUserReply);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($aboutUsersReply);
+            $em->persist($aboutUserReply);
             $em->flush();
 
-            return $this->redirectToRoute('aboutusersreply_show', array('id' => $aboutUsersReply->getId()));
+            return $this->redirectToRoute('aboutusersreply_show', array('id' => $aboutUserReply->getId()));
         }
 
         return $this->render('aboutusersreply/new.html.twig', array(
-            'aboutUsersReply' => $aboutUsersReply,
+            'aboutUserReply' => $aboutUserReply,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a aboutUsersReply entity.
+     * Finds and displays a aboutUserReply entity.
      *
      */
-    public function showAction(AboutUsersReply $aboutUsersReply)
+    public function showAction(AboutUserReply $aboutUserReply)
     {
-        $deleteForm = $this->createDeleteForm($aboutUsersReply);
+        $deleteForm = $this->createDeleteForm($aboutUserReply);
 
         return $this->render('aboutusersreply/show.html.twig', array(
-            'aboutUsersReply' => $aboutUsersReply,
+            'aboutUserReply' => $aboutUserReply,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing aboutUsersReply entity.
+     * Displays a form to edit an existing aboutUserReply entity.
      *
      */
-    public function editAction(Request $request, AboutUsersReply $aboutUsersReply)
+    public function editAction(Request $request, AboutUserReply $aboutUserReply)
     {
-        $deleteForm = $this->createDeleteForm($aboutUsersReply);
-        $editForm = $this->createForm('Dt\UserBundle\Form\AboutUsersReplyType', $aboutUsersReply);
+        $deleteForm = $this->createDeleteForm($aboutUserReply);
+        $editForm = $this->createForm('Dt\UserBundle\Form\AboutUserReplyType', $aboutUserReply);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('aboutusersreply_edit', array('id' => $aboutUsersReply->getId()));
+            return $this->redirectToRoute('aboutusersreply_edit', array('id' => $aboutUserReply->getId()));
         }
 
         return $this->render('aboutusersreply/edit.html.twig', array(
-            'aboutUsersReply' => $aboutUsersReply,
+            'aboutUserReply' => $aboutUserReply,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a aboutUsersReply entity.
+     * Deletes a aboutUserReply entity.
      *
      */
-    public function deleteAction(Request $request, AboutUsersReply $aboutUsersReply)
+    public function deleteAction(Request $request, AboutUserReply $aboutUserReply)
     {
-        $form = $this->createDeleteForm($aboutUsersReply);
+        $form = $this->createDeleteForm($aboutUserReply);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($aboutUsersReply);
+            $em->remove($aboutUserReply);
             $em->flush();
         }
 
@@ -121,16 +121,16 @@ class AboutUsersReplyController extends Controller
     }
 
     /**
-     * Creates a form to delete a aboutUsersReply entity.
+     * Creates a form to delete a aboutUserReply entity.
      *
-     * @param AboutUsersReply $aboutUsersReply The aboutUsersReply entity
+     * @param AboutUserReply $aboutUserReply The aboutUserReply entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(AboutUsersReply $aboutUsersReply)
+    private function createDeleteForm(AboutUserReply $aboutUserReply)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('aboutusersreply_delete', array('id' => $aboutUsersReply->getId())))
+            ->setAction($this->generateUrl('aboutusersreply_delete', array('id' => $aboutUserReply->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

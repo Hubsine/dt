@@ -11,12 +11,12 @@ use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Dt\AdminBundle\Entity\AboutUsers;
+use Dt\AdminBundle\Entity\AboutUser;
 use AppBundle\Form\Tree\TreeType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManager;
 
-class AboutUsersType extends AbstractType
+class AboutUserType extends AbstractType
 {
     
     private $em;
@@ -25,7 +25,7 @@ class AboutUsersType extends AbstractType
     public function __construct(EntityManager $em) {
         
         $this->em = $em;
-        $this->repo = $this->em->getRepository('DtAdminBundle:AboutUsers');
+        $this->repo = $this->em->getRepository('DtAdminBundle:AboutUser');
     }
 
     /**
@@ -35,14 +35,14 @@ class AboutUsersType extends AbstractType
     {
         $builder
                 ->add('label', TextType::class, array(
-                    'label' => 'form.about_users.label.label',
+                    'label' => 'form.about_user.label.label',
                     'required'  => true
                 ))
                 ->add('expectedReplyType', ChoiceType::class, array(
-                    'label' => 'form.about_users.expected_reply_type.label',
-                    'help_block'    => 'form.about_users.expected_reply_type.help_text',
+                    'label' => 'form.about_user.expected_reply_type.label',
+                    'help_block'    => 'form.about_user.expected_reply_type.help_text',
                     'required'  => false,
-                    'choices'   => AboutUsers::getExpectedReplyTypeArray(),
+                    'choices'   => AboutUser::getExpectedReplyTypeArray(),
                     'choices_as_values' => true,
                     'multiple'  => false,
                     'expanded'  => true,
@@ -55,14 +55,14 @@ class AboutUsersType extends AbstractType
                     }
                 ))
                 ->add('parent', EntityType::class, array(
-                    'label' => 'form.about_users.parent.label',
+                    'label' => 'form.about_user.parent.label',
                     'required'  =>  false,
-                    'class' => 'DtAdminBundle:AboutUsers',
-                    'choice_label'  => function(AboutUsers $aboutUsers){
+                    'class' => 'DtAdminBundle:AboutUser',
+                    'choice_label'  => function(AboutUser $aboutUser){
                         
-                        $prefix = str_repeat('-', $aboutUsers->getLvl());
+                        $prefix = str_repeat('-', $aboutUser->getLvl());
                         
-                        return $prefix . ' ' . $aboutUsers->getLabel();
+                        return $prefix . ' ' . $aboutUser->getLabel();
                     },
                     'multiple'  => false,
                     'expanded'  => false,
@@ -81,7 +81,7 @@ class AboutUsersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Dt\AdminBundle\Entity\AboutUsers',
+            'data_class' => 'Dt\AdminBundle\Entity\AboutUser',
             'validation_groups' => array('Profile'),
         ));
     }

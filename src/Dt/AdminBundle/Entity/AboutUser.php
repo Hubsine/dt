@@ -9,21 +9,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 use AppBundle\Doctrine\EntityInterface;
-use Dt\UserBundle\Entity\AboutUsersReply;
+use Dt\UserBundle\Entity\AboutUserReply;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUsersRepository")
- * @ORM\Table(name="dt_about_users")
+ * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUserRepository")
+ * @ORM\Table(name="dt_about_user")
  * 
  * @Gedmo\Tree(type="nested")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
- * ATTENTION : créer un evenement qui va supprimer dans les AboutUsersReply 
- * Si on supprime un AboutUsers, il faut le supprimer aussi dans AboutUsersReply::responseCheckbox
- * et AboutUsersReply::responseRadio. Cela peu se faire avec les evenement doctrine
+ * Assert\Expression(
+ *     "!this.getParent().getExpectedReplyType() in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
+ *     message="Un About User ayant un expedted response ne peut avoir d'enfant"
+ * )
+ * 
+ * ATTENTION : créer un evenement qui va supprimer dans les AboutUserReply 
+ * Si on supprime un AboutUser, il faut le supprimer aussi dans AboutUserReply::responseCheckbox
+ * et AboutUserReply::responseRadio. Cela peu se faire avec les evenement doctrine
  * 
  */
-class AboutUsers implements Translatable, EntityInterface
+class AboutUser implements Translatable, EntityInterface
 {
     
     
@@ -41,7 +47,7 @@ class AboutUsers implements Translatable, EntityInterface
      * @ORM\Column()
      * 
      * @Assert\NotBlank(message="dt_about_user.label.blank", groups={"Profile"})
-     * @Assert\Type(type="string", message="dt_about_users.label.type", groups={"Profile"})
+     * @Assert\Type(type="string", message="dt_about_user.label.type", groups={"Profile"})
      * 
      * @Gedmo\Translatable
      * 
@@ -54,12 +60,11 @@ class AboutUsers implements Translatable, EntityInterface
      * 
      * @ORM\Column(nullable=true)
      * 
-     * @Assert\Choice(callback= "getExpectedReplyTypeArray", groups={"Profile"}, message="dt_about_users.expected_reply_type.choice")
-     * @Assert\Expression(
+     * @Assert\Choice(callback= "getExpectedReplyTypeArray", groups={"Profile"}, message="dt_about_user.expected_reply_type.choice")
+     * Assert\Expression(
      *      "this.getParent().getExpectedReplyType() in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']
-     *      && this.expectedReplyType == null
-     *      ",
-     *      message="dt_about_users.expected_reply_type.expression"
+     *      && this.expectedReplyType == null",
+     *      message="dt_about_user.expected_reply_type.expression"
      * )
      */
     protected $expectedReplyType;
@@ -67,11 +72,11 @@ class AboutUsers implements Translatable, EntityInterface
     /**
      * @var Dt\UserBundle\Entity\AboutUserReply
      * 
-     * ORM\ManyToOne(targetEntity="Dt\UserBundle\Entity\AboutUsersReply", cascade={"remove"},
+     * ORM\ManyToOne(targetEntity="Dt\UserBundle\Entity\AboutUserReply", cascade={"remove"},
      * inversedBy="responseCheckbox")
      * ORM\JoinColumn(nullable=true)
      */
-    protected $aboutUsersReplyCheckbox;
+    protected $aboutUserReplyCheckbox;
     
     /**
      * @var Dt\UserBundle\Entity\AboutUserReply
@@ -81,7 +86,7 @@ class AboutUsers implements Translatable, EntityInterface
      * )
      * ORM\JoinColumn(nullable=true)
      */
-    protected $aboutUsersReplyRadio;
+    protected $aboutUserReplyRadio;
 
     /**
      * @Gedmo\TreeLeft
@@ -103,31 +108,29 @@ class AboutUsers implements Translatable, EntityInterface
 
     /**
      * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="AboutUsers")
+     * @ORM\ManyToOne(targetEntity="AboutUser")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      */
     protected $root;
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="AboutUsers", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="AboutUser", inversedBy="children")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
+     * 
+     * Assert\Expression(
+     *     expression="value !== null && value.getExpectedReplyType() in ['checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
+     *     message="Un About User ayant un expedted response ne peut avoir d'enfant",
+     *     groups={"Profile"} 
+     * )
      */
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="AboutUsers", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="AboutUser", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;
-    
-    /**
-     *
-     * @var \AboutUsersReply
-     */
-    protected $reply;
-    
-    protected $__childrens;
 
     /**
      * Get id
@@ -178,7 +181,7 @@ class AboutUsers implements Translatable, EntityInterface
      * @param \Dt\UserBundle\Entity\AboutUser $parent
      * @return AboutUser
      */
-    public function setParent(AboutUsers $parent = null)
+    public function setParent(AboutUser $parent = null)
     {
         $this->parent = $parent;
 
@@ -188,7 +191,7 @@ class AboutUsers implements Translatable, EntityInterface
     /**
      * Get parent
      *
-     * @return \Dt\UserBundle\Entity\AboutUsers 
+     * @return \Dt\UserBundle\Entity\AboutUser 
      */
     public function getParent()
     {
@@ -201,7 +204,7 @@ class AboutUsers implements Translatable, EntityInterface
      * Set expectedReplyType
      *
      * @param string $expectedReplyType
-     * @return AboutUsers
+     * @return AboutUser
      */
     public function setExpectedReplyType($expectedReplyType)
     {
@@ -223,7 +226,6 @@ class AboutUsers implements Translatable, EntityInterface
     public static function getExpectedReplyTypeArray(){
         
         return array(
-            '',
             'checkbox', 'radio',
             'text', // One input type
             'textCollection', // 0 à 5 input text
@@ -241,26 +243,23 @@ class AboutUsers implements Translatable, EntityInterface
         return $this->lvl;
     }
     
-    /**
-     * 
-     * @return \AboutUsersReply
-     */
-    public function getReply(){
-        return $this->reply;
-    }
-    
-    /**
-     * 
-     * @param AboutUsersReply $reply
-     * @return $this
-     */
-    public function setReply(AboutUsersReply $reply)
-    {
-        $this->reply = $reply;
-        return $this;
-    }
-    
     public function getChildren(){
+        
+    }
+    
+    /**
+     * @Assert\Callback(groups={"Profile"})
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        # - un tree qui a un "expectedReplyType" text, textCollection, textValCollection ou textara ne peut pas avoir de child
+        if( !empty($this->parent ) && in_array($this->parent->getExpectedReplyType(), self::getExpectedReplyTypeArray()))
+        {
+            $context
+                ->buildViolation("Un About User ayant un expectedReplyType response ne peut avoir d'enfant")
+                ->atPath('parent')
+                ->addViolation();
+        }
         
     }
 }

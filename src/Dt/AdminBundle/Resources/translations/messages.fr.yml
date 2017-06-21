@@ -1,13 +1,13 @@
 dashboard:
     dashboard: 'Tableau de bord'
-    about_users:
+    about_user:
         back: 'Back to the list'
-        about_users: 'About Users'
+        about_user: 'About Users'
         new: 'Ajouter un about users'
-        edit: 'Editer AboutUsers'
+        edit: 'Editer AboutUser'
                 
 form:
-    about_users:
+    about_user:
         submit: 'Ajouter'
         flash:
             add_success: 'About user ajouter avec succès.'

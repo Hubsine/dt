@@ -3,6 +3,11 @@
 namespace Dt\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * AboutUserMeta
@@ -10,8 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="about_user_meta")
  * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUserMetaRepository")
  */
-class AboutUserMeta
+class AboutUserMeta implements Translatable
 {
+    
+    use SoftDeleteableEntity;
+    use TimestampableEntity;
+    
     /**
      * @var int
      *
@@ -24,9 +33,14 @@ class AboutUserMeta
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="label", type="string", length=255)
+     * 
+     * @Assert\NotBlank(message="dt_about_user_meta.label.blank", groups={"Profile"})
+     * @Assert\Type(type="string", message="dt_about_user_meta.label.type", groups={"Profile"})
+     * 
+     * @Gedmo\Translatable
      */
-    private $title;
+    protected $label;
 
 
     /**
@@ -40,25 +54,25 @@ class AboutUserMeta
     }
 
     /**
-     * Set title
+     * Set label
      *
-     * @param string $title
+     * @param string $label
      * @return AboutUserMeta
      */
-    public function setTitle($title)
+    public function setLabel($label)
     {
-        $this->title = $title;
+        $this->label = $label;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get label
      *
      * @return string 
      */
-    public function getTitle()
+    public function getLabel()
     {
-        return $this->title;
+        return $this->label;
     }
 }

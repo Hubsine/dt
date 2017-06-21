@@ -29,6 +29,6 @@ dt_user_edit_profile_qui_suis_je:
     path: /{slug}/mon-compte/profile/edit/qui-suis-je
     defaults: { _controller: DtUserBundle:Compte:editQuiSuisJe }   
     
-dt_user_edit_profile_about_users_reply: 
+dt_user_edit_profile_about_user_reply: 
     path: /{slug}/mon-compte/profile/edit/about-users-reply
-    defaults: { _controller: DtUserBundle:Compte:editAboutUsersReply }       
+    defaults: { _controller: DtUserBundle:Compte:editAboutUserReply }       

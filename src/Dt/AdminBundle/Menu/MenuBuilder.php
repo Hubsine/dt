@@ -111,7 +111,7 @@ class MenuBuilder{
             'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');
         
-        $aboutUserMeta->addChild('admin_sidebar.about_user.index', array(
+        $aboutUserMeta->addChild('admin_sidebar.about_user_meta.index', array(
             'route' => 'dt_admin.about_user_meta.index'
         ))->setExtra('translation_domain', 'menu');
         

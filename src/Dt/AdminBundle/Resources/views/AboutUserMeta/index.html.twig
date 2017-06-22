@@ -1,34 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends "DtAdminBundle::layout.html.twig" %}
 
-{% block body %}
-    <h1>Aboutusermetas list</h1>
+{% block headline %}{% trans %} dashboard.about_user_meta.about_user_meta {% endtrans %}{% endblock headline %}
 
-    <table>
+{% block content_page_content %}
+    
+    <table class="table table-striped table-responsive">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Label</th>
-                <th>Deletedat</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for aboutUserMetum in aboutUserMetas %}
+        {% for aboutUserMeta in aboutUserMetas %}
             <tr>
-                <td><a href="{{ path('aboutusermeta_show', { 'id': aboutUserMetum.id }) }}">{{ aboutUserMetum.id }}</a></td>
-                <td>{{ aboutUserMetum.label }}</td>
-                <td>{% if aboutUserMetum.deletedAt %}{{ aboutUserMetum.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if aboutUserMetum.createdAt %}{{ aboutUserMetum.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if aboutUserMetum.updatedAt %}{{ aboutUserMetum.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td><a href="{{ path('dt_admin.about_user_meta.show', { 'id': aboutUserMeta.id }) }}">{{ aboutUserMeta.id }}</a></td>
+                <td>{{ aboutUserMeta.label }}</td>
                 <td>
-                    <ul>
+                    <ul class="list-unstyled list-inline">
                         <li>
-                            <a href="{{ path('aboutusermeta_show', { 'id': aboutUserMetum.id }) }}">show</a>
+                            <a class="btn btn-default" role="button" href="{{ path('dt_admin.about_user_meta.show', { 'id': aboutUserMeta.id }) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         </li>
                         <li>
-                            <a href="{{ path('aboutusermeta_edit', { 'id': aboutUserMetum.id }) }}">edit</a>
+                            <a class="btn btn-warning" role="button" href="{{ path('dt_admin.about_user_meta.edit', { 'id': aboutUserMeta.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="hidden">
+                            <a class="btn btn-danger" role="button" href="{{ path('dt_admin.about_user_meta.delete', { 'id': aboutUserMeta.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </li>
                     </ul>
                 </td>
@@ -37,9 +35,10 @@
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-unstyled">
         <li>
-            <a href="{{ path('aboutusermeta_new') }}">Create a new aboutUserMetum</a>
+            <a class="btn btn-default" role="button" href="{{ path('dt_admin.about_user_meta.new') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
         </li>
     </ul>
-{% endblock %}
+
+{% endblock content_page_content %}        

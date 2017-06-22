@@ -5,6 +5,11 @@ dashboard:
         about_user: 'About Users'
         new: 'Ajouter un about users'
         edit: 'Editer AboutUser'
+    about_user_meta:
+        back: 'Back to the list'
+        about_user_meta: 'About Users meta'
+        new: 'Ajouter un about users meta'
+        edit: 'Editer AboutUser meta'    
                 
 form:
     about_user:
@@ -18,4 +23,10 @@ form:
             help_text: 'Déterminez le type de champ de formulaire lorsque le user doit choisir.'
         parent:
             label: 'Parent'
+    about_user_meta:
+        submit: 'Ajouter'
+        flash:
+            add_success: 'About user meta ajouter avec succès.'
+        label: 
+            label: 'Label'
     

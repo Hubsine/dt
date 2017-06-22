@@ -12,13 +12,15 @@
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
-    <ul>
+    <ul class="list-unstyled list-inline">
         <li>
-            <a href="{{ path('dt_admin_about_user_index') }}">{% trans %} dashboard.about_user.back {% endtrans %}</a>
+            <a class="btn btn-default" href="{{ path('dt_admin.about_user.index') }}">{% trans %} dashboard.about_user.back {% endtrans %}</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <button class="btn btn-danger" role="button" type="submit">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
             {{ form_end(delete_form) }}
         </li>
     </ul>

@@ -31,7 +31,7 @@ class AboutUserController extends Controller
 //                'childClose' => '</li>',
                 'html' => true,
                 'nodeDecorator' => function($node) {
-                    $url = $this->generateUrl('dt_admin_about_user_edit', array('id' => $node['id']));
+                    $url = $this->generateUrl('dt_admin.about_user.edit', array('id' => $node['id']));
                     return '<a href="'.$url.'">'.$node['label'].'</a> ' . $node['expectedReplyType'];
                 }
             )
@@ -114,7 +114,7 @@ class AboutUserController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $aboutUserManager->updateEntity($aboutUser);
 
-            return $this->redirectToRoute('dt_admin_about_user_edit', array('id' => $aboutUser->getId()));
+            return $this->redirectToRoute('dt_admin.about_user.edit', array('id' => $aboutUser->getId()));
         }
 
         return $this->render('DtAdminBundle:AboutUser:edit.html.twig', array(
@@ -139,7 +139,7 @@ class AboutUserController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('dt_admin_about_user_index');
+        return $this->redirectToRoute('dt_admin.about_user.index');
     }
 
     /**
@@ -152,7 +152,7 @@ class AboutUserController extends Controller
     private function createDeleteForm(AboutUser $aboutUser)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('dt_admin_about_user_delete', array('id' => $aboutUser->getId())))
+            ->setAction($this->generateUrl('dt_admin.about_user.delete', array('id' => $aboutUser->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

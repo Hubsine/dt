@@ -90,19 +90,34 @@ class MenuBuilder{
         ###
         # About User
         ###
-        $aboutUser = $menu->addChild('admin_sidebar.about_user', array(
-            'route' => 'dt_admin_about_user_index',
+        $aboutUser = $menu->addChild('admin_sidebar.about_user.index', array(
+            'route' => 'dt_admin.about_user.index',
             'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');
         
-        $aboutUser->addChild('admin_sidebar.about_user', array(
-            'route' => 'dt_admin_about_user_index'
+        $aboutUser->addChild('admin_sidebar.about_user.index', array(
+            'route' => 'dt_admin.about_user.index'
         ))->setExtra('translation_domain', 'menu');
         
-        $aboutUser->addChild('admin_sidebar.about_user_new', array(
-            'route' => 'dt_admin_about_user_new'
+        $aboutUser->addChild('admin_sidebar.about_user.new', array(
+            'route' => 'dt_admin.about_user.new'
         ))->setExtra('translation_domain', 'menu');
         
+        ###
+        # About User Meta
+        ###
+        $aboutUserMeta = $menu->addChild('admin_sidebar.about_user_meta.index', array(
+            'route' => 'dt_admin.about_user_meta.index',
+            'childrenAttributes'    => array('class'    => 'nav')
+        ))->setExtra('translation_domain', 'menu');
+        
+        $aboutUserMeta->addChild('admin_sidebar.about_user.index', array(
+            'route' => 'dt_admin.about_user_meta.index'
+        ))->setExtra('translation_domain', 'menu');
+        
+        $aboutUserMeta->addChild('admin_sidebar.about_user_meta.new', array(
+            'route' => 'dt_admin.about_user_meta.new'
+        ))->setExtra('translation_domain', 'menu');
         
         return $menu;
     }

@@ -1,10 +1,11 @@
 <?php
 
-namespace Dt\AdminBundle\Form;
+namespace Dt\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AboutUserMetaType extends AbstractType
 {
@@ -13,7 +14,11 @@ class AboutUserMetaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('label')->add('deletedAt')->add('createdAt')->add('updatedAt');
+        $builder
+            ->add('label', TextType::class, array(
+                'label' => 'form.about_user_meta.label.label',
+                'required'  => true
+            ));
     }
     
     /**

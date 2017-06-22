@@ -22,7 +22,7 @@ class AboutUserMetaController extends Controller
 
         $aboutUserMetas = $em->getRepository('DtAdminBundle:AboutUserMeta')->findAll();
 
-        return $this->render('aboutusermeta/index.html.twig', array(
+        return $this->render('DtAdminBundle:AboutUserMeta:index.html.twig', array(
             'aboutUserMetas' => $aboutUserMetas,
         ));
     }
@@ -33,34 +33,38 @@ class AboutUserMetaController extends Controller
      */
     public function newAction(Request $request)
     {
-        $aboutUserMetum = new Aboutusermetum();
-        $form = $this->createForm('Dt\AdminBundle\Form\AboutUserMetaType', $aboutUserMetum);
+        $aboutUserMeta = new AboutUserMeta();
+        $form = $this->createForm('Dt\AdminBundle\Form\Type\AboutUserMetaType', $aboutUserMeta);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($aboutUserMetum);
+            $em->persist($aboutUserMeta);
             $em->flush();
 
-            return $this->redirectToRoute('aboutusermeta_show', array('id' => $aboutUserMetum->getId()));
+            $message = $this->get('translator')->trans('form.about_user_meta.flash.add_success');
+            
+            $this->addFlash('success', $message);
+            
+            $form = $this->createForm('Dt\AdminBundle\Form\Type\AboutUserMetaType', new AboutUserMeta());
         }
 
-        return $this->render('aboutusermeta/new.html.twig', array(
-            'aboutUserMetum' => $aboutUserMetum,
+        return $this->render('DtAdminBundle:AboutUserMeta:new.html.twig', array(
+            'aboutUserMeta' => $aboutUserMeta,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a aboutUserMetum entity.
+     * Finds and displays a aboutUserMeta entity.
      *
      */
-    public function showAction(AboutUserMeta $aboutUserMetum)
+    public function showAction(AboutUserMeta $aboutUserMeta)
     {
-        $deleteForm = $this->createDeleteForm($aboutUserMetum);
+        $deleteForm = $this->createDeleteForm($aboutUserMeta);
 
-        return $this->render('aboutusermeta/show.html.twig', array(
-            'aboutUserMetum' => $aboutUserMetum,
+        return $this->render('DtAdminBundle:AboutUserMeta:show.html.twig', array(
+            'aboutUserMeta' => $aboutUserMeta,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -72,16 +76,16 @@ class AboutUserMetaController extends Controller
     public function editAction(Request $request, AboutUserMeta $aboutUserMetum)
     {
         $deleteForm = $this->createDeleteForm($aboutUserMetum);
-        $editForm = $this->createForm('Dt\AdminBundle\Form\AboutUserMetaType', $aboutUserMetum);
+        $editForm = $this->createForm('Dt\AdminBundle\Form\Type\AboutUserMetaType', $aboutUserMetum);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('aboutusermeta_edit', array('id' => $aboutUserMetum->getId()));
+            return $this->redirectToRoute('dt_admin.about_user_meta.edit', array('id' => $aboutUserMetum->getId()));
         }
 
-        return $this->render('aboutusermeta/edit.html.twig', array(
+        return $this->render('DtAdminBundle:AboutUserMeta:edit.html.twig', array(
             'aboutUserMetum' => $aboutUserMetum,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -103,7 +107,7 @@ class AboutUserMetaController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('aboutusermeta_index');
+        return $this->redirectToRoute('dt_admin.about_user_meta.index');
     }
 
     /**
@@ -116,7 +120,7 @@ class AboutUserMetaController extends Controller
     private function createDeleteForm(AboutUserMeta $aboutUserMetum)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('aboutusermeta_delete', array('id' => $aboutUserMetum->getId())))
+            ->setAction($this->generateUrl('dt_admin.about_user_meta.delete', array('id' => $aboutUserMetum->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

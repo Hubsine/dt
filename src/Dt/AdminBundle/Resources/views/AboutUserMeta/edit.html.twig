@@ -1,21 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends "DtAdminBundle::layout.html.twig" %}
 
-{% block body %}
-    <h1>Aboutusermetum edit</h1>
+{% form_theme edit_form 'MopaBootstrapBundle:form:fields.html.twig' %}
+{% form_theme delete_form 'MopaBootstrapBundle:form:fields.html.twig' %}
+
+{% block headline %}{% trans %} dashboard.about_user_meta.edit {% endtrans %}{% endblock headline %}
+
+{% block content_page_content %}
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input class="btn btn-warning" type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('aboutusermeta_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-{% endblock %}
+    <section>
+        <ul class="list-unstyled list-inline">
+            <li>
+                <a class="btn btn-default" href="{{ path('dt_admin.about_user_meta.index') }}">{% trans %} dashboard.about_user_meta.back {% endtrans %}</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <button class="btn btn-danger" role="button" type="submit">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </section>
+            
+{% endblock content_page_content %}

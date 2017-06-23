@@ -14,11 +14,11 @@ admin_sidebar:
     user: 'Utilisateurs'
     about_user:
         index: 'About users'
-        new: 'Ajouter'
+        new: 'Ajouter about user'
         edit: 'Editer'
     about_user_meta:
         index: 'About users meta'
-        new: 'Ajouter'
+        new: 'Ajouter about user meta'
         edit: 'Editer'
     
     

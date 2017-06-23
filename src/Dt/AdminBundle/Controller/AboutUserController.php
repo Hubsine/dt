@@ -60,10 +60,6 @@ class AboutUserController extends Controller
         
         $form->handleRequest($request);
         
-        ###
-        # ATTENTION : prendre en compte les cas suivants (créer des constraints)
-        # - un tree qui a un "expectedReplyType" text, textCollection, textValCollection ou textara ne peut pas avoir de child
-        ###
         if( $form->isSubmitted() && $form->isValid() ){
             
             $aboutUserManager->updateEntity($aboutUser);

@@ -18,7 +18,8 @@ class AboutUserMetaType extends AbstractType
             ->add('label', TextType::class, array(
                 'label' => 'form.about_user_meta.label.label',
                 'required'  => true
-            ));
+            ))
+            ;
     }
     
     /**

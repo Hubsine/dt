@@ -54,7 +54,7 @@ class AboutUserReply
      * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
      * 
      * @Assert\Expression(
-     *      "value.getExpectedReplyType() in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
+     *      "value.getExpectedReplyType() in [echeckbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
      *      message="dt_about_user.about_user.expression"
      * )
      */

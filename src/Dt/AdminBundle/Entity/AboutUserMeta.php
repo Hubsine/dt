@@ -41,6 +41,17 @@ class AboutUserMeta implements Translatable
      * @Gedmo\Translatable
      */
     protected $label;
+    
+    /**
+     * @var \Dt\AdminBundle\Entity\AboutUser
+     * 
+     * @ORM\ManyToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser", 
+     *      inversedBy="aboutUserMetas")
+     * @ORM\JoinColumn(name="dt_about_user_id", referencedColumnName="id", nullable=false)
+     * 
+     * @Assert\Blank(message="dt_about_user_meta.about_user.blank", groups={"Profile"})
+     */
+    protected $aboutUser;
 
 
     /**
@@ -74,5 +85,28 @@ class AboutUserMeta implements Translatable
     public function getLabel()
     {
         return $this->label;
+    }
+
+    /**
+     * Set aboutUser
+     *
+     * @param \Dt\AdminBundle\Entity\AboutUser $aboutUser
+     * @return AboutUserMeta
+     */
+    public function setAboutUser(\Dt\AdminBundle\Entity\AboutUser $aboutUser)
+    {
+        $this->aboutUser = $aboutUser;
+
+        return $this;
+    }
+
+    /**
+     * Get aboutUser
+     *
+     * @return \Dt\AdminBundle\Entity\AboutUser 
+     */
+    public function getAboutUser()
+    {
+        return $this->aboutUser;
     }
 }

@@ -5,11 +5,13 @@ namespace Dt\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Dt\AdminBundle\Entity\AboutUserMeta;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 use AppBundle\Doctrine\EntityInterface;
 use Dt\UserBundle\Entity\AboutUserReply;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
@@ -19,11 +21,6 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * @Gedmo\Tree(type="nested")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
- * Assert\Expression(
- *     "!this.getParent().getExpectedReplyType() in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
- *     message="Un About User ayant un expedted response ne peut avoir d'enfant"
- * )
- * 
  * ATTENTION : créer un evenement qui va supprimer dans les AboutUserReply 
  * Si on supprime un AboutUser, il faut le supprimer aussi dans AboutUserReply::responseCheckbox
  * et AboutUserReply::responseRadio. Cela peu se faire avec les evenement doctrine
@@ -32,6 +29,13 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class AboutUser implements Translatable, EntityInterface
 {
     
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->aboutUserMetas = new ArrayCollection();
+    }
     
     use SoftDeleteableEntity;
     use TimestampableEntity;
@@ -61,11 +65,7 @@ class AboutUser implements Translatable, EntityInterface
      * @ORM\Column(nullable=true)
      * 
      * @Assert\Choice(callback= "getExpectedReplyTypeArray", groups={"Profile"}, message="dt_about_user.expected_reply_type.choice")
-     * Assert\Expression(
-     *      "this.getParent().getExpectedReplyType() in [‘checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']
-     *      && this.expectedReplyType == null",
-     *      message="dt_about_user.expected_reply_type.expression"
-     * )
+     * 
      */
     protected $expectedReplyType;
     
@@ -79,14 +79,23 @@ class AboutUser implements Translatable, EntityInterface
     protected $aboutUserReplyCheckbox;
     
     /**
-     * @var Dt\UserBundle\Entity\AboutUserReply
+     * @var Dt\AdminBundle\Entity\AboutUserMeta
      * 
-     * ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\AboutUserReply", cascade={"remove"}, 
-     * inversedBy="responseRadio"
+     * @Assert\Expression(
+     *      "this.getExpectedReplyType() in ['radio', 'checkbox'] && !value.isEmpty()",
+     *      message="dt_about_user.about_user_metas.expression",
+     *      groups={"Profile", "TestAboutUserMetas"}
      * )
-     * ORM\JoinColumn(nullable=true)
+     * 
+     * @Assert\Valid
+     * 
+     * @ORM\OneToMany(targetEntity="Dt\AdminBundle\Entity\AboutUserMeta", 
+     *      mappedBy="aboutUser", 
+     *      cascade={"persist", "remove"})
+     * Ne pas oublié de supprimer aussi les reponses lié
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
-    protected $aboutUserReplyRadio;
+    protected $aboutUserMetas;
 
     /**
      * @Gedmo\TreeLeft
@@ -120,8 +129,8 @@ class AboutUser implements Translatable, EntityInterface
      * 
      * Assert\Expression(
      *     expression="value !== null && value.getExpectedReplyType() in ['checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
-     *     message="Un About User ayant un expedted response ne peut avoir d'enfant",
-     *     groups={"Profile"} 
+     *     message="dt_about_user.parent.expression",
+     *     groups={"Profile", "TestAboutUserExpectedNotNull"}
      * )
      */
     protected $parent;
@@ -235,6 +244,22 @@ class AboutUser implements Translatable, EntityInterface
     }
     
     /**
+     * @Assert\Callback(groups={"Profile", "TestAboutUserExpectedNotNull"})
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        # - un tree qui a un "expectedReplyType" ne peut pas avoir de child
+        if( !empty($this->parent ) && in_array($this->parent->getExpectedReplyType(), self::getExpectedReplyTypeArray()))
+        {
+            $context
+                ->buildViolation("dt_about_user.parent.expression")
+                ->atPath('parent')
+                ->addViolation();
+        }
+        
+    }
+    
+    /**
      * Get lvl
      * 
      * @return integer
@@ -243,23 +268,57 @@ class AboutUser implements Translatable, EntityInterface
         return $this->lvl;
     }
     
-    public function getChildren(){
-        
-    }
-    
     /**
-     * @Assert\Callback(groups={"Profile"})
+     * Get lft
+     *
+     * @return integer 
      */
-    public function validate(ExecutionContextInterface $context)
+    public function getLft()
     {
-        # - un tree qui a un "expectedReplyType" text, textCollection, textValCollection ou textara ne peut pas avoir de child
-        if( !empty($this->parent ) && in_array($this->parent->getExpectedReplyType(), self::getExpectedReplyTypeArray()))
-        {
-            $context
-                ->buildViolation("Un About User ayant un expectedReplyType response ne peut avoir d'enfant")
-                ->atPath('parent')
-                ->addViolation();
-        }
-        
+        return $this->lft;
     }
+
+    /**
+     * Get rgt
+     *
+     * @return integer 
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * Add aboutUserMetas
+     *
+     * @param \Dt\AdminBundle\Entity\AboutUserMeta $aboutUserMeta
+     * @return AboutUser
+     */
+    public function addAboutUserMeta(AboutUserMeta $aboutUserMeta)
+    {
+        $this->aboutUserMetas[] = $aboutUserMeta;
+
+        return $this;
+    }
+
+    /**
+     * Remove aboutUserMetas
+     *
+     * @param \Dt\AdminBundle\Entity\AboutUserMeta $aboutUserMeta
+     */
+    public function removeAboutUserMeta(AboutUserMeta $aboutUserMeta)
+    {
+        $this->aboutUserMetas->removeElement($aboutUserMeta);
+    }
+
+    /**
+     * Get aboutUserMetas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAboutUserMetas()
+    {
+        return $this->aboutUserMetas;
+    }
+
 }

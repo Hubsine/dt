@@ -59,7 +59,8 @@ class AboutUserType extends AbstractType
                     'entry_type'    => AboutUserMetaType::class,
                     'allow_add' => true,
                     'allow_delete'  => true,
-                    'by_reference'  => false
+                    'by_reference'  => false,
+                    'error_bubbling'    => false
                 ))
                 ->add('parent', EntityType::class, array(
                     'label' => 'form.about_user.parent.label',

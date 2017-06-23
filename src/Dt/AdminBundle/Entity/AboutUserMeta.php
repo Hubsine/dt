@@ -47,9 +47,9 @@ class AboutUserMeta implements Translatable
      * 
      * @ORM\ManyToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser", 
      *      inversedBy="aboutUserMetas")
-     * @ORM\JoinColumn(name="dt_about_user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="dt_about_user_id", nullable=false)
      * 
-     * @Assert\Blank(message="dt_about_user_meta.about_user.blank", groups={"Profile"})
+     * @Assert\NotBlank(message="dt_about_user_meta.about_user.blank", groups={"Profile"})
      */
     protected $aboutUser;
 

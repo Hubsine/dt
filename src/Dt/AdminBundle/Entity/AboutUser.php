@@ -296,6 +296,8 @@ class AboutUser implements Translatable, EntityInterface
      */
     public function addAboutUserMeta(AboutUserMeta $aboutUserMeta)
     {
+        $aboutUserMeta->setAboutUser($this);
+        
         $this->aboutUserMetas[] = $aboutUserMeta;
 
         return $this;

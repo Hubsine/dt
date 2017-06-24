@@ -9,6 +9,7 @@
             <tr>
                 <th>Id</th>
                 <th>Label</th>
+                <th>About User</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,6 +18,9 @@
             <tr>
                 <td><a href="{{ path('dt_admin.about_user_meta.show', { 'id': aboutUserMeta.id }) }}">{{ aboutUserMeta.id }}</a></td>
                 <td>{{ aboutUserMeta.label }}</td>
+                <td>
+                    {{ aboutUserMeta.aboutUser.label }}
+                </td>
                 <td>
                     <ul class="list-unstyled list-inline">
                         <li>

@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class AboutUserMetaType extends AbstractType
+class AboutUserMetaAbuType extends AbstractType
 {
     /**
      * {@inheritdoc}

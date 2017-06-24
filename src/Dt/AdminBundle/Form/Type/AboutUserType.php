@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Dt\AdminBundle\Entity\AboutUser;
-use Dt\AdminBundle\Form\Type\AboutUserMetaType;
+use Dt\AdminBundle\Form\Type\AboutUserMetaAbuType;
 use AppBundle\Form\Tree\TreeType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManager;
@@ -56,7 +56,7 @@ class AboutUserType extends AbstractType
                     }
                 ))
                 ->add('aboutUserMetas', CollectionType::class, array(
-                    'entry_type'    => AboutUserMetaType::class,
+                    'entry_type'    => AboutUserMetaAbuType::class,
                     'allow_add' => true,
                     'allow_delete'  => true,
                     'by_reference'  => false,

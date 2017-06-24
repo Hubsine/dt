@@ -29,4 +29,6 @@ form:
             add_success: 'About user meta ajouter avec succès.'
         label: 
             label: 'Label'
+        about_user:
+            label: 'About User'
     

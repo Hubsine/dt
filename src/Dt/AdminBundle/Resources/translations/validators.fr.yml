@@ -15,3 +15,4 @@ dt_about_user_meta:
         type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
     about_user:
         blank: 'Ce champ ne peux pas être vide.'
+        callback: 'Le expectedReplyType du AboutUser doit être radio ou checkbox.'

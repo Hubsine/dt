@@ -8,6 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * AboutUserMeta
@@ -53,7 +54,6 @@ class AboutUserMeta implements Translatable
      */
     protected $aboutUser;
 
-
     /**
      * Get id
      *
@@ -95,8 +95,10 @@ class AboutUserMeta implements Translatable
      */
     public function setAboutUser(\Dt\AdminBundle\Entity\AboutUser $aboutUser)
     {
+        
         $this->aboutUser = $aboutUser;
 
+        
         return $this;
     }
 
@@ -108,5 +110,21 @@ class AboutUserMeta implements Translatable
     public function getAboutUser()
     {
         return $this->aboutUser;
+    }
+    
+    /**
+     * @Assert\Callback(groups={"Profile", "TestAboutUserExpectedIsRadioCheckbox"})
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        # - le expected de AboutUser doit être radio ou checkbox
+        if(!in_array($this->aboutUser->getExpectedReplyType(), array('radio', 'checkbox')))
+        {
+            $context
+                ->buildViolation("dt_about_user_meta.about_user.callback")
+                ->atPath('aboutUser')
+                ->addViolation();
+        }
+        
     }
 }

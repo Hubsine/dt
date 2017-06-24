@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * AboutUserMeta
  *
- * @ORM\Table(name="about_user_meta")
+ * @ORM\Table(name="dt_about_user_meta")
  * @ORM\Entity(repositoryClass="Dt\AdminBundle\Repository\AboutUserMetaRepository")
  */
 class AboutUserMeta implements Translatable
@@ -48,7 +48,7 @@ class AboutUserMeta implements Translatable
      * 
      * @ORM\ManyToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser", 
      *      inversedBy="aboutUserMetas")
-     * @ORM\JoinColumn(name="dt_about_user_id", nullable=false)
+     * @ORM\JoinColumn(name="about_user_id", nullable=false)
      * 
      * @Assert\NotBlank(message="dt_about_user_meta.about_user.blank", groups={"Profile"})
      */

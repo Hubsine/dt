@@ -318,15 +318,14 @@ class CompteController extends Controller
             
                 $node = $tree[0];
                 
-                // On affiche pas les derniers elements dont le parent a un expectedReplyType autre que text, textarea
-                if(empty($node['__children']) && 
-                        !in_array($node['expectedReplyType'], array('text', 'textarea', 'textCollection', 'textValCollection'))){
-                    return '';
-                }
-                
                 $class = '';
                 if($node['lvl'] === 0){
-                    $class .= "list-unstyled list-group";
+                    $class .= "list-group mainNode";
+                }
+                
+                if($node['lvl'] > 0 )
+                {
+                    $class .= 'list-unstyled list-inline';
                 }
                 
                 return '<ul class="'.$class.'">';
@@ -334,16 +333,7 @@ class CompteController extends Controller
             'rootClose' => '</ul>',
             'childOpen' => function($node){
                 
-                // On affiche pas les derniers elements dont le parent a un expectedReplyType autre que text, textarea
-                if(empty($node['__children']) && 
-                        !in_array($node['expectedReplyType'], array('text', 'textarea', 'textCollection', 'textValCollection'))){
-                    return '';
-                }
-                
                 $class = '';
-                if(empty($node['__children'])){
-                    $class .= 'nodeLastChild ';
-                }
 
                 if($node['lvl'] === 0){
                     $class .= 'list-group-item ';
@@ -360,39 +350,6 @@ class CompteController extends Controller
             'nodeDecorator' => function($node) use (&$controller, $aboutUserReplyManager) {
 
                 $html = '';
-                
-                // On affiche pas les derniers elements dont le parent a un expectedReplyType autre que text, textarea
-                if(empty($node['__children']) && 
-                        !in_array($node['expectedReplyType'], array('text', 'textarea', 'textCollection', 'textValCollection'))){
-                    return '';
-                }
-                
-                #if(empty($node['__children'])){
-                    
-                    switch ($node['expectedReplyType']){
-
-                        case '':
-                            
-                            break;
-                        
-                        case 'textarea':
-
-                            break;
-
-                        case 'radio':
-                            $start = '<ul>';
-                            $end = '</ul>';
-                            $lis = '';
-                            foreach ($node['__children'] as $key => $children) {
-                                $lis .= '<li class="radioReply">'.$children['label'].'</li>';
-                            }
-                            $html = $start . $lis . $end;
-                            break;
-                        
-                        case 'checkbox':
-                            break;
-                    }
-                #}
 
                 if($node['lvl'] === 0){
                     return '<h4 class="text-center list-group-item-heading">' . $node['label'] . '</h4>';

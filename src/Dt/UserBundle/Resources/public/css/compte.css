@@ -1,17 +1,10 @@
 /***
 * Compte
 ***/
-.aboutUsertopLvl{
-    display: inline-block;
-    vertical-align: top;
-}
 
 /***
 * Node 
 ***/
-.mainNode{
-    
+ul.list-group li{
+    vertical-align: top;
 } 
-
-.mainNode li.firstNode{
-}

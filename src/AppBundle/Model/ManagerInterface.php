@@ -18,6 +18,8 @@ interface ManagerInterface {
     
     public function createEntity();
     
+    public function getClass();
+    
     public function deleteEntity(EntityInterface $entity);
     
     public function reloadEntity(EntityInterface $entity);

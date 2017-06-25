@@ -41,6 +41,14 @@ abstract class AbstractManager implements ManagerInterface{
     }
     
     /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function createEntity()

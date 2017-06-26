@@ -323,4 +323,11 @@ class AboutUser implements Translatable, EntityInterface
         return $this->aboutUserMetas;
     }
 
+    /**
+     * Get children
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren(){
+        return $this->children;
+    }
 }

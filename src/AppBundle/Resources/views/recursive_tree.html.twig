@@ -1,7 +1,6 @@
 {% macro recursiveTree(node, form) %}
     {% import _self as self %}
     
-    {% if node.__children|length > 0 %}
     <li>
         
             {{ node.label }}
@@ -19,5 +18,4 @@
             </ul>
         {% endif %}
     </li>
-    {% endif %}
 {% endmacro %}

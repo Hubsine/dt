@@ -1,17 +1,26 @@
 {% macro recursiveTree(node, form) %}
     {% import _self as self %}
     
-    <li>
+    {% set class = '' %}
+    {% if node.lvl == 0 %}
+        {% set class = 'list-group-item mainNode' %}
+    {% endif %}   
+    
+    <li class="{{ class }}">
         
-            {{ node.label }}
-        
+        {% if node.lvl == 0 %}
+            <h4 class="text-center list-group-item-heading">{{ node.label }}</h4>
+        {% else %}
+            <span>{{ node.label }}</span>
+        {% endif %}    
         
         {% if node.expectedReplyType == "radio" %}
-            {{ form_row( attribute(form, 'aboutUser' ~ node.id) ) }}
+            {{ form_row( attribute(form, 'aboutUserReply' ~ node.id) ) }}
         {% endif %}     
         
         {% if node.__children|length %}
-            <ul>
+            {% set class = 'list-unstyled list-inline' %}
+            <ul class="{{ class }}">
                 {% for nodeChild in node.__children %}
                     {{ self.recursiveTree(nodeChild, form) }}
                 {% endfor %}

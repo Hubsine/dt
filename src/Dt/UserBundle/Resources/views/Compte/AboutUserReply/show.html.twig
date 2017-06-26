@@ -20,8 +20,8 @@
    
 
     {% if ab %}
-        <div id="categories">
-            <ul>
+        <div>
+            <ul class="list-group">
                 {% for tree in ab %}
                     {{ recursiveTree.recursiveTree(tree, form) }}
                 {% endfor %}

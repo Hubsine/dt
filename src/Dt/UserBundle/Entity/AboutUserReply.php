@@ -77,13 +77,6 @@ class AboutUserReply
     protected $responseCheckbox;
     
     /**
-     * Peut contenir qu'un élément de type AboutUser de derniers niveau (last child)
-     * et dont le AboutUser::expectedReplyType du parent a la valeur "radio"
-     * 
-     * Exemple : Yeux > Couleur > Marron
-     * -- Marron : est le dernier élèment 
-     * -- Couleur : le "expectedReplyType" du parent doit avoir la valeur "radio"
-     * 
      * 
      * @var Dt\AdminBundle\Entity\AboutUser 
      * 

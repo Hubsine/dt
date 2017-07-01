@@ -23,6 +23,7 @@ layout:
         photo: 'Photos'
         reseaux_sociaux: 'Réseaux sociaux'
         qui_suis_je: 'Qui suis-je ?'
+        about_user_reply: 'A propos de moi'
 
 change_profile:
     update: 'Mettre à jour'

@@ -1,42 +1,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
-{% import 'AppBundle::recursive_tree.html.twig' as recursiveTree %} 
 
 {% if message is defined %}    
         {{ advanced_flash('success', message, '', true, false, '') }}    
 {% endif %}
-
-{#{ dump(aboutUser) }#}
-{{ dump(ab) }}
-
-{% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
-
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-
-
-
-
-   
-
-    {% if ab %}
-        <div>
-            <ul class="list-group">
-                {% for tree in ab %}
-                    {{ recursiveTree.recursiveTree(tree, form) }}
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
-
-
-
-    
-    <div>
-        <button type="submit" class="btn btn-default">{{ 'registration.submit'|trans }}</button>
-    </div>
-{{ form_end(form) }}
 
 <div class="mainNode">
 {{ aboutUser|raw }}

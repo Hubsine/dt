@@ -23,6 +23,8 @@ use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * Controller managing the user profile.
@@ -64,16 +66,11 @@ class CompteController extends Controller
         
         /** @var $aboutUserManager AboutUserManager */
         $aboutUserManager = $this->get('about_user.manager');
-
-        $ab = $aboutUserManager->getRepository()->childrenHierarchy(null, false, array('decorate'  => false));
-        $form = $this->getAboutUserReplyForm($ab);
         
         $aboutUser = $aboutUserManager->getUsersReplyView(null, false, $this->getTreeOptions());
 
         return $this->render('DtUserBundle:Compte:AboutUserReply/show.html.twig', array(
-            'aboutUser'    => $aboutUser,
-            'ab'    => $ab,
-            'form'  => $form
+            'aboutUser'    => $aboutUser
         ));
     }
 
@@ -82,14 +79,16 @@ class CompteController extends Controller
         
         /** aboutUserReplyManager \Dt\UserBundle\Doctrine\AboutUserReplyManager */
         $aboutUserReplyManager = $this->get('about_user_reply.manager');
+        /** @var $aboutUserManager AboutUserManager */
+        $aboutUserManager = $this->get('about_user.manager');
         
         $codeResponse = 200;
         $contentId = 'aboutUserReplyContent';
         $templateToShow = 'DtUserBundle:Compte:AboutUserReply/show.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:AboutUserReply/edit.html.twig';
         
-        $aboutUserReply = $aboutUserReplyManager->createEntity();
-        $form = $this->createForm(AboutUserReplyType::class, $aboutUserReply);
+        $aboutUsers = $aboutUserManager->getRepository()->childrenHierarchy(null, false, array('decorate'  => false));
+        $form = $this->getAboutUserReplyForm($aboutUsers);
         
         $form->handleRequest($request);
         
@@ -123,6 +122,7 @@ class CompteController extends Controller
                 'contentId' => $contentId,
                 'form'  => $this->renderView($templateToEdit, array(
                     'form' => $form->createView(),
+                    'aboutUsers'    => $aboutUsers
                      ))
             ), $codeResponse );
         
@@ -367,12 +367,23 @@ class CompteController extends Controller
         /** @var $aboutUserManager AboutUserManager */
         $aboutUserManager = $this->get('about_user.manager');
         $aboutUserReplyManager = $this->get('about_user_reply.manager');
+        $aboutUsers = array();
         
-        $aboutUser = $aboutUserManager->getRepository()->getChildren();
-        #$replies = $aboutUserReplyManager->getUserReply($this->getUser());
-        $form = $this->createFormBuilder();
+        $nodes = $aboutUserManager
+            ->getRepository()->createQueryBuilder('node')
+            ->orderBy('node.root, node.lft', 'ASC')
+            ->getQuery()
+            ->getResult();
         
-        function iterator($tree, $form, $aboutUser){
+        foreach ($nodes as $key => $node) 
+        {
+            $aboutUsers[$node->getId()] = $node;
+        }
+        
+        #$builder = $this->createForm(CollectionType::class, array('entry_type'  => 'DtUserBundle:AboutUserReply'));
+        $builder = $this->createFormBuilder();
+        
+        function iterator($tree, $builder, $aboutUsers){
             
             foreach ($tree as $key => $node) 
             {
@@ -381,48 +392,23 @@ class CompteController extends Controller
                 switch ($node['expectedReplyType'])
                 {
                     case 'radio':
-                        if(count($node['__children']) > 0){
-                            $choices = array();
-                            foreach($aboutUser as $aboutUserKey => $aboutUser) {
-                                
-                                if($aboutUser->getId() == $node['id']){
-                                    echo $aboutUser->getParent()->getLabel();
-                                    $choices[] = $aboutUser;
-                                }
-                            }
-                            //echo count($choices);
-                            foreach ($node['__children'] as $childrenKey => $children) {
-                                $choices[]  = (object) $children;
-                            }
-
-                            //var_dump($choices);
-                            //var_dump($node['__children']);
-                            $form->add('aboutUser'.$node['id'], EntityType::class, array(
-                                'choices'   => array($aboutUser[8]),
-                                'multiple'  => false,
-                                'expanded'  => true,
-                                'choices_as_values' => true,
-                                'class' => 'DtAdminBundle:AboutUser',
-                                //'label_attr'    => array('class'    => 'hidden'),
-                                'choice_label' => function ($value, $key, $index) {
-
-                                    return $value->getLabel();
-
-                                },
-                            ));
-                        }
+                        $builder->add('aboutUserReply'.$node['id'], AboutUserReplyType::class, array(
+                                'node'  => $node,
+                                'aboutUser'    => $aboutUsers[$node['id']], 'label' => false
+                            )
+                        );
                         break;
                 }
             
                 if (count($node['__children']) > 0) 
                 {
-                    iterator($node['__children'], $form, $aboutUser);
+                    iterator($node['__children'], $builder, $aboutUsers);
                 }
             }
         }
         
-        iterator($tree, $form, $aboutUser);
+        iterator($tree, $builder, $aboutUsers);
         
-        return $form->getForm()->createView();
+        return $builder->getForm();
     }
 }

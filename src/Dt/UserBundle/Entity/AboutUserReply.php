@@ -61,16 +61,16 @@ class AboutUserReply
     protected $aboutUser;
     
     /**
-     * Peut contenir plusieurs éléments de type AboutUser de derniers niveau (last child) 
-     * et dont le AboutUser::expectedReplyType du parent a la valeur "checkbox"
+     * Peut contenir plusieurs éléments de type AboutUserMeta 
+     * et dont le AboutUser::expectedReplyType a la valeur "checkbox"
      * 
-     * @var Dt\AdminBundle\Entity\AboutUser 
+     * @var Dt\AdminBundle\Entity\AboutUserMeta
      *
-     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\AboutUser")
+     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\AboutUserMeta")
      * @ORM\JoinColumn(nullable=true, name="dt_about_user_reply_checkbox")
      * 
      * @Assert\Expression(
-     *      "value.getParent().getExpectedReplyType() == checkbox",
+     *      "this.getAboutUser().getExpectedReplyType() == checkbox",
      *      message="dt_about_user_reply.response_checkbox.expression"
      * )
      */
@@ -78,13 +78,13 @@ class AboutUserReply
     
     /**
      * 
-     * @var Dt\AdminBundle\Entity\AboutUser 
+     * @var Dt\AdminBundle\Entity\AboutUserMeta
      * 
-     * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUserMeta")
+     * @ORM\JoinColumn(nullable=true, name="dt_about_user_reply_radio")
      * 
      * @Assert\Expression(
-     *      "value.getParent().getExpectedReplyType() == radio",
+     *      "this.getAboutUser().getExpectedReplyType() == radio",
      *      message="dt_about_user_reply.response_radio.expression"
      * )
      * 
@@ -293,10 +293,10 @@ class AboutUserReply
     /**
      * Add responseCheckbox
      *
-     * @param \Dt\AdminBundle\Entity\AboutUser $responseCheckbox
+     * @param \Dt\AdminBundle\Entity\AboutUserMeta $responseCheckbox
      * @return AboutUserReply
      */
-    public function addResponseCheckbox(\Dt\AdminBundle\Entity\AboutUser $responseCheckbox)
+    public function addResponseCheckbox(\Dt\AdminBundle\Entity\AboutUserMeta $responseCheckbox)
     {
         $this->responseCheckbox[] = $responseCheckbox;
 
@@ -306,9 +306,9 @@ class AboutUserReply
     /**
      * Remove responseCheckbox
      *
-     * @param \Dt\AdminBundle\Entity\AboutUser $responseCheckbox
+     * @param \Dt\AdminBundle\Entity\AboutUserMeta $responseCheckbox
      */
-    public function removeResponseCheckbox(\Dt\AdminBundle\Entity\AboutUser $responseCheckbox)
+    public function removeResponseCheckbox(\Dt\AdminBundle\Entity\AboutUserMeta $responseCheckbox)
     {
         $this->responseCheckbox->removeElement($responseCheckbox);
     }
@@ -326,10 +326,10 @@ class AboutUserReply
     /**
      * Set responseRadio
      *
-     * @param \Dt\AdminBundle\Entity\AboutUser $responseRadio
+     * @param \Dt\AdminBundle\Entity\AboutUserMeta $responseRadio
      * @return AboutUserReply
      */
-    public function setResponseRadio(\Dt\AdminBundle\Entity\AboutUser $responseRadio = null)
+    public function setResponseRadio(\Dt\AdminBundle\Entity\AboutUserMeta $responseRadio = null)
     {
         $this->responseRadio = $responseRadio;
 
@@ -339,7 +339,7 @@ class AboutUserReply
     /**
      * Get responseRadio
      *
-     * @return \Dt\AdminBundle\Entity\AboutUser 
+     * @return \Dt\AdminBundle\Entity\AboutUserMeta 
      */
     public function getResponseRadio()
     {

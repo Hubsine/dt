@@ -25,6 +25,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Doctrine\ORM\EntityRepository;
+use Dt\AdminBundle\Entity\AboutUser;
 
 /**
  * Controller managing the user profile.
@@ -382,22 +384,25 @@ class CompteController extends Controller
         
         #$builder = $this->createForm(CollectionType::class, array('entry_type'  => 'DtUserBundle:AboutUserReply'));
         $builder = $this->createFormBuilder();
+        #$builder->add('aboutUserReply', CollectionType::class);
         
         function iterator($tree, $builder, $aboutUsers){
             
             foreach ($tree as $key => $node) 
             {
-                //echo $node['label'];
                 
-                switch ($node['expectedReplyType'])
+                $aboutUser = $aboutUsers[$node['id']];
+                $expectedReplyType = $node['expectedReplyType'];
+                
+                if ( in_array( $expectedReplyType, AboutUser::getExpectedReplyTypeArray() ) )
                 {
-                    case 'radio':
-                        $builder->add('aboutUserReply'.$node['id'], AboutUserReplyType::class, array(
-                                'node'  => $node,
-                                'aboutUser'    => $aboutUsers[$node['id']], 'label' => false
-                            )
-                        );
-                        break;
+                    $builder->add('aboutUserReply'.$node['id'], AboutUserReplyType::class, array(
+                       'node'  => $node,
+                        'aboutUser'    => $aboutUser, 
+                        'label' => false
+                        )
+                    );
+                    
                 }
             
                 if (count($node['__children']) > 0) 

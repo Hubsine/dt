@@ -14,9 +14,9 @@
             <span>{{ node.label }}</span>
         {% endif %}    
         
-        {% if node.expectedReplyType == "radio" %}
+        {% if node.expectedReplyType in ['radio', 'checkbox', 'text', 'textCollection', 'textValCollection', 'textarea'] %}    
             {{ form_row( attribute(form, 'aboutUserReply' ~ node.id) ) }}
-        {% endif %}     
+        {% endif  %}     
         
         {% if node.__children|length %}
             {% set class = 'list-unstyled list-inline' %}

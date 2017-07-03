@@ -370,6 +370,7 @@ class CompteController extends Controller
         $aboutUserManager = $this->get('about_user.manager');
         $aboutUserReplyManager = $this->get('about_user_reply.manager');
         $aboutUsers = array();
+        $aboutUserReplys = $aboutUserReplyManager->getUserReply($this->getUser());
         
         $nodes = $aboutUserManager
             ->getRepository()->createQueryBuilder('node')
@@ -386,7 +387,7 @@ class CompteController extends Controller
         $builder = $this->createFormBuilder();
         #$builder->add('aboutUserReply', CollectionType::class);
         
-        function iterator($tree, $builder, $aboutUsers){
+        function iterator($tree, $builder, $aboutUsers, $aboutUserReplys){
             
             foreach ($tree as $key => $node) 
             {
@@ -398,7 +399,8 @@ class CompteController extends Controller
                 {
                     $builder->add('aboutUserReply'.$node['id'], AboutUserReplyType::class, array(
                        'node'  => $node,
-                        'aboutUser'    => $aboutUser, 
+                       'aboutUser'    => $aboutUser, 
+                       'aboutUserReplys'    => $aboutUserReplys, 
                         'label' => false
                         )
                     );
@@ -407,12 +409,12 @@ class CompteController extends Controller
             
                 if (count($node['__children']) > 0) 
                 {
-                    iterator($node['__children'], $builder, $aboutUsers);
+                    iterator($node['__children'], $builder, $aboutUsers, $aboutUserReplys);
                 }
             }
         }
         
-        iterator($tree, $builder, $aboutUsers);
+        iterator($tree, $builder, $aboutUsers, $aboutUserReplys);
         
         return $builder->getForm();
     }

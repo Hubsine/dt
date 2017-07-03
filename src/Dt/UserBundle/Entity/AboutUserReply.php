@@ -144,9 +144,9 @@ class AboutUserReply
      * 
      * @ORM\Column(nullable=true, type="simple_array")
      * 
-     * @Assert\Type(type="string", message="dt_about_user_reply.response_text_val_collection.type")
+     * @Assert\Type(type="array", message="dt_about_user_reply.response_text_val_collection.type")
      */
-    protected $responseTextValCollection;
+    protected $responseTextValCollection = array();
     
     /**
      * @var string
@@ -235,6 +235,19 @@ class AboutUserReply
     }
 
     /**
+     * Set responseText
+     * 
+     * @param string $text
+     * @return $this
+     */
+    public function setResponseText($text)
+    {
+        $this->responseText = $text;
+        
+        return $this;
+    }   
+    
+    /**
      * Get responseTextarea
      *
      * @return string 
@@ -243,6 +256,16 @@ class AboutUserReply
     {
         return $this->responseTextarea;
     }
+    
+    /**
+     * Get responseText
+     * 
+     * @return string
+     */
+    public function getResponseText()
+    {
+        return $this->responseText;
+    }            
 
     /**
      * Set user

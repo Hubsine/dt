@@ -308,7 +308,7 @@ class AboutUserReply implements EntityInterface
      * @param \Dt\UserBundle\Entity\User $user
      * @return AboutUserReply
      */
-    public function setUser(\Dt\UserBundle\Entity\User $user = null)
+    public function setUser(\Dt\UserBundle\Entity\User $user)
     {
         $this->user = $user;
 
@@ -331,7 +331,7 @@ class AboutUserReply implements EntityInterface
      * @param \Dt\AdminBundle\Entity\AboutUser $aboutUser
      * @return AboutUserReply
      */
-    public function setAboutUser(\Dt\AdminBundle\Entity\AboutUser $aboutUser = null)
+    public function setAboutUser(\Dt\AdminBundle\Entity\AboutUser $aboutUser)
     {
         $this->aboutUser = $aboutUser;
 

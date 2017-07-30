@@ -86,4 +86,12 @@ abstract class AbstractManager implements ManagerInterface{
             $this->objectManager->flush();
         }
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function flush()
+    {
+        $this->objectManager->flush();
+    }
 }

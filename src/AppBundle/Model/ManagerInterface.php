@@ -25,4 +25,6 @@ interface ManagerInterface {
     public function reloadEntity(EntityInterface $entity);
     
     public function updateEntity(EntityInterface $entity);
+    
+    public function flush();
 }

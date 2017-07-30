@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
-{% import 'AppBundle::recursive_tree.html.twig' as recursiveTree %} 
+{% import 'DtUserBundle:Compte:AboutUserReply/about_user_reply_recursive_tree.html.twig' as recursiveTree %} 
 
 {{ form_start(form, { 'action': path('dt_user_edit_profile_about_user_reply', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'aboutUserReplyContent' } }) }}
 

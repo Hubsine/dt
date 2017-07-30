@@ -76,7 +76,8 @@ class AboutUserReplyType extends AbstractType
             
             case 'text':
                 $builder->add('responseText', TextType::class, array(
-                    'label' => false
+                    'label' => false,
+                    'required'  => false
                 ));
                 break;
             

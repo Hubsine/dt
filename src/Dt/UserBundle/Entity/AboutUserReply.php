@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Dt\AdminBundle\Entity\AboutUser;
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Doctrine\EntityInterface;
 
 /**
  * AboutUserReply
@@ -22,7 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Permet d'avoir une seule réponse, pas de duplicata
  * @UniqueEntity(fields={"user", "aboutUser"}, message="dt_about_user_reply.unique_entity")
  */
-class AboutUserReply
+class AboutUserReply implements EntityInterface
 {
     
     use SoftDeleteableEntity;

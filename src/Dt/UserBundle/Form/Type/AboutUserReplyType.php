@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManager;
+use Dt\AdminBundle\Form\DataTransformer\AboutUserToNumberTransformer;
 
 class AboutUserReplyType extends AbstractType
 {
@@ -43,9 +44,13 @@ class AboutUserReplyType extends AbstractType
        
         $builder
             ->add('aboutUser', HiddenType::class, array(
-                'data' => $aboutUser->getId(),
+                'data' => $aboutUser,
+                'data_class'    => null,
                 'invalid_message' => 'That is not a valid issue number'
             ));
+        
+        $builder->get('aboutUser')->addModelTransformer(new AboutUserToNumberTransformer($this->em));
+        //$builder->get('aboutUser')->addViewTransformer(new AboutUserToNumberTransformer($this->em));
                                 
         switch ($expectedReplyType){
             

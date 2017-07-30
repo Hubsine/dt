@@ -29,6 +29,11 @@ class AboutUserToNumberTransformer implements DataTransformerInterface {
      */
     public function transform($aboutUser)
     {
+        //var_dump($aboutUser);
+        if(is_object($aboutUser))
+        {
+            //echo '1';
+        }
         if (null === $aboutUser) {
             return '';
         }
@@ -45,6 +50,7 @@ class AboutUserToNumberTransformer implements DataTransformerInterface {
      */
     public function reverseTransform($aboutUserNumber)
     {
+        
         // no AboutUser number? It's optional, so that's ok
         if (!$aboutUserNumber) {
             return;

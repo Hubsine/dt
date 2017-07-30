@@ -55,7 +55,8 @@ class AboutUserReply
      * 
      * @Assert\Expression(
      *      "value.getExpectedReplyType() in ['checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
-     *      message="dt_about_user.about_user.expression"
+     *      message="dt_about_user.about_user.expression",
+     *      groups={"AboutUserReply"}
      * )
      */
     protected $aboutUser;
@@ -71,7 +72,8 @@ class AboutUserReply
      * 
      * @Assert\Expression(
      *      "this.getAboutUser().getExpectedReplyType() == 'checkbox'",
-     *      message="dt_about_user_reply.response_checkbox.expression"
+     *      message="dt_about_user_reply.response_checkbox.expression",
+     *      groups={"checkbox"}
      * )
      */
     protected $responseCheckbox;
@@ -85,7 +87,8 @@ class AboutUserReply
      * 
      * @Assert\Expression(
      *      "this.getAboutUser().getExpectedReplyType() == 'radio'",
-     *      message="dt_about_user_reply.response_radio.expression"
+     *      message="dt_about_user_reply.response_radio.expression",
+     *      groups={"radio"}
      * )
      * 
      */
@@ -96,7 +99,9 @@ class AboutUserReply
      * 
      * ORM\Column(nullable=true)
      * 
-     * @Assert\Type(type="string", message="dt_about_user_reply.response_text.type")
+     * @Assert\Type(type="string", 
+     *      message="dt_about_user_reply.response_text.type", 
+     *      groups={"text"})
      */
     protected $responseText;
     
@@ -111,28 +116,51 @@ class AboutUserReply
      *      min = 0,
      *      max = 4,
      *      minMessage = "dt_about_user_reply.response_text_collection.count.min",
-     *      maxMessage = "dt_about_user_reply.response_text_collection.count.max"
+     *      maxMessage = "dt_about_user_reply.response_text_collection.count.max",
+     *      groups = {"textCollection"}
      * )
      * @Assert\Collection(
      *      fields={
      *          "response_0" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
+     *                              @Assert\Type(
+     *                                  type="string", 
+     *                                  message="dt_about_user_reply.response_text_collection.string",
+     *                                  groups={"textCollection"}
+     *                              )
      *          ),
      *          "response_1" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
+     *                              @Assert\Type(
+     *                                  type="string", 
+     *                                  message="dt_about_user_reply.response_text_collection.string",
+     *                                  groups={"textCollection"}
+     *                              )
      *          ),
      *          "response_2" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
+     *                              @Assert\Type(
+     *                                  type="string", 
+     *                                  message="dt_about_user_reply.response_text_collection.string",
+     *                                  groups={"textCollection"}
+     *                              )
      *          ),
      *          "response_3" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
+     *                              @Assert\Type(
+     *                                  type="string", 
+     *                                  message="dt_about_user_reply.response_text_collection.string",
+     *                                  groups={"textCollection"}
+     *                              )
      *          ),
      *          "response_4" = @Assert\Optional(
-     *                              @Assert\Type(type="string", message="dt_about_user_reply.response_text_collection.string")
+     *                              @Assert\Type(
+     *                                  type="string", 
+     *                                  message="dt_about_user_reply.response_text_collection.string",
+     *                                  groups={"textCollection"}
+     *                              )
      *          )
      *      },
      *      allowMissingFields=true,
-     *      extraFieldsMessage="dt_about_user_reply.response_text_collection.extra_fields_message"
+     *      extraFieldsMessage="dt_about_user_reply.response_text_collection.extra_fields_message",
+     *      groups={"textCollection"} 
+     *
      * )
      */
     protected $responseTextCollection = array(
@@ -144,7 +172,9 @@ class AboutUserReply
      * 
      * @ORM\Column(nullable=true, type="simple_array")
      * 
-     * @Assert\Type(type="array", message="dt_about_user_reply.response_text_val_collection.type")
+     * @Assert\Type(type="array", 
+     *      message="dt_about_user_reply.response_text_val_collection.type",
+     *      groups={"textValCollection"})
      */
     protected $responseTextValCollection = array();
     
@@ -153,7 +183,9 @@ class AboutUserReply
      * 
      * @ORM\Column(nullable=true)
      * 
-     * @Assert\Type(type="string", message="dt_about_user_reply.response_textarea.type")
+     * @Assert\Type(type="string", 
+     *      message="dt_about_user_reply.response_textarea.type",
+     *      groups={"textarea"})
      */
     protected $responseTextarea;
 

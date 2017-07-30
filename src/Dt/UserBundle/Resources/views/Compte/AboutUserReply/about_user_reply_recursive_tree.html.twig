@@ -15,6 +15,10 @@
         {% endif %}    
         
         {% if node.expectedReplyType in ['radio', 'checkbox', 'text', 'textCollection', 'textValCollection', 'textarea'] %}    
+            
+            {#% set aboutUserReplyView = attribute(form, 'aboutUserReply' ~ node.id) %#}
+            {#{ dump(attribute(form, 'aboutUserReply' ~ node.id) }#}
+            {#{ form_errors(attribute(form, 'aboutUserReply' ~ node.id)) }#}
             {{ form_row( attribute(form, 'aboutUserReply' ~ node.id) ) }}
         {% endif  %}     
         

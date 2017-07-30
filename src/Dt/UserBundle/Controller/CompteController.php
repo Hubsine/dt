@@ -101,13 +101,14 @@ class CompteController extends Controller
                 /** @var $userManager UserManagerInterface */
                 $userManager = $this->get('fos_user.user_manager');
                 
-                $userManager->updateUser($user);
+                //$userManager->updateUser($user);
                 
                 $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
                 
                 $response = new JsonResponse(array(
                     'contentId' => $contentId,
                     'form'  => $this->renderView($templateToShow, array(
+                        'aboutUser' => $aboutUserManager->getUsersReplyView(null, false, $this->getTreeOptions()),
                         'message'   => $message
                          ))
                 ), $codeResponse );
@@ -399,10 +400,13 @@ class CompteController extends Controller
                 {
                     $builder->add('aboutUserReply'.$node['id'], AboutUserReplyType::class, array(
                        'node'  => $node,
-                       'aboutUser'    => $aboutUser, 
-                       'aboutUserReplys'    => $aboutUserReplys, 
-                        'label' => false
+                       'aboutUser' => $aboutUser, 
+                       'aboutUserReplys' => $aboutUserReplys, 
+                       'label' => false,
+                       'error_bubbling'   => false,
+                       'validation_groups' => array('AboutUserReply', $expectedReplyType)
                         )
+                         
                     );
                     
                 }

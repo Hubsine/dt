@@ -46,7 +46,8 @@ class AboutUserReplyType extends AbstractType
             ->add('aboutUser', HiddenType::class, array(
                 'data' => $aboutUser,
                 'data_class'    => null,
-                'invalid_message' => 'That is not a valid issue number'
+                'invalid_message' => 'That is not a valid issue number',
+                'error_bubbling'   => false
             ));
         
         $builder->get('aboutUser')->addModelTransformer(new AboutUserToNumberTransformer($this->em));
@@ -62,6 +63,7 @@ class AboutUserReplyType extends AbstractType
                     'expanded'  => true,
                     'label' => false,
                     'required'  => false,
+                    'error_bubbling'   => false,
                     'choice_label'  => function(AboutUserMeta $aboutUserMeta){
                         return $aboutUserMeta->getLabel();
                     }
@@ -83,6 +85,7 @@ class AboutUserReplyType extends AbstractType
                     'expanded'  => true,
                     'label' => false,
                     'required'  => false,
+                    'error_bubbling'   => false,
                     'choice_label'  => function(AboutUserMeta $aboutUserMeta){
                         return $aboutUserMeta->getLabel();
                     }
@@ -93,7 +96,8 @@ class AboutUserReplyType extends AbstractType
             case 'text':
                 $builder->add('responseText', TextType::class, array(
                     'label' => false,
-                    'required'  => false
+                    'required'  => false,
+                    'error_bubbling'   => false,
                 ));
                 break;
             
@@ -102,6 +106,7 @@ class AboutUserReplyType extends AbstractType
                     'entry_type'    => TextType::class,
                     'label' => false,
                     'required'  => false,
+                    'error_bubbling'   => false,
                     'data'  => array("response_0" => null, "response_1" => null, "response_2" => null, 
                         "response_3" => null, "response_4" => null),
                     'entry_options' => array(
@@ -116,7 +121,8 @@ class AboutUserReplyType extends AbstractType
             case 'textValCollection':
                 $builder->add('responseTextValCollection', TextType::class, array(
                     'label' => false,
-                    'required'  => false
+                    'required'  => false,
+                    'error_bubbling'   => false,
                 ));
 //                $builder->get('responseTextValCollection')
 //                    ->addModelTransformer(new CallbackTransformer(
@@ -132,7 +138,8 @@ class AboutUserReplyType extends AbstractType
             case 'textarea':
                 $builder->add('responseTextarea', TextareaType::class, array(
                     'label' => false,
-                    'required'  => false
+                    'required'  => false,
+                    'error_bubbling'   => false
                 ));
                 break;
         }
@@ -153,7 +160,8 @@ class AboutUserReplyType extends AbstractType
             'data_class' => 'Dt\UserBundle\Entity\AboutUserReply',
             'node'  => null,
             'aboutUser' => null,
-            'aboutUserReplys'   => null
+            'aboutUserReplys'   => null,
+            'validation_groups' => array('AboutUserReply')
         ));
     }
 

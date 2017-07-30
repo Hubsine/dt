@@ -41,6 +41,7 @@ class AboutUserReply
      * @var Dt\UserBundle\Entity\User
      * 
      * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     protected $user;
     
@@ -52,6 +53,7 @@ class AboutUserReply
      * @var Dt\AdminBundle\Entity\AboutUser
      * 
      * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
+     * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\Expression(
      *      "value.getExpectedReplyType() in ['checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",

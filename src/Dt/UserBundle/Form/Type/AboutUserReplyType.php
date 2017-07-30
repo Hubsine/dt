@@ -33,7 +33,8 @@ class AboutUserReplyType extends AbstractType
        
         $builder
             ->add('aboutUser', HiddenType::class, array(
-                'data' => $aboutUser->getId()
+                'data' => $aboutUser->getId(),
+                'invalid_message' => 'That is not a valid issue number'
             ));
                                 
         switch ($expectedReplyType){

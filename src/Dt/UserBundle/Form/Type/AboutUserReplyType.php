@@ -45,6 +45,7 @@ class AboutUserReplyType extends AbstractType
                     'multiple'  => false,
                     'expanded'  => true,
                     'label' => false,
+                    'required'  => false,
                     'choice_label'  => function(AboutUserMeta $aboutUserMeta){
                         return $aboutUserMeta->getLabel();
                     }
@@ -65,6 +66,7 @@ class AboutUserReplyType extends AbstractType
                     'multiple'  => true,
                     'expanded'  => true,
                     'label' => false,
+                    'required'  => false,
                     'choice_label'  => function(AboutUserMeta $aboutUserMeta){
                         return $aboutUserMeta->getLabel();
                     }
@@ -96,7 +98,8 @@ class AboutUserReplyType extends AbstractType
             
             case 'textValCollection':
                 $builder->add('responseTextValCollection', TextType::class, array(
-                    'label' => false
+                    'label' => false,
+                    'required'  => false
                 ));
 //                $builder->get('responseTextValCollection')
 //                    ->addModelTransformer(new CallbackTransformer(
@@ -111,7 +114,8 @@ class AboutUserReplyType extends AbstractType
             
             case 'textarea':
                 $builder->add('responseTextarea', TextareaType::class, array(
-                    'label' => false
+                    'label' => false,
+                    'required'  => false
                 ));
                 break;
         }

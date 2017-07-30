@@ -18,10 +18,20 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Doctrine\ORM\EntityManager;
 
 class AboutUserReplyType extends AbstractType
 {
 
+    private $em;
+    private $repo;
+            
+    public function __construct(EntityManager $em) {
+        
+        $this->em = $em;
+        $this->repo = $this->em->getRepository('DtUserBundle:AboutUserReply');
+    }
+    
     /**
      * {@inheritdoc}
      */

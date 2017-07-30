@@ -7,6 +7,8 @@ parameters:
     # Manager
     dt_user.about_user_reply.entity.class: Dt\UserBundle\Entity\AboutUserReply
     dt_user.about_user_reply.manager.class: Dt\UserBundle\Doctrine\AboutUserReplyManager
+    # Form
+    dt_user.about_user_reply.form.type.class: Dt\UserBundle\Form\Type\AboutUserReplyType
 
 services:
     dt.oauth.user_provider:
@@ -30,3 +32,10 @@ services:
     about_user_reply.manager:
         class: '%dt_user.about_user_reply.manager.class%'
         arguments: ["@doctrine.orm.entity_manager", "%dt_user.about_user_reply.entity.class%"]
+        
+    # Form
+    dt_user.form.type.about_user_reply_type:
+        class: '%dt_user.about_user_reply.form.type.class%'
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }  

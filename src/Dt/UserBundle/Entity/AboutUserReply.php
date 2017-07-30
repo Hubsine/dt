@@ -54,7 +54,7 @@ class AboutUserReply
      * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
      * 
      * @Assert\Expression(
-     *      "value.getExpectedReplyType() in [echeckbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
+     *      "value.getExpectedReplyType() in ['checkbox', 'radio', 'text', 'textCollection', 'textValCollection', 'textarea']",
      *      message="dt_about_user.about_user.expression"
      * )
      */
@@ -70,7 +70,7 @@ class AboutUserReply
      * @ORM\JoinColumn(nullable=true, name="dt_about_user_reply_checkbox")
      * 
      * @Assert\Expression(
-     *      "this.getAboutUser().getExpectedReplyType() == checkbox",
+     *      "this.getAboutUser().getExpectedReplyType() == 'checkbox'",
      *      message="dt_about_user_reply.response_checkbox.expression"
      * )
      */
@@ -84,7 +84,7 @@ class AboutUserReply
      * @ORM\JoinColumn(nullable=true, name="dt_about_user_reply_radio")
      * 
      * @Assert\Expression(
-     *      "this.getAboutUser().getExpectedReplyType() == radio",
+     *      "this.getAboutUser().getExpectedReplyType() == 'radio'",
      *      message="dt_about_user_reply.response_radio.expression"
      * )
      * 

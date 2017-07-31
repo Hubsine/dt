@@ -33,9 +33,9 @@ services:
         class: '%dt_user.about_user_reply.manager.class%'
         arguments: ["@doctrine.orm.entity_manager", "%dt_user.about_user_reply.entity.class%"]
         
-    # Form
+    # Form Type
     dt_user.form.type.about_user_reply_type:
         class: '%dt_user.about_user_reply.form.type.class%'
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage', '@fos_user.user_manager']
         tags:
             - { name: form.type }  

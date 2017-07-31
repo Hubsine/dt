@@ -20,17 +20,25 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManager;
 use Dt\AdminBundle\Form\DataTransformer\AboutUserToNumberTransformer;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer;
+use FOS\UserBundle\Doctrine\UserManager;
 
 class AboutUserReplyType extends AbstractType
 {
 
     private $em;
     private $repo;
-            
-    public function __construct(EntityManager $em) {
+    private $tokenStorage;
+    private $userManager;
+
+
+    public function __construct(EntityManager $em, TokenStorage $tokenStorage, UserManager $userManager) {
         
         $this->em = $em;
         $this->repo = $this->em->getRepository('DtUserBundle:AboutUserReply');
+        $this->tokenStorage = $tokenStorage;
+        $this->userManager = $userManager;
     }
     
     /**
@@ -43,6 +51,11 @@ class AboutUserReplyType extends AbstractType
         $expectedReplyType = $aboutUser->getExpectedReplyType(); 
        
         $builder
+            ->add('user', HiddenType::class, array(
+                'data'  => $this->tokenStorage->getToken()->getUser(),
+                'error_bubbling'   => false,
+                'data_class' => null
+            ))
             ->add('aboutUser', HiddenType::class, array(
                 'data' => $aboutUser,
                 'data_class'    => null,
@@ -51,7 +64,7 @@ class AboutUserReplyType extends AbstractType
             ));
         
         $builder->get('aboutUser')->addModelTransformer(new AboutUserToNumberTransformer($this->em));
-        //$builder->get('aboutUser')->addViewTransformer(new AboutUserToNumberTransformer($this->em));
+        $builder->get('user')->addViewTransformer(new UserToUsernameTransformer($this->userManager));
                                 
         switch ($expectedReplyType){
             
@@ -144,6 +157,22 @@ class AboutUserReplyType extends AbstractType
                 break;
         }
         
+        $user = $this->tokenStorage->getToken()->getUser();
+        
+//        $builder->addEventListener(
+//            FormEvents::PRE_SUBMIT, 
+//            function(FormEvent $event) use($user){
+//                 
+//                $aboutUserReplys = $event->getData();
+//                //$aboutUserReplys['user'] = $user;
+//                //$AboutUserReplys
+//                $event->setData($aboutUserReplys);
+//                echo gettype($aboutUserReplys);
+//                
+//                
+//            }
+//        );
+        
 //        $aboutUserReply = new AboutUserReply();
 //        foreach ($aboutUser->getAboutUserMetas() as $key => $aboutUserMeta) {
 //            $aboutUserReply->addResponseCheckbox($aboutUserMeta);
@@ -161,7 +190,7 @@ class AboutUserReplyType extends AbstractType
             'node'  => null,
             'aboutUser' => null,
             'aboutUserReplys'   => null,
-            'validation_groups' => array('AboutUserReply')
+            //'validation_groups' => array('AboutUserReply')
         ));
     }
 

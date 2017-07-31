@@ -27,6 +27,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Doctrine\ORM\EntityRepository;
 use Dt\AdminBundle\Entity\AboutUser;
+use Symfony\Component\Form\FormError;
 
 /**
  * Controller managing the user profile.
@@ -102,6 +103,9 @@ class CompteController extends Controller
                 $userManager = $this->get('fos_user.user_manager');
                 
                 //$userManager->updateUser($user);
+                
+                //$aboutUserReplyManager->updateEntity($aboutUserReply, false);
+                //$aboutUserReplyManager->flush();
                 
                 $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
                 

@@ -21,7 +21,12 @@ use AppBundle\Doctrine\EntityInterface;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
  * Permet d'avoir une seule réponse, pas de duplicata
- * @UniqueEntity(fields={"user", "aboutUser"}, message="dt_about_user_reply.unique_entity")
+ * @UniqueEntity(
+ *      fields={"user", "aboutUser"}, 
+ *      errorPath="aboutUser", 
+ *      message="dt_about_user_reply.unique_entity",
+ *      groups={"AboutUserReply"}
+ * )
  */
 class AboutUserReply implements EntityInterface
 {

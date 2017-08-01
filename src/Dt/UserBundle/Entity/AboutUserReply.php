@@ -91,7 +91,7 @@ class AboutUserReply implements EntityInterface
      * @var Dt\AdminBundle\Entity\AboutUserMeta
      * 
      * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUserMeta")
-     * @ORM\JoinColumn(nullable=true, name="dt_about_user_reply_radio")
+     * @ORM\JoinColumn(nullable=true, name="about_user_reply_radio")
      * 
      * @Assert\Expression(
      *      "this.getAboutUser().getExpectedReplyType() == 'radio'",

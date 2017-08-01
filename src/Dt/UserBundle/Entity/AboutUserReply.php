@@ -119,7 +119,10 @@ class AboutUserReply implements EntityInterface
      * @ORM\Column(nullable=true, type="array")
      * 
      * 
-     * @Assert\Type(type="array", message="dt_about_user_reply.response_text_collection.array")
+     * @Assert\Type(
+     *      type="array", 
+     *      message="dt_about_user_reply.response_text_collection.array",
+     *      groups = {"textCollection"})
      * @Assert\Count(
      *      min = 0,
      *      max = 4,
@@ -224,9 +227,9 @@ class AboutUserReply implements EntityInterface
      * @param array $responseTextCollection
      * @return AboutUserReply
      */
-    public function setResponseTextCollection($key, $value)
+    public function setResponseTextCollection($responseTextCollection = array())
     {
-        $this->responseTextCollection[$key] = $$value;
+        $this->responseTextCollection = $responseTextCollection;
 
         return $this;
     }

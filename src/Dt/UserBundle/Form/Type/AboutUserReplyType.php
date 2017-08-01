@@ -63,8 +63,8 @@ class AboutUserReplyType extends AbstractType
                 'error_bubbling'   => false
             ));
         
-        $builder->get('aboutUser')->addModelTransformer(new AboutUserToNumberTransformer($this->em));
-        $builder->get('user')->addViewTransformer(new UserToUsernameTransformer($this->userManager));
+//        $builder->get('aboutUser')->addModelTransformer(new AboutUserToNumberTransformer($this->em));
+//        $builder->get('user')->addViewTransformer(new UserToUsernameTransformer($this->userManager));
                                 
         switch ($expectedReplyType){
             
@@ -82,12 +82,12 @@ class AboutUserReplyType extends AbstractType
                     }
                 ));
                 
-                $builder->addEventListener(
-                    FormEvents::POST_SET_DATA, 
-                    function(FormEvent $event) use ($options) {
-                    
-                    
-                });
+//                $builder->addEventListener(
+//                    FormEvents::POST_SET_DATA, 
+//                    function(FormEvent $event) use ($options) {
+//                    
+//                    
+//                });
                 break;
             
             case 'checkbox':
@@ -152,12 +152,12 @@ class AboutUserReplyType extends AbstractType
                 $builder->add('responseTextarea', TextareaType::class, array(
                     'label' => false,
                     'required'  => false,
-                    'error_bubbling'   => false
+                    'error_bubbling'   => false,
+                    //'validation_groups' => array('test')
                 ));
                 break;
         }
         
-        $user = $this->tokenStorage->getToken()->getUser();
         
 //        $builder->addEventListener(
 //            FormEvents::PRE_SUBMIT, 
@@ -178,6 +178,9 @@ class AboutUserReplyType extends AbstractType
 //            $aboutUserReply->addResponseCheckbox($aboutUserMeta);
 //        }
 //        $builder->setData($aboutUserReply);
+        
+        $builder->get('aboutUser')->addModelTransformer(new AboutUserToNumberTransformer($this->em));
+        $builder->get('user')->addViewTransformer(new UserToUsernameTransformer($this->userManager));
     }
 
     /**

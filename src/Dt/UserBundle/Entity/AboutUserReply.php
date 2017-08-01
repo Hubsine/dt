@@ -46,7 +46,7 @@ class AboutUserReply implements EntityInterface
     /**
      * @var Dt\UserBundle\Entity\User
      * 
-     * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Dt\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $user;
@@ -58,7 +58,7 @@ class AboutUserReply implements EntityInterface
      * 
      * @var Dt\AdminBundle\Entity\AboutUser
      * 
-     * @ORM\OneToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
+     * @ORM\ManyToOne(targetEntity="Dt\AdminBundle\Entity\AboutUser")
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\Expression(
@@ -193,7 +193,10 @@ class AboutUserReply implements EntityInterface
      * 
      * @Assert\Type(type="string", 
      *      message="dt_about_user_reply.response_textarea.type",
-     *      groups={"textarea"})
+     *      groups={"textarea"}
+     * )
+     * @Assert\Blank(groups={"AboutUserReply", "test"})
+     * 
      */
     protected $responseTextarea;
 

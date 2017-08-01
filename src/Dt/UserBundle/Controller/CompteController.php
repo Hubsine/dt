@@ -104,7 +104,9 @@ class CompteController extends Controller
                 
                 //$userManager->updateUser($user);
                 
-                //$aboutUserReplyManager->updateEntity($aboutUserReply, false);
+                foreach ($form->getData() as $key => $aboutUserReply) {
+                    //$aboutUserReplyManager->updateEntity($aboutUserReply, false);
+                }
                 //$aboutUserReplyManager->flush();
                 
                 $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
@@ -390,6 +392,8 @@ class CompteController extends Controller
         
         #$builder = $this->createForm(CollectionType::class, array('entry_type'  => 'DtUserBundle:AboutUserReply'));
         $builder = $this->createFormBuilder();
+        //$form = $this->createForm($this->get('dt_user.form.type.about_user_reply_type'));
+        
         #$builder->add('aboutUserReply', CollectionType::class);
         
         function iterator($tree, $builder, $aboutUsers, $aboutUserReplys){
@@ -408,7 +412,8 @@ class CompteController extends Controller
                        'aboutUserReplys' => $aboutUserReplys, 
                        'label' => false,
                        'error_bubbling'   => false,
-                       'validation_groups' => array('AboutUserReply', $expectedReplyType)
+                       'validation_groups' => array('AboutUserReply', $expectedReplyType, 'test')
+                       //'validation_groups' => array('test')
                         )
                          
                     );

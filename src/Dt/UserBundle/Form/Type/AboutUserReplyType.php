@@ -137,15 +137,15 @@ class AboutUserReplyType extends AbstractType
                     'required'  => false,
                     'error_bubbling'   => false,
                 ));
-//                $builder->get('responseTextValCollection')
-//                    ->addModelTransformer(new CallbackTransformer(
-//                        function($hasArray){
-//                            return implode(',', $hasArray);
-//                        },
-//                        function($hasString){
-//                            return explode(',', $hasString);
-//                        }
-//                    ));
+                $builder->get('responseTextValCollection')
+                    ->addModelTransformer(new CallbackTransformer(
+                        function($hasArray){
+                            return implode(',', $hasArray);
+                        },
+                        function($hasString){
+                            return explode(',', $hasString);
+                        }
+                    ));
                 break;
             
             case 'textarea':

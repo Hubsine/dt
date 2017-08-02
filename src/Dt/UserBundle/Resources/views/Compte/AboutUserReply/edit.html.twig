@@ -5,6 +5,7 @@
 
 {{ form_start(form, { 'action': path('dt_user_edit_profile_about_user_reply', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'aboutUserReplyContent' } }) }}
 
+{{ form_errors(form) }}
 
     {% if aboutUsers %}
         <div>

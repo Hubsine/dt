@@ -120,8 +120,6 @@ class AboutUserReplyType extends AbstractType
                     'label' => false,
                     'required'  => false,
                     'error_bubbling'   => false,
-                    'data'  => array("response_0" => null, "response_1" => null, "response_2" => null, 
-                        "response_3" => null, "response_4" => null),
                     'entry_options' => array(
                         //'label' => false
                     )

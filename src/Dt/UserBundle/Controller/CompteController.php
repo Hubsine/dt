@@ -322,7 +322,12 @@ class CompteController extends Controller
         
         $aboutUserReplyManager = $this->get('about_user_reply.manager');
         $controller = $this;
-        #$replies = $aboutUserReplyManager->getUserReply($this->getUser());
+        $userResponses = $aboutUserReplyManager->getUserReply($this->getUser());
+        $aboutUserReplys = array();
+        
+        foreach ($userResponses as $key => $aboutUserReply) {
+            $aboutUserReplys[$aboutUserReply->getAboutUser()->getId()] = $aboutUserReply;
+        }
         
         $treeOptions = array(
             'rootOpen' => function($tree){
@@ -358,12 +363,52 @@ class CompteController extends Controller
 //                }
                 return '</li>';
             },
-            'nodeDecorator' => function($node) use (&$controller, $aboutUserReplyManager) {
+            'nodeDecorator' => function($node) use (&$controller, $aboutUserReplyManager, $aboutUserReplys) {
 
                 $html = '';
+                if( array_key_exists($node['id'], $aboutUserReplys) )
+                {
+                    $userResponse = $aboutUserReplys[$node['id']];
+                    $expected = $userResponse->getAboutUser()->getExpectedReplyType();
+                    
+                    switch ($expected)
+                    {
+                        case 'checkbox':
+                            $checkboxResponse = $userResponse->getResponseCheckbox()->getValues();
+                            foreach ($checkboxResponse as $key => $aboutUserMeta) {
+                                $html .= $aboutUserMeta->getLabel();
+                            }
+                            break;
+                        
+                        case 'radio':
+                            $html .= ( !empty( $userResponse->getResponseRadio() ) ) ? 
+                                $userResponse->getResponseRadio()->getLabel() : '';
+                            break;
+                        
+                        case 'text':
+                            $html .= $userResponse->getResponseText();
+                            break;
+                        
+                        case 'textCollection':
+//                            $textCollectionResponse = $userResponse->getResponseTextCollection();
+//                            foreach ($textCollectionResponse as $key => $value) {
+//                                $html .= $value;
+//                            }
+                            $html .= implode(',', $userResponse->getResponseTextCollection());
+                            break;
+                        
+                        case 'textValCollection':
+                            $html .= implode(',', $userResponse->getResponseTextValCollection());
+                            break;
+                        
+                        case 'textarea':
+                            $html .= $userResponse->getResponseTextarea();
+                            break;
+                    }
+                }
 
                 if($node['lvl'] === 0){
-                    return '<h4 class="text-center list-group-item-heading">' . $node['label'] . '</h4>';
+                    return '<h4 class="text-center list-group-item-heading">' . $node['label'] . '</h4>' . $html;
                 }
 
                 return '<span class="">' . $node['label'] . '</span>' . $html;

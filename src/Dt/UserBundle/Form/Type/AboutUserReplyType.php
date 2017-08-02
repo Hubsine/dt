@@ -53,14 +53,14 @@ class AboutUserReplyType extends AbstractType
         $builder
             ->add('user', HiddenType::class, array(
                 'data'  => $this->tokenStorage->getToken()->getUser(),
-                'error_bubbling'   => false,
+                //'error_bubbling'   => false,
                 'data_class' => null
             ))
             ->add('aboutUser', HiddenType::class, array(
                 'data' => $aboutUser,
                 'data_class'    => null,
                 'invalid_message' => 'That is not a valid issue number',
-                'error_bubbling'   => false
+                //'error_bubbling'   => false
             ));
         
 //        $builder->get('aboutUser')->addModelTransformer(new AboutUserToNumberTransformer($this->em));

@@ -28,6 +28,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Doctrine\ORM\EntityRepository;
 use Dt\AdminBundle\Entity\AboutUser;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * Controller managing the user profile.
@@ -254,6 +255,7 @@ class CompteController extends Controller
         $user = $this->getUser();
         
         $form = $this->createForm(MoiFormType::class, $user);
+        
         $form->handleRequest($request);
         
         if($form->isSubmitted()){
@@ -390,11 +392,11 @@ class CompteController extends Controller
             $aboutUsers[$node->getId()] = $node;
         }
         
-        #$builder = $this->createForm(CollectionType::class, array('entry_type'  => 'DtUserBundle:AboutUserReply'));
-        $builder = $this->createFormBuilder();
-        //$form = $this->createForm($this->get('dt_user.form.type.about_user_reply_type'));
-        
-        #$builder->add('aboutUserReply', CollectionType::class);
+        $builder = $this->createFormBuilder(null, array(
+                'validation_groups'=> array('AboutUserReply'),
+                'constraints' => array(new Valid()),
+            )
+        );
         
         function iterator($tree, $builder, $aboutUsers, $aboutUserReplys){
             
@@ -411,9 +413,9 @@ class CompteController extends Controller
                        'aboutUser' => $aboutUser, 
                        'aboutUserReplys' => $aboutUserReplys, 
                        'label' => false,
-                       'error_bubbling'   => false,
-                       'validation_groups' => array('AboutUserReply', $expectedReplyType, 'test')
-                       //'validation_groups' => array('test')
+                       //'error_bubbling'   => false,
+                       'validation_groups' => array($expectedReplyType),
+                       'constraints' => array(new Valid()),
                         )
                          
                     );

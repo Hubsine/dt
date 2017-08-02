@@ -23,7 +23,6 @@ use AppBundle\Doctrine\EntityInterface;
  * Permet d'avoir une seule réponse, pas de duplicata
  * @UniqueEntity(
  *      fields={"user", "aboutUser"}, 
- *      errorPath="aboutUser", 
  *      message="dt_about_user_reply.unique_entity",
  *      groups={"AboutUserReply"}
  * )
@@ -122,7 +121,8 @@ class AboutUserReply implements EntityInterface
      * @Assert\Type(
      *      type="array", 
      *      message="dt_about_user_reply.response_text_collection.array",
-     *      groups = {"textCollection"})
+     *      groups = {"textCollection"}
+     * )
      * @Assert\Count(
      *      min = 0,
      *      max = 4,
@@ -194,11 +194,12 @@ class AboutUserReply implements EntityInterface
      * 
      * @ORM\Column(nullable=true)
      * 
+     * Assert\NotBlank( groups = {"textarea"} )
      * @Assert\Type(type="string", 
      *      message="dt_about_user_reply.response_textarea.type",
      *      groups={"textarea"}
      * )
-     * @Assert\Blank(groups={"AboutUserReply", "test"})
+     * 
      * 
      */
     protected $responseTextarea;

@@ -153,7 +153,7 @@ class AboutUserReplyType extends AbstractType
                     'label' => false,
                     'required'  => false,
                     'error_bubbling'   => false,
-                    //'validation_groups' => array('test')
+                    #'validation_groups' => array('textarea')
                 ));
                 break;
         }

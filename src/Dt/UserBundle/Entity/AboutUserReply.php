@@ -104,7 +104,7 @@ class AboutUserReply implements EntityInterface
     /**
      * @var string
      * 
-     * ORM\Column(nullable=true)
+     * @ORM\Column(nullable=true)
      * 
      * @Assert\Type(type="string", 
      *      message="dt_about_user_reply.response_text.type", 

@@ -106,9 +106,9 @@ class CompteController extends Controller
                 //$userManager->updateUser($user);
                 
                 foreach ($form->getData() as $key => $aboutUserReply) {
-                    //$aboutUserReplyManager->updateEntity($aboutUserReply, false);
+                    $aboutUserReplyManager->updateEntity($aboutUserReply, false);
                 }
-                //$aboutUserReplyManager->flush();
+                $aboutUserReplyManager->flush();
                 
                 $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
                 
@@ -378,8 +378,16 @@ class CompteController extends Controller
         /** @var $aboutUserManager AboutUserManager */
         $aboutUserManager = $this->get('about_user.manager');
         $aboutUserReplyManager = $this->get('about_user_reply.manager');
+        $user = $this->getUser();
+        
         $aboutUsers = array();
-        $aboutUserReplys = $aboutUserReplyManager->getUserReply($this->getUser());
+        $aboutUserReplys = array();
+        
+        $userResponses = $aboutUserReplyManager->getUserReply($this->getUser());
+        
+        foreach ($userResponses as $key => $aboutUserReply) {
+            $aboutUserReplys[$aboutUserReply->getAboutUser()->getId()] = $aboutUserReply;
+        }
         
         $nodes = $aboutUserManager
             ->getRepository()->createQueryBuilder('node')
@@ -398,7 +406,7 @@ class CompteController extends Controller
             )
         );
         
-        function iterator($tree, $builder, $aboutUsers, $aboutUserReplys){
+        function iterator($tree, $builder, $aboutUsers, $aboutUserReplys, $user){
             
             foreach ($tree as $key => $node) 
             {
@@ -408,14 +416,27 @@ class CompteController extends Controller
                 
                 if ( in_array( $expectedReplyType, AboutUser::getExpectedReplyTypeArray() ) )
                 {
+                    $aboutUserReply = new AboutUserReply();
+                    
+                    $aboutUserReply->setAboutUser($aboutUser);
+                    $aboutUserReply->setUser($user);
+                    
+                    
+                    // Determine la réponse courante (recuperer dans la bdd)
+                    if(array_key_exists($aboutUser->getId(), $aboutUserReplys))
+                    {
+                        $aboutUserReply = $aboutUserReplys[$aboutUser->getId()];
+                    }
+                    
                     $builder->add('aboutUserReply'.$node['id'], AboutUserReplyType::class, array(
                        'node'  => $node,
                        'aboutUser' => $aboutUser, 
-                       'aboutUserReplys' => $aboutUserReplys, 
+                       //'aboutUserReplys' => $aboutUserReplys, 
                        'label' => false,
                        //'error_bubbling'   => false,
                        'validation_groups' => array($expectedReplyType),
                        'constraints' => array(new Valid()),
+                        'data'  => $aboutUserReply
                         )
                          
                     );
@@ -424,12 +445,12 @@ class CompteController extends Controller
             
                 if (count($node['__children']) > 0) 
                 {
-                    iterator($node['__children'], $builder, $aboutUsers, $aboutUserReplys);
+                    iterator($node['__children'], $builder, $aboutUsers, $aboutUserReplys, $user);
                 }
             }
         }
         
-        iterator($tree, $builder, $aboutUsers, $aboutUserReplys);
+        iterator($tree, $builder, $aboutUsers, $aboutUserReplys, $user);
         
         return $builder->getForm();
     }

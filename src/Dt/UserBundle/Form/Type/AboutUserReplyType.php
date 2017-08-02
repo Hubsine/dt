@@ -47,18 +47,18 @@ class AboutUserReplyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options) {
        
         $aboutUser = $options['aboutUser'];
-        $aboutUserReplys = $options['aboutUserReplys']; 
+        //$aboutUserReplys = $options['aboutUserReplys']; 
         $expectedReplyType = $aboutUser->getExpectedReplyType(); 
        
         $builder
             ->add('user', HiddenType::class, array(
-                'data'  => $this->tokenStorage->getToken()->getUser(),
+                //'data'  => $this->tokenStorage->getToken()->getUser(),
                 //'error_bubbling'   => false,
-                'data_class' => null
+                //'data_class' => null
             ))
             ->add('aboutUser', HiddenType::class, array(
-                'data' => $aboutUser,
-                'data_class'    => null,
+                //'data' => $aboutUser,
+                //'data_class'    => null,
                 'invalid_message' => 'That is not a valid issue number',
                 //'error_bubbling'   => false
             ));

@@ -1,6 +1,9 @@
 /***
 * Compte
 ***/
+#aboutUserReplyContent .viewContent .item{
+    margin-right: 5px;
+}
 
 /***
 * Node 

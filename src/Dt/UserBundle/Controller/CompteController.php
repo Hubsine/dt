@@ -366,6 +366,9 @@ class CompteController extends Controller
             'nodeDecorator' => function($node) use (&$controller, $aboutUserReplyManager, $aboutUserReplys) {
 
                 $html = '';
+                $itemOpen = '<div class="item label label-default">';
+                $itemClose = '</div>';
+                
                 if( array_key_exists($node['id'], $aboutUserReplys) )
                 {
                     $userResponse = $aboutUserReplys[$node['id']];
@@ -376,42 +379,46 @@ class CompteController extends Controller
                         case 'checkbox':
                             $checkboxResponse = $userResponse->getResponseCheckbox()->getValues();
                             foreach ($checkboxResponse as $key => $aboutUserMeta) {
-                                $html .= $aboutUserMeta->getLabel();
+                                $html .= $itemOpen . $aboutUserMeta->getLabel() . $itemClose;
                             }
                             break;
                         
                         case 'radio':
                             $html .= ( !empty( $userResponse->getResponseRadio() ) ) ? 
-                                $userResponse->getResponseRadio()->getLabel() : '';
+                                $itemOpen . $userResponse->getResponseRadio()->getLabel() . $itemClose : '';
                             break;
                         
                         case 'text':
-                            $html .= $userResponse->getResponseText();
+                            $html .= $itemOpen . $userResponse->getResponseText() . $itemClose;
                             break;
                         
                         case 'textCollection':
-//                            $textCollectionResponse = $userResponse->getResponseTextCollection();
-//                            foreach ($textCollectionResponse as $key => $value) {
-//                                $html .= $value;
-//                            }
-                            $html .= implode(',', $userResponse->getResponseTextCollection());
+                            $textCollectionResponse = $userResponse->getResponseTextCollection();
+                            foreach ($textCollectionResponse as $key => $value) {
+                                $html .= $itemOpen . $value . $itemClose;
+                            }
+                            //$html .= implode(',', $userResponse->getResponseTextCollection());
                             break;
                         
                         case 'textValCollection':
-                            $html .= implode(',', $userResponse->getResponseTextValCollection());
+                            $textValCollectionResponse = $userResponse->getResponseTextValCollection();
+                            foreach ($textValCollectionResponse as $key => $value) {
+                                $html .= $itemOpen . $value . $itemClose;
+                            }
+                            //$html .= implode(',', $userResponse->getResponseTextValCollection());
                             break;
                         
                         case 'textarea':
-                            $html .= $userResponse->getResponseTextarea();
+                            $html .= $itemOpen . $userResponse->getResponseTextarea() . $itemClose;
                             break;
                     }
                 }
-
+                
                 if($node['lvl'] === 0){
                     return '<h4 class="text-center list-group-item-heading">' . $node['label'] . '</h4>' . $html;
                 }
 
-                return '<span class="">' . $node['label'] . '</span>' . $html;
+                return '<div class="">' . $node['label'] . '</div>' . $html;
             }
         );
          

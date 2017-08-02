@@ -123,7 +123,7 @@ class AboutUserReply implements EntityInterface
      *      message="dt_about_user_reply.response_text_collection.array",
      *      groups = {"textCollection"}
      * )
-     * @Assert\Count(
+     * Assert\Count(
      *      min = 0,
      *      max = 4,
      *      minMessage = "dt_about_user_reply.response_text_collection.count.min",

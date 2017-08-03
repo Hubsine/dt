@@ -20,6 +20,10 @@ admin_sidebar:
         index: 'About users meta'
         new: 'Ajouter about user meta'
         edit: 'Editer'
+    looking_for_meta:   
+        index: 'Je cherche'
+        new: 'Ajouter'
+        edit: 'Editer'
     
     
     

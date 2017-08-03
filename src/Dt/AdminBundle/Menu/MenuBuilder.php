@@ -119,6 +119,25 @@ class MenuBuilder{
             'route' => 'dt_admin.about_user_meta.new'
         ))->setExtra('translation_domain', 'menu');
         
+        ###
+        # Looking For Meta
+        ###
+        $lookingForMeta = $menu->addChild('admin_sidebar.looking_for_meta.index', array(
+            'route' => 'dt_admin.looking_for_meta.index',
+            'childrenAttributes'    => array('class'    => 'nav')
+        ))->setExtra('translation_domain', 'menu');
+        
+        $lookingForMeta->addChild('admin_sidebar.looking_for_meta.index', array(
+            'route' => 'dt_admin.looking_for_meta.index',
+            'childrenAttributes'    => array('class'    => 'nav')
+        ))->setExtra('translation_domain', 'menu');
+        
+        $lookingForMeta->addChild('admin_sidebar.looking_for_meta.new', array(
+            'route' => 'dt_admin.looking_for_meta.new',
+            'childrenAttributes'    => array('class'    => 'nav')
+        ))->setExtra('translation_domain', 'menu');
+        
+        
         return $menu;
     }
 }

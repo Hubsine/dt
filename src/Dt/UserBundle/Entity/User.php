@@ -12,6 +12,7 @@ use Dt\UserBundle\Entity\ProfilePicture;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\Type;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
+use ONGR\ElasticsearchBundle\Annotation as ES;
 
 /**
  * @ORM\Entity
@@ -20,6 +21,7 @@ use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumbe
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @UniqueEntity("phone", message="dt_user.phone.already_used", groups={"ProfileMoi"})
  * 
+ * @ES\Document(type="user")
  */
 class User extends BaseUser
 {
@@ -37,6 +39,8 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @ES\Id()
      */
     protected $id;
 
@@ -87,6 +91,8 @@ class User extends BaseUser
      * @Assert\Choice(choices = {"male", "female"}, message="dt_user.gender.choice", groups={"ProfileMoi", "Registration", "FbRegistration", "GoogleRegistration"})
      * 
      * @var string
+     * 
+     * @ES\Property(type="text")
      */
     protected $gender;
     

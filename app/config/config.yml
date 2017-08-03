@@ -316,3 +316,16 @@ knp_menu:
     # use "twig: false" to disable the Twig extension and the TwigRenderer
     #twig:
         #template: KnpMenuBundle::menu.html.twig    
+
+# ONGR Elastic Search        
+ongr_elasticsearch:
+    managers:
+        default:
+            index:
+                index_name: dt
+                hosts:
+                    - - 127.0.0.1:9200
+            mappings:
+                - AppBundle
+                - DtUserBundle
+                - DtAdminBundle

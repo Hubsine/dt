@@ -1,48 +1,50 @@
-{% extends 'base.html.twig' %}
+{% extends "DtAdminBundle::layout.html.twig" %}
 
-{% block body %}
-    <h1>Lookingformetum</h1>
+{% block headline %}{% trans %} dashboard.about_user_meta.about_user_meta {% endtrans %}{% endblock headline %}
 
-    <table>
+{% block content_page_content %}
+
+    <table class="table table-striped table-responsive">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ lookingForMetum.id }}</td>
+                <td>{{ lookingForMeta.id }}</td>
             </tr>
             <tr>
                 <th>Label</th>
-                <td>{{ lookingForMetum.label }}</td>
+                <td>{{ lookingForMeta.label }}</td>
             </tr>
             <tr>
                 <th>Onproperty</th>
-                <td>{{ lookingForMetum.onProperty }}</td>
+                <td>{{ lookingForMeta.onProperty }}</td>
             </tr>
             <tr>
                 <th>Deletedat</th>
-                <td>{% if lookingForMetum.deletedAt %}{{ lookingForMetum.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if lookingForMeta.deletedAt %}{{ lookingForMeta.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
-                <td>{% if lookingForMetum.createdAt %}{{ lookingForMetum.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if lookingForMeta.createdAt %}{{ lookingForMeta.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Updatedat</th>
-                <td>{% if lookingForMetum.updatedAt %}{{ lookingForMetum.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if lookingForMeta.updatedAt %}{{ lookingForMeta.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-unstyled list-inline">
         <li>
-            <a href="{{ path('dt_admin.looking_for_meta.index') }}">Back to the list</a>
+            <a class="btn btn-default" href="{{ path('dt_admin.looking_for_meta.index') }}">{% trans %} dashboard.looking_for_meta.back {% endtrans %}</a>
         </li>
         <li>
-            <a href="{{ path('dt_admin.looking_for_meta.edit', { 'id': lookingForMetum.id }) }}">Edit</a>
+            <a class="btn btn-primary" href="{{ path('dt_admin.looking_for_meta.edit', { 'id': lookingForMeta.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input class="btn btn-danger" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
-{% endblock %}
+            
+{% endblock content_page_content %}

@@ -18,7 +18,7 @@
         <tbody>
         {% for lookingForMetum in lookingForMetas %}
             <tr>
-                <td><a href="{{ path('dt_admin.looking_for_meta._show', { 'id': lookingForMetum.id }) }}">{{ lookingForMetum.id }}</a></td>
+                <td><a href="{{ path('dt_admin.looking_for_meta.show', { 'id': lookingForMetum.id }) }}">{{ lookingForMetum.id }}</a></td>
                 <td>{{ lookingForMetum.label }}</td>
                 <td>{{ lookingForMetum.onProperty }}</td>
                 <td>{% if lookingForMetum.deletedAt %}{{ lookingForMetum.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -27,10 +27,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('dt_admin.looking_for_meta._show', { 'id': lookingForMetum.id }) }}">show</a>
+                            <a href="{{ path('dt_admin.looking_for_meta.show', { 'id': lookingForMetum.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('dt_admin.looking_for_meta._edit', { 'id': lookingForMetum.id }) }}">edit</a>
+                            <a href="{{ path('dt_admin.looking_for_meta.edit', { 'id': lookingForMetum.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -41,7 +41,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('dt_admin.looking_for_meta._new') }}">Create a new lookingForMetum</a>
+            <a href="{{ path('dt_admin.looking_for_meta.new') }}">Create a new lookingForMetum</a>
         </li>
     </ul>
 {% endblock %}

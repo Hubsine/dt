@@ -25,10 +25,6 @@ dt_user_edit_profile_reseaux_sociaux:
     path: /{slug}/mon-compte/profile/edit/reseaux-sociaux
     defaults: { _controller: DtUserBundle:Compte:editReseauxSociaux }
     
-dt_user_edit_profile_qui_suis_je: 
-    path: /{slug}/mon-compte/profile/edit/qui-suis-je
-    defaults: { _controller: DtUserBundle:Compte:editQuiSuisJe }   
-    
 dt_user_edit_profile_about_user_reply: 
     path: /{slug}/mon-compte/profile/edit/about-users-reply
     defaults: { _controller: DtUserBundle:Compte:editAboutUserReply }       

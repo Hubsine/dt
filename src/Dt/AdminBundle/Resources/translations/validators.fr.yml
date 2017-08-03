@@ -16,3 +16,11 @@ dt_about_user_meta:
     about_user:
         blank: 'Ce champ ne peux pas être vide.'
         callback: 'Le expectedReplyType du AboutUser doit être radio ou checkbox.'
+
+dt_looking_for_meta:
+    label:
+        blank: 'Ce champ ne peux pas être vide.'
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
+    on_property:
+        blank: 'Ce champ ne peux pas être vide.'
+        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'        

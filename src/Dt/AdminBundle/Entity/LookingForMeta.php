@@ -8,6 +8,7 @@ use ONGR\ElasticsearchBundle\Annotation as ES;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Translatable\Translatable;
 
 /**
  * LookingForMeta
@@ -17,7 +18,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
-class LookingForMeta
+class LookingForMeta implements Translatable
 {
     
     use SoftDeleteableEntity;
@@ -36,6 +37,11 @@ class LookingForMeta
      * @var string
      *
      * @ORM\Column(name="label", type="string", length=255)
+     * 
+     * @Assert\NotBlank(message="dt_looking_for_meta.label.blank")
+     * @Assert\Type(type="string", message="dt_looking_for_meta.label.type")
+     * 
+     * @Gedmo\Translatable
      */
     private $label;
 
@@ -43,6 +49,10 @@ class LookingForMeta
      * @var string
      *
      * @ORM\Column(name="on_property", type="string", length=100)
+     * 
+     * @Assert\NotBlank(message="dt_looking_for_meta.on_property.blank")
+     * @Assert\Type(type="string", message="dt_looking_for_meta.on_property.type")
+     * 
      */
     private $onProperty;
 

@@ -5,6 +5,7 @@ namespace Dt\AdminBundle\Controller;
 use Dt\AdminBundle\Entity\LookingForMeta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Dt\AdminBundle\Form\Type\LookingForMetaType;
 
 /**
  * Lookingformetum controller.
@@ -34,7 +35,8 @@ class LookingForMetaController extends Controller
     public function newAction(Request $request)
     {
         $lookingForMeta = new LookingForMeta();
-        $form = $this->createForm('Dt\AdminBundle\Form\LookingForMetaType', $lookingForMeta);
+        $form = $this->createForm(LookingForMetaType::class, $lookingForMeta);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

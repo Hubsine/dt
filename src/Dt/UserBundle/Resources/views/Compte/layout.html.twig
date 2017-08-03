@@ -12,6 +12,15 @@
 
     {{ parent() }}
     
+    <script type="text/javascript">
+        
+    jQuery(function($){
+        $('#sidebarMenu').scrollToFixed({
+            marginTop: $('#main-header').outerHeight()
+        });
+    });
+    </script>
+    
 {% endblock foot_script_assetic %}
 
 

@@ -143,7 +143,7 @@ class MenuBuilder{
         
         $menu = $this->factory->createItem('sidebar.accueil', array(
             #'childrenAttributes'    => array('class', 'hidden-print hidden-sm hidden-xs affix')
-        ))->setAttribute('class', 'hidden-print hidden-sm hidden-xs affix');
+        ))->setAttribute('class', 'hidden-print hidden-sm hidden-xs');
         
         ###
         # Profile 

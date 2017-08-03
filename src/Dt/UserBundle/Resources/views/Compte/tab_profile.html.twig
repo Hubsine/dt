@@ -14,14 +14,8 @@
         'contentId': 'reseauxSociauxContent',
         'content': controller('DtUserBundle:Compte:showReseauxSociaux', {'slug': app.request.get('slug') })
     },
-    'qui_suis_je': {
-        'sectionId': 'profile-qui-suis-je',
-        'sectionTitle': 'layout.compte.qui_suis_je',
-        'contentId': 'quiSuisJeContent',
-        'content': controller('DtUserBundle:Compte:showQuiSuisJe', {'slug': app.request.get('slug') })
-    },
     'about_user': {
-        'sectionId': 'about-users-reply',
+        'sectionId': 'profile-a-propos-de-moi',
         'sectionTitle': 'layout.compte.about_user_reply',
         'contentId': 'aboutUserReplyContent',
         'content': controller('DtUserBundle:Compte:showAboutUserReply', {'slug': app.request.get('slug') })

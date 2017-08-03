@@ -5,9 +5,6 @@
 
 jQuery(function($){
    
-   /// Sidebar menu affix
-   $('#sidebarMenu').affix('checkPosition');
-   
    /// Menu design and smool scroll
     $('#sidebarMenu .nav .nav > li').click('click', function(){
 

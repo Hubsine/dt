@@ -1,16 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends "DtAdminBundle::layout.html.twig" %}
 
-{% block body %}
-    <h1>Lookingformetum creation</h1>
+{% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+{% block headline %}{% trans %} dashboard.looking_for_meta.new {% endtrans %}{% endblock headline %}
+
+{% block content_page_content %}
+    
+    {{ form_start(form, {'method': 'post', 'action': path('dt_admin.looking_for_meta.new'), 'attr': {'class': ''}}) }}
+
+    {{ form_widget(form)}}
+    <div>
+        <button type="submit" class="btn btn-default">{{ 'form.looking_for_meta.submit'|trans }}</button>
+        <a class="btn btn-info" href="{{ path('dt_admin.looking_for_meta.index') }}">{% trans %} dashboard.back {% endtrans %}</a>
+    </div>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('dt_admin.looking_for_meta.index') }}">Back to the list</a>
-        </li>
-    </ul>
-{% endblock %}
+            
+{% endblock content_page_content %}

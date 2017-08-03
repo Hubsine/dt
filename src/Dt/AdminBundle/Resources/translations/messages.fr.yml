@@ -1,5 +1,7 @@
 dashboard:
     dashboard: 'Tableau de bord'
+    new: 'Nouveau'
+    back: 'Retour'
     about_user:
         back: 'Back to the list'
         about_user: 'About Users'
@@ -9,7 +11,12 @@ dashboard:
         back: 'Back to the list'
         about_user_meta: 'About Users meta'
         new: 'Ajouter un about users meta'
-        edit: 'Editer AboutUser meta'    
+        edit: 'Editer AboutUser meta'   
+    looking_for_meta:    
+        back: 'Back to the list'
+        about_user_meta: 'About Users meta'
+        new: 'Ajouter un about users meta'
+        edit: 'Editer AboutUser meta'   
                 
 form:
     about_user:
@@ -31,4 +38,6 @@ form:
             label: 'Label'
         about_user:
             label: 'About User'
+    looking_for_meta:
+        submit: Ajouter
     

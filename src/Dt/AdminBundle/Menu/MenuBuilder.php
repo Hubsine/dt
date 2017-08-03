@@ -87,10 +87,12 @@ class MenuBuilder{
             ->setExtra('translation_domain', 'menu')
             ->setUri('#');
         
+        
+        
         ###
         # About User
         ###
-        $aboutUser = $menu->addChild('admin_sidebar.about_user.index', array(
+        $aboutUser = $users->addChild('admin_sidebar.about_user.index', array(
             'route' => 'dt_admin.about_user.index',
             'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');
@@ -106,7 +108,7 @@ class MenuBuilder{
         ###
         # About User Meta
         ###
-        $aboutUserMeta = $menu->addChild('admin_sidebar.about_user_meta.index', array(
+        $aboutUserMeta = $users->addChild('admin_sidebar.about_user_meta.index', array(
             'route' => 'dt_admin.about_user_meta.index',
             'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');
@@ -122,7 +124,7 @@ class MenuBuilder{
         ###
         # Looking For Meta
         ###
-        $lookingForMeta = $menu->addChild('admin_sidebar.looking_for_meta.index', array(
+        $lookingForMeta = $users->addChild('admin_sidebar.looking_for_meta.index', array(
             'route' => 'dt_admin.looking_for_meta.index',
             'childrenAttributes'    => array('class'    => 'nav')
         ))->setExtra('translation_domain', 'menu');

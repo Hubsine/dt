@@ -26,9 +26,18 @@ class LookingFor {
     use TimestampableEntity;
     
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
      * @var array
      * 
-     * @ORM\Column(type="array", length=10, name="gender", nullable=true)
+     * ORM\Column(type="array", length=10, name="gender", nullable=true)
      */
     private $gender;
     
@@ -37,4 +46,14 @@ class LookingFor {
     private $relationships;
     
     private $localisation;
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }

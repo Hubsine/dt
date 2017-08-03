@@ -33,20 +33,20 @@ class LookingForMetaController extends Controller
      */
     public function newAction(Request $request)
     {
-        $lookingForMetum = new Lookingformetum();
-        $form = $this->createForm('Dt\AdminBundle\Form\LookingForMetaType', $lookingForMetum);
+        $lookingForMeta = new LookingForMeta();
+        $form = $this->createForm('Dt\AdminBundle\Form\LookingForMetaType', $lookingForMeta);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($lookingForMetum);
+            $em->persist($lookingForMeta);
             $em->flush();
 
-            return $this->redirectToRoute('dt_admin.looking_for_meta.show', array('id' => $lookingForMetum->getId()));
+            return $this->redirectToRoute('dt_admin.looking_for_meta.show', array('id' => $lookingForMeta->getId()));
         }
 
         return $this->render('DtAdminBundle:LookingForMeta:new.html.twig', array(
-            'lookingForMetum' => $lookingForMetum,
+            'lookingForMeta' => $lookingForMeta,
             'form' => $form->createView(),
         ));
     }

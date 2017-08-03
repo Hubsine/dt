@@ -1,0 +1,24 @@
+dt_admin.looking_for_meta.index:
+    path:     /
+    defaults: { _controller: "DtAdminBundle:LookingForMeta:index" }
+    methods:  GET
+
+dt_admin.looking_for_meta.show:
+    path:     /{id}/show
+    defaults: { _controller: "DtAdminBundle:LookingForMeta:show" }
+    methods:  GET
+
+dt_admin.looking_for_meta.new:
+    path:     /new
+    defaults: { _controller: "DtAdminBundle:LookingForMeta:new" }
+    methods:  [GET, POST]
+
+dt_admin.looking_for_meta.edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtAdminBundle:LookingForMeta:edit" }
+    methods:  [GET, POST]
+
+dt_admin.looking_for_meta.delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtAdminBundle:LookingForMeta:delete" }
+    methods:  DELETE

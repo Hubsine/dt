@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lookingformetas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Label</th>
+                <th>Onproperty</th>
+                <th>Deletedat</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lookingForMetum in lookingForMetas %}
+            <tr>
+                <td><a href="{{ path('dt_admin.looking_for_meta._show', { 'id': lookingForMetum.id }) }}">{{ lookingForMetum.id }}</a></td>
+                <td>{{ lookingForMetum.label }}</td>
+                <td>{{ lookingForMetum.onProperty }}</td>
+                <td>{% if lookingForMetum.deletedAt %}{{ lookingForMetum.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if lookingForMetum.createdAt %}{{ lookingForMetum.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if lookingForMetum.updatedAt %}{{ lookingForMetum.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dt_admin.looking_for_meta._show', { 'id': lookingForMetum.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dt_admin.looking_for_meta._edit', { 'id': lookingForMetum.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dt_admin.looking_for_meta._new') }}">Create a new lookingForMetum</a>
+        </li>
+    </ul>
+{% endblock %}

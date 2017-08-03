@@ -11,8 +11,10 @@ dt_admin_about_user:
     prefix:   /about-user
 
 dt_admin_aboutusermeta:
-        resource: "@DtAdminBundle/Resources/config/routing/aboutusermeta.yml"
-        prefix:   /about-user-meta
+    resource: "@DtAdminBundle/Resources/config/routing/aboutusermeta.yml"
+    prefix:   /about-user-meta
 
-    
+dt_admin.looking_for_meta.:
+    resource: "@DtAdminBundle/Resources/config/routing/lookingformeta.yml"
+    prefix:   /looking-for-meta 
 

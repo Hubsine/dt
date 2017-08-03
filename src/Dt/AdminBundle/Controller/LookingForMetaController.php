@@ -8,13 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Dt\AdminBundle\Form\Type\LookingForMetaType;
 
 /**
- * Lookingformetum controller.
+ * LookingforMeta controller.
  *
  */
 class LookingForMetaController extends Controller
 {
     /**
-     * Lists all lookingForMetum entities.
+     * Lists all lookingForMeta entities.
      *
      */
     public function indexAction()
@@ -29,7 +29,7 @@ class LookingForMetaController extends Controller
     }
 
     /**
-     * Creates a new lookingForMetum entity.
+     * Creates a new lookingForMeta entity.
      *
      */
     public function newAction(Request $request)
@@ -54,54 +54,54 @@ class LookingForMetaController extends Controller
     }
 
     /**
-     * Finds and displays a lookingForMetum entity.
+     * Finds and displays a lookingForMeta entity.
      *
      */
-    public function showAction(LookingForMeta $lookingForMetum)
+    public function showAction(LookingForMeta $lookingForMeta)
     {
-        $deleteForm = $this->createDeleteForm($lookingForMetum);
+        $deleteForm = $this->createDeleteForm($lookingForMeta);
 
         return $this->render('DtAdminBundle:LookingForMeta:show.html.twig', array(
-            'lookingForMetum' => $lookingForMetum,
+            'lookingForMeta' => $lookingForMeta,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing lookingForMetum entity.
+     * Displays a form to edit an existing lookingForMeta entity.
      *
      */
-    public function editAction(Request $request, LookingForMeta $lookingForMetum)
+    public function editAction(Request $request, LookingForMeta $lookingForMeta)
     {
-        $deleteForm = $this->createDeleteForm($lookingForMetum);
-        $editForm = $this->createForm('Dt\AdminBundle\Form\LookingForMetaType', $lookingForMetum);
+        $deleteForm = $this->createDeleteForm($lookingForMeta);
+        $editForm = $this->createForm(LookingForMetaType::class, $lookingForMeta);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('dt_admin.looking_for_meta.edit', array('id' => $lookingForMetum->getId()));
+            return $this->redirectToRoute('dt_admin.looking_for_meta.edit', array('id' => $lookingForMeta->getId()));
         }
 
         return $this->render('DtAdminBundle:LookingForMeta:edit.html.twig', array(
-            'lookingForMetum' => $lookingForMetum,
+            'lookingForMeta' => $lookingForMeta,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a lookingForMetum entity.
+     * Deletes a lookingForMeta entity.
      *
      */
-    public function deleteAction(Request $request, LookingForMeta $lookingForMetum)
+    public function deleteAction(Request $request, LookingForMeta $lookingForMeta)
     {
-        $form = $this->createDeleteForm($lookingForMetum);
+        $form = $this->createDeleteForm($lookingForMeta);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($lookingForMetum);
+            $em->remove($lookingForMeta);
             $em->flush();
         }
 
@@ -109,16 +109,16 @@ class LookingForMetaController extends Controller
     }
 
     /**
-     * Creates a form to delete a lookingForMetum entity.
+     * Creates a form to delete a lookingForMeta entity.
      *
-     * @param LookingForMeta $lookingForMetum The lookingForMetum entity
+     * @param LookingForMeta $lookingForMeta The lookingForMeta entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(LookingForMeta $lookingForMetum)
+    private function createDeleteForm(LookingForMeta $lookingForMeta)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('dt_admin.looking_for_meta.delete', array('id' => $lookingForMetum->getId())))
+            ->setAction($this->generateUrl('dt_admin.looking_for_meta.delete', array('id' => $lookingForMeta->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

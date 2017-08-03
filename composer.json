@@ -33,6 +33,7 @@
         "misd/phone-number-bundle": "^1.2",
         "mopa/bootstrap-bundle": "^3.1",
         "oneup/acl-bundle": "^1.0",
+        "ongr/elasticsearch-bundle": "^5.0",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "stof/doctrine-extensions-bundle": "^1.2",

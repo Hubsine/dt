@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Oneup\AclBundle\OneupAclBundle(),
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
+            new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
             //My Bundle
             new AppBundle\AppBundle(),
             new Dt\UserBundle\DtUserBundle(),

@@ -169,10 +169,10 @@ class MenuBuilder{
                 ->setExtra('translation_domain', 'menu')
                 ->setUri('#profile-reseaux-sociaux');
             
-            $profile->addChild('sidebar.qui', array(
+            $profile->addChild('sidebar.about', array(
             ))
                 ->setExtra('translation_domain', 'menu')
-                ->setUri('#profile-qui-suis-je');
+                ->setUri('#profile-a-propos-de-moi');
             
             $profile->addChild('sidebar.cherche', array(
             ))

@@ -22,7 +22,7 @@ class LookingForMetaController extends Controller
 
         $lookingForMetas = $em->getRepository('DtAdminBundle:LookingForMeta')->findAll();
 
-        return $this->render('lookingformeta/index.html.twig', array(
+        return $this->render('DtAdminBundle:LookingForMeta:index.html.twig', array(
             'lookingForMetas' => $lookingForMetas,
         ));
     }
@@ -42,10 +42,10 @@ class LookingForMetaController extends Controller
             $em->persist($lookingForMetum);
             $em->flush();
 
-            return $this->redirectToRoute('dt_admin.looking_for_meta._show', array('id' => $lookingForMetum->getId()));
+            return $this->redirectToRoute('dt_admin.looking_for_meta.show', array('id' => $lookingForMetum->getId()));
         }
 
-        return $this->render('lookingformeta/new.html.twig', array(
+        return $this->render('DtAdminBundle:LookingForMeta:new.html.twig', array(
             'lookingForMetum' => $lookingForMetum,
             'form' => $form->createView(),
         ));
@@ -59,7 +59,7 @@ class LookingForMetaController extends Controller
     {
         $deleteForm = $this->createDeleteForm($lookingForMetum);
 
-        return $this->render('lookingformeta/show.html.twig', array(
+        return $this->render('DtAdminBundle:LookingForMeta:show.html.twig', array(
             'lookingForMetum' => $lookingForMetum,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -78,10 +78,10 @@ class LookingForMetaController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('dt_admin.looking_for_meta._edit', array('id' => $lookingForMetum->getId()));
+            return $this->redirectToRoute('dt_admin.looking_for_meta.edit', array('id' => $lookingForMetum->getId()));
         }
 
-        return $this->render('lookingformeta/edit.html.twig', array(
+        return $this->render('DtAdminBundle:LookingForMeta:edit.html.twig', array(
             'lookingForMetum' => $lookingForMetum,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -103,7 +103,7 @@ class LookingForMetaController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('dt_admin.looking_for_meta._index');
+        return $this->redirectToRoute('dt_admin.looking_for_meta.index');
     }
 
     /**
@@ -116,7 +116,7 @@ class LookingForMetaController extends Controller
     private function createDeleteForm(LookingForMeta $lookingForMetum)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('dt_admin.looking_for_meta._delete', array('id' => $lookingForMetum->getId())))
+            ->setAction($this->generateUrl('dt_admin.looking_for_meta.delete', array('id' => $lookingForMetum->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

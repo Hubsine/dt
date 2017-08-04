@@ -43,14 +43,32 @@ class LookingFor {
     private $user;
     
     /**
-     * @var array Dt\AdminBundle\Entity\LookingForMeta
+     * @var array
      * 
      * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
      * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinTable(name="looking_for_meta_genders")
      * 
-     * @Assert\Valid()
+     * @Assert\Expression(
+     *      "value.getOnProperty() == 'genders'",
+     *      message="dt_looking_for.genders.expression"
+     * )
      */
-    private $lookingForMeta;
+    private $genders;
+    
+    /**
+     * @var type 
+     * 
+     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
+     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinTable(name="looking_for_meta_relationships")
+     * 
+     * @Assert\Expression(
+     *      "value.getOnProperty() == 'relationships'",
+     *      message="dt_looking_for.relationships.expression"
+     * )
+     */
+    private $relationships;
     
     /**
      * @var array

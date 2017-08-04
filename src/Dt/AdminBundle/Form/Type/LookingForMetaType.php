@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Dt\AdminBundle\Entity\LookingForMeta;
 
 class LookingForMetaType extends AbstractType
 {
@@ -23,8 +24,11 @@ class LookingForMetaType extends AbstractType
             ->add('onProperty', ChoiceType::class, array(
                 'label' => '',
                 'required'  => true,
-                'choices'   => array('gender' => 'gender', 'relationships' => 'relationships'),
-                'choices_as_values' => true
+                'choices'   => LookingForMeta::getAvaiblesOnProperty(),
+                'choices_as_values' => true,
+                'choice_label' => function ($value, $key, $index) {
+                    return $value;
+                }
             ));
     }
     

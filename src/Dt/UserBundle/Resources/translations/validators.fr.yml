@@ -50,6 +50,18 @@ dt_about_user_reply:
     response_textarea:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         
+dt_looking_for:
+    age_range:
+        min:
+            type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+        max: 
+            type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+        expression: 'La valeur "minimum" ne peut-être supérieur à l''âge maximum.'
+    gender:
+        expression: 'La propriété "property" de la class "LookingForMeta" doit être "gender".'
+    relationships:
+        expression: 'La propriété "property" de la class "LookingForMeta" doit être "relationships".'
+        
 
   
         

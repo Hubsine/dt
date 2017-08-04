@@ -69,7 +69,7 @@ class Adress
      *
      * @ORM\Column(name="zip_code", type="integer", nullable=true)
      * 
-     * @Assert\Length(max = 5, message="dt_adress.zip_code.length")
+     * @Assert\Length(max = 5, maxMessage="dt_adress.zip_code.length")
      */
     protected $zipCode;
 

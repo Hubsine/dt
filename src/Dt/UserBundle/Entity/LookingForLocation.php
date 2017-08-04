@@ -28,5 +28,27 @@ class LookingForLocation extends Adress
      */
     private $lookingFor;
     
-    
+    /**
+     * Set lookingFor
+     *
+     * @param \Dt\UserBundle\Entity\LookingFor $lookingFor
+     * @return LookingForLocation
+     */
+    public function setLookingFor(\Dt\UserBundle\Entity\LookingFor $lookingFor)
+    {
+        $this->lookingFor = $lookingFor;
+
+        return $this;
+    }
+
+    /**
+     * Get lookingFor
+     *
+     * @return \Dt\UserBundle\Entity\LookingFor 
+     */
+    public function getLookingFor()
+    {
+        return $this->lookingFor;
+    }
+
 }

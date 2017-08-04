@@ -43,30 +43,14 @@ class LookingFor {
     private $user;
     
     /**
-     * @var array
+     * @var array Dt\AdminBundle\Entity\LookingForMeta
      * 
      * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Assert\Expression(
-     *      "value.getOnProperty() == 'genders'",
-     *      message="dt_looking_for.genders.expression"
-     * )
+     * @Assert\Valid()
      */
-    private $genders;
-    
-    /**
-     * @var type 
-     * 
-     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
-     * @ORM\JoinColumn(nullable=false)
-     * 
-     * @Assert\Expression(
-     *      "value.getOnProperty() == 'relationships'",
-     *      message="dt_looking_for.relationships.expression"
-     * )
-     */
-    private $relationships;
+    private $lookingForMeta;
     
     /**
      * @var array
@@ -107,6 +91,15 @@ class LookingFor {
      */
     private $location;
     
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lookingForMeta = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -115,15 +108,6 @@ class LookingFor {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->genders = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->relationships = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -173,69 +157,36 @@ class LookingFor {
     }
 
     /**
-     * Add genders
+     * Add lookingForMeta
      *
-     * @param \Dt\AdminBundle\Entity\LookingForMeta $genders
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta
      * @return LookingFor
      */
-    public function addGender(\Dt\AdminBundle\Entity\LookingForMeta $genders)
+    public function addLookingForMetum(\Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta)
     {
-        $this->genders[] = $genders;
+        $this->lookingForMeta[] = $lookingForMeta;
 
         return $this;
     }
 
     /**
-     * Remove genders
+     * Remove lookingForMeta
      *
-     * @param \Dt\AdminBundle\Entity\LookingForMeta $genders
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta
      */
-    public function removeGender(\Dt\AdminBundle\Entity\LookingForMeta $genders)
+    public function removeLookingForMetum(\Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta)
     {
-        $this->genders->removeElement($genders);
+        $this->lookingForMeta->removeElement($lookingForMeta);
     }
 
     /**
-     * Get genders
+     * Get lookingForMeta
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getGenders()
+    public function getLookingForMeta()
     {
-        return $this->genders;
-    }
-
-    /**
-     * Add relationships
-     *
-     * @param \Dt\AdminBundle\Entity\LookingForMeta $relationships
-     * @return LookingFor
-     */
-    public function addRelationship(\Dt\AdminBundle\Entity\LookingForMeta $relationships)
-    {
-        $this->relationships[] = $relationships;
-
-        return $this;
-    }
-
-    /**
-     * Remove relationships
-     *
-     * @param \Dt\AdminBundle\Entity\LookingForMeta $relationships
-     */
-    public function removeRelationship(\Dt\AdminBundle\Entity\LookingForMeta $relationships)
-    {
-        $this->relationships->removeElement($relationships);
-    }
-
-    /**
-     * Get relationships
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getRelationships()
-    {
-        return $this->relationships;
+        return $this->lookingForMeta;
     }
 
     /**
@@ -244,7 +195,7 @@ class LookingFor {
      * @param \Dt\UserBundle\Entity\LookingForLocation $location
      * @return LookingFor
      */
-    public function setLocation(\Dt\UserBundle\Entity\LookingForLocation $location = null)
+    public function setLocation(\Dt\UserBundle\Entity\LookingForLocation $location)
     {
         $this->location = $location;
 

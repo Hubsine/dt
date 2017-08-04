@@ -19,6 +19,12 @@
         'sectionTitle': 'layout.compte.about_user_reply',
         'contentId': 'aboutUserReplyContent',
         'content': controller('DtUserBundle:Compte:showAboutUserReply', {'slug': app.request.get('slug') })
+    },
+    'looking_for': {
+        'sectionId': 'profile-je-cherche',
+        'sectionTitle': 'layout.compte.looking_for',
+        'contentId': 'lookingForContent',
+        'content': controller('DtUserBundle:Compte:showLookingFor', {'slug': app.request.get('slug') })
     }
 }
 %}

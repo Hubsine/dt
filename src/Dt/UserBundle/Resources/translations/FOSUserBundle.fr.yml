@@ -24,6 +24,7 @@ layout:
         reseaux_sociaux: 'Réseaux sociaux'
         qui_suis_je: 'Qui suis-je ?'
         about_user_reply: 'A propos de moi'
+        looking_for: Je cherche
 
 change_profile:
     update: 'Mettre à jour'

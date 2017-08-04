@@ -15,10 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Dt\UserBundle\Form\Type\MoiFormType;
 use Dt\UserBundle\Form\Type\ReseauxSociauxFormType;
 use Dt\UserBundle\Form\Type\AboutUserReplyType;
+use Dt\UserBundle\Form\Type\LookingForType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dt\UserBundle\Entity\User;
 use Dt\UserBundle\Entity\AboutUserReply;
+use Dt\UserBundle\Entity\LookingFor;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -71,6 +73,12 @@ class CompteController extends Controller
         return $this->render('DtUserBundle:Compte:AboutUserReply/show.html.twig', array(
             'aboutUser'    => $aboutUser
         ));
+    }
+    
+    public function showLookingForAction(Request $request, User $user)
+    {
+        
+        return $this->render('DtUserBundle:Compte:LookingFor/show.html.twig');
     }
 
     public function editAboutUserReplyAction(Request $request, User $user)
@@ -128,6 +136,55 @@ class CompteController extends Controller
                 'form'  => $this->renderView($templateToEdit, array(
                     'form' => $form->createView(),
                     'aboutUsers'    => $aboutUsers
+                     ))
+            ), $codeResponse );
+        
+        return $response;
+        
+    }
+    
+    public function editLookingForAction(Request $request, User $user){
+        
+        $codeResponse = 200;
+        $contentId = 'lookingForContent';
+        $templateToShow = 'DtUserBundle:Compte:LookingFor/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:LookingFor/edit.html.twig';
+        
+        $lookingFor = new LookingFor();
+        $form = $this->createForm(LookingForType::class, $lookingFor);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted()){
+            
+            if($form->isValid()){
+                
+                /** @var $userManager UserManagerInterface */
+                //$userManager = $this->get('fos_user.user_manager');
+                
+                //$userManager->updateUser($user);
+                
+                $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+                
+                $response = new JsonResponse(array(
+                    'contentId' => $contentId,
+                    'form'  => $this->renderView($templateToShow, array(
+                        'message'   => $message
+                         ))
+                ), $codeResponse );
+
+                return $response;
+                
+            }else{
+                $codeResponse = 400;
+            }
+        }
+        
+        $response = new JsonResponse(
+            array(
+                'contentId' => $contentId,
+                'form'  => $this->renderView($templateToEdit, array(
+                    'form' => $form->createView(),
                      ))
             ), $codeResponse );
         

@@ -8,6 +8,6 @@ use Doctrine\ORM\EntityRepository;
  * LocalisationRepository
  *
  */
-class LocalisationRepository extends EntityRepository
+class LookingForLocationRepository extends EntityRepository
 {
 }

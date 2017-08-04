@@ -28,3 +28,7 @@ dt_user_edit_profile_reseaux_sociaux:
 dt_user_edit_profile_about_user_reply: 
     path: /{slug}/mon-compte/profile/edit/about-users-reply
     defaults: { _controller: DtUserBundle:Compte:editAboutUserReply }       
+
+dt_user_edit_profile_looking_for: 
+    path: /{slug}/mon-compte/profile/edit/looking-for
+    defaults: { _controller: DtUserBundle:Compte:editLookingFor }

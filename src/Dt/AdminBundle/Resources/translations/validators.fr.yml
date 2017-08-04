@@ -23,5 +23,4 @@ dt_looking_for_meta:
         type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'
     on_property:
         blank: 'Ce champ ne peux pas être vide.'
-        type: 'La valeure "{{ value }}" n''est pas de type "{{ type }}".'        
         choice: 'Choisisez une proprité valide.'

@@ -51,8 +51,7 @@ class LookingForMeta implements Translatable
      * @ORM\Column(name="on_property", type="string", length=100)
      * 
      * @Assert\NotBlank(message="dt_looking_for_meta.on_property.blank")
-     * @Assert\Type(type="string", message="dt_looking_for_meta.on_property.type")
-     * @Assert\Choice( choices= {"genders", "relationships"}, message="dt_looking_for_meta.on_property.choice" )
+     * @Assert\Choice( callback= "getAvaiblesOnProperty", message="dt_looking_for_meta.on_property.choice" )
      * 
      */
     private $onProperty;
@@ -112,5 +111,10 @@ class LookingForMeta implements Translatable
     public function getOnProperty()
     {
         return $this->onProperty;
+    }
+    
+    public static function getAvaiblesOnProperty()
+    {
+        return array("genders", "relationships");
     }
 }

@@ -52,6 +52,7 @@ class LookingForMeta implements Translatable
      * 
      * @Assert\NotBlank(message="dt_looking_for_meta.on_property.blank")
      * @Assert\Type(type="string", message="dt_looking_for_meta.on_property.type")
+     * @Assert\Choice( choices= {"gender", "relationships"}, message="dt_looking_for_meta.on_property.choice" )
      * 
      */
     private $onProperty;

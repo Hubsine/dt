@@ -62,6 +62,12 @@ dt_looking_for:
     relationships:
         expression: 'La propriété "property" de la class "LookingForMeta" doit être "relationships".'
         
+dt_adress:
+    country: 
+        country: 'Cette valeur n''est pas un pays valide'
+    zip_code:
+        length: 'Le code postal ne peux pas avoir plus de {{ limit }} charactères.'
+        
 
   
         

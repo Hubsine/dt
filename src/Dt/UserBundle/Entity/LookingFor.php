@@ -49,11 +49,11 @@ class LookingFor {
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\Expression(
-     *      "value.getOnProperty() == 'gender'",
-     *      message="dt_looking_for.gender.expression"
+     *      "value.getOnProperty() == 'genders'",
+     *      message="dt_looking_for.genders.expression"
      * )
      */
-    private $gender;
+    private $genders;
     
     /**
      * @var type 

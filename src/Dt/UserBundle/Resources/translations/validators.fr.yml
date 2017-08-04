@@ -57,7 +57,7 @@ dt_looking_for:
         max: 
             type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         expression: 'La valeur "minimum" ne peut-être supérieur à l''âge maximum.'
-    gender:
+    genders:
         expression: 'La propriété "property" de la class "LookingForMeta" doit être "gender".'
     relationships:
         expression: 'La propriété "property" de la class "LookingForMeta" doit être "relationships".'

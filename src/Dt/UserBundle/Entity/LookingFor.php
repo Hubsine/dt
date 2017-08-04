@@ -45,7 +45,7 @@ class LookingFor {
     /**
      * @var array
      * 
-     * @ORM\OneToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
+     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\Expression(
@@ -58,7 +58,8 @@ class LookingFor {
     /**
      * @var type 
      * 
-     * @ORM\OneToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
+     * @ORM\ManyToMany(targetEntity="Dt\AdminBundle\Entity\LookingForMeta")
+     * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\Expression(
      *      "value.getOnProperty() == 'relationships'",
@@ -96,7 +97,15 @@ class LookingFor {
      */
     private $ageRange = array('min' => 18, 'max' => 99);
     
-    private $localisation;
+    /**
+     * @var LookingForLocation
+     * 
+     * @ORM\OneToOne(targetEntity="LookingForLocation", cascade={"persist", "remove"}, mappedBy="lookingFor")
+     * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Assert\Valid()
+     */
+    private $location;
     
     /**
      * Get id
@@ -106,5 +115,149 @@ class LookingFor {
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->genders = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->relationships = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set ageRange
+     *
+     * @param array $ageRange
+     * @return LookingFor
+     */
+    public function setAgeRange($ageRange)
+    {
+        $this->ageRange = $ageRange;
+
+        return $this;
+    }
+
+    /**
+     * Get ageRange
+     *
+     * @return array 
+     */
+    public function getAgeRange()
+    {
+        return $this->ageRange;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Dt\UserBundle\Entity\User $user
+     * @return LookingFor
+     */
+    public function setUser(\Dt\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Dt\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add genders
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $genders
+     * @return LookingFor
+     */
+    public function addGender(\Dt\AdminBundle\Entity\LookingForMeta $genders)
+    {
+        $this->genders[] = $genders;
+
+        return $this;
+    }
+
+    /**
+     * Remove genders
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $genders
+     */
+    public function removeGender(\Dt\AdminBundle\Entity\LookingForMeta $genders)
+    {
+        $this->genders->removeElement($genders);
+    }
+
+    /**
+     * Get genders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGenders()
+    {
+        return $this->genders;
+    }
+
+    /**
+     * Add relationships
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $relationships
+     * @return LookingFor
+     */
+    public function addRelationship(\Dt\AdminBundle\Entity\LookingForMeta $relationships)
+    {
+        $this->relationships[] = $relationships;
+
+        return $this;
+    }
+
+    /**
+     * Remove relationships
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $relationships
+     */
+    public function removeRelationship(\Dt\AdminBundle\Entity\LookingForMeta $relationships)
+    {
+        $this->relationships->removeElement($relationships);
+    }
+
+    /**
+     * Get relationships
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelationships()
+    {
+        return $this->relationships;
+    }
+
+    /**
+     * Set location
+     *
+     * @param \Dt\UserBundle\Entity\LookingForLocation $location
+     * @return LookingFor
+     */
+    public function setLocation(\Dt\UserBundle\Entity\LookingForLocation $location = null)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \Dt\UserBundle\Entity\LookingForLocation 
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }

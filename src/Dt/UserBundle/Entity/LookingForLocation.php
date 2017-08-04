@@ -19,6 +19,14 @@ use Dt\UserBundle\Entity\Adress;
  */
 class LookingForLocation extends Adress
 {
-
+    
+    /**
+     * @var LookingFor
+     * 
+     * @ORM\OneToOne(targetEntity="LookingFor", inversedBy="location")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lookingFor;
+    
     
 }

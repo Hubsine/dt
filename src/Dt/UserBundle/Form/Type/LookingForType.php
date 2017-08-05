@@ -6,7 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Dt\AdminBundle\Entity\LookingForMeta;
+use Dt\UserBundle\Entity\LookingForLocation;
+use Dt\AdminBundle\Repository\LookingForMetaRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Dt\UserBundle\Form\Type\LookingForLocationType;
 
 class LookingForType extends AbstractType
 {
@@ -16,15 +20,40 @@ class LookingForType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lookingForMeta', EntityType::class, array(
+            ->add('genders', EntityType::class, array(
                 'class' => LookingForMeta::class,
                 'multiple'  => true,
                 'expanded'  => true,
                 'choice_label'  => function ($lookingForMeta){
                     return $lookingForMeta->getLabel();
+                },
+                'query_builder' => function (LookingForMetaRepository $er) {
+                    return $er->createQueryBuilder('l')
+                            ->where('l.onProperty = :onProperty')
+                            ->setParameter('onProperty', 'genders');
                 }
             ))
-            ->add('ageRange')->add('location');
+            ->add('relationships', EntityType::class, array(
+                'class' => LookingForMeta::class,
+                'multiple'  => true,
+                'expanded'  => true,
+                'choice_label'  => function ($lookingForMeta){
+                    return $lookingForMeta->getLabel();
+                },
+                'query_builder' => function (LookingForMetaRepository $er) {
+                    return $er->createQueryBuilder('l')
+                            ->where('l.onProperty = :onProperty')
+                            ->setParameter('onProperty', 'genders');
+                }        
+            ))
+//            ->add('ageRange', RangeType::class, array(
+//                'attr'  => $builder->getData()->getAgeRange(),
+//                //'type'    => 'range'
+//                //'data'  => $builder->getData()->getAgeRange()
+//            ))
+            ->add('location', LookingForLocationType::class, array(
+                //'class' => LookingForLocation::class
+            ));
     }
     
     /**

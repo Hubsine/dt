@@ -14,7 +14,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *
  * @author Hubsine
  * 
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Dt\UserBundle\Repository\LookingForRepository")
  * @ORM\Table(name="dt_looking_for")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
@@ -228,5 +228,71 @@ class LookingFor {
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * Add genders
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $genders
+     * @return LookingFor
+     */
+    public function addGender(\Dt\AdminBundle\Entity\LookingForMeta $genders)
+    {
+        $this->genders[] = $genders;
+
+        return $this;
+    }
+
+    /**
+     * Remove genders
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $genders
+     */
+    public function removeGender(\Dt\AdminBundle\Entity\LookingForMeta $genders)
+    {
+        $this->genders->removeElement($genders);
+    }
+
+    /**
+     * Get genders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGenders()
+    {
+        return $this->genders;
+    }
+
+    /**
+     * Add relationships
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $relationships
+     * @return LookingFor
+     */
+    public function addRelationship(\Dt\AdminBundle\Entity\LookingForMeta $relationships)
+    {
+        $this->relationships[] = $relationships;
+
+        return $this;
+    }
+
+    /**
+     * Remove relationships
+     *
+     * @param \Dt\AdminBundle\Entity\LookingForMeta $relationships
+     */
+    public function removeRelationship(\Dt\AdminBundle\Entity\LookingForMeta $relationships)
+    {
+        $this->relationships->removeElement($relationships);
+    }
+
+    /**
+     * Get relationships
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelationships()
+    {
+        return $this->relationships;
     }
 }

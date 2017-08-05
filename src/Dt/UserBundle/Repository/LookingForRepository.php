@@ -5,9 +5,9 @@ namespace Dt\UserBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * LookingForLocationRepository
+ * LookingForRepository
  *
  */
-class LookingForLocationRepository extends EntityRepository
+class LookingForRepository extends EntityRepository
 {
 }

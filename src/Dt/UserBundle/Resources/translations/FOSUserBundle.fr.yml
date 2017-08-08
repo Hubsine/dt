@@ -65,5 +65,9 @@ form:
     twitter_url: 'Profile Twitter'
     instagram_url: 'Profile instagram'
     snapchat_name: 'Nom d''utilisateur SnapChat'
+    country: Pays
+    region: State / Provice / Region
+    zip_code: Code postal
+    city: Ville
     
     

@@ -21,6 +21,7 @@ class LookingForType extends AbstractType
     {
         $builder
             ->add('genders', EntityType::class, array(
+                'label' => 'form.genders',
                 'class' => LookingForMeta::class,
                 'multiple'  => true,
                 'expanded'  => true,
@@ -34,6 +35,7 @@ class LookingForType extends AbstractType
                 }
             ))
             ->add('relationships', EntityType::class, array(
+                'label' => 'form.relationships',
                 'class' => LookingForMeta::class,
                 'multiple'  => true,
                 'expanded'  => true,
@@ -62,7 +64,8 @@ class LookingForType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Dt\UserBundle\Entity\LookingFor'
+            'data_class' => 'Dt\UserBundle\Entity\LookingFor',
+            'translation_domain' => 'FOSUserBundle'
         ));
     }
 

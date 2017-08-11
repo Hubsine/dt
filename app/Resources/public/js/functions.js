@@ -1,7 +1,24 @@
+////
+// Google Maps API JS - Autocomplete
+////
+function autocompleteItemReset(element)
+{
+    element.val('');
+}
+
+function autocompleteSuccess(element, place)
+{
+    element.val( place.name ).parent('.form-group').removeClass('has-error');
+}
+
+function autocompleteError(element)
+{
+    element.val('').parent('.form-group').addClass('has-error');
+}
 
 function autocompleteLocationRegion(selectCountry, inputRegion, autocompleteRegion)
 {
-    inputRegion.val('');
+    autocompleteItemReset(inputRegion)
     
     autocompleteRegion.setComponentRestrictions({'country': selectCountry.val()});
 
@@ -18,9 +35,9 @@ function autocompleteLocationRegion(selectCountry, inputRegion, autocompleteRegi
             ) 
         )
         {
-            inputRegion.val( place.name ).parent('.form-group').removeClass('has-error');
+            autocompleteSuccess(inputRegion, place);
         }else{
-            inputRegion.val('').parent('.form-group').addClass('has-error');
+            autocompleteError(inputRegion);
         }
         
         console.log(place);

@@ -20,27 +20,12 @@
             marginTop: $('#main-header').outerHeight()
         });
         
-        $('body').on('change', '#dt_userbundle_lookingfor_location_country', function(){
-            
-            var options = { 
-                'types': ['(regions)']
-            };
-            
-            var country = $(this).find(':selected');
-            var region = document.getElementById('dt_userbundle_lookingfor_location_region');
-            
-            var autocomplete = new google.maps.places.Autocomplete(region, options);
-            autocomplete.setComponentRestrictions({'country': country.val()});
-            
-            google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                var place = autocomplete.getPlace();
-                region.value = place.name;
-                region.text = place.name;
-                
-                console.log(place);
-            });
-
-        });
+        //////
+        // Google Maps API JS
+        //////
+        
+        
+        
     });
     </script>
     

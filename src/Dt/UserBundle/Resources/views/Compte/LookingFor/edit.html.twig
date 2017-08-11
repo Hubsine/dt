@@ -2,7 +2,7 @@
 
 {% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
 
-{{ form_start(form, { 'action': path('dt_user_edit_profile_looking_for', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'lookingForContent' } }) }}
+{{ form_start(form, { 'action': path('dt_user_edit_profile_looking_for', { 'slug': app.user.slug } ), 'attr': { 'id': 'autocompleteLocation', 'class': 'ajaxForm', 'data-container': 'lookingForContent' } }) }}
     {{ form_widget(form) }}
     <div>
         <button type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
@@ -15,4 +15,49 @@
     </div>
 {{ form_end(form) }}
 
+<script type="text/javascript">
+        
+    jQuery(function($){
+console.log('ok');        
+        //////
+        // Google Maps API JS
+        //////
+        //if( $('#autocompleteLocation').length > 0 )
+        //{
+        // Inputs 
+        var country = $('#dt_userbundle_lookingfor_location_country');
+        var region = $('#dt_userbundle_lookingfor_location_region');
+        var city = $('#dt_userbundle_lookingfor_location_city');
+        var zipCode = $('#dt_userbundle_lookingfor_location_zipCode');
+        
+        // Options
+        var optionsRegion = 
+        {
+            types: ['(regions)'],
+            componentRestrictions: 
+            {
+                country: country.val()
+            }
+        }
+        
+        var optionsCity = 
+        {
+            types: ['(cities)'],
+            componentRestrictions: 
+            {
+                //country: country.val()
+            }
+        }
+        
+        var autocompleteRegion = new google.maps.places.Autocomplete(region.get( 0 ), optionsRegion);
+            
+        $('body').on('change', '#dt_userbundle_lookingfor_location_country', function(){
 
+            console.log( country.val() );
+            autocompleteLocationRegion( country, region, autocompleteRegion);
+
+        });
+        
+        //}
+    });
+    </script>

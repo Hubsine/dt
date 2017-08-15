@@ -51,6 +51,10 @@ dt_about_user_reply:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         
 dt_looking_for:
+    genders:
+        expression: 'Ce champ est obligatoire.'
+    relationships:
+        expression: 'Ce champ est obligatoire.'    
     age_range_min:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         greater_than_or_equal: 'Cette valeur doit être supérieure ou égale à {{ compared_value }}.'

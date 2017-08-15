@@ -60,7 +60,7 @@ dt_looking_for:
         greater_than_or_equal: 'Cette valeur doit être supérieure ou égale à {{ compared_value }}.'
         expression: 'L''âge maximum ne peut-être inférieure à l''âge minimum.'
         
-dt_adress:
+dt_address:
     country: 
         country: 'Cette valeur n''est pas un pays valide'
     zip_code:

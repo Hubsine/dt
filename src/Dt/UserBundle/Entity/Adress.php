@@ -11,15 +11,15 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 
 /**
- * Adress
+ * Address
  * 
  * @MappedSuperclass
- * ORM\Table(name="dt_adress")
- * ORM\Entity(repositoryClass="Dt\UserBundle\Repository\AdressRepository")
+ * ORM\Table(name="dt_address")
+ * ORM\Entity(repositoryClass="Dt\UserBundle\Repository\AddressRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
-class Adress
+class Address
 {
     use SoftDeleteableEntity;
     use TimestampableEntity;
@@ -46,7 +46,7 @@ class Adress
      *
      * @ORM\Column(name="country", type="string", length=255, nullable=true)
      * 
-     * @Assert\Country(message="dt_adress.country.country")
+     * @Assert\Country(message="dt_address.country.country")
      */
     protected $country;
     
@@ -69,7 +69,7 @@ class Adress
      *
      * @ORM\Column(name="zip_code", type="integer", nullable=true)
      * 
-     * @Assert\Length(max = 5, maxMessage="dt_adress.zip_code.length")
+     * @Assert\Length(max = 5, maxMessage="dt_address.zip_code.length")
      */
     protected $zipCode;
 

@@ -8,7 +8,7 @@ use ONGR\ElasticsearchBundle\Annotation as ES;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Dt\UserBundle\Entity\Adress;
+use Dt\UserBundle\Entity\Address;
 
 /**
  * Localisation
@@ -17,7 +17,7 @@ use Dt\UserBundle\Entity\Adress;
  * @ORM\Entity(repositoryClass="Dt\UserBundle\Repository\LookingForLocationRepository")
  * 
  */
-class LookingForLocation extends Adress
+class LookingForLocation extends Address
 {
     
     /**

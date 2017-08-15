@@ -17,47 +17,178 @@
 
 <script type="text/javascript">
         
-    jQuery(function($){
-console.log('ok');        
-        //////
-        // Google Maps API JS
-        //////
-        //if( $('#autocompleteLocation').length > 0 )
-        //{
-        // Inputs 
-        var country = $('#dt_userbundle_lookingfor_location_country');
-        var region = $('#dt_userbundle_lookingfor_location_region');
-        var city = $('#dt_userbundle_lookingfor_location_city');
-        var zipCode = $('#dt_userbundle_lookingfor_location_zipCode');
-        
-        // Options
-        var optionsRegion = 
-        {
-            types: ['(regions)'],
-            componentRestrictions: 
-            {
-                country: country.val()
-            }
-        }
-        
-        var optionsCity = 
-        {
-            types: ['(cities)'],
-            componentRestrictions: 
-            {
-                //country: country.val()
-            }
-        }
-        
-        var autocompleteRegion = new google.maps.places.Autocomplete(region.get( 0 ), optionsRegion);
-            
-        $('body').on('change', '#dt_userbundle_lookingfor_location_country', function(){
+jQuery(function($){
+    
+    //////
+    // Google Maps API JS
+    //////
+    
+    // Inputs 
+    var country = $('#dt_userbundle_lookingfor_location_country');
+    var region = $('#dt_userbundle_lookingfor_location_region');
+    var city = $('#dt_userbundle_lookingfor_location_city');
+    //var zipCode = $('#dt_userbundle_lookingfor_location_zipCode');
 
-            console.log( country.val() );
-            autocompleteLocationRegion( country, region, autocompleteRegion);
+    // Options
+    var optionsRegion = 
+    {
+        types: ['(regions)'],
+        componentRestrictions: 
+        {
+            country: country.val()
+        }
+    };
+
+    var optionsCity = 
+    {
+        types: ['(cities)'],
+        componentRestrictions: 
+        {
+            country: country.val()
+        }
+    };
+
+    var autocompleteRegion = new google.maps.places.Autocomplete(region.get( 0 ), optionsRegion);
+    var autocompleteCity = new google.maps.places.Autocomplete(city.get( 0 ), optionsCity);
+
+    autocompleteRegion.addListener('place_changed', function () {
+
+        var place = autocompleteRegion.getPlace();
+        var regionTypes = ['administrative_area_level_1', 'administrative_area_level_2'];
+
+        // Is administrative_area_level_1 or administrative_area_level_2
+        if( place.types.length > 0 && 
+            ( 
+                $.inArray( regionTypes[0], place.types ) !== -1 
+                || $.inArray( regionTypes[1], place.types ) !== -1
+            ) 
+        )
+        {
+            autocompleteSuccess(region, place);
+        }else{
+            autocompleteError(region);
+        }
+
+        console.log(place);
+    });
+    
+    autocompleteCity.addListener(autocompleteCity, 'place_changed', function () {
+
+        var place = autocompleteCity.getPlace();
+        var cityTypes = ['locality'];
+        
+        // Is locality
+        if( place.types.length > 0 && 
+            ( 
+                $.inArray( cityTypes[0], place.types ) !== -1 
+            ) 
+        )
+        {
+            autocompleteSuccess(city, place);
+        }else{
+            autocompleteError(city);
+        }
+        
+        console.log(place);
+    });
+        
+        /*if( ! region.val() )
+        {
+            //autocompleteItemDisabled(city);
+            autocompleteItemDisabled(zipCode);
+        }
+        
+        if( !region.val() || !city.val() )
+        {
+            autocompleteItemDisabled(zipCode);
+        }*/
+        
+        $('body').on('change', country, function()
+        {
+            autocompleteLocationRegion( country, region, autocompleteRegion );
+            autocompleteLocationCity( country, city, autocompleteCity )
+        });
+        
+        $('body').on('change', region, function(){
+            
+            /*console.log( region.value  );
+            if( ! $.trim( region.val() ) == '' )
+            {
+                autocompleteItemDisabled(city, false);
+                console.log('to disabled');
+            }else{
+                autocompleteItemDisabled(city);
+            }*/
+        });
+        
+        $('body').on('change', city, function(){
+
+            //autocompleteLocationCity( country, region, autocompleteCity);
+            //autocompleteItemReset(inputRegion);
+    
+            //autocompleteCity.setComponentRestrictions({'country': country.val()});
+
+            /*google.maps.event.addListener(autocompleteCity, 'place_changed', function () {
+
+                var place = autocompleteCity.getPlace();
+                var cityTypes = ['locality'];
+
+                // Is administrative_area_level_1 or administrative_area_level_2
+                if( place.types.length > 0 && 
+                    ( 
+                        $.inArray( cityTypes[0], place.types ) !== -1 
+                    ) 
+                )
+                {
+                    autocompleteSuccess(city, place);
+                }else{
+                    autocompleteError(city);
+                }
+
+                console.log(place);
+            });*/
+    
 
         });
         
-        //}
+        /*google.maps.event.addListener(autocompleteCity, 'place_changed', function () {
+
+                var place = autocompleteCity.getPlace();
+                var cityTypes = ['locality'];
+
+                // Is administrative_area_level_1 or administrative_area_level_2
+                if( place.types.length > 0 && 
+                    ( 
+                        $.inArray( cityTypes[0], place.types ) !== -1 
+                    ) 
+                )
+                {
+                    autocompleteSuccess(city, place);
+                    var lat = place.geometry.location.lat();
+                    var lng = place.geometry.location.lng();
+                    var latlng = { lat: lat, lng: lng };
+                    
+                    var geocoder = new google.maps.Geocoder;
+                    //geocoder.geocode({'location': latlng}, function(results, status) {
+                    //    console.log(results);
+                    //    if (status === 'OK') {
+                    //    }
+                    //});
+                    geocoder.geocode(
+                        {   
+                            location: latlng
+                        }, function(results, status) {
+                        console.log(results);
+                        if (status === 'OK') {
+                        }
+                    });
+                    
+                }else{
+                    autocompleteError(city);
+                }
+
+                console.log(place);
+            });*/
+        
     });
     </script>

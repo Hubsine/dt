@@ -54,11 +54,11 @@ dt_looking_for:
     age_range_min:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         greater_than_or_equal: 'Cette valeur doit être supérieure ou égale à {{ compared_value }}.'
-        expression: 'La valeur "minimum" ne peut-être supérieur à la valeure maximum.'
+        expression: 'L''âge minimum ne peut-être supérieur à l''âge maximum.'
     age_range_max:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         greater_than_or_equal: 'Cette valeur doit être supérieure ou égale à {{ compared_value }}.'
-        expression: 'La valeur "minimum" ne peut-être supérieur à l''âge maximum.'
+        expression: 'L''âge maximum ne peut-être inférieure à l''âge minimum.'
         
 dt_adress:
     country: 

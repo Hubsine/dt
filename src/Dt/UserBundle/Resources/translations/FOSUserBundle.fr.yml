@@ -68,6 +68,8 @@ form:
     location: Localisation
     genders: Sexes
     relationships: Relations
+    age_range_min: Age minimum
+    age_range_max: Age maximum
     country: Pays
     region: State / Provice / Region
     zip_code: Code postal

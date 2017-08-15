@@ -11,6 +11,7 @@ use Dt\AdminBundle\Repository\LookingForMetaRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Dt\UserBundle\Form\Type\LookingForLocationType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class LookingForType extends AbstractType
 {
@@ -48,11 +49,12 @@ class LookingForType extends AbstractType
                             ->setParameter('onProperty', 'relationships');
                 }        
             ))
-//            ->add('ageRange', RangeType::class, array(
-//                'attr'  => $builder->getData()->getAgeRange(),
-//                //'type'    => 'range'
-//                //'data'  => $builder->getData()->getAgeRange()
-//            ))
+            ->add('ageRangeMin', IntegerType::class, array(
+                'label' => 'form.age_range_min'
+            ))
+            ->add('ageRangeMax', IntegerType::class, array(
+                'label' => 'form.age_range_max'
+            ))        
             ->add('location', LookingForLocationType::class, array(
                 'label' => 'form.location'
                 //'class' => LookingForLocation::class

@@ -51,11 +51,13 @@ dt_about_user_reply:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         
 dt_looking_for:
-    age_range:
-        min:
-            type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
-        max: 
-            type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+    age_range_min:
+        type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+        greater_than_or_equal: 'Cette valeur doit être supérieure ou égale à {{ compared_value }}.'
+        expression: 'La valeur "minimum" ne peut-être supérieur à la valeure maximum.'
+    age_range_max:
+        type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+        greater_than_or_equal: 'Cette valeur doit être supérieure ou égale à {{ compared_value }}.'
         expression: 'La valeur "minimum" ne peut-être supérieur à l''âge maximum.'
     genders:
         expression: 'La propriété "property" de la class "LookingForMeta" doit être "gender".'

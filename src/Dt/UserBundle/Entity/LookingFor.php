@@ -73,31 +73,47 @@ class LookingFor {
     /**
      * @var array
      * 
-     * @ORM\Column(name="age_range", type="array")
+     * @ORM\Column(name="age_range_min", type="integer")
      * 
-     * @Assert\Collection(
-     *      fields={
-     *          "min" = @Assert\Optional(
-     *                              @Assert\Type(
-     *                                  type="integer", 
-     *                                  message="dt_looking_for.age_range.min.type",
-     *                              )
-     *          ),
-     *          "max" = @Assert\Optional(
-     *                              @Assert\Type(
-     *                                  type="integer", 
-     *                                  message="dt_looking_for.age_range.max.type",
-     *                              )
-     *          )
-     *      }
+     * @Assert\Type(
+     *     type="integer",
+     *     message="dt_looking_for.age_range_min.type"
+     * )
+     * 
+     * @Assert\GreaterThanOrEqual(
+     *     value = 18,
+     *     message="dt_looking_for.age_range_min.greater_than_or_equal"
      * )
      * 
      * @Assert\Expression(
-     *      "value.min <= value.max",
-     *      message="dt_looking_for.age_range.expression"
+     *      "value <= this.getAgeRangeMax()",
+     *      message="dt_looking_for.age_range_min.expression"
+     * )
+     * 
+     */
+    private $ageRangeMin = 18;
+    
+    /**
+     * @var array
+     * 
+     * @ORM\Column(name="age_range_max", type="integer")
+     * 
+     * @Assert\Type(
+     *     type="integer",
+     *     message="dt_looking_for.age_range_max.type"
+     * )
+     * 
+     * @Assert\GreaterThanOrEqual(
+     *     value = 18,
+     *     message="dt_looking_for.age_range_max.greater_than_or_equal"
+     * )
+     * 
+     * @Assert\Expression(
+     *      "value >= this.getAgeRangeMin()",
+     *      message="dt_looking_for.age_range_max.expression"
      * )
      */
-    private $ageRange = array('min' => 18, 'max' => 99);
+    private $ageRangeMax =  99;
     
     /**
      * @var LookingForLocation
@@ -126,29 +142,6 @@ class LookingFor {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set ageRange
-     *
-     * @param array $ageRange
-     * @return LookingFor
-     */
-    public function setAgeRange($ageRange)
-    {
-        $this->ageRange = $ageRange;
-
-        return $this;
-    }
-
-    /**
-     * Get ageRange
-     *
-     * @return array 
-     */
-    public function getAgeRange()
-    {
-        return $this->ageRange;
     }
 
     /**
@@ -294,5 +287,51 @@ class LookingFor {
     public function getRelationships()
     {
         return $this->relationships;
+    }
+
+    /**
+     * Set ageRangeMin
+     *
+     * @param integer $ageRangeMin
+     * @return LookingFor
+     */
+    public function setAgeRangeMin($ageRangeMin)
+    {
+        $this->ageRangeMin = $ageRangeMin;
+
+        return $this;
+    }
+
+    /**
+     * Get ageRangeMin
+     *
+     * @return integer 
+     */
+    public function getAgeRangeMin()
+    {
+        return $this->ageRangeMin;
+    }
+
+    /**
+     * Set ageRangeMax
+     *
+     * @param integer $ageRangeMax
+     * @return LookingFor
+     */
+    public function setAgeRangeMax($ageRangeMax)
+    {
+        $this->ageRangeMax = $ageRangeMax;
+
+        return $this;
+    }
+
+    /**
+     * Get ageRangeMax
+     *
+     * @return integer
+     */
+    public function getAgeRangeMax()
+    {
+        return $this->ageRangeMax;
     }
 }

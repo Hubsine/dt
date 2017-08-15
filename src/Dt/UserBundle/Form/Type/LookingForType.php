@@ -54,6 +54,7 @@ class LookingForType extends AbstractType
 //                //'data'  => $builder->getData()->getAgeRange()
 //            ))
             ->add('location', LookingForLocationType::class, array(
+                'label' => 'form.location'
                 //'class' => LookingForLocation::class
             ));
     }

@@ -45,7 +45,7 @@ class LookingForType extends AbstractType
                 'query_builder' => function (LookingForMetaRepository $er) {
                     return $er->createQueryBuilder('l')
                             ->where('l.onProperty = :onProperty')
-                            ->setParameter('onProperty', 'genders');
+                            ->setParameter('onProperty', 'relationships');
                 }        
             ))
 //            ->add('ageRange', RangeType::class, array(

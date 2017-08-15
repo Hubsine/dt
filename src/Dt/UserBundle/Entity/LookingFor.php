@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Dt\AdminBundle\Entity\LookingForMeta;
+use AppBundle\Doctrine\EntityInterface;
 
 /**
  * Description of LookingFor
@@ -21,7 +22,7 @@ use Dt\AdminBundle\Entity\LookingForMeta;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
  */
-class LookingFor {
+class LookingFor implements EntityInterface{
     
     use SoftDeleteableEntity;
     use TimestampableEntity;

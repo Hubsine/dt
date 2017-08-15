@@ -50,10 +50,12 @@ class LookingForType extends AbstractType
                 }        
             ))
             ->add('ageRangeMin', IntegerType::class, array(
-                'label' => 'form.age_range_min'
+                'label' => 'form.age_range_min',
+                'attr'  => array('min' => 18)
             ))
             ->add('ageRangeMax', IntegerType::class, array(
-                'label' => 'form.age_range_max'
+                'label' => 'form.age_range_max',
+                'attr'  => array('min' => 18)
             ))        
             ->add('location', LookingForLocationType::class, array(
                 'label' => 'form.location'

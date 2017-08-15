@@ -118,6 +118,6 @@ class LookingForMeta implements Translatable
     
     public static function getAvaiblesOnProperty()
     {
-        return array("genders", "relationships");
+        return array(self::onPropertyGenders, self::onPropertyRelationships);
     }
 }

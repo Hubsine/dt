@@ -9,7 +9,7 @@ parameters:
     dt_user.looking_for.entity.class: Dt\UserBundle\Entity\LookingFor
     # Manager Class
     dt_user.about_user_reply.manager.class: Dt\UserBundle\Doctrine\AboutUserReplyManager
-    dt_user.looking_for.manager.class: Dt\UserBundle\Doctrine\LookingManager
+    dt_user.looking_for.manager.class: Dt\UserBundle\Doctrine\LookingForManager
     # Form
     dt_user.about_user_reply.form.type.class: Dt\UserBundle\Form\Type\AboutUserReplyType
 

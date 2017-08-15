@@ -77,8 +77,18 @@ class CompteController extends Controller
     
     public function showLookingForAction(Request $request, User $user)
     {
+        /** lookingForManager \Dt\UserBundle\Doctrine\LookingForManager */
+        $lookingForManager = $this->get('looking_for.manager');
         
-        return $this->render('DtUserBundle:Compte:LookingFor/show.html.twig');
+        $lookingFor = $lookingForManager
+                ->getRepository()
+                ->findBy(array('user'   => $user));
+        
+        return $this->render(
+            'DtUserBundle:Compte:LookingFor/show.html.twig',array(
+                'lookingFor'    => $lookingFor
+            )
+        );
     }
 
     public function editAboutUserReplyAction(Request $request, User $user)

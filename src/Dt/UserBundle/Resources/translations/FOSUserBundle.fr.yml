@@ -16,6 +16,7 @@ layout:
     twitter_url: 'Profile Twitter'
     instagram_url: 'Profile instagram'
     snapchat_name: 'Nom d''utilisateur SnapChat'
+    section_empty: 'Vous n''avez pas encore renseigné cette partie de votre profil. Cliquez sur "Modifier" pour le renseigné.'
     compte:
         mon_compte: 'Compte'
         moi: 'Moi'
@@ -25,6 +26,13 @@ layout:
         qui_suis_je: 'Qui suis-je ?'
         about_user_reply: 'A propos de moi'
         looking_for: Je cherche
+    looking_for:
+        sexe: 'Sexe'
+        relationships: 'Relation cherchée'
+        age_range: Âge
+        age_range_min: Âge minimum
+        age_range_max: Âge maximum
+        location: Localisation
 
 change_profile:
     update: 'Mettre à jour'

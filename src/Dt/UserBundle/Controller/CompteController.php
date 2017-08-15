@@ -82,7 +82,7 @@ class CompteController extends Controller
         
         $lookingFor = $lookingForManager
                 ->getRepository()
-                ->findBy(array('user'   => $user));
+                ->findByUser();
         
         return $this->render(
             'DtUserBundle:Compte:LookingFor/show.html.twig',array(

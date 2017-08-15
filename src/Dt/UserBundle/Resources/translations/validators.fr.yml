@@ -59,10 +59,6 @@ dt_looking_for:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         greater_than_or_equal: 'Cette valeur doit être supérieure ou égale à {{ compared_value }}.'
         expression: 'La valeur "minimum" ne peut-être supérieur à l''âge maximum.'
-    genders:
-        expression: 'La propriété "property" de la class "LookingForMeta" doit être "gender".'
-    relationships:
-        expression: 'La propriété "property" de la class "LookingForMeta" doit être "relationships".'
         
 dt_adress:
     country: 

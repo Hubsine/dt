@@ -21,6 +21,9 @@ use Gedmo\Translatable\Translatable;
 class LookingForMeta implements Translatable
 {
     
+    const onPropertyGenders = 'genders';
+    const onPropertyRelationships = 'relationships';
+
     use SoftDeleteableEntity;
     use TimestampableEntity;
     

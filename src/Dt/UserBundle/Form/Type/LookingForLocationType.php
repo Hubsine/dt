@@ -27,10 +27,6 @@ class LookingForLocationType extends AbstractType
             ->add('city', TextType::class, array(
                 'label' => 'form.city',
                 'required'  => false
-            ))
-            ->add('zipCode', IntegerType::class, array(
-                'label' => 'form.zip_code',
-                'required'  => false
             ));
     }
     

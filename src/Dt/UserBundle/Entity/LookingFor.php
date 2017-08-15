@@ -8,6 +8,7 @@ use ONGR\ElasticsearchBundle\Annotation as ES;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Dt\AdminBundle\Entity\LookingForMeta;
 
 /**
  * Description of LookingFor
@@ -49,10 +50,6 @@ class LookingFor {
      * @ORM\JoinColumn(nullable=false)
      * @ORM\JoinTable(name="looking_for_meta_genders")
      * 
-     * @Assert\Expression(
-     *      "value.getOnProperty() == 'genders'",
-     *      message="dt_looking_for.genders.expression"
-     * )
      */
     private $genders;
     
@@ -63,10 +60,6 @@ class LookingFor {
      * @ORM\JoinColumn(nullable=false)
      * @ORM\JoinTable(name="looking_for_meta_relationships")
      * 
-     * @Assert\Expression(
-     *      "value.getOnProperty() == 'relationships'",
-     *      message="dt_looking_for.relationships.expression"
-     * )
      */
     private $relationships;
     
@@ -125,15 +118,6 @@ class LookingFor {
      */
     private $location;
     
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->lookingForMeta = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Get id
      *
@@ -168,39 +152,6 @@ class LookingFor {
     }
 
     /**
-     * Add lookingForMeta
-     *
-     * @param \Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta
-     * @return LookingFor
-     */
-    public function addLookingForMetum(\Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta)
-    {
-        $this->lookingForMeta[] = $lookingForMeta;
-
-        return $this;
-    }
-
-    /**
-     * Remove lookingForMeta
-     *
-     * @param \Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta
-     */
-    public function removeLookingForMetum(\Dt\AdminBundle\Entity\LookingForMeta $lookingForMeta)
-    {
-        $this->lookingForMeta->removeElement($lookingForMeta);
-    }
-
-    /**
-     * Get lookingForMeta
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getLookingForMeta()
-    {
-        return $this->lookingForMeta;
-    }
-
-    /**
      * Set location
      *
      * @param \Dt\UserBundle\Entity\LookingForLocation $location
@@ -229,10 +180,13 @@ class LookingFor {
      * @param \Dt\AdminBundle\Entity\LookingForMeta $genders
      * @return LookingFor
      */
-    public function addGender(\Dt\AdminBundle\Entity\LookingForMeta $genders)
+    public function addGender(LookingForMeta $genders)
     {
-        $this->genders[] = $genders;
-
+        if( $genders->getOnProperty() == LookingForMeta::onPropertyGenders )
+        {
+            $this->genders[] = $genders;
+        }
+        
         return $this;
     }
 
@@ -264,7 +218,10 @@ class LookingFor {
      */
     public function addRelationship(\Dt\AdminBundle\Entity\LookingForMeta $relationships)
     {
-        $this->relationships[] = $relationships;
+        if( $relationships->getOnProperty() == LookingForMeta::onPropertyRelationships )
+        {
+            $this->relationships[] = $relationships;
+        }
 
         return $this;
     }
@@ -334,4 +291,13 @@ class LookingFor {
     {
         return $this->ageRangeMax;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->genders = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->relationships = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }

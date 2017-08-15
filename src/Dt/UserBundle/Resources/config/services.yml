@@ -4,9 +4,12 @@ parameters:
     # Listener
     dt_user.listener.oauth_user.class: Dt\UserBundle\EventListener\LoadUserByOAuthUserListener
     dt_user.listener.redirect.class: Dt\UserBundle\EventListener\RedirectListener
-    # Manager
+    # Manager Entity
     dt_user.about_user_reply.entity.class: Dt\UserBundle\Entity\AboutUserReply
+    dt_user.looking_for.entity.class: Dt\UserBundle\Entity\LookingFor
+    # Manager Class
     dt_user.about_user_reply.manager.class: Dt\UserBundle\Doctrine\AboutUserReplyManager
+    dt_user.looking_for.manager.class: Dt\UserBundle\Doctrine\LookingManager
     # Form
     dt_user.about_user_reply.form.type.class: Dt\UserBundle\Form\Type\AboutUserReplyType
 
@@ -31,7 +34,11 @@ services:
     # Manager
     about_user_reply.manager:
         class: '%dt_user.about_user_reply.manager.class%'
-        arguments: ["@doctrine.orm.entity_manager", "%dt_user.about_user_reply.entity.class%"]
+        arguments: ["@doctrine.orm.entity_manager", "%dt_user.looking_for.entity.class%"]
+    
+    looking_for.manager:
+        class: '%dt_user.looking_for.manager.class%'
+        arguments: ["@doctrine.orm.entity_manager", "%dt_user.looking_for.entity.class%"]    
         
     # Form Type
     dt_user.form.type.about_user_reply_type:

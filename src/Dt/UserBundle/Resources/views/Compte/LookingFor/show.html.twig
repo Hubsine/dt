@@ -6,40 +6,45 @@
         {{ advanced_flash('success', message, '', true, false, '') }}    
 {% endif %}
 
-<table class="table table-condensed">
-    <tbody> 
-        <tr> 
-            <th scope="row">{% trans %} layout.looking_for.sexe {% endtrans %}</th> 
-            <td>
-                {% for lookingForGender in lookingFor.genders %}
-                    {{ lookingForGender.label }}
-                {% endfor %}
-            </td> 
-        </tr> 
-        <tr> 
-            <th scope="row">{% trans %} layout.looking_for.relationships {% endtrans %}</th> 
-            <td>
-                {% for lookingForRelationships in lookingFor.relationships %}
-                    {{ lookingForRelationships.label }} 
-                {% endfor %}
-            </td> 
-        <tr> 
-            <th scope="row">{% trans %} layout.looking_for.age_range {% endtrans %}</th>
-            <td>
-                {% trans %} layout.looking_for.age_range_min {% endtrans %} : {{ lookingFor.ageRangeMin }}
-                {% trans %} layout.looking_for.age_range_max {% endtrans %} : {{ lookingFor.ageRangeMax }}
-            </td> 
-        </tr> 
-        <tr> 
-            <th scope="row">{% trans %} layout.looking_for.location {% endtrans %}</th>
-            <td>
-                {{ lookingFor.location.country }} 
-                {{ lookingFor.location.region }}
-                {{ lookingFor.location.city }}
-            </td> 
-        </tr> 
-    </tbody>
-</table>
+{% if lookingFor is null %}
+    {% set message = 'layout.section_empty'|trans%}
+    {{ flash('info', message) }}
+{% else %}    
+    <table class="table table-condensed">
+        <tbody> 
+            <tr> 
+                <th scope="row">{% trans %} layout.looking_for.sexe {% endtrans %}</th> 
+                <td>
+                    {% for lookingForGender in lookingFor.genders %}
+                        {{ lookingForGender.label }}
+                    {% endfor %}
+                </td> 
+            </tr> 
+            <tr> 
+                <th scope="row">{% trans %} layout.looking_for.relationships {% endtrans %}</th> 
+                <td>
+                    {% for lookingForRelationships in lookingFor.relationships %}
+                        {{ lookingForRelationships.label }} 
+                    {% endfor %}
+                </td> 
+            <tr> 
+                <th scope="row">{% trans %} layout.looking_for.age_range {% endtrans %}</th>
+                <td>
+                    {% trans %} layout.looking_for.age_range_min {% endtrans %} : {{ lookingFor.ageRangeMin }}
+                    {% trans %} layout.looking_for.age_range_max {% endtrans %} : {{ lookingFor.ageRangeMax }}
+                </td> 
+            </tr> 
+            <tr> 
+                <th scope="row">{% trans %} layout.looking_for.location {% endtrans %}</th>
+                <td>
+                    {{ lookingFor.location.country }} 
+                    {{ lookingFor.location.region }}
+                    {{ lookingFor.location.city }}
+                </td> 
+            </tr> 
+        </tbody>
+    </table>
+{% endif %}
         
 <div>
     <button 

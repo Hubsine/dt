@@ -69,7 +69,6 @@ jQuery(function($){
             autocompleteError(region);
         }
 
-        console.log(place);
     });
     
     autocompleteCity.addListener(autocompleteCity, 'place_changed', function () {
@@ -89,7 +88,6 @@ jQuery(function($){
             autocompleteError(city);
         }
         
-        console.log(place);
     });
         
         /*if( ! region.val() )
@@ -103,10 +101,10 @@ jQuery(function($){
             autocompleteItemDisabled(zipCode);
         }*/
         
-        $('body').on('change', country, function()
+        $('body').on('change', '#dt_userbundle_lookingfor_location_country', function()
         {
             autocompleteLocationRegion( country, region, autocompleteRegion );
-            autocompleteLocationCity( country, city, autocompleteCity )
+            autocompleteLocationCity( country, city, autocompleteCity );
         });
         
         $('body').on('change', region, function(){

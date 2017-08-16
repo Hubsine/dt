@@ -10,6 +10,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Dt\AdminBundle\Entity\LookingForMeta;
 use AppBundle\Doctrine\EntityInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Description of LookingFor
@@ -21,6 +22,10 @@ use AppBundle\Doctrine\EntityInterface;
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * 
+ * @UniqueEntity(
+ *      fields={"user"}, 
+ *      message="dt_looking_for.unique_entity"
+ * )
  */
 class LookingFor implements EntityInterface{
     
@@ -51,6 +56,10 @@ class LookingFor implements EntityInterface{
      * @ORM\JoinColumn(nullable=false)
      * @ORM\JoinTable(name="looking_for_meta_genders")
      * 
+     * @Assert\Expression(
+     *      "value.count() > 0",
+     *      message = "dt_looking_for.genders.expression"
+     * )
      */
     private $genders;
     
@@ -61,6 +70,10 @@ class LookingFor implements EntityInterface{
      * @ORM\JoinColumn(nullable=false)
      * @ORM\JoinTable(name="looking_for_meta_relationships")
      * 
+     * @Assert\Expression(
+     *      "value.count() > 0",
+     *      message = "dt_looking_for.relationships.expression"
+     *  )
      */
     private $relationships;
     
@@ -162,6 +175,8 @@ class LookingFor implements EntityInterface{
     {
         $this->location = $location;
 
+        $location->setLookingFor($this);
+        
         return $this;
     }
 

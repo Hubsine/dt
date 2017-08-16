@@ -1,5 +1,7 @@
 parameters:
     app.menu_builder.class: AppBundle\Menu\MenuBuilder
+    app.twig.country_extension.class: AppBundle\Twig\Extensions\CountryExtension
+    
 services:
     app.menu_builder:
         class: '%app.menu_builder.class%'
@@ -9,3 +11,9 @@ services:
             - { name: knp_menu.menu_builder, method: createLoginMenu, alias: login }
             - { name: knp_menu.menu_builder, method: createLogoutMenu, alias: logout }
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }
+            
+    app.twig.country_extension:
+        class: '%app.twig.country_extension.class%'
+        public: false
+        tags:
+            - { name: twig.extension }

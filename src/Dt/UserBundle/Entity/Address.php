@@ -175,4 +175,27 @@ class Address
     {
         return $this->zip;
     }
+    
+    /**
+     * Set user
+     *
+     * @param \Dt\UserBundle\Entity\User $user
+     * @return LookingFor
+     */
+    public function setUser(\Dt\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Dt\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

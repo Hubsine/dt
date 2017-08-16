@@ -90,6 +90,14 @@ abstract class AbstractManager implements ManagerInterface{
     /**
      * {@inheritdoc}
      */
+    public function mergeEntity(EntityInterface $entity)
+    {
+        $this->objectManager->merge($entity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function flush()
     {
         $this->objectManager->flush();

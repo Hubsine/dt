@@ -51,6 +51,7 @@ dt_about_user_reply:
         type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
         
 dt_looking_for:
+    unique_entity: "Une erreur est survenue : DT_LOOKING_FOR::UniqueEntity."
     genders:
         expression: 'Ce champ est obligatoire.'
     relationships:

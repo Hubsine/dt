@@ -26,5 +26,7 @@ interface ManagerInterface {
     
     public function updateEntity(EntityInterface $entity);
     
+    public function mergeEntity(EntityInterface $entity);
+
     public function flush();
 }

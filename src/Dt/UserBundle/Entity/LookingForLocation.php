@@ -13,7 +13,7 @@ use Dt\UserBundle\Entity\Address;
 /**
  * Localisation
  *
- * @ORM\Table(name="dt_localisation")
+ * @ORM\Table(name="dt_looking_for_location")
  * @ORM\Entity(repositoryClass="Dt\UserBundle\Repository\LookingForLocationRepository")
  * 
  */

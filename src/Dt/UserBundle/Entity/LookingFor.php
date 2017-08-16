@@ -125,8 +125,7 @@ class LookingFor implements EntityInterface{
     /**
      * @var LookingForLocation
      * 
-     * @ORM\OneToOne(targetEntity="LookingForLocation", cascade={"persist", "remove"}, mappedBy="lookingFor")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="LookingForLocation", cascade={"persist", "remove"}, inversedBy="lookingFor")
      * 
      * @Assert\Valid()
      */
@@ -173,10 +172,10 @@ class LookingFor implements EntityInterface{
      */
     public function setLocation(\Dt\UserBundle\Entity\LookingForLocation $location)
     {
-        $this->location = $location;
-
         $location->setLookingFor($this);
         
+        $this->location = $location;
+
         return $this;
     }
 

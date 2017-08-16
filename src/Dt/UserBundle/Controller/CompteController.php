@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dt\UserBundle\Entity\User;
 use Dt\UserBundle\Entity\AboutUserReply;
 use Dt\UserBundle\Entity\LookingFor;
+use Dt\UserBundle\Entity\LookingForLocation;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -160,7 +161,24 @@ class CompteController extends Controller
         $templateToShow = 'DtUserBundle:Compte:LookingFor/show.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:LookingFor/edit.html.twig';
         
-        $lookingFor = new LookingFor();
+        /** lookingForManager \Dt\UserBundle\Doctrine\LookingForManager */
+        $lookingForManager = $this->get('looking_for.manager');
+        
+        $lookingFor = $lookingForManager
+                ->getRepository()
+                ->findOneByUser($user);
+       
+        if( empty($lookingFor) )
+        {           
+            $lookingFor = new LookingFor();
+            $lookingForLocation = new LookingForLocation();
+            
+            $lookingForLocation->setUser($user);
+            $lookingFor->setLocation($lookingForLocation);
+        }
+        
+        $lookingFor->setUser($user);
+        
         $form = $this->createForm(LookingForType::class, $lookingFor);
         
         $form->handleRequest($request);
@@ -169,18 +187,16 @@ class CompteController extends Controller
             
             if($form->isValid()){
                 
-                /** @var $userManager UserManagerInterface */
-                //$userManager = $this->get('fos_user.user_manager');
-                
-                //$userManager->updateUser($user);
-                
-                $message = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+                $lookingForManager->updateEntity($lookingFor);
+
+                $message = $this->get('translator')->trans('change_profile.success', array(), 'FOSUserBundle');
                 
                 $response = new JsonResponse(array(
                     'contentId' => $contentId,
                     'form'  => $this->renderView($templateToShow, array(
-                        'message'   => $message
-                         ))
+                        'message'   => $message,
+                        'lookingFor'    => $lookingFor
+                    ))
                 ), $codeResponse );
 
                 return $response;

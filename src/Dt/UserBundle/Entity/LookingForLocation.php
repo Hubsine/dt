@@ -23,8 +23,7 @@ class LookingForLocation extends Address
     /**
      * @var LookingFor
      * 
-     * @ORM\OneToOne(targetEntity="LookingFor", inversedBy="location")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="LookingFor", mappedBy="location")
      */
     private $lookingFor;
     

@@ -34,7 +34,7 @@ services:
     # Manager
     about_user_reply.manager:
         class: '%dt_user.about_user_reply.manager.class%'
-        arguments: ["@doctrine.orm.entity_manager", "%dt_user.looking_for.entity.class%"]
+        arguments: ["@doctrine.orm.entity_manager", "%dt_user.about_user_reply.entity.class%"]
     
     looking_for.manager:
         class: '%dt_user.looking_for.manager.class%'

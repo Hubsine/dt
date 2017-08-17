@@ -39,12 +39,12 @@
                 <td>
                     {{ app.user.userLocation.country|countryName }} 
                     
-                    {% if app.user.userLocation.region is not empty %}
-                    > {{ app.user.userLocation.region }}
+                    {% if lookingFor.location.region is not empty %}
+                    > {{ lookingFor.location.region }}
                     {% endif %}
                     
-                    {% if app.user.userLocation.city is not empty %}
-                    > {{ app.user.userLocation.city }}
+                    {% if lookingFor.location.city is not empty %}
+                    > {{ lookingFor.location.city }}
                     {% endif %}
                 </td> 
             </tr> 

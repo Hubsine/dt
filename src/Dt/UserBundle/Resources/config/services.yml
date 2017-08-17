@@ -7,9 +7,11 @@ parameters:
     # Manager Entity
     dt_user.about_user_reply.entity.class: Dt\UserBundle\Entity\AboutUserReply
     dt_user.looking_for.entity.class: Dt\UserBundle\Entity\LookingFor
+    dt_user.user_location.entity.class: Dt\UserBundle\Entity\UserLocation
     # Manager Class
     dt_user.about_user_reply.manager.class: Dt\UserBundle\Doctrine\AboutUserReplyManager
     dt_user.looking_for.manager.class: Dt\UserBundle\Doctrine\LookingForManager
+    dt_user.user_location.manager.class: Dt\UserBundle\Doctrine\UserLocationManager
     # Form
     dt_user.about_user_reply.form.type.class: Dt\UserBundle\Form\Type\AboutUserReplyType
 
@@ -38,7 +40,11 @@ services:
     
     looking_for.manager:
         class: '%dt_user.looking_for.manager.class%'
-        arguments: ["@doctrine.orm.entity_manager", "%dt_user.looking_for.entity.class%"]    
+        arguments: ["@doctrine.orm.entity_manager", "%dt_user.looking_for.entity.class%"] 
+        
+    user_location.manager:
+        class: '%dt_user.user_location.manager.class%'
+        arguments: ["@doctrine.orm.entity_manager", "%dt_user.user_location.entity.class%"] 
         
     # Form Type
     dt_user.form.type.about_user_reply_type:

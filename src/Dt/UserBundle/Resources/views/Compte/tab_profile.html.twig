@@ -25,6 +25,12 @@
         'sectionTitle': 'layout.compte.looking_for',
         'contentId': 'lookingForContent',
         'content': controller('DtUserBundle:Compte:showLookingFor', {'slug': app.request.get('slug') })
+    },
+    'user_location': {
+        'sectionId': 'profile-user-location',
+        'sectionTitle': 'layout.compte.user_location',
+        'contentId': 'userLocationContent',
+        'content': controller('DtUserBundle:Compte:showUserLocation', {'slug': app.request.get('slug') })
     }
 }
 %}

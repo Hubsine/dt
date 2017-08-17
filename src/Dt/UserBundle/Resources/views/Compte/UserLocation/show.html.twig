@@ -15,9 +15,16 @@
             <tr> 
                 <th scope="row">{% trans %} layout.user_location.location {% endtrans %}</th>
                 <td>
-                    {{ app.user.userLocation.country|countryName }} >
-                    {{ app.user.userLocation.region }} >
-                    {{ app.user.userLocation.city }}
+                    {{ app.user.userLocation.country|countryName }} 
+                    
+                    {% if app.user.userLocation.region is not empty %}
+                    > {{ app.user.userLocation.region }}
+                    {% endif %}
+                    
+                    {% if app.user.userLocation.city is not empty %}
+                    > {{ app.user.userLocation.city }}
+                    {% endif %}
+                    
                 </td> 
             </tr> 
         </tbody>

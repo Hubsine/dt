@@ -26,6 +26,7 @@ layout:
         qui_suis_je: 'Qui suis-je ?'
         about_user_reply: 'A propos de moi'
         looking_for: Je cherche
+        user_location: Ma localisation
     looking_for:
         sexe: 'Sexe'
         relationships: 'Relation cherchée'

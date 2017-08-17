@@ -6,7 +6,7 @@
         {{ advanced_flash('success', message, '', true, false, '') }}    
 {% endif %}
 
-{% if app.user.location is null %}
+{% if app.user.userLocation is null %}
     {% set message = 'layout.section_empty'|trans%}
     {{ flash('info', message) }}
 {% else %}    
@@ -15,9 +15,9 @@
             <tr> 
                 <th scope="row">{% trans %} layout.user_location.location {% endtrans %}</th>
                 <td>
-                    {{ app.user.location.country|countryName }} >
-                    {{ app.user.location.region }} >
-                    {{ app.user.location.city }}
+                    {{ app.user.userLocation.country|countryName }} >
+                    {{ app.user.userLocation.region }} >
+                    {{ app.user.userLocation.city }}
                 </td> 
             </tr> 
         </tbody>

@@ -35,7 +35,8 @@ class UserLocationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Dt\UserBundle\Entity\UserLocation'
+            'data_class' => 'Dt\UserBundle\Entity\UserLocation',
+            'translation_domain' => 'FOSUserBundle'
         ));
     }
 

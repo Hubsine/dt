@@ -71,7 +71,7 @@ jQuery(function($){
 
     });
     
-    autocompleteCity.addListener(autocompleteCity, 'place_changed', function () {
+    autocompleteCity.addListener('place_changed', function () {
 
         var place = autocompleteCity.getPlace();
         var cityTypes = ['locality'];

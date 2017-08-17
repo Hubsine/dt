@@ -36,7 +36,7 @@ class Address
     /**
      * @var User
      * 
-     * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\User")
+     * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\User", mappedBy="id")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $user;

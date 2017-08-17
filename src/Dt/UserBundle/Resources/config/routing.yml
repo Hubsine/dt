@@ -32,3 +32,7 @@ dt_user_edit_profile_about_user_reply:
 dt_user_edit_profile_looking_for: 
     path: /{slug}/mon-compte/profile/edit/looking-for
     defaults: { _controller: DtUserBundle:Compte:editLookingFor }
+    
+dt_user_edit_profile_user_location: 
+    path: /{slug}/mon-compte/profile/edit/user-location
+    defaults: { _controller: DtUserBundle:Compte:editUserLocation }    

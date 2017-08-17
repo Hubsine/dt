@@ -33,6 +33,8 @@ layout:
         age_range_min: Âge minimum
         age_range_max: Âge maximum
         location: Localisation
+    user_location:
+        location: Ma localisation
 
 change_profile:
     update: 'Mettre à jour'

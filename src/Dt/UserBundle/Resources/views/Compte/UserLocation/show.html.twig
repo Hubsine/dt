@@ -1,0 +1,37 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+
+{% if message is defined %}    
+        {{ advanced_flash('success', message, '', true, false, '') }}    
+{% endif %}
+
+{% if app.user.location is null %}
+    {% set message = 'layout.section_empty'|trans%}
+    {{ flash('info', message) }}
+{% else %}    
+    <table class="table table-condensed">
+        <tbody> 
+            <tr> 
+                <th scope="row">{% trans %} layout.user_location.location {% endtrans %}</th>
+                <td>
+                    {{ app.user.location.country|countryName }} >
+                    {{ app.user.location.region }} >
+                    {{ app.user.location.city }}
+                </td> 
+            </tr> 
+        </tbody>
+    </table>
+{% endif %}
+        
+<div>
+    <button 
+        data-action="{{ path('dt_user_edit_profile_user_location', { 'slug': app.user.slug } ) }}" 
+        data-container="userLocationContent"
+        class="updateFormToUpdateInAjax pull-right btn btn-danger">
+        {% trans %} layout.update {% endtrans %}
+    </button>
+        
+</div>
+
+

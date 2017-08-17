@@ -1,0 +1,99 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
+
+{{ form_start(form, { 'action': path('dt_user_edit_profile_user_location', { 'slug': app.user.slug } ), 'attr': { 'id': 'userLocation', 'class': 'ajaxForm', 'data-container': 'userLocationContent' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <button type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
+        <div
+            data-action="{{ path('dt_user_edit_profile_user_location', { 'slug': app.user.slug } ) }}" 
+            data-container="userLocationContent"
+            class="cancelFormToUpdateInAjax btn btn-warning">
+            {% trans %} layout.cancel {% endtrans %}
+        </div>
+    </div>
+{{ form_end(form) }}
+
+<script type="text/javascript">
+        
+jQuery(function($){
+    
+    //////
+    // Google Maps API JS
+    //////
+    
+    // Inputs 
+    var userLocationCountry = $('#dt_userbundle_userlocation_location_country');
+    var userLocationRegion = $('#dt_userbundle_userlocation_location_region');
+    var userLocationCity = $('#dt_userbundle_userlocation_location_city');
+
+    // Options
+    var userLocationOptionsRegion = 
+    {
+        types: ['(regions)'],
+        componentRestrictions: 
+        {
+            country: userLocationCountry.val()
+        }
+    };
+
+    var userLocationOptionsCity = 
+    {
+        types: ['(cities)'],
+        componentRestrictions: 
+        {
+            country: userLocationCountry.val()
+        }
+    };
+
+    var userLocationAutocompleteRegion = new google.maps.places.Autocomplete(userLocationRegion.get( 0 ), userLocationOptionsRegion);
+    var userLocationAutocompleteCity = new google.maps.places.Autocomplete(city.get( 0 ), userLocationOptionsCity);
+
+    userLocationAutocompleteRegion.addListener('place_changed', function () {
+
+        var place = userLocationAutocompleteRegion.getPlace();
+        var regionTypes = ['administrative_area_level_1', 'administrative_area_level_2'];
+
+        // Is administrative_area_level_1 or administrative_area_level_2
+        if( place.types.length > 0 && 
+            ( 
+                $.inArray( regionTypes[0], place.types ) !== -1 
+                || $.inArray( regionTypes[1], place.types ) !== -1
+            ) 
+        )
+        {
+            autocompleteSuccess(userLocationRegion, place);
+        }else{
+            autocompleteError(userLocationRegion);
+        }
+
+    });
+    
+    userLocationAutocompleteCity.addListener('place_changed', function () {
+
+        var place = userLocationAutocompleteCity.getPlace();
+        var cityTypes = ['locality'];
+        
+        // Is locality
+        if( place.types.length > 0 && 
+            ( 
+                $.inArray( cityTypes[0], place.types ) !== -1 
+            ) 
+        )
+        {
+            autocompleteSuccess(userLocationCity, place);
+        }else{
+            autocompleteError(userLocationCity);
+        }
+        
+    });
+        
+        
+    $('body').on('change', '#dt_userbundle_userlocation_location_country', function()
+    {
+        autocompleteLocationRegion( userLocationCountry, userLocationRegion, autocompleteRegion );
+        autocompleteLocationCity( userLocationCountry, userLocationCity, autocompleteCity );
+    });
+        
+    </script>

@@ -16,12 +16,14 @@ use Dt\UserBundle\Form\Type\MoiFormType;
 use Dt\UserBundle\Form\Type\ReseauxSociauxFormType;
 use Dt\UserBundle\Form\Type\AboutUserReplyType;
 use Dt\UserBundle\Form\Type\LookingForType;
+use Dt\UserBundle\Form\Type\UserLocationType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dt\UserBundle\Entity\User;
 use Dt\UserBundle\Entity\AboutUserReply;
 use Dt\UserBundle\Entity\LookingFor;
 use Dt\UserBundle\Entity\LookingForLocation;
+use Dt\UserBundle\Entity\UserLocation;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -90,6 +92,11 @@ class CompteController extends Controller
                 'lookingFor'    => $lookingFor
             )
         );
+    }
+    
+    public function showUserLocationAction(Request $request, User $user)
+    {
+        return $this->render('DtUserBundle:Compte:UserLocation/show.html.twig');
     }
 
     public function editAboutUserReplyAction(Request $request, User $user)
@@ -196,6 +203,65 @@ class CompteController extends Controller
                     'form'  => $this->renderView($templateToShow, array(
                         'message'   => $message,
                         'lookingFor'    => $lookingFor
+                    ))
+                ), $codeResponse );
+
+                return $response;
+                
+            }else{
+                $codeResponse = 400;
+            }
+        }
+        
+        $response = new JsonResponse(
+            array(
+                'contentId' => $contentId,
+                'form'  => $this->renderView($templateToEdit, array(
+                    'form' => $form->createView(),
+                     ))
+            ), $codeResponse );
+        
+        return $response;
+        
+    }
+    
+    public function editUserLocationAction(Request $request, User $user){
+        
+        $codeResponse = 200;
+        $contentId = 'userLocationContent';
+        $templateToShow = 'DtUserBundle:Compte:UserLocation/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:UserLocation/edit.html.twig';
+        
+        $userlocation = $this->getUser()->getLocation();
+        
+        if( empty($userlocation) )
+        {
+            $userlocation = new UserLocation();
+        }
+        
+        $userlocation->setUser($user);
+        
+        $form = $this->createForm(UserLocationType::class, $userlocation);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted()){
+            
+            if($form->isValid()){
+                
+                $user->setUserLocation($userlocation);
+                
+                /** @var $userManager UserManagerInterface */
+                $userManager = $this->get('fos_user.user_manager');
+                
+                $userManager->updateUser($user);
+
+                $message = $this->get('translator')->trans('change_profile.success', array(), 'FOSUserBundle');
+                
+                $response = new JsonResponse(array(
+                    'contentId' => $contentId,
+                    'form'  => $this->renderView($templateToShow, array(
+                        'message'   => $message
                     ))
                 ), $codeResponse );
 

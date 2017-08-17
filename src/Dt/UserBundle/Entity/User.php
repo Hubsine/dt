@@ -213,9 +213,16 @@ class User extends BaseUser
      */
     protected $about;
     
+    /**
+     * @deprecated 
+     * @var type 
+     */
     protected $aboutUser;
 
-
+    /**
+     * @deprecated 
+     * @var type 
+     */
     protected $size; 
     
     /**
@@ -226,6 +233,15 @@ class User extends BaseUser
      */
     protected $profilePicture;
     
+    /**
+     * @var UserLocation
+     * 
+     * @ORM\OneToOne(targetEntity="UserLocation", cascade={"persist", "remove"}, inversedBy="user")
+     * 
+     * @Assert\Valid()
+     */
+    protected $userLocation;
+
     /**
      * @param string $facebookId
      * @return User
@@ -593,5 +609,30 @@ class User extends BaseUser
     public function getSnapchatName()
     {
         return $this->snapchatName;
+    }
+
+    /**
+     * Set userLocation
+     *
+     * @param \Dt\UserBundle\Entity\UserLocation $userLocation
+     * @return User
+     */
+    public function setUserLocation(\Dt\UserBundle\Entity\UserLocation $userLocation = null)
+    {
+        $this->userLocation = $userLocation;
+        
+        $userLocation->setUser($this);
+        
+        return $this;
+    }
+
+    /**
+     * Get userLocation
+     *
+     * @return \Dt\UserBundle\Entity\UserLocation 
+     */
+    public function getUserLocation()
+    {
+        return $this->userLocation;
     }
 }

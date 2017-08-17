@@ -17,9 +17,8 @@ function autocompleteItemReset(element)
 }
 
 function autocompleteSuccess(element, place)
-{
-    //element.val( place.name ).parent('.form-group').removeClass('has-error');
-    element.parent('.form-group').removeClass('has-error');
+{   
+    element.val( place.name ).parent('.form-group').removeClass('has-error');
 }
 
 function autocompleteError(element)

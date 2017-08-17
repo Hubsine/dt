@@ -1,0 +1,51 @@
+<?php
+
+namespace Dt\UserBundle\Form\Type;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+class UserLocationType extends AbstractType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('country', CountryType::class, array(
+                'label' => 'form.country'
+            ))
+            ->add('region', TextType::class, array(
+                'label' => 'form.region',
+                'required'  => false
+            ))
+            ->add('city', TextType::class, array(
+                'label' => 'form.city',
+                'required'  => false
+            ));
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Dt\UserBundle\Entity\UserLocation'
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'dt_userbundle_userlocation';
+    }
+
+
+}

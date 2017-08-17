@@ -232,7 +232,7 @@ class CompteController extends Controller
         $templateToShow = 'DtUserBundle:Compte:UserLocation/show.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:UserLocation/edit.html.twig';
         
-        $userlocation = $this->getUser()->getLocation();
+        $userlocation = $this->getUser()->getUserLocation();
         
         if( empty($userlocation) )
         {

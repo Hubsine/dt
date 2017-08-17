@@ -48,7 +48,7 @@ jQuery(function($){
     };
 
     var userLocationAutocompleteRegion = new google.maps.places.Autocomplete(userLocationRegion.get( 0 ), userLocationOptionsRegion);
-    var userLocationAutocompleteCity = new google.maps.places.Autocomplete(city.get( 0 ), userLocationOptionsCity);
+    var userLocationAutocompleteCity = new google.maps.places.Autocomplete(userLocationCity.get( 0 ), userLocationOptionsCity);
 
     userLocationAutocompleteRegion.addListener('place_changed', function () {
 

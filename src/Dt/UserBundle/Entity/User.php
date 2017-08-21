@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\Type;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use ONGR\ElasticsearchBundle\Annotation as ES;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -29,6 +30,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        
+        $this->userPictures = new ArrayCollection();
         $this->setRoles(array('ROLE_USER'));
     }
     
@@ -242,6 +245,13 @@ class User extends BaseUser
      */
     protected $userLocation;
 
+    /**
+     * @var UserPicture
+     * 
+     * @ORM\OneToMany(targetEntity="UserPicture", cascade={"persist", "remove"}, mappedBy="user")
+     */
+    protected $userPictures;
+    
     /**
      * @param string $facebookId
      * @return User
@@ -634,5 +644,40 @@ class User extends BaseUser
     public function getUserLocation()
     {
         return $this->userLocation;
+    }
+
+    /**
+     * Add userPictures
+     *
+     * @param \Dt\UserBundle\Entity\UserPicture $userPictures
+     * @return User
+     */
+    public function addUserPicture(\Dt\UserBundle\Entity\UserPicture $userPictures)
+    {
+        $this->userPictures[] = $userPictures;
+        
+        $userPictures->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove userPictures
+     *
+     * @param \Dt\UserBundle\Entity\UserPicture $userPictures
+     */
+    public function removeUserPicture(\Dt\UserBundle\Entity\UserPicture $userPictures)
+    {
+        $this->userPictures->removeElement($userPictures);
+    }
+
+    /**
+     * Get userPictures
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserPictures()
+    {
+        return $this->userPictures;
     }
 }

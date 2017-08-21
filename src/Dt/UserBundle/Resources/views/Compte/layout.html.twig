@@ -53,6 +53,8 @@
     
         {% include 'FOSUserBundle:Compte:tab_profile.html.twig' %}
         
+    {% elseif 'photos' %}
+        {% include 'FOSUserBundle:Compte:tab_photos.html.twig' %}
     {% endif %}
     
     {#    

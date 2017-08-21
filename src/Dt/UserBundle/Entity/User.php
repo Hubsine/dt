@@ -9,6 +9,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Dt\UserBundle\Entity\ProfilePicture;
+use Dt\UserBundle\Entity\UserPicture;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\Type;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
@@ -229,10 +230,10 @@ class User extends BaseUser
     protected $size; 
     
     /**
-     * @ORM\OneToOne(targetEntity="Dt\UserBundle\Entity\ProfilePicture", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="UserPicture")
      * @ORM\JoinColumn(nullable=true)
      * 
-     * @var Dt\UserBundle\Entity\ProfilePicture
+     * @var UserPicture
      */
     protected $profilePicture;
     
@@ -431,10 +432,10 @@ class User extends BaseUser
     /**
      * Set profilePicture
      *
-     * @param \Dt\UserBundle\Entity\ProfilePicture $profilePicture
+     * @param \Dt\UserBundle\Entity\UserPicture $userPicture
      * @return User
      */
-    public function setProfilePicture(ProfilePicture $profilePicture = null)
+    public function setProfilePicture(UserPicture $userPicture = null)
     {
         $this->profilePicture = $profilePicture;
 
@@ -444,7 +445,7 @@ class User extends BaseUser
     /**
      * Get profilePicture
      *
-     * @return \Dt\UserBundle\Entity\ProfilePicture 
+     * @return \Dt\UserBundle\Entity\UserPicture 
      */
     public function getProfilePicture()
     {

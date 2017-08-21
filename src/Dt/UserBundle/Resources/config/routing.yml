@@ -39,4 +39,4 @@ dt_user_edit_profile_user_location:
     
 dt_user_dt_user_user_picture:
         resource: "@DtUserBundle/Resources/config/routing/userpicture.yml"
-        prefix:   /dt_user_user_picture    
+        prefix:   /{slug}/mon-compte/pictures   

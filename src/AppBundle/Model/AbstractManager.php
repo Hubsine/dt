@@ -35,8 +35,13 @@ abstract class AbstractManager implements ManagerInterface{
     /**
      * @return ObjectRepository
      */
-    public function getRepository()
+    public function getRepository($className = null)
     {
+        if( !empty($className) )
+        {
+            return $this->objectManager->getRepository($className);
+        }
+        
         return $this->objectManager->getRepository($this->class);
     }
     

@@ -47,7 +47,13 @@
 
 {% block content_page_content %}
     
-    {% include 'FOSUserBundle:Compte:tab_profile.html.twig' %}
+    {% set tab = app.request.get('tab') %}
+    
+    {% if tab is null or tab == 'profile' %}
+    
+        {% include 'FOSUserBundle:Compte:tab_profile.html.twig' %}
+        
+    {% endif %}
     
     {#    
     <div class="section-anchor-js">

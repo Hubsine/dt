@@ -12,7 +12,7 @@ use AppBundle\Doctrine\EntityInterface;
  */
 interface ManagerInterface {
 
-    public function __construct(ObjectManager $om, $class);
+    public function __construct(ObjectManager $om, $class = null);
 
     public function getRepository();
     

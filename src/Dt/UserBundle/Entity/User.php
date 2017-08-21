@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Dt\UserBundle\Entity\ProfilePicture;
 use Dt\UserBundle\Entity\UserPicture;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\Type;

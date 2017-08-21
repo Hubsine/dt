@@ -3,7 +3,7 @@
 namespace Dt\UserBundle\Event;
 
 use Dt\UserBundle\Entity\User;
-use Dt\UserBundle\Entity\ProfilePicture;
+use Dt\UserBundle\Entity\UserPicture;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -20,7 +20,7 @@ class OAuthUserEvent extends Event{
     protected $user;
     
     /**
-     * @var ProfilePicture
+     * @var UserPicture
      */
     protected $profilePicture;
     
@@ -32,11 +32,11 @@ class OAuthUserEvent extends Event{
     /**
      * 
      * @param User $user
-     * @param ProfilePicture $profilePicture
+     * @param UserPicture $profilePicture
      * @param UserResponseInterface $userResponse
      * 
      */
-    public function __construct(User $user, ProfilePicture $profilePicture, UserResponseInterface $userResponse) {
+    public function __construct(User $user, UserPicture $profilePicture, UserResponseInterface $userResponse) {
         
         $this->user = $user;
         $this->profilePicture = $profilePicture;
@@ -52,9 +52,9 @@ class OAuthUserEvent extends Event{
     }
 
     /**
-     * @return ProfilePicture
+     * @return UserPicture
      */
-    public function getProfilePicture(): ProfilePicture {
+    public function getProfilePicture(): UserPicture {
         return $this->profilePicture;
     }
 
@@ -73,9 +73,9 @@ class OAuthUserEvent extends Event{
     }
 
     /**
-     * @param ProfilePicture $profilePicture
+     * @param UserPicture $profilePicture
      */
-    public function setProfilePicture(ProfilePicture $profilePicture) {
+    public function setProfilePicture(UserPicture $profilePicture) {
         $this->profilePicture = $profilePicture;
     }
     

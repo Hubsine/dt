@@ -6,7 +6,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseFOSUBProvider;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Dt\UserBundle\Entity\User;
-use Dt\UserBundle\Entity\ProfilePicture;
+use Dt\UserBundle\Entity\UserPicture;
 use Dt\UserBundle\Event\OAuthUserEvent;
 use Dt\UserBundle\DtUserEvents;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
@@ -66,7 +66,7 @@ class DtFOSUBUserProvider extends BaseFOSUBProvider
         if (null === $user) {
 
             $user = new User();
-            $profilePicture = new ProfilePicture();
+            $profilePicture = new UserPicture();
             $tokenGenerator = new TokenGenerator();
             $userPlainPassword = $tokenGenerator->generateToken();
         

@@ -1,6 +1,8 @@
 parameters:
     app.menu_builder.class: AppBundle\Menu\MenuBuilder
     app.twig.country_extension.class: AppBundle\Twig\Extensions\CountryExtension
+    # Manager Class
+    app_bundle.base.manager.class: AppBundle\Doctrine\BaseManager
     
 services:
     app.menu_builder:
@@ -17,3 +19,8 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+
+    # Manager
+    base.manager:
+        class: '%app_bundle.base.manager.class%'
+        arguments: ["@doctrine.orm.entity_manager"]

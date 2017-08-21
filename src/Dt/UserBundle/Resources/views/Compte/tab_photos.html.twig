@@ -1,0 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% set tabsContent = 
+{
+}
+%}
+
+{% for content in tabsContent %}
+
+    <div class="section-anchor-js">
+        <h3 class="page-header" id="{{ content.sectionId }}">
+            {{ content.sectionTitle|trans({}, 'FOSUserBundle') }}
+        </h3>
+        <div id="{{ content.contentId }}">
+            <div class="viewContent">
+                {{ render(content.content) }}
+            </div>
+            <div class="formContent hidden">
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}    
+
+photos tab contents

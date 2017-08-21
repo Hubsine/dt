@@ -1,0 +1,24 @@
+dt_user_user_picture_index:
+    path:     /
+    defaults: { _controller: "DtUserBundle:UserPicture:index" }
+    methods:  GET
+
+dt_user_user_picture_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtUserBundle:UserPicture:show" }
+    methods:  GET
+
+dt_user_user_picture_new:
+    path:     /new
+    defaults: { _controller: "DtUserBundle:UserPicture:new" }
+    methods:  [GET, POST]
+
+dt_user_user_picture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtUserBundle:UserPicture:edit" }
+    methods:  [GET, POST]
+
+dt_user_user_picture_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtUserBundle:UserPicture:delete" }
+    methods:  DELETE

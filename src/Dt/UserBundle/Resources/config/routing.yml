@@ -36,3 +36,7 @@ dt_user_edit_profile_looking_for:
 dt_user_edit_profile_user_location: 
     path: /{slug}/mon-compte/profile/edit/user-location
     defaults: { _controller: DtUserBundle:Compte:editUserLocation }    
+    
+dt_user_dt_user_user_picture:
+        resource: "@DtUserBundle/Resources/config/routing/userpicture.yml"
+        prefix:   /dt_user_user_picture    

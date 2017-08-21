@@ -18,17 +18,18 @@ class UserPicture extends Picture
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="User", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userPictures")
      */
     private $user;
+
 
     /**
      * Set user
      *
-     * @param \stdClass $user
+     * @param \Dt\UserBundle\Entity\User $user
      * @return UserPicture
      */
-    public function setUser($user)
+    public function setUser(\Dt\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -38,7 +39,7 @@ class UserPicture extends Picture
     /**
      * Get user
      *
-     * @return \stdClass 
+     * @return \Dt\UserBundle\Entity\User 
      */
     public function getUser()
     {

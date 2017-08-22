@@ -4,6 +4,7 @@ namespace Dt\UserBundle\Controller;
 
 use Dt\UserBundle\Entity\UserPicture;
 use Dt\UserBundle\Entity\User;
+use Dt\UserBundle\Form\Type\UserPictureType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

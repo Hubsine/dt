@@ -5,6 +5,8 @@ namespace Dt\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserPictureType extends AbstractType
 {
@@ -13,7 +15,9 @@ class UserPictureType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('path')->add('name')->add('mimeType')->add('size')->add('deletedAt')->add('createdAt')->add('updatedAt')->add('user');
+        $builder->add('file', FileType::class, array(
+            
+        ));
     }
     
     /**

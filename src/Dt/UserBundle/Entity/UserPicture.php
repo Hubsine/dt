@@ -22,7 +22,11 @@ class UserPicture extends Picture
      */
     private $user;
 
-
+    public function getUploadPathFolder()
+    {
+        return parent::getUploadPathFolder() . '/users';
+    }
+    
     /**
      * Set user
      *

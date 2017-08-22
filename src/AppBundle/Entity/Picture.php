@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Doctrine\ORM\Mapping\MappedSuperclass;
+use AppBundle\Model\PictureEntityInterface;
 
 /**
  * 
@@ -16,13 +17,13 @@ use Doctrine\ORM\Mapping\MappedSuperclass;
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @Gedmo\Uploadable(
- *  pathMethod="getPathFolder", 
+ *  pathMethod="getUploadPathFolder", 
  *  allowedTypes="jpg,jpeg,png", 
  *  maxSize="16777216", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)
  * 
  * @author Hubsine
  */
-class Picture {
+class Picture implements PictureEntityInterface{
     
     use SoftDeleteableEntity;
     use TimestampableEntity;
@@ -59,7 +60,13 @@ class Picture {
      * @Gedmo\UploadableFileSize
      */
     protected $size;
-    
+ 
+    /**
+     * @var mixed
+     *
+     */
+    protected $file;
+
     /**
      * Get id
      *
@@ -71,14 +78,25 @@ class Picture {
     }
     
     /**
+     * Get path where uploaded file are moved
      * 
-     * @param string $defaultPath
      * @return string
      */
-    public function getPathFolder($defaultPath){
-        return '/uploads';
+    public function getUploadPathFolder()
+    {
+        return $this->getAbsolutetUploadRootDir() . '/uploads';
     }
     
+    /**
+     * Get absolute path of web directory 
+     * 
+     * @return string
+     */
+    public function getAbsolutetUploadRootDir()
+    {
+        return __DIR__.'/../../../../web';
+    }
+  
     /**
      * 
      * @param string $defaultPath
@@ -86,7 +104,7 @@ class Picture {
      */
     public function getPath(){
         return $this->path;
-    }
+}
 
     public function getName() {
         return $this->name;
@@ -122,5 +140,15 @@ class Picture {
         $this->size = $size;
         
         return $this;
+    }
+    
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
     }
 }

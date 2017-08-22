@@ -3,6 +3,7 @@
 namespace Dt\UserBundle\Controller;
 
 use Dt\UserBundle\Entity\UserPicture;
+use Dt\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,13 +17,13 @@ class UserPictureController extends Controller
      * Lists all userPicture entities.
      *
      */
-    public function indexAction()
+    public function indexAction(User $user)
     {
         $em = $this->getDoctrine()->getManager();
 
         $userPictures = $em->getRepository('DtUserBundle:UserPicture')->findAll();
 
-        return $this->render('userpicture/index.html.twig', array(
+        return $this->render('DtUserBundle:Compte:UserPicture/index.html.twig', array(
             'userPictures' => $userPictures,
         ));
     }
@@ -31,7 +32,7 @@ class UserPictureController extends Controller
      * Creates a new userPicture entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, User $user)
     {
         $userPicture = new Userpicture();
         $form = $this->createForm('Dt\UserBundle\Form\UserPictureType', $userPicture);

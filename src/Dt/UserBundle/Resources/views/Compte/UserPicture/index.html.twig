@@ -1,51 +1,23 @@
-{% extends 'base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
 
-{% block body %}
-    <h1>Userpictures list</h1>
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Path</th>
-                <th>Name</th>
-                <th>Mimetype</th>
-                <th>Size</th>
-                <th>Deletedat</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for userPicture in userPictures %}
-            <tr>
-                <td><a href="{{ path('dt_user_user_picture_show', { 'id': userPicture.id }) }}">{{ userPicture.id }}</a></td>
-                <td>{{ userPicture.path }}</td>
-                <td>{{ userPicture.name }}</td>
-                <td>{{ userPicture.mimeType }}</td>
-                <td>{{ userPicture.size }}</td>
-                <td>{% if userPicture.deletedAt %}{{ userPicture.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if userPicture.createdAt %}{{ userPicture.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if userPicture.updatedAt %}{{ userPicture.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+{% if message is defined %}    
+        {{ advanced_flash('success', message, '', true, false, '') }}    
+{% endif %}
+
+{% if app.user.userLocation is null %}
+    {% set message = 'layout.section_empty'|trans%}
+    {{ flash('info', message) }}
+{% else %}    
+    <table class="table table-condensed">
+        <tbody> 
+            <tr> 
+                <th scope="row"></th>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('dt_user_user_picture_show', { 'id': userPicture.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('dt_user_user_picture_edit', { 'id': userPicture.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+                    
+                </td> 
+            </tr> 
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('dt_user_user_picture_new') }}">Create a new userPicture</a>
-        </li>
-    </ul>
-{% endblock %}
+{% endif %}

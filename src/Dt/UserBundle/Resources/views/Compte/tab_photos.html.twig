@@ -2,6 +2,12 @@
 
 {% set tabsContent = 
 {
+    'user_pictures': {
+        'sectionId': 'photos-user-pictures',
+        'sectionTitle': 'layout.compte.user_pictures',
+        'contentId': 'userPicturesContent',
+        'content': controller('DtUserBundle:UserPicture:index', {'slug': app.request.get('slug') })
+    }
 }
 %}
 
@@ -22,4 +28,4 @@
     
 {% endfor %}    
 
-photos tab contents
+{#{ render ( controller( 'DtUserBundle:UserPicture:index', { 'slug': app.request.get('slug') } ) ) }#}

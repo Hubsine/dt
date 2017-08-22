@@ -27,6 +27,7 @@ layout:
         about_user_reply: 'A propos de moi'
         looking_for: Je cherche
         user_location: Ma localisation
+        user_pictures: Mes photos
     looking_for:
         sexe: 'Sexe'
         relationships: 'Relation cherchée'
@@ -36,6 +37,8 @@ layout:
         location: Localisation
     user_location:
         location: Ma localisation
+    user_pictures:
+        section_title: Mes photos
 
 change_profile:
     update: 'Mettre à jour'

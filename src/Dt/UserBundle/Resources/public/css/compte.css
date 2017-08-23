@@ -11,3 +11,13 @@
 ul.list-group li{
     vertical-align: top;
 } 
+
+/***
+* User Pictures
+***/
+#userPicturesForm #dt_userbundle_userpicture_file{
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    z-index: -5;
+}

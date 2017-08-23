@@ -10,16 +10,13 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use AppBundle\Model\PictureEntityInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * 
  * @MappedSuperclass
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
- * @Gedmo\Uploadable(
- *  pathMethod="getUploadPathFolder", 
- *  allowedTypes="jpg,jpeg,png", 
- *  maxSize="16777216", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)
  * 
  * @author Hubsine
  */
@@ -60,12 +57,6 @@ class Picture implements PictureEntityInterface{
      * @Gedmo\UploadableFileSize
      */
     protected $size;
- 
-    /**
-     * @var mixed
-     *
-     */
-    protected $file;
 
     /**
      * Get id

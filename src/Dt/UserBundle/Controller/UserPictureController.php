@@ -7,6 +7,9 @@ use Dt\UserBundle\Entity\User;
 use Dt\UserBundle\Form\Type\UserPictureType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Gedmo\Uploadable\FileInfo\FileInfoArray;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Userpicture controller.
@@ -23,9 +26,14 @@ class UserPictureController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $userPictures = $em->getRepository('DtUserBundle:UserPicture')->findAll();
-
+        
+        $userPicture = new UserPicture;
+        
+        $form = $this->createForm(UserPictureType::class, $userPicture);
+        
         return $this->render('DtUserBundle:Compte:UserPicture/index.html.twig', array(
             'userPictures' => $userPictures,
+            'form'  => $form->createView()
         ));
     }
 
@@ -35,22 +43,51 @@ class UserPictureController extends Controller
      */
     public function newAction(Request $request, User $user)
     {
-        $userPicture = new Userpicture();
-        $form = $this->createForm('Dt\UserBundle\Form\UserPictureType', $userPicture);
+        $codeResponse = 200;
+        $dataResponse = array();
+        $dataResponse['object'] = $_FILES;
+        
+        $templateToShow = 'DtUserBundle:Compte:AboutUserReply/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:AboutUserReply/edit.html.twig';
+        
+        $userPicture = new UserPicture();
+        $userPicture->setPath($user->getId());
+        
+        $form = $this->createForm(UserPictureType::class, $userPicture);
+        
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($userPicture);
-            $em->flush();
+        if( $form->isSubmitted() ) 
+        {   $dataResponse['isSubmited'] ='';
+            $dataResponse['object'] = $userPicture->getFile()->getClientMimeType() . '-' .$userPicture->getFile()->getMimeType();
+            if( $form->isValid() )
+            {
+                $dataResponse['isValid'] ='';
+                //$fileInfo = new FileInfoArray($form['file']);
 
-            return $this->redirectToRoute('dt_user_user_picture_show', array('id' => $userPicture->getId()));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($userPicture);
+
+                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                //$uploadableManager->addEntityFileInfo($file, $fileInfo);
+                $uploadableManager->markEntityToUpload($userPicture, $userPicture->getFile());
+
+                $em->flush();
+
+                $dataResponse['message']    = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+            
+            }else{
+                $dataResponse['isErrors'] ='';
+                $codeResponse = 400;
+                $dataResponse['message'] = (string) $form->getErrors(true);
+            }
+            
         }
 
-        return $this->render('userpicture/new.html.twig', array(
-            'userPicture' => $userPicture,
-            'form' => $form->createView(),
-        ));
+        $response = new JsonResponse($dataResponse, $codeResponse);
+        
+        return $response;
+        
     }
 
     /**

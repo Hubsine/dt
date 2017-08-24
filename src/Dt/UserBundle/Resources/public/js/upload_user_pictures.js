@@ -28,6 +28,7 @@ jQuery(function($){
         })
         .done(function(data){
             console.log(data);
+            form.find('.messageContainer').html(data.message);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseJSON);

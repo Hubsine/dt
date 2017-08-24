@@ -20,11 +20,16 @@ use AppBundle\Entity\Picture;
  */
 class UserPicture extends Picture
 {
+    
+    /** Dossier d'upload des fichiers de 'lutilisateur. %d is user id. */
+    const USER_UPLODED_FOLDER = 'uploads/users/%d';
 
     /**
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userPictures")
+     * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $user;
 
@@ -37,11 +42,14 @@ class UserPicture extends Picture
      */
     protected $file;
     
-    public function getUploadPathFolder()
+    public function getUploadPathFolder($defaultPath)
     {
-        return parent::getUploadPathFolder() . '/users';
+        $userId             = $this->getUser()->getId();
+        $userUploadFolder   = sprintf( self::USER_UPLODED_FOLDER, $userId );
+        
+        return parent::getAbsolutetUploadRootDir() . '/' . $userUploadFolder;
     }
-    
+
     /**
      * Set user
      *

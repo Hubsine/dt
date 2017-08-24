@@ -45,43 +45,46 @@ class UserPictureController extends Controller
     {
         $codeResponse = 200;
         $dataResponse = array();
-        $dataResponse['object'] = $_FILES;
         
         $templateToShow = 'DtUserBundle:Compte:AboutUserReply/show.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:AboutUserReply/edit.html.twig';
         
         $userPicture = new UserPicture();
-        $userPicture->setPath($user->getId());
         
         $form = $this->createForm(UserPictureType::class, $userPicture);
         
         $form->handleRequest($request);
 
         if( $form->isSubmitted() ) 
-        {   $dataResponse['isSubmited'] ='';
-            $dataResponse['object'] = $userPicture->getFile()->getClientMimeType() . '-' .$userPicture->getFile()->getMimeType();
-            if( $form->isValid() )
+        {  
+            $dataResponse['file'] = $_FILES;
+            if( $form->isValid() && $userPicture->getFile()->isValid() )
             {
-                $dataResponse['isValid'] ='';
-                //$fileInfo = new FileInfoArray($form['file']);
 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($userPicture);
-
+                $user->addUserPicture($userPicture);
+                
+                /** @var $userManager UserManagerInterface */
+                $userManager = $this->get('fos_user.user_manager');
+                
+                $userManager->updateUser($user, false);
+                
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-                //$uploadableManager->addEntityFileInfo($file, $fileInfo);
                 $uploadableManager->markEntityToUpload($userPicture, $userPicture->getFile());
 
                 $em->flush();
-
+                
+                $dataResponse['errorCode'] = $userPicture->getFile()->getError();
+                $dataResponse['uploadIsvalid'] = $userPicture->getFile()->isValid();
+                $dataResponse['uploadedmsgError'] = $userPicture->getFile()->getErrorMessage();
                 $dataResponse['message']    = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
             
-            }else{
-                $dataResponse['isErrors'] ='';
-                $codeResponse = 400;
-                $dataResponse['message'] = (string) $form->getErrors(true);
+                return new JsonResponse($dataResponse, $codeResponse);
+                
             }
             
+            $codeResponse = 400;
+            $dataResponse['message'] = (string) $form->getErrors();
         }
 
         $response = new JsonResponse($dataResponse, $codeResponse);

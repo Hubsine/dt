@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class BaseManager extends AbstractManager{
     
-    public function __construct(ObjectManager $om) 
+    public function __construct(ObjectManager $om, $className = null) 
     {
         $this->objectManager = $om;
     }

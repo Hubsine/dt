@@ -16,5 +16,5 @@ interface PictureEntityInterface {
      * 
      * @return string
      */
-    public function getUploadPathFolder();
+    public function getUploadPathFolder($defaultPath);
 }

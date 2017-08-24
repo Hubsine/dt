@@ -73,7 +73,7 @@ class Picture implements PictureEntityInterface{
      * 
      * @return string
      */
-    public function getUploadPathFolder()
+    public function getUploadPathFolder($defaultPath)
     {
         return $this->getAbsolutetUploadRootDir() . '/uploads';
     }
@@ -85,7 +85,7 @@ class Picture implements PictureEntityInterface{
      */
     public function getAbsolutetUploadRootDir()
     {
-        return __DIR__.'/../../../../web';
+        return __DIR__.'/../../../web';
     }
   
     /**

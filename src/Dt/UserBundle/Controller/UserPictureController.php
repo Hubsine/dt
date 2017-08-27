@@ -46,9 +46,6 @@ class UserPictureController extends Controller
         $codeResponse = 200;
         $dataResponse = array();
         
-        $templateToShow = 'DtUserBundle:Compte:AboutUserReply/show.html.twig';
-        $templateToEdit = 'DtUserBundle:Compte:AboutUserReply/edit.html.twig';
-        
         $userPicture = new UserPicture();
         
         $form = $this->createForm(UserPictureType::class, $userPicture);
@@ -57,7 +54,6 @@ class UserPictureController extends Controller
 
         if( $form->isSubmitted() ) 
         {  
-            $dataResponse['file'] = $_FILES;
             if( $form->isValid() && $userPicture->getFile()->isValid() )
             {
 
@@ -74,9 +70,6 @@ class UserPictureController extends Controller
 
                 $em->flush();
                 
-                $dataResponse['errorCode'] = $userPicture->getFile()->getError();
-                $dataResponse['uploadIsvalid'] = $userPicture->getFile()->isValid();
-                $dataResponse['uploadedmsgError'] = $userPicture->getFile()->getErrorMessage();
                 $dataResponse['message']    = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
             
                 return new JsonResponse($dataResponse, $codeResponse);
@@ -84,7 +77,7 @@ class UserPictureController extends Controller
             }
             
             $codeResponse = 400;
-            $dataResponse['message'] = (string) $form->getErrors();
+            $dataResponse['message'] = (string) $form->getErrors(true);
         }
 
         $response = new JsonResponse($dataResponse, $codeResponse);

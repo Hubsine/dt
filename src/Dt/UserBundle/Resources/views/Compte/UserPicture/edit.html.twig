@@ -1,21 +1,17 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Userpicture edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
+{% set 
+    urlToUpdate, 
+    urlToDelete = 
+    path('dt_user_user_picture_edit', {'slug': app.user.slug, 'id': picture.id}), 
+    path('dt_user_user_picture_delete', {'slug': app.user.slug, 'id': picture.id}) %}
+<div>
+    <ul class="list-inline userPictureActions">
         <li>
-            <a href="{{ path('dt_user_user_picture_index') }}">Back to the list</a>
+            <div data-action-url="{{ urlToUpdate }}" class="btn btn-default callAction"><i class="fa fa-user" aria-hidden="true"></i></div>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <div data-action-url="{{ urlToDelete }}" class="btn btn-default callAction"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
         </li>
     </ul>
-{% endblock %}
+</div>
+     

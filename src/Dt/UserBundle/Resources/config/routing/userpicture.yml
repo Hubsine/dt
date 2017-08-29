@@ -13,10 +13,10 @@ dt_user_user_picture_new:
     defaults: { _controller: "DtUserBundle:UserPicture:new" }
     methods:  [GET, POST]
 
-#dt_user_user_picture_edit:
-#    path:     /{id}/edit
-#    defaults: { _controller: "DtUserBundle:UserPicture:edit" }
-#    methods:  [GET, POST]
+dt_user_user_picture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtUserBundle:UserPicture:edit" }
+    methods:  [GET, POST]
 
 dt_user_user_picture_delete:
     path:     /{id}/delete

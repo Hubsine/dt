@@ -13,15 +13,11 @@
     {{ flash('info', message) }}
 {% else %}   
     
-    <div class="row">
-        {% for picture in userPictures %}
-        <div class="col-xs-2">
-            
-        </div>
-        {% endfor %}
+        {#% for picture in userPictures %#}
+        {% include 'DtUserBundle:Compte:UserPicture/show.html.twig' %}
+        {#% endfor %#}
         
         {% include 'DtUserBundle:Compte:UserPicture/new.html.twig' %}
-    </div>
     {#<table class="table table-condensed">
         <tbody> 
             <tr> 

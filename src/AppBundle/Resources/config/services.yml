@@ -1,6 +1,8 @@
 parameters:
     app.menu_builder.class: AppBundle\Menu\MenuBuilder
+    # Extensions Class
     app.twig.country_extension.class: AppBundle\Twig\Extensions\CountryExtension
+    app.twig.file_exists_extension.class: AppBundle\Twig\Extensions\FileExistsExtension
     # Manager Class
     app_bundle.base.manager.class: AppBundle\Doctrine\BaseManager
     
@@ -14,11 +16,18 @@ services:
             - { name: knp_menu.menu_builder, method: createLogoutMenu, alias: logout }
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }
             
+    # Twig Extensions
     app.twig.country_extension:
         class: '%app.twig.country_extension.class%'
         public: false
         tags:
             - { name: twig.extension }
+            
+    app.twig.file_exists_extension:
+        class: '%app.twig.file_exists_extension.class%'
+        public: false
+        tags:
+            - { name: twig.extension }        
 
     # Manager
     base.manager:

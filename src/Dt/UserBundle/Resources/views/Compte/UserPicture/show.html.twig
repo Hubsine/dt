@@ -1,16 +1,32 @@
 
 <div class="row">
 {% for picture in userPictures %}
-    <div class="col-xs-2">
-        {#% set pictureUlr = app.request.schemeAndHttpHost %#}
+    
+    {% set picturePath = 
+        [
+            app.request.server.get('DOCUMENT_ROOT'),
+            constant('USER_UPLODED_FOLDER', picture)|replace({'%d': app.user.id}),
+            picture.name
+        ]|join('/')
+    %}
+    
+    {% if picturePath|fileExists %}
+    <div class="col-xs-3 col-md-3 col-lg-3">
+
         {% set pictureUrl = 
             [
-                app.request.schemeAndHttpHost, 
-                'web', constant('USER_UPLODED_FOLDER', 
-                picture)|replace({'%d': app.user.id}),
+                constant('USER_UPLODED_FOLDER', picture)|replace({'%d': app.user.id}),
                 picture.name
-            ]|join('/') %}
-        <img src="{{ pictureUrl }}">
+            ]|join('/') 
+        %}
+            
+        <div class="thumbnail">
+            <img src="/{{ pictureUrl }}">
+            {% include 'DtUserBundle:Compte:UserPicture/edit.html.twig' %}
+        </div>
+        
     </div>
+    {% endif %}
+    
 {% endfor %}
 </div>

@@ -431,10 +431,10 @@ class User extends BaseUser
     /**
      * Set profilePicture
      *
-     * @param \Dt\UserBundle\Entity\UserPicture $userPicture
+     * @param \Dt\UserBundle\Entity\UserPicture $profilePicture
      * @return User
      */
-    public function setProfilePicture(UserPicture $userPicture = null)
+    public function setProfilePicture(UserPicture $profilePicture = null)
     {
         $this->profilePicture = $profilePicture;
 

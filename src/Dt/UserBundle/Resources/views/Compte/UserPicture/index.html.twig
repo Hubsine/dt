@@ -12,6 +12,8 @@
     {% set message = 'layout.section_empty'|trans%}
     {{ flash('info', message) }}
 {% else %}   
+    <div class=" col-xs-12 messageContainer">
+    </div>
     
         {#% for picture in userPictures %#}
         {% include 'DtUserBundle:Compte:UserPicture/show.html.twig' %}

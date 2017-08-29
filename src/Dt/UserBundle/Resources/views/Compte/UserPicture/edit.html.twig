@@ -2,15 +2,30 @@
 {% set 
     urlToUpdate, 
     urlToDelete = 
-    path('dt_user_user_picture_edit', {'pictureId': app.user.id, 'id': picture.id}), 
+    path('dt_user_user_picture_edit', {'id': picture.id, 'pictureId': app.user.id}), 
     path('dt_user_user_picture_delete', {'pictureId': app.user.id, 'id': picture.id}) %}
+    
+{% 
+    set actionParameters = {'id': app.user.id, 'pictureId': picture.id}
+%}   
+
+{% if picture.id == app.user.profilePicture.id %}
+    {% set btnExtraClass = 'btn-success' %}
+{% else %}
+    {% set btnExtraClass = '' %}
+{% endif %}    
+
 <div>
     <ul class="list-inline userPictureActions">
         <li>
-            <div data-action-url="{{ urlToUpdate }}" class="btn btn-default callAction"><i class="fa fa-user" aria-hidden="true"></i></div>
+            <div 
+                data-action-parameters='{{ actionParameters|json_encode() }}'
+                data-action-url="dt_user_user_picture_update_user_profile_picture" class="{{ btnExtraClass }} btn btn-default callAction">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
         </li>
         <li>
-            <div data-action-url="{{ urlToDelete }}" class="btn btn-default callAction"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+            <div data-action-url="dt_user_user_picture_delete" class="btn btn-default callAction"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
         </li>
     </ul>
 </div>

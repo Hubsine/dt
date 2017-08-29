@@ -1,14 +1,4 @@
-function startAjaxSpinner(container){
 
-    //var containerHeight = $(container).height();
-    var spinner = '<div class="spinner text-center"><i style="position: absolute; top: 30%;" class="fa fa-spinner fa-spin fa-3x fa-fw" style=""></i></div>';
-    $(container).addClass('hasSpinner').append(spinner);
-    
-}
-
-function stopAjaxSpinner(container){
-    $(container).removeClass('hasSpinner').children('.spinner').remove();
-}
 
 function initAjaxCancelBtn(){
 

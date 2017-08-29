@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Gedmo\Uploadable\FileInfo\FileInfoArray;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Userpicture controller.
@@ -123,6 +125,35 @@ class UserPictureController extends Controller
         ));
     }
 
+    /**
+     * To update user profile picture
+     *
+     * @Route("/{id}/mon-compte/pictures/{pictureId}/update-user-profile-picture")
+     * 
+     * @ParamConverter("userPicture", options={"mapping": {"pictureId" = "id"}})
+     */
+    public function updateUserProfilePictureAction(Request $request, User $user, UserPicture $userPicture)
+    {
+        $codeResponse = 200;
+        $response = array();
+        
+        if( $request->isXmlHttpRequest() )
+        {
+            /** @var $userManager UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+            
+            $user->setProfilePicture($userPicture);
+            
+            $userManager->updateUser($user);
+            
+            $response['message'] = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+        }
+        
+        return new JsonResponse($response, $codeResponse);
+        
+        
+    }
+    
     /**
      * Deletes a userPicture entity.
      *

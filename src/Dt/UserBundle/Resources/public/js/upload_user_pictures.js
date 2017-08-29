@@ -1,5 +1,9 @@
 jQuery(function($){
     
+    ////
+    // Add user picture
+    ////
+    
     $('body').on('click', '#userPicturesForm .add-new', function(e){
         console.log(1);
         $('#dt_userbundle_userpicture_file').click();
@@ -37,4 +41,46 @@ jQuery(function($){
         });
        
     });
+    
+    ////
+    // Update and delete user picture
+    ////
+    
+    $('body').on('click', '.userPictureActions .callAction', function(e){
+        
+        var elmt = $(this);
+        var container = $('#userPicturesContent');
+        var msgContainer = $('#userPicturesContent').find('.messageContainer');
+        
+        var routeName = elmt.data('action-url');
+        var routeParameters = elmt.data('action-parameters');
+        
+        $.ajax({
+            url: Routing.generate(routeName, routeParameters),
+            type: 'GET',
+            data: routeParameters,
+            beforeSend: function(jqXHR, settings)
+            {
+                startAjaxSpinner(container);
+                resetElmt(msgContainer);
+            },
+            complete: function(jqXHR, textStatus)
+            {
+                stopAjaxSpinner(container);
+            }
+        })
+        .done(function(data){
+            
+            $('.userPictureActions .callAction.btn-success').removeClass('btn-success');
+            elmt.addClass('btn-success');
+            
+            msgContainer.html(data.message);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            msgContainer.html(jqXHR.responseJSON.message);
+    
+        });
+        
+    });
+    
 });

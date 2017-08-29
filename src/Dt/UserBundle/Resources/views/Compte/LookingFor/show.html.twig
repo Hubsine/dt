@@ -54,7 +54,7 @@
         
 <div>
     <button 
-        data-action="{{ path('dt_user_edit_profile_looking_for', { 'slug': app.user.slug } ) }}" 
+        data-action="{{ path('dt_user_edit_profile_looking_for', { 'id': app.user.id } ) }}" 
         data-container="lookingForContent"
         class="updateFormToUpdateInAjax pull-right btn btn-danger">
         {% trans %} layout.update {% endtrans %}

@@ -1,5 +1,5 @@
 <div class="row">
-{{ form_start(form, { 'action': path('dt_user_user_picture_new', { 'slug': app.user.slug } ), 'attr': { 'id': 'userPicturesForm', 'data-container': 'userLocationContent' } }) }}
+{{ form_start(form, { 'action': path('dt_user_user_picture_new', { 'id': app.user.id } ), 'attr': { 'id': 'userPicturesForm', 'data-container': 'userLocationContent' } }) }}
     <div class=" col-xs-12 messageContainer">
     </div>
         {{ form_widget(form) }}

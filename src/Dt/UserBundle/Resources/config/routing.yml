@@ -7,36 +7,36 @@ dt_user_members:
     defaults: { _controller: DtUserBundle:Members:members }
     
 dt_user_members_history:
-    path: /{slug}/historique
+    path: /{id}/historique
     defaults: { _controller: DtUserBundle:Members:history }
     
 dt_user_members_mon_compte:
-    path: /{slug}/mon-compte
+    path: /{id}/mon-compte
     defaults: { _controller: DtUserBundle:Compte:view }
     
 ###
 # Edit dans mon compte - Toutes editions se fait en js 
 ###
 dt_user_edit_profile_moi: 
-    path: /{slug}/mon-compte/profile/edit/moi
+    path: /{id}/mon-compte/profile/edit/moi
     defaults: { _controller: DtUserBundle:Compte:editMoi }
 
 dt_user_edit_profile_reseaux_sociaux: 
-    path: /{slug}/mon-compte/profile/edit/reseaux-sociaux
+    path: /{id}/mon-compte/profile/edit/reseaux-sociaux
     defaults: { _controller: DtUserBundle:Compte:editReseauxSociaux }
     
 dt_user_edit_profile_about_user_reply: 
-    path: /{slug}/mon-compte/profile/edit/about-users-reply
+    path: /{id}/mon-compte/profile/edit/about-users-reply
     defaults: { _controller: DtUserBundle:Compte:editAboutUserReply }       
 
 dt_user_edit_profile_looking_for: 
-    path: /{slug}/mon-compte/profile/edit/looking-for
+    path: /{id}/mon-compte/profile/edit/looking-for
     defaults: { _controller: DtUserBundle:Compte:editLookingFor }
     
 dt_user_edit_profile_user_location: 
-    path: /{slug}/mon-compte/profile/edit/user-location
+    path: /{id}/mon-compte/profile/edit/user-location
     defaults: { _controller: DtUserBundle:Compte:editUserLocation }    
     
 dt_user_dt_user_user_picture:
         resource: "@DtUserBundle/Resources/config/routing/userpicture.yml"
-        prefix:   /{slug}/mon-compte/pictures   
+        prefix:   /{id}/mon-compte/pictures   

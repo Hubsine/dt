@@ -2,8 +2,8 @@
 {% set 
     urlToUpdate, 
     urlToDelete = 
-    path('dt_user_user_picture_edit', {'slug': app.user.slug, 'id': picture.id}), 
-    path('dt_user_user_picture_delete', {'slug': app.user.slug, 'id': picture.id}) %}
+    path('dt_user_user_picture_edit', {'pictureId': app.user.id, 'id': picture.id}), 
+    path('dt_user_user_picture_delete', {'pictureId': app.user.id, 'id': picture.id}) %}
 <div>
     <ul class="list-inline userPictureActions">
         <li>

@@ -3,7 +3,7 @@
 {% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
 {% import 'DtUserBundle:Compte:AboutUserReply/about_user_reply_recursive_tree.html.twig' as recursiveTree %} 
 
-{{ form_start(form, { 'action': path('dt_user_edit_profile_about_user_reply', { 'slug': app.user.slug } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'aboutUserReplyContent' } }) }}
+{{ form_start(form, { 'action': path('dt_user_edit_profile_about_user_reply', { 'id': app.user.id } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'aboutUserReplyContent' } }) }}
 
 {{ form_errors(form) }}
 
@@ -20,7 +20,7 @@
     <div>
         <button type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
         <div
-            data-action="{{ path('dt_user_edit_profile_about_user_reply', { 'slug': app.user.slug } ) }}" 
+            data-action="{{ path('dt_user_edit_profile_about_user_reply', { 'id': app.user.id } ) }}" 
             data-container="aboutUserReplyContent"
             class="cancelFormToUpdateInAjax btn btn-warning">
             {% trans %} layout.cancel {% endtrans %}

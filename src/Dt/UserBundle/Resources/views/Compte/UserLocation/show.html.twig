@@ -33,7 +33,7 @@
         
 <div>
     <button 
-        data-action="{{ path('dt_user_edit_profile_user_location', { 'slug': app.user.slug } ) }}" 
+        data-action="{{ path('dt_user_edit_profile_user_location', { 'id': app.user.id } ) }}" 
         data-container="userLocationContent"
         class="updateFormToUpdateInAjax pull-right btn btn-danger">
         {% trans %} layout.update {% endtrans %}

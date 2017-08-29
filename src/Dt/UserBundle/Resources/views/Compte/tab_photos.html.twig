@@ -6,7 +6,7 @@
         'sectionId': 'photos-user-pictures',
         'sectionTitle': 'layout.compte.user_pictures',
         'contentId': 'userPicturesContent',
-        'content': controller('DtUserBundle:UserPicture:index', {'slug': app.request.get('slug') })
+        'content': controller('DtUserBundle:UserPicture:index', {'id': app.user.id })
     }
 }
 %}
@@ -28,4 +28,4 @@
     
 {% endfor %}    
 
-{#{ render ( controller( 'DtUserBundle:UserPicture:index', { 'slug': app.request.get('slug') } ) ) }#}
+{#{ render ( controller( 'DtUserBundle:UserPicture:index', { 'id': app.user.id } ) ) }#}

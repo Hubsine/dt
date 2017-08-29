@@ -14,11 +14,11 @@ dt_user_user_picture_new:
     methods:  [GET, POST]
 
 dt_user_user_picture_edit:
-    path:     /{id}/edit
+    path:     /{pictureId}/edit
     defaults: { _controller: "DtUserBundle:UserPicture:edit" }
     methods:  [GET, POST]
 
 dt_user_user_picture_delete:
-    path:     /{id}/delete
+    path:     /{pictureId}/delete
     defaults: { _controller: "DtUserBundle:UserPicture:delete" }
     methods:  DELETE

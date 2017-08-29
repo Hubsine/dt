@@ -1,56 +1,16 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Userpicture</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ userPicture.id }}</td>
-            </tr>
-            <tr>
-                <th>Path</th>
-                <td>{{ userPicture.path }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ userPicture.name }}</td>
-            </tr>
-            <tr>
-                <th>Mimetype</th>
-                <td>{{ userPicture.mimeType }}</td>
-            </tr>
-            <tr>
-                <th>Size</th>
-                <td>{{ userPicture.size }}</td>
-            </tr>
-            <tr>
-                <th>Deletedat</th>
-                <td>{% if userPicture.deletedAt %}{{ userPicture.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if userPicture.createdAt %}{{ userPicture.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if userPicture.updatedAt %}{{ userPicture.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('dt_user_user_picture_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('dt_user_user_picture_edit', { 'id': userPicture.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-{% endblock %}
+<div class="row">
+{% for picture in userPictures %}
+    <div class="col-xs-2">
+        {#% set pictureUlr = app.request.schemeAndHttpHost %#}
+        {% set pictureUrl = 
+            [
+                app.request.schemeAndHttpHost, 
+                'web', constant('USER_UPLODED_FOLDER', 
+                picture)|replace({'%d': app.user.id}),
+                picture.name
+            ]|join('/') %}
+        <img src="{{ pictureUrl }}">
+    </div>
+{% endfor %}
+</div>

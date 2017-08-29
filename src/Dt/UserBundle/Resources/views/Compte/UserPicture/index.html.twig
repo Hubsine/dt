@@ -19,18 +19,8 @@
             
         </div>
         {% endfor %}
-            {{ form_start(form, { 'action': path('dt_user_user_picture_new', { 'slug': app.user.slug } ), 'attr': { 'id': 'userPicturesForm', 'data-container': 'userLocationContent' } }) }}
-            <div class=" col-xs-12 messageContainer">
-            </div>
-                {{ form_widget(form) }}
-                <div row>
-                    <div class="col-xs-12">
-                    <div class="btn btn-danger add-new">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-            {{ form_end(form) }}
+        
+        {% include 'DtUserBundle:Compte:UserPicture/new.html.twig' %}
     </div>
     {#<table class="table table-condensed">
         <tbody> 

@@ -1,0 +1,7 @@
+{
+    "name": "dt",
+    "dependencies": {
+        "swipebox": "latest",
+        "ScrollToFixed": "latest"
+    }
+}

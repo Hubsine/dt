@@ -75,6 +75,10 @@ class UserPictureController extends Controller
                 $em->flush();
                 
                 $dataResponse['message']    = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
+                $dataResponse['item']       = $this->renderView(
+                        'DtUserBundle:Compte:UserPicture/item.html.twig', 
+                        array('picture' => $userPicture)
+                    );
             
                 return new JsonResponse($dataResponse, $codeResponse);
                 

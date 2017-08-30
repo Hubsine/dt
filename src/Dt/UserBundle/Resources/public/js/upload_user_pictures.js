@@ -5,18 +5,15 @@ jQuery(function($){
     ////
     
     $('body').on('click', '#userPicturesForm .add-new', function(e){
-        console.log(1);
         $('#dt_userbundle_userpicture_file').click();
     });
     
     $('body').on('change', '#dt_userbundle_userpicture_file', function(e){
-        console.log(2);
         $('#userPicturesForm').submit().find('.messageContainer').html('');
     });
     
     $('body').on('submit', '#userPicturesForm', function(e){
         
-        console.log(3);
         e.preventDefault(); 
         
         var form = $(this);
@@ -30,9 +27,9 @@ jQuery(function($){
             form: form,
             cache: false
         })
-        .done(function(data){
-            console.log(data);
+        .done(function(data, textStatus, jqXHR){
             form.find('.messageContainer').html(data.message);
+            $('.userPictureContainer').append(data.item);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseJSON);
@@ -70,7 +67,7 @@ jQuery(function($){
                 stopAjaxSpinner(container);
             }
         })
-        .done(function(data){
+        .done(function(data, textStatus, jqXHR){
             
             if( method === 'GET' )
             {

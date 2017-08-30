@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row userPictureContainer">
 {% for picture in userPictures %}
     
     {% set picturePath = 
@@ -11,21 +11,7 @@
     %}
     
     {% if picturePath|fileExists %}
-    <div class="col-xs-3 col-md-3 col-lg-3 userPictureItem">
-
-        {% set pictureUrl = 
-            [
-                constant('USER_UPLODED_FOLDER', picture)|replace({'%d': app.user.id}),
-                picture.name
-            ]|join('/') 
-        %}
-            
-        <div class="thumbnail">
-            <img src="/{{ pictureUrl }}">
-            {% include 'DtUserBundle:Compte:UserPicture/edit.html.twig' %}
-        </div>
-        
-    </div>
+    {% include 'DtUserBundle:Compte:UserPicture/item.html.twig' %}
     {% endif %}
     
 {% endfor %}

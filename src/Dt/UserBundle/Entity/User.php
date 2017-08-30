@@ -253,7 +253,7 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="UserPicture", cascade={"persist", "remove"}, mappedBy="user")
      * 
      * @Assert\Count(
-     *      max = 5, 
+     *      max = User::USER_PICTURES_MAX, 
      *      maxMessage="dt_user.user_pictures.count.max",
      *      groups={"NewUserPicture"}
      * )

@@ -26,6 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class User extends BaseUser
 {
+ 
+    const USER_PICTURES_MAX = 5;
     
     public function __construct()
     {
@@ -249,6 +251,12 @@ class User extends BaseUser
      * @var UserPicture
      * 
      * @ORM\OneToMany(targetEntity="UserPicture", cascade={"persist", "remove"}, mappedBy="user")
+     * 
+     * @Assert\Count(
+     *      max = 5, 
+     *      maxMessage="dt_user.user_pictures.count.max",
+     *      groups={"NewUserPicture"}
+     * )
      */
     protected $userPictures;
     

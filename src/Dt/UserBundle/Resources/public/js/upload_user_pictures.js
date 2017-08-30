@@ -1,5 +1,7 @@
 jQuery(function($){
     
+    var msgContainer = $('#userPicturesContent').find('.messageContainer');
+    
     ////
     // Add user picture
     ////
@@ -28,12 +30,12 @@ jQuery(function($){
             cache: false
         })
         .done(function(data, textStatus, jqXHR){
-            form.find('.messageContainer').html(data.message);
+            msgContainer.html(data.message);
             $('.userPictureContainer').append(data.item);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseJSON);
-            form.find('.messageContainer').html(jqXHR.responseJSON.message);
+            msgContainer.html(jqXHR.responseJSON.message);
     
         });
        
@@ -47,7 +49,6 @@ jQuery(function($){
         
         var elmt = $(this);
         var container = $('#userPicturesContent');
-        var msgContainer = $('#userPicturesContent').find('.messageContainer');
         
         var routeName = elmt.data('action-url');
         var routeParameters = elmt.data('action-parameters');

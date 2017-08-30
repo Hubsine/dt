@@ -58,11 +58,13 @@ class UserPictureController extends Controller
 
         if( $form->isSubmitted() ) 
         {  
-            if( $form->isValid() && $userPicture->getFile()->isValid() )
+            $user->addUserPicture($userPicture);
+            $errors = $this->get('validator')->validateProperty($user, 'userPictures', array('NewUserPicture'));
+            
+            if( $form->isValid() && $userPicture->getFile()->isValid() && count($errors) <= 0 )
             {
 
                 $em = $this->getDoctrine()->getManager();
-                $user->addUserPicture($userPicture);
                 
                 /** @var $userManager UserManagerInterface */
                 $userManager = $this->get('fos_user.user_manager');
@@ -84,8 +86,18 @@ class UserPictureController extends Controller
                 
             }
             
+            $validationMessage = '';
+            
+            if( $errors->count() > 0 )
+            {
+                foreach ($errors as $key => $error) 
+                {
+                    $validationMessage = $error->getMessage();
+                }
+            }
+            
             $codeResponse = 400;
-            $dataResponse['message'] = (string) $form->getErrors(true);
+            $dataResponse['message'] = (string) $form->getErrors(true) . $validationMessage;
         }
 
         $response = new JsonResponse($dataResponse, $codeResponse);

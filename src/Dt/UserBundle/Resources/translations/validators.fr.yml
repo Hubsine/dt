@@ -28,6 +28,9 @@ dt_user:
         dns: 'l''hôte "{{ value }}" n''est pas valide.'
     snapchat_name:
        type: 'la valeur {{ value }} n''est pas une valeur de type {{ type }}.'
+    user_pictures:
+        count:
+            max: 'Vous avez atteint le nombre maximal d''image autorisée.'
        
 dt_about_user_reply:
     unique_entity: 'Vous ne pouvez pas avoir deux réponse pour le même élément. DUPLICATA.'

@@ -16,6 +16,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 /**
  * Userpicture controller.
  *
+ * @Route("/membres/{id}/mon-compte/pictures/{pictureId}")
+ * 
  */
 class UserPictureController extends Controller
 {
@@ -157,19 +159,36 @@ class UserPictureController extends Controller
     /**
      * Deletes a userPicture entity.
      *
+     * @Route("/{id}/mon-compte/pictures/{pictureId}/delete")
+     * 
+     * @ParamConverter("userPicture", options={"mapping": {"pictureId" = "id"}})
      */
-    public function deleteAction(Request $request, UserPicture $userPicture)
+    public function deleteAction(Request $request, User $user, UserPicture $userPicture)
     {
-        $form = $this->createDeleteForm($userPicture);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $codeResponse = 200;
+        $response = array();
+        
+        $response['count'] = $user->getUserPictures()->count();
+        
+        if ( $request->isXmlHttpRequest() ) 
+        {
+            if( $user->getProfilePicture() instanceof UserPicture 
+                && $userPicture->getId() === $user->getProfilePicture()->getId() )
+            {
+                $codeResponse = 400;
+                $response['message'] = $this->get('translator')->trans('change_profile.delete_profile_picture',array(), 'FOSUserBundle');
+                
+                return new JsonResponse($response, $codeResponse);
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->remove($userPicture);
             $em->flush();
+            
+            $response['message'] = $this->get('translator')->trans('change_profile.success',array(), 'FOSUserBundle');
         }
-
-        return $this->redirectToRoute('dt_user_user_picture_index');
+        
+        return new JsonResponse($response, $codeResponse);
     }
 
     /**

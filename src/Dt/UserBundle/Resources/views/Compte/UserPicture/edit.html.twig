@@ -20,12 +20,20 @@
         <li>
             <div 
                 data-action-parameters='{{ actionParameters|json_encode() }}'
-                data-action-url="dt_user_user_picture_update_user_profile_picture" class="{{ btnExtraClass }} btn btn-default callAction">
+                data-action-url="dt_user_user_picture_update_user_profile_picture" 
+                data-action-method="GET"
+                class="{{ btnExtraClass }} btn btn-default callAction">
                 <i class="fa fa-user" aria-hidden="true"></i>
             </div>
         </li>
         <li>
-            <div data-action-url="dt_user_user_picture_delete" class="btn btn-default callAction"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+            <div 
+                data-action-parameters='{{ actionParameters|json_encode() }}'
+                data-action-url="dt_user_user_picture_delete" 
+                data-action-method="DELETE"
+                class="btn btn-default callAction">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </div>
         </li>
     </ul>
 </div>

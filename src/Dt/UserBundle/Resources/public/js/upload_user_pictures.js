@@ -54,10 +54,11 @@ jQuery(function($){
         
         var routeName = elmt.data('action-url');
         var routeParameters = elmt.data('action-parameters');
+        var method = elmt.data('action-method');
         
         $.ajax({
             url: Routing.generate(routeName, routeParameters),
-            type: 'GET',
+            type: method,
             data: routeParameters,
             beforeSend: function(jqXHR, settings)
             {
@@ -71,8 +72,16 @@ jQuery(function($){
         })
         .done(function(data){
             
-            $('.userPictureActions .callAction.btn-success').removeClass('btn-success');
-            elmt.addClass('btn-success');
+            if( method === 'GET' )
+            {
+                $('.userPictureActions .callAction.btn-success').removeClass('btn-success');
+                elmt.addClass('btn-success');
+            }
+            
+            if( method === 'DELETE')
+            {
+                elmt.closest('div.userPictureItem').remove();
+            }
             
             msgContainer.html(data.message);
         })

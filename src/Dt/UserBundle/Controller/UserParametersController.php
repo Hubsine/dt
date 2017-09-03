@@ -5,6 +5,8 @@ namespace Dt\UserBundle\Controller;
 use Dt\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Dt\UserBundle\Form\Type\UserParametersType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * UserParameters controller.
@@ -18,13 +20,7 @@ class UserParametersController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('DtUserBundle:User')->findAll();
-
-        return $this->render('user/index.html.twig', array(
-            'users' => $users,
-        ));
+        return $this->render('DtUserBundle:Compte:UserParameters/index.html.twig');
     }
 
     /**
@@ -71,21 +67,19 @@ class UserParametersController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('Dt\UserBundle\Form\UserType', $user);
+        $editForm = $this->createForm(UserParametersType::class, $user);
+        
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ( $editForm->isSubmitted() )
+        {
+            if ( $editForm->isValid() ) 
+            {
+                $this->getDoctrine()->getManager()->flush();
+            }
 
-            return $this->redirectToRoute('user_parameters_edit', array('id' => $user->getId()));
         }
 
-        return $this->render('user/edit.html.twig', array(
-            'user' => $user,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
 
     /**

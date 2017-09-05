@@ -231,6 +231,7 @@ fos_js_routing:
         - google_login
         - dt_user_user_picture_update_user_profile_picture
         - dt_user_user_picture_delete
+        - dt_user_parameters_edit
         
 # JMS Security Extra Bundle
 jms_security_extra:

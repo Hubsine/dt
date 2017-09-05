@@ -17,6 +17,10 @@ layout:
     instagram_url: 'Profile instagram'
     snapchat_name: 'Nom d''utilisateur SnapChat'
     section_empty: 'Vous n''avez pas encore renseigné cette partie de votre profil. Cliquez sur "Modifier" pour le renseigné.'
+    last_name: 'Nom'
+    first_name: 'Prénom'
+    user_password: 'Mot de passe'
+    email: 'E-mail'
     compte:
         mon_compte: 'Compte'
         moi: 'Moi'
@@ -28,6 +32,8 @@ layout:
         looking_for: Je cherche
         user_location: Ma localisation
         user_pictures: Mes photos
+        parameters: 'Paramètres'
+        email: 'E-mail'
     looking_for:
         sexe: 'Sexe'
         relationships: 'Relation cherchée'
@@ -48,6 +54,7 @@ security:
     password_forget: 'Mot de passe oublié ?'
     login: 
         email: 'Votre adresse e-mail'
+    hidden: 'Pour des raisons de sécurité votre mot de passe n''est pas visible.'    
     
 registration:
     flash:

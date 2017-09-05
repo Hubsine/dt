@@ -1,24 +1,24 @@
-user_parameters_index:
+dt_user_parameters_index:
     path:     /
     defaults: { _controller: "DtUserBundle:UserParameters:index" }
     methods:  GET
 
-user_parameters_show:
+dt_user_parameters_show:
     path:     /show
     defaults: { _controller: "DtUserBundle:UserParameters:show" }
     methods:  GET
 
-#user_parameters_new:
+#dt_user_parameters_new:
 #    path:     /new
 #    defaults: { _controller: "DtUserBundle:UserParameters:new" }
 #    methods:  [GET, POST]
 
-user_parameters_edit:
+dt_user_parameters_edit:
     path:     /edit
     defaults: { _controller: "DtUserBundle:UserParameters:edit" }
     methods:  [GET, POST]
 
-#user_parameters_delete:
+#dt_user_parameters_delete:
 #    path:     /delete
 #    defaults: { _controller: "DtUserBundle:UserParameters:delete" }
 #    methods:  DELETE

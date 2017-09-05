@@ -27,6 +27,9 @@ function initAjaxUpdateBtn(){
             type: 'GET',
             url: $(this).data('action'),
             container: "#"+$(this).data('container'),
+            data: {
+              container: $(this).data('container')
+            },
             beforeSend: function(jqXHR, settings){
                 
                 var container = settings.container;

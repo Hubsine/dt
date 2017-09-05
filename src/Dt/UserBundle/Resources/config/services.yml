@@ -14,6 +14,7 @@ parameters:
     dt_user.user_location.manager.class: Dt\UserBundle\Doctrine\UserLocationManager
     # Form
     dt_user.about_user_reply.form.type.class: Dt\UserBundle\Form\Type\AboutUserReplyType
+    dt_user.user_parameters.form.type.class: Dt\UserBundle\Form\Type\UserParametersType
 
 services:
     dt.oauth.user_provider:
@@ -52,3 +53,9 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage', '@fos_user.user_manager']
         tags:
             - { name: form.type }  
+    
+    dt_user.user_parameters.form.type:
+        class: '%dt_user.user_parameters.form.type.class%'
+        arguments: ['@request_stack']
+        tags:
+            - { name: form.type }          

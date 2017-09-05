@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dt\UserBundle\Form\Type\UserParametersType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * UserParameters controller.
@@ -16,9 +18,9 @@ class UserParametersController extends Controller
 {
     /**
      * Lists all user entities.
-     *
+     * 
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return $this->render('DtUserBundle:Compte:UserParameters/index.html.twig');
     }
@@ -51,14 +53,9 @@ class UserParametersController extends Controller
      * Finds and displays a user entity.
      *
      */
-    public function showAction(User $user)
+    public function showAction(Request $request, User $user)
     {
-        $deleteForm = $this->createDeleteForm($user);
-
-        return $this->render('user/show.html.twig', array(
-            'user' => $user,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render('DtUserBundle:Compte:UserParameters/show.html.twig');
     }
 
     /**
@@ -67,19 +64,64 @@ class UserParametersController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        $editForm = $this->createForm(UserParametersType::class, $user);
+        $codeResponse = 200;
+        $contentId = $request->get('container');
+        $templateToShow = 'DtUserBundle:Compte:UserParameters/show.html.twig';
+        $templateToEdit = 'DtUserBundle:Compte:UserParameters/edit.html.twig';
         
-        $editForm->handleRequest($request);
-
-        if ( $editForm->isSubmitted() )
+        $form = $this->createForm(UserParametersType::class, $user);
+        
+        switch ($contentId)
         {
-            if ( $editForm->isValid() ) 
+            case 'userParametersPasswordContent':
+                $form->add('container', TextType::class, array(
+                    'data' => $contentId,
+                    'mapped'  => false
+                ));
+                break;
+            
+            case 'userParametersEmailContent':
+                $form->add('container', TextType::class, array(
+                    'data' => $contentId,
+                    'mapped'  => false
+                ));
+                break;
+        }
+        
+        $form->handleRequest($request);
+
+        if ( $form->isSubmitted() )
+        {
+            if ( $form->isValid() ) 
             {
                 $this->getDoctrine()->getManager()->flush();
+                
+                $message = $this->get('translator')->trans('change_profile.success', array(), 'FOSUserBundle');
+                
+                $response = new JsonResponse(array(
+                    'contentId' => $contentId,
+                    'form'  => $this->renderView($templateToShow, array(
+                        'message'   => $message
+                    ))
+                ), $codeResponse );
+
+                return $response;
             }
 
+            $codeResponse = 400;
+            
         }
 
+        $response = new JsonResponse(
+            array(
+                'contentId' => $contentId,
+                'form'  => $this->renderView($templateToEdit, array(
+                    'form' => $form->createView()
+                     ))
+            ), $codeResponse );
+        
+        return $response;
+        
     }
 
     /**

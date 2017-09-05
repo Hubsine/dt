@@ -54,8 +54,10 @@
     
         {% include 'FOSUserBundle:Compte:tab_profile.html.twig' %}
         
-    {% elseif 'photos' %}
+    {% elseif tab == 'photos' %}
         {% include 'FOSUserBundle:Compte:tab_photos.html.twig' %}
+    {% elseif tab == 'parametres' %}
+        {{ userParametersView|raw }}
     {% endif %}
     
     {#    

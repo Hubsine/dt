@@ -1,0 +1,23 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% macro userPassword() %}
+<table class="table table-condensed">
+    <tbody> 
+        <tr> 
+            <th scope="row">{% trans %} layout.user_password {% endtrans %}</th> 
+            <td>{{ 'security.hidden'|trans }}</td> 
+        </tr> 
+    </tbody>
+</table>
+{% endmacro userPassword %}
+
+{% macro userEmail() %}
+<table class="table table-condensed">
+    <tbody> 
+        <tr> 
+            <th scope="row">{% trans %} layout.email {% endtrans %}</th> 
+            <td>{{ app.user.email }}</td> 
+        </tr> 
+    </tbody>
+</table>
+{% endmacro userEmail %}

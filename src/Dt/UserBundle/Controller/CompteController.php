@@ -51,8 +51,11 @@ class CompteController extends Controller
     {
         #$aclManager = $this->get('oneup_acl.manager');
         #$aclManager->setObjectPermission($user, MaskBuilder::MASK_OWNER, UserSecurityIdentity::fromAccount($user));
+        $parametersResponse = $this->forward('DtUserBundle:UserParameters:index');
         
-        return $this->render('DtUserBundle:Compte:layout.html.twig');
+        return $this->render('DtUserBundle:Compte:layout.html.twig', array(
+            'userParametersView'    => $parametersResponse->getContent()
+        ));
     }
 
     public function showMoiAction(Request $request, User $user)

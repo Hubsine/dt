@@ -1,21 +1,18 @@
-{% extends 'base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
 
-{% block body %}
-    <h1>User edit</h1>
+{% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+{{ form_start(form, { 'action': path('dt_user_parameters_edit', { 'id': app.user.id } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'userParametersContent' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <button type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
+        <div
+            data-action="{{ path('dt_user_parameters_edit', { 'id': app.user.id } ) }}" 
+            data-container="userParametersContent"
+            class="cancelFormToUpdateInAjax btn btn-warning">
+            {% trans %} layout.cancel {% endtrans %}
+        </div>
+    </div>
+{{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('user_parameters_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-{% endblock %}
+

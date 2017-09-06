@@ -7,8 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dt\UserBundle\Form\Type\UserParametersType;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * UserParameters controller.
@@ -65,28 +63,12 @@ class UserParametersController extends Controller
     public function editAction(Request $request, User $user)
     {
         $codeResponse = 200;
-        $contentId = $request->get('container');
-        $templateToShow = 'DtUserBundle:Compte:UserParameters/show.html.twig';
+        $sectionData = $request->get('sectionData');
+        $templateToShow = 'DtUserBundle:Compte:macros.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:UserParameters/edit.html.twig';
         
         $form = $this->createForm(UserParametersType::class, $user);
         
-        switch ($contentId)
-        {
-            case 'userParametersPasswordContent':
-                $form->add('container', TextType::class, array(
-                    'data' => $contentId,
-                    'mapped'  => false
-                ));
-                break;
-            
-            case 'userParametersEmailContent':
-                $form->add('container', TextType::class, array(
-                    'data' => $contentId,
-                    'mapped'  => false
-                ));
-                break;
-        }
         
         $form->handleRequest($request);
 
@@ -99,9 +81,11 @@ class UserParametersController extends Controller
                 $message = $this->get('translator')->trans('change_profile.success', array(), 'FOSUserBundle');
                 
                 $response = new JsonResponse(array(
-                    'contentId' => $contentId,
+                    'contentId' => $sectionData['contentId'],
                     'form'  => $this->renderView($templateToShow, array(
-                        'message'   => $message
+                        'message'   => $message,
+                        'sectionData'  => $sectionData
+                        //'contentId' => $contentId
                     ))
                 ), $codeResponse );
 
@@ -114,10 +98,13 @@ class UserParametersController extends Controller
 
         $response = new JsonResponse(
             array(
-                'contentId' => $contentId,
+                'contentId' => $sectionData['contentId'],
                 'form'  => $this->renderView($templateToEdit, array(
-                    'form' => $form->createView()
-                     ))
+                    'form' => $form->createView(),
+                    'sectionData'   => $sectionData
+                    //'contentId' => $contentId
+                     )
+                )
             ), $codeResponse );
         
         return $response;

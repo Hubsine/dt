@@ -28,7 +28,7 @@ function initAjaxUpdateBtn(){
             url: $(this).data('action'),
             container: "#"+$(this).data('container'),
             data: {
-              container: $(this).data('container')
+              sectionData: $(this).data('section-data')
             },
             beforeSend: function(jqXHR, settings){
                 
@@ -67,10 +67,15 @@ function initAjaxForm()
  
         //$('.section-anchor-js .alert-success').addClass('hidden');
         e.preventDefault();
- 
+        
+        var sectionData = $(this).find('button[type="submit"]').data('section-data');
+        //var data = $(this).serializeArray(); data.push( {'sectionData': $.parseJSON( +"'"+sectionData+"'" ) } );
+        
+        console.log($.param( { 'sectionData': sectionData } ));
+        
         $.ajax({
             type: $(this).attr('method'),
-            url: $(this).attr('action'),
+            url: $(this).attr('action') + '?' + $.param( { 'sectionData': sectionData } ),
             data: $(this).serialize(),
             form: $(this),
             container: "#"+$(this).data('container'),

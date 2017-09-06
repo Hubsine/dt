@@ -3,28 +3,32 @@
 {% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
 {% import 'DtUserBundle:Compte:macros.html.twig' as macros %}
 
-{% if message is defined %}    
-        {{ advanced_flash('success', message, '', true, false, '') }}    
-{% endif %}
-
 {% set sections =
 {
     'userPassword': {
         'id': 'parameters-password',
         'title':  'layout.compte.password',
         'contentId': 'userParametersPasswordContent',
-        'view': macros.userPassword(),
+        'view': 'userPassword',
         'path': path( 'dt_user_parameters_edit', { 'id': app.user.id } )
     },
     'userEmail': {
         'id': 'parameters-email',
         'title':  'layout.compte.email',
         'contentId': 'userParametersEmailContent',
-        'view': macros.userEmail(),
+        'view': 'userEmail',
         'path': path( 'dt_user_parameters_edit', { 'id': app.user.id } )
     }
 }
 %}
+
+{% if message is defined %}    
+        {{ advanced_flash('success', message, '', true, false, '') }}    
+        
+        {% set sections = {} %}
+        {% set sections = sections|merge( { 'item': sectionData } ) %}
+        
+{% endif %}
 
 {% for section in sections %}
     
@@ -37,17 +41,9 @@
         
         <div class="viewContent">
             
-            {{ section.view }}
+            {{ attribute(macros, section.view) }}
 
-            <div>
-                <button 
-                    data-action="{{ section.path }}" 
-                    data-container="{{ section.contentId }}"
-                    class="updateFormToUpdateInAjax pull-right btn btn-danger">
-                    {% trans %} layout.update {% endtrans %}
-                </button>
-
-            </div>
+            {{ macros.sectionFormButton(section) }}
         </div>
                 
         <div class="formContent hidden">

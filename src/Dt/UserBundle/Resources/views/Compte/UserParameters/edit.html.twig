@@ -2,13 +2,16 @@
 
 {% form_theme form 'MopaBootstrapBundle:form:fields.html.twig' %}
 
-{{ form_start(form, { 'action': path('dt_user_parameters_edit', { 'id': app.user.id } ), 'attr': { 'class': 'ajaxForm', 'data-container': 'userParametersContent' } }) }}
+{{ form_start(form, { 'action': path('dt_user_parameters_edit', { 'id': app.user.id } ), 'attr': { 'class': 'ajaxForm', 'data-container': sectionData.contentId } }) }}
     {{ form_widget(form) }}
     <div>
-        <button type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
+        <button
+            data-section-data="{{ sectionData|json_encode() }}"
+            type="submit" class="btn btn-danger">{{ 'change_profile.update'|trans }}</button>
         <div
             data-action="{{ path('dt_user_parameters_edit', { 'id': app.user.id } ) }}" 
-            data-container="userParametersContent"
+            data-container="{{ sectionData.contentId }}"
+            data-section-data="{{ sectionData|json_encode() }}"
             class="cancelFormToUpdateInAjax btn btn-warning">
             {% trans %} layout.cancel {% endtrans %}
         </div>

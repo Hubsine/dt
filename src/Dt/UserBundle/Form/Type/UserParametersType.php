@@ -8,9 +8,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use FOS\UserBundle\Form\Type\ChangePasswordFormType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Form\CallbackTransformer;
 
 class UserParametersType extends AbstractType
 {
@@ -28,9 +30,12 @@ class UserParametersType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $container = $this->request->getCurrentRequest()->get('container');
+        $sectionData = $this->request->getCurrentRequest()->get('sectionData');
+        //$sectionData = ( is_array($sectionData) ) ? $sectionData : (array) rawurldecode($sectionData);
         
-        switch ($container)
+        //var_dump($sectionData);
+        //die()
+        switch ($sectionData['contentId'])
         {
             case 'userParametersPasswordContent':
                 ###
@@ -57,6 +62,26 @@ class UserParametersType extends AbstractType
                 );   
             break;
         }
+        
+//        $builder->add('sectionData', HiddenType::class, array(
+//            'data'=> $sectionData, 
+//            'mapped'=> false,
+//        ));
+//        
+//        $builder->get('sectionData')
+//            ->addModelTransformer(new CallbackTransformer(
+//                function($hasArray){
+//                    return implode(',', $hasArray);
+//                },
+//                function($hasString){
+//                    return explode(',', $hasString);
+//                }
+//        ));
+        
+        $builder->add('container', HiddenType::class, array(
+            'data' => $sectionData['contentId'],
+            'mapped'    => false
+        ));
     }
     
     /**
@@ -65,7 +90,8 @@ class UserParametersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Dt\UserBundle\Entity\User'
+            'data_class' => 'Dt\UserBundle\Entity\User',
+            'allow_extra_fields'    => true
         ));
     }
 

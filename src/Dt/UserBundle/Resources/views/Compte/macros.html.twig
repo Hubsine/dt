@@ -1,5 +1,18 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% import _self as macros %}
+
+{% macro sectionFormButton(section) %}
+    <div>
+        <button 
+            data-action="{{ section.path }}" 
+            data-section-data="{{ section|json_encode() }}"
+            class="updateFormToUpdateInAjax pull-right btn btn-danger">
+            {% trans %} layout.update {% endtrans %}
+        </button>
+    </div>
+{% endmacro sectionFormButton %}
+
 {% macro userPassword() %}
 <table class="table table-condensed">
     <tbody> 
@@ -21,3 +34,6 @@
     </tbody>
 </table>
 {% endmacro userEmail %}
+
+{{ attribute(macros, sectionData.view) }}
+{{ macros.sectionFormButton(sectionData) }}

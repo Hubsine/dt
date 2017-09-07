@@ -22,14 +22,6 @@
 }
 %}
 
-{% if message is defined %}    
-        {{ advanced_flash('success', message, '', true, false, '') }}    
-        
-        {% set sections = {} %}
-        {% set sections = sections|merge( { 'item': sectionData } ) %}
-        
-{% endif %}
-
 {% for section in sections %}
     
 <div class="section-anchor-js">

@@ -2,6 +2,20 @@
 
 {% import _self as macros %}
 
+{% macro sectionMessage(sectionData, message) %}
+    
+    {% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+    
+    {% if message is defined %}    
+        {{ advanced_flash('success', message, '', true, false, '') }}    
+        
+        {% set sections = {} %}
+        {% set sections = sections|merge( { 'item': sectionData } ) %}
+        
+    {% endif %}
+    
+{% endmacro sectionMessage %}
+    
 {% macro sectionFormButton(section) %}
     <div>
         <button 
@@ -35,5 +49,6 @@
 </table>
 {% endmacro userEmail %}
 
+{{ macros.sectionMessage(sectionData, message) }}
 {{ attribute(macros, sectionData.view) }}
 {{ macros.sectionFormButton(sectionData) }}

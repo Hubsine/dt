@@ -31,6 +31,8 @@ class UserParametersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $sectionData = $this->request->getCurrentRequest()->get('sectionData');
+        $optionsResolver = new OptionsResolver();
+        
         //$sectionData = ( is_array($sectionData) ) ? $sectionData : (array) rawurldecode($sectionData);
         
         //var_dump($sectionData);
@@ -59,7 +61,8 @@ class UserParametersType extends AbstractType
                     'invalid_message' => 'dt_user.email.mismatch',
                     'required'  => false
                     )
-                );   
+                );
+                //$this->configureOptions($optionsResolver->setDefault('validation_groups', array('ChangeEmail')));
             break;
         }
         

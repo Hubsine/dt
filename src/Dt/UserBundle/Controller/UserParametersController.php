@@ -62,13 +62,24 @@ class UserParametersController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
+        $optionsForm = array();
         $codeResponse = 200;
         $sectionData = $request->get('sectionData');
         $templateToShow = 'DtUserBundle:Compte:macros.html.twig';
         $templateToEdit = 'DtUserBundle:Compte:UserParameters/edit.html.twig';
         
-        $form = $this->createForm(UserParametersType::class, $user);
+        switch ($sectionData['contentId'])
+        {
+            case 'userParametersPasswordContent':
+                //$optionsForm['validation_groups'] = array('ChangePassword');
+                break;
+            
+            case 'userParametersEmailContent':
+                $optionsForm['validation_groups'] = array('ChangeEmail');
+                break;
+        }
         
+        $form = $this->createForm(UserParametersType::class, $user, $optionsForm);
         
         $form->handleRequest($request);
 
@@ -76,7 +87,11 @@ class UserParametersController extends Controller
         {
             if ( $form->isValid() ) 
             {
-                $this->getDoctrine()->getManager()->flush();
+                /** @var $userManager UserManagerInterface */
+                $userManager = $this->get('fos_user.user_manager');
+                
+                $userManager->updateUser($user);
+                //$this->getDoctrine()->getManager()->flush();
                 
                 $message = $this->get('translator')->trans('change_profile.success', array(), 'FOSUserBundle');
                 
@@ -85,7 +100,6 @@ class UserParametersController extends Controller
                     'form'  => $this->renderView($templateToShow, array(
                         'message'   => $message,
                         'sectionData'  => $sectionData
-                        //'contentId' => $contentId
                     ))
                 ), $codeResponse );
 
@@ -102,7 +116,6 @@ class UserParametersController extends Controller
                 'form'  => $this->renderView($templateToEdit, array(
                     'form' => $form->createView(),
                     'sectionData'   => $sectionData
-                    //'contentId' => $contentId
                      )
                 )
             ), $codeResponse );

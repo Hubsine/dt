@@ -29,6 +29,7 @@
                 <value>FbRegistration</value>
                 <value>GoogleRegistration</value>
                 <value>ProfileMoi</value>
+                <value>ChangeEmail</value>
             </option>
         </constraint>
         
@@ -68,6 +69,7 @@
                     <value>FbRegistration</value>
                     <value>GoogleRegistration</value>
                     <value>ProfileMoi</value>
+                    <value>ChangeEmail</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -81,6 +83,7 @@
                     <value>FbRegistration</value>
                     <value>GoogleRegistration</value>
                     <value>ProfileMoi</value>
+                    <value>ChangeEmail</value>
                 </option>
             </constraint>
             <constraint name="Email">
@@ -91,6 +94,7 @@
                     <value>FbRegistration</value>
                     <value>GoogleRegistration</value>
                     <value>ProfileMoi</value>
+                    <value>ChangeEmail</value>
                 </option>
             </constraint>
         </property>

@@ -209,6 +209,8 @@ class User extends BaseUser
     protected $verifiedEmail;
 
     /**
+     * @deprecated
+     * 
      * ORM\Column(type="string", name="about")
      * 
      * @Assert\NotBlank(groups={""}, message="dt_user.about.blank")

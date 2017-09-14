@@ -20,36 +20,21 @@
 
 {% block navbar %}
 
-    {% block container_header_start %} 
-        <header id="main-header"> 
-    {% endblock container_header_start %}
+    {% if app.user %}
+        
+        {% block container_header_start %} 
+            <header id="main-header"> 
+        {% endblock container_header_start %}
+
+        {% embed ':Nav:top.html.twig' %}
+
+        {% endembed %}    
+
+        {% block container_header_end %} 
+            </header> 
+        {% endblock container_header_end %}
     
-    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: false, inverse: true, id: 'mainNavbar' } %}
-
-        {% block brand %}
-            <a class="navbar-brand" href="#">Mopa Bootstrap</a>
-        {% endblock %}
-
-
-        {% block menu %}
-            {{ mopa_bootstrap_menu('main') }}
-            {#{ knp_menu_render('main') }#}
-            
-            {% if app.user %}
-                {#{ knp_menu_render('login', {'automenu': 'navbar', 'pull-right': true}) }#}
-                {{ mopa_bootstrap_menu('login', {'automenu': 'navbar', 'pull-right': true}) }}
-            {% else %}
-                {#{ knp_menu_render('logout', {'automenu': 'navbar', 'pull-right': true}) }#}
-                {{ mopa_bootstrap_menu('logout', {'automenu': 'navbar', 'pull-right': true}) }}
-            {% endif %}
-            
-        {% endblock menu %}
-
-    {% endembed %}
-
-    {% block container_header_end %} 
-        </header> 
-    {% endblock container_header_end %}
+    {% endif %}
 
 {% endblock navbar %}
 
@@ -80,7 +65,7 @@
 
                      {% block page_title %}
                         <section id="page-title">
-                             <h1>{% block headline %}Mopa Bootstrap Bundle{% endblock headline %}</h1>
+                            <h1>{% block headline %}Mopa Bootstrap Bundle{% endblock headline %}</h1>
                         </section>
                      {% endblock page_title %}
                     </div>

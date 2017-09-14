@@ -1,0 +1,12 @@
+/***
+* Nav
+***/
+
+.mainHeader, .mainFooter{
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.mainHeader{ top: 0; }
+.mainFooter{ bottom: 0; }

@@ -23,7 +23,7 @@
     {% if app.user %}
         
         {% block container_header_start %} 
-            <header id="main-header"> 
+            <header id="main-header" class="mainHeader"> 
         {% endblock container_header_start %}
 
         {% embed ':Nav:top.html.twig' %}
@@ -123,7 +123,7 @@
     
     {% block main_footer %}
         {% if app.user %}
-            <footer>
+            <footer class="mainFooter">
                 {% block footer_content %}
                     {% embed ":Nav:bottom.html.twig" %}
                     {% endembed %}

@@ -122,13 +122,14 @@
     {% endblock page_main_content %}
     
     {% block main_footer %}
-        <footer>
-            <div class="container">
+        {% if app.user %}
+            <footer>
                 {% block footer_content %}
-                    <p>&copy; <a href="http://www.mohrenweiserpartner.de" target="_blank">Mohrenweiser & Partner</a> 2011-2015</p>
+                    {% embed ":Nav:bottom.html.twig" %}
+                    {% endembed %}
                 {% endblock footer_content %}
-            </div>
-        </footer>
+            </footer>
+        {% endif %}
     {% endblock main_footer%}
     
 {% endblock container %}    

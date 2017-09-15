@@ -122,14 +122,12 @@
     {% endblock page_main_content %}
     
     {% block main_footer %}
-        {% if app.user %}
-            <footer class="mainFooter">
-                {% block footer_content %}
-                    {% embed ":Nav:bottom.html.twig" %}
-                    {% endembed %}
-                {% endblock footer_content %}
-            </footer>
-        {% endif %}
+        <footer class="mainFooter">
+            {% block footer_content %}
+                {% embed ":Nav:bottom.html.twig" %}
+                {% endembed %}
+            {% endblock footer_content %}
+        </footer>
     {% endblock main_footer%}
     
 {% endblock container %}    

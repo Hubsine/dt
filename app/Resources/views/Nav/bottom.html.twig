@@ -1,19 +1,26 @@
-{% set menu = knp_menu_get('login') %}
+
 {% set extrasClass = '' %}
         
+{% if app.user %}
+
+    {% set loginMenu = knp_menu_get('login') %}
+
+    <div class="btn-group btn-group-justified">
+        {% for item in loginMenu %}
+            {#{ dump(item.getExtras()) }#}
+
+            {% if item.isCurrent() %}
+                {% set extrasClass = 'current' %}
+            {% endif %}
+
+        <a href="{{ item.getUri() }}" title="{{ item.getLabel()|trans( {}, 'menu')  }}" class="{{ extrasClass }} btn btn-primary">
+            <i class="fa fa-2x {{ item.getExtra('icon') }}" aria-hidden="true"></i>
+        </a>
+        {% endfor %}
+    </div>
         
-<div class="btn-group btn-group-justified">
-    {% for item in menu %}
-        {#{ dump(item.getExtras()) }#}
-        
-        {% if item.isCurrent() %}
-            {% set extrasClass = 'current' %}
-        {% endif %}
-        
-    <a href="{{ item.getUri() }}" title="{{ item.getLabel()|trans( {}, 'menu')  }}" class="{{ extrasClass }} btn btn-primary">
-        <i class="fa fa-2x {{ item.getExtra('icon') }}" aria-hidden="true"></i>
-    </a>
-    {% endfor %}
-</div>
-        
-        
+{% else %}
+    
+    {#% set logoutMenu = knp_menu_get('logout') %#}
+    {{ mopa_bootstrap_menu('logout', {'automenu': 'pills', 'fixedBottom': true}) }}
+{% endif %}

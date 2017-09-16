@@ -2,9 +2,23 @@
 {% set extrasClass = '' %}
         
 {% if app.user %}
-    {{ mopa_bootstrap_menu('login', {'automenu': 'pills'}) }}
-{% else %}
     
-    {#% set logoutMenu = knp_menu_get('logout') %#}
+    {% set loginMenu = knp_menu_get('login') %}
+    
+    <div class="btn-group btn-group-justified">
+        {% for item in loginMenu %}
+            {#{ dump(item.getExtras()) }#}
+            
+            {% if item.isCurrent() %}
+                {% set extrasClass = 'current' %}
+            {% endif %}
+
+        <a href="{{ item.getUri() }}" title="{{ item.getLabel()|trans( {}, 'menu')  }}" class="{{ extrasClass }} btn btn-primary">
+            <i class="fa fa-2x fa-{{ item.getExtra('icon') }}" aria-hidden="true"></i>
+        </a>
+        {% endfor %}
+    </div>
+        
+{% else %}
     {{ mopa_bootstrap_menu('logout', {'automenu': 'pills'}) }}
 {% endif %}

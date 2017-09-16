@@ -109,13 +109,13 @@ class MenuBuilder{
         ))->setExtra('translation_domain', 'menu');
         
         $menu->addChild('my_profile', array(
-            'icon'  => 'fa-user',
+            'icon'  => 'user',
             'route' => 'fos_user_profile_show', // Il s'agit de montrer le profile public que tout le monde peut voir
             'routeParameters'   => array('id' => $this->userId)
         ))->setExtra('translation_domain', 'menu');
         
         $menu->addChild('mon_compte', array(
-            'icon' => 'fa-cog',
+            'icon' => 'cog',
             'caret' => true, 
             'route' => 'dt_user_members_mon_compte',
             'routeParameters'   => array('id' => $this->userId)

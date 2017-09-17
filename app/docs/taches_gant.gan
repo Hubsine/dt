@@ -44,14 +44,14 @@
         <task id="41" name="Extend la class Gedmo\Timestampable\Traits\TimestampableEntity ?" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="42" name="configurer et organiser les templates" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="40" name="Créer toutes les routes dans routing" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        <task id="15" name="Faire chaque entité dans son bundle en générant les CRUD" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true">
+        <task id="15" name="Faire chaque entité dans son bundle en générant les CRUD" meeting="false" start="2017-04-25" duration="1" complete="0" expand="false">
             <task id="19" name="Les champs" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
             <task id="20" name="Les asserts et msg de validation" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
             <task id="21" name="Créer les class de formulaire" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
             <task id="43" name="Créer les CRUD" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         </task>
         <task id="18" name="Faire les routes" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        <task id="31" name="Page accueil" meeting="false" start="2017-04-25" duration="1" complete="0" expand="false">
+        <task id="31" name="Page accueil" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true">
             <task id="32" name="Header" meeting="false" start="2017-04-25" duration="1" complete="0" expand="false">
                 <task id="34" name="Menu" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
                 <task id="37" name="Breadcrub" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
@@ -64,12 +64,14 @@
             <task id="12" name="Inscription avec HWIOAuthBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
             <task id="13" name="Connexion avec HWIOAuthBundle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="25" name="Editer ses paramètres" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        <task id="24" name="Editter le profil" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="24" name="Editer le profil" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="47" name="Editer ses paramètres" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="30" name="Afficer les membres (avec possibilité de recherche ?) et les plus recents en premier" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="23" name="Afficher un membre (profil public)" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        <task id="22" name="Faire la fonction DT06" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-        <task id="29" name="Refuser une DT06" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        <task id="22" name="Faire la fonction DT06" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true">
+            <task id="49" name="Demande DT" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+            <task id="29" name="Refuser une DT06" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+        </task>
         <task id="27" name="Supprimer mon compte" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="28" name="Affichage de l'historique des demandes" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="26" name="Moteur de recherche" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>

@@ -69,8 +69,10 @@
         <task id="30" name="Afficer les membres (avec possibilité de recherche ?) et les plus recents en premier" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="23" name="Afficher un membre (profil public)" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="22" name="Faire la fonction DT06" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true">
-            <task id="49" name="Demande DT" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
-            <task id="29" name="Refuser une DT06" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+            <task id="50" name="Spécification fonctionnelle" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+            <task id="51" name="Architecture de la story" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+            <task id="49" name="Coder" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
+            <task id="29" name="Test" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         </task>
         <task id="27" name="Supprimer mon compte" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>
         <task id="28" name="Affichage de l'historique des demandes" meeting="false" start="2017-04-25" duration="1" complete="0" expand="true"/>

@@ -1,15 +1,15 @@
 {% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
 
 {% block head_style %}
-    
+    {#{ parent() }#}
     {% stylesheets
-        '../app/Resources/public/css/variables.less'
+        
+        '../app/Resources/public/less/main.less'
         '@AppBundle/Resources/public/css/*.css'
-        '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle-fa.less'
     %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
     {% endstylesheets %}
-    {{ parent() }}
+    
     
 {% endblock head_style %}
 

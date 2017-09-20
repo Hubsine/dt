@@ -194,3 +194,11 @@
     {% endjavascripts %}
 
 {% endblock foot_script_assetic %}
+
+{% block body_end %}
+    
+   {{ parent() }}  
+   
+   {{ ws_client() }}
+   
+{% endblock body_end %}

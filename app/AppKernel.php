@@ -32,6 +32,8 @@ class AppKernel extends Kernel
             new Oneup\AclBundle\OneupAclBundle(),
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
             new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
+            new Gos\Bundle\WebSocketBundle\GosWebSocketBundle(),
+            new Gos\Bundle\PubSubRouterBundle\GosPubSubRouterBundle(),
             //My Bundle
             new AppBundle\AppBundle(),
             new Dt\UserBundle\DtUserBundle(),

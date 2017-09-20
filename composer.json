@@ -23,6 +23,7 @@
         "friendsofsymfony/elastica-bundle": "^4.0",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "friendsofsymfony/user-bundle": "dev-master",
+        "gos/web-socket-bundle": "^1.8",
         "hwi/oauth-bundle": "^0.5.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/security-extra-bundle": "^1.6",

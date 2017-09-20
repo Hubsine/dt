@@ -21,6 +21,15 @@ services:
         class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
         arguments: [@pdo, {lock_mode: 0}]
         
+    gos_web_socket_server.client_event.listener:
+        class: AppBundle\EventListener\AppClientEventListener
+        tags:
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_connected', method: onClientConnect }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_disconnected', method: onClientDisconnect }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_error', method: onClientError }
+            - { name: kernel.event_listener, event: 'gos_web_socket.server_launched', method: onServerStart }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_rejected', method: onClientRejected }
+            
     # End Gos WebSocket Bundle
         
     app.menu_builder:

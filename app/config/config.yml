@@ -12,6 +12,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    session:
+        handler_id: session.handler.pdo
 
 framework:
     #esi: ~
@@ -339,4 +341,7 @@ ongr_elasticsearch:
 gos_web_socket:
     server:
         port: 8080        #The port the socket server will listen on
-        host: 127.0.0.1   #The host ip to bind to                
+        host: 127.0.0.1   #The host ip to bind to      
+    client:
+        firewall: main #can be an array of firewalls
+        session_handler: @session.handler.pdo

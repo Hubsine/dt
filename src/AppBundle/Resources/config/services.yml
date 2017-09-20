@@ -7,6 +7,22 @@ parameters:
     app_bundle.base.manager.class: AppBundle\Doctrine\BaseManager
     
 services:
+    # Gos WebSocket Bundle
+    pdo:
+        class: PDO
+        arguments:
+            dsn: 'mysql:host=%database_host%;dbname=%database_name%'
+            user: %database_user%
+            password: %database_password%
+        calls:
+            - [ setAttribute, [3, 2] ] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
+
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: [@pdo, {lock_mode: 0}]
+        
+    # End Gos WebSocket Bundle
+        
     app.menu_builder:
         class: '%app.menu_builder.class%'
         arguments: ["@knp_menu.factory", "@security.token_storage", "@request_stack"]

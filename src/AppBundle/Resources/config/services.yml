@@ -19,7 +19,10 @@ services:
 
     session.handler.pdo:
         class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-        arguments: [@pdo, {lock_mode: 0}]
+        arguments:
+            - 'mysql:host=%database_host%;dbname=%database_name%'
+            - { db_table: sessions, db_username: '%database_user%', db_password: '%database_password%' }
+        #arguments: [@pdo, {lock_mode: 0}]
         
     gos_web_socket_server.client_event.listener:
         class: AppBundle\EventListener\AppClientEventListener

@@ -95,6 +95,17 @@ doctrine:
 #                alias: GedmoTree # (optional) it will default to the name set for the mapping
 #                is_bundle: false
 
+doctrine_cache:
+    providers:
+        redis_cache:
+            redis:
+                host: 127.0.0.1
+                port: 6379
+                database: 3
+        websocket_cache_client:
+            type: redis
+            alias: gos_web_socket.client_storage.driver.redis
+
 #StofDoctrineExtensionBundle
 #See https://github.com/Atlantic18/DoctrineExtensions/tree/master/doc/
 stof_doctrine_extensions:
@@ -345,4 +356,7 @@ gos_web_socket:
     client:
         firewall: main #can be an array of firewalls
         session_handler: @session.handler.pdo
+        storage:
+            driver: @gos_web_socket.client_storage.driver.redis
+            decorator: @gos_web_socket.client_storage.doctrine.decorator
         

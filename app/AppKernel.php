@@ -32,8 +32,8 @@ class AppKernel extends Kernel
             new Oneup\AclBundle\OneupAclBundle(),
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
             new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
-            new Snc\RedisBundle\SncRedisBundle(),
-            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
+            //new Snc\RedisBundle\SncRedisBundle(),
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Gos\Bundle\WebSocketBundle\GosWebSocketBundle(),
             new Gos\Bundle\PubSubRouterBundle\GosPubSubRouterBundle(),
             //My Bundle

@@ -23,7 +23,13 @@ services:
             - 'mysql:host=%database_host%;dbname=%database_name%'
             - { db_table: sessions, db_username: '%database_user%', db_password: '%database_password%' }
         #arguments: [@pdo, {lock_mode: 0}]
-        
+    
+#    gos_web_scocket.client_storage.driver.predis:
+#        class: AppBundle\WebSocket\Client\Driver\PredisDriver
+#        arguments:
+#            - @snc_redis.cache
+#            - %web_socket_server.client_storage.prefix% #(optionally)if you use prefix
+            
     gos_web_socket_server.client_event.listener:
         class: AppBundle\EventListener\AppClientEventListener
         tags:

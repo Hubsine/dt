@@ -33,7 +33,8 @@ framework:
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
-        handler_id: ~
+        #handler_id: ~
+        handler_id: session.handler.pdo
     fragments: ~
     http_method_override: true
 
@@ -95,16 +96,16 @@ doctrine:
 #                alias: GedmoTree # (optional) it will default to the name set for the mapping
 #                is_bundle: false
 
-doctrine_cache:
-    providers:
-        redis_cache:
-            redis:
-                host: 127.0.0.1
-                port: 6379
-                database: 3
-        websocket_cache_client:
-            type: redis
-            alias: gos_web_socket.client_storage.driver.redis
+#doctrine_cache:
+#    providers:
+#        redis_cache:
+#            redis:
+#                host: 127.0.0.1
+#                port: 6379
+#                database: 3
+#        websocket_cache_client:
+#            type: redis
+#            alias: gos_web_socket.client_storage.driver.redis
 
 #StofDoctrineExtensionBundle
 #See https://github.com/Atlantic18/DoctrineExtensions/tree/master/doc/
@@ -356,19 +357,34 @@ gos_web_socket:
     client:
         firewall: main #can be an array of firewalls
         session_handler: @session.handler.pdo
-        storage:
-            driver: @gos_web_socket.client_storage.driver.predis
-            decorator: @gos_web_socket.client_storage.doctrine.decorator
+        #storage:
+            #driver: @gos_web_socket.client_storage.driver.redis
+#            decorator: @gos_web_socket.client_storage.doctrine.decorator
 
-# Snc Redis            
-clients:
-    ws_client:
-        type: predis
-        alias: client_storage.driver #snc_redis.client_storage.driver
-        dsn: redis://127.0.0.1/2
-        logging: %kernel.debug%
-        options:
-            profile: 2.2
-            connection_timeout: 10
-            read_write_timeout: 30         
+# Snc Redis    
+#snc_redis:
+#    clients:
+#        default:
+#            type: predis
+#            alias: default
+#            dsn: redis://localhost
+#snc_redis:
+#    clients:
+#        ws_client:
+#            type: predis
+#            alias: client_storage.driver #snc_redis.client_storage.driver
+#            dsn: redis://127.0.0.1/2
+#            logging: %kernel.debug%
+#            options:
+#                profile: 2.2
+#                connection_timeout: 10
+#                read_write_timeout: 30  
+#        cache:
+#            type: predis
+#            alias: cache #snc_redis.client_storage.driver
+#            dsn: redis://127.0.0.1/2
+#            logging: %kernel.debug%
+#            options:
+#                connection_timeout: 0
+#                read_write_timeout: 30
         

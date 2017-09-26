@@ -192,7 +192,7 @@
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-
+    
 {% endblock foot_script_assetic %}
 
 {% block body_end %}
@@ -200,5 +200,23 @@
    {{ parent() }}  
    
    {{ ws_client() }}
+   
+   <script type="text/javascript">
+        var _WS_URI = "wss://{{ gos_web_socket_server_host }}:{{ gos_web_socket_server_port }}";
+        var webSocket = WS.connect(_WS_URI);
+        
+        webSocket.on("socket/connect", function(session){
+            //session is an Autobahn JS WAMP session.
+
+            console.log("Successfully Connected!");
+        });
+
+        webSocket.on("socket/disconnect", function(error){
+            //error provides us with some insight into the disconnection: error.reason and error.code
+            console.log(error);
+            console.log("Disconnected for " + error.reason + " with code " + error.code);
+        });
+
+    </script>
    
 {% endblock body_end %}

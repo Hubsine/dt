@@ -13,6 +13,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+//        $host = $this->getParameter('web_socket_server.host');
+//        $port = $this->getParameter('web_socket_server.port');
+//        
+//        $webSocketServer = $this->get('gos_web_socket.ws.server');
+//        $webSocketServer->launch($host, $port, true);
+        
         // replace this example code with whatever you need
         return $this->render('AppBundle::layout.html.twig', array(
         ));

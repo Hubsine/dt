@@ -352,8 +352,13 @@ ongr_elasticsearch:
 # Web Socket Configuration
 gos_web_socket:
     server:
+        origin_check: true
         port: 8080        #The port the socket server will listen on
-        host: 127.0.0.1   #The host ip to bind to      
+        host: localhost   #The host ip to bind to    
+    origins:
+        - https://www.donneton06.com
+        - https://donneton06.com
+        - www.donneton06.com
     client:
         firewall: main #can be an array of firewalls
         session_handler: @session.handler.pdo

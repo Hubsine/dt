@@ -70,7 +70,7 @@ class AppClientEventListener
      */
 	public function onClientRejected(ClientRejectedEvent $event)
     {
-    	$origin = $event->getOrigin;
+    	$origin = $event->getOrigin();
 
 		echo 'connection rejected from '. $origin . PHP_EOL;
     }

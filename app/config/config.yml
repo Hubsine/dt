@@ -356,7 +356,7 @@ gos_web_socket:
         port: 8080        #The port the socket server will listen on
         host: donneton06.com   #The host ip to bind to    
     origins:
-        donneton06.com
+        - donneton06.com
         - https://www.donneton06.com
         - https://donneton06.com
         - www.donneton06.com

@@ -352,9 +352,9 @@ ongr_elasticsearch:
 # Web Socket Configuration
 gos_web_socket:
     server:
-        origin_check: true
-        port: 8080        #The port the socket server will listen on
-        host: donneton06.com   #The host ip to bind to    
+        origin_check: false
+        port: 8843       #The port the socket server will listen on
+        host: donneton06.com  #The host ip to bind to    
     origins:
         - donneton06.com
         - https://www.donneton06.com

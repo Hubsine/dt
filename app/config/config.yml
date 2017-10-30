@@ -148,7 +148,7 @@ assetic:
         cssrewrite: ~
         less:
             node: /usr/local/bin/node
-            node_paths: [/opt/local/lib/node_modules]
+            node_paths: [/usr/local/lib/node_modules]
             apply_to: "\.less$"
 #        Ce block génère une erreur 
 #        cssembed:

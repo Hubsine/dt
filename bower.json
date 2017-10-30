@@ -1,7 +1,8 @@
 {
-    "name": "dt",
-    "dependencies": {
-        "swipebox": "latest",
-        "ScrollToFixed": "latest"
-    }
+  "name": "dt",
+  "dependencies": {
+    "swipebox": "latest",
+    "ScrollToFixed": "latest",
+    "anchor-js": "^4.1.0"
+  }
 }

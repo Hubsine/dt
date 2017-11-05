@@ -6,6 +6,8 @@ use Gos\Bundle\WebSocketBundle\Event\ClientEvent;
 use Gos\Bundle\WebSocketBundle\Event\ClientErrorEvent;
 use Gos\Bundle\WebSocketBundle\Event\ServerEvent;
 use Gos\Bundle\WebSocketBundle\Event\ClientRejectedEvent;
+use Gos\Bundle\WebSocketBundle\Client\ClientManipulatorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Description of AppClientEventListener
@@ -14,6 +16,21 @@ use Gos\Bundle\WebSocketBundle\Event\ClientRejectedEvent;
  */
 class AppClientEventListener
 {
+    
+    /** private $connections Ratchet\ConnectionInterface */
+    private $connections = array();
+    
+    /** protected $clientManipulator */
+    protected $clientManipulator;
+
+    /**
+     * @param ClientManipulatorInterface $clientManipulator
+     */
+    public function __construct(ClientManipulatorInterface $clientManipulator)
+    { 
+        $this->clientManipulator = $clientManipulator;
+    }
+    
     /**
      * Called whenever a client connects
      *
@@ -22,7 +39,13 @@ class AppClientEventListener
     public function onClientConnect(ClientEvent $event)
     {
         $conn = $event->getConnection();
-
+        $user = $this->clientManipulator->getClient($conn);
+        
+        if( $user instanceof UserInterface )
+        {
+            $this->connections[$user->getId()] = $conn;
+        }
+        
         echo $conn->resourceId . " connected" . PHP_EOL;
     }
 
@@ -34,7 +57,9 @@ class AppClientEventListener
     public function onClientDisconnect(ClientEvent $event)
     {
         $conn = $event->getConnection();
-
+        
+        unset($this->connections[$this->clientManipulator->getClient($conn)]);
+        
         echo $conn->resourceId . " disconnected" . PHP_EOL;
     }
 
@@ -60,7 +85,7 @@ class AppClientEventListener
     {
     	$event = $event->getEventLoop();
 
-        echo 'Server was successfully started !'. PHP_EOL;
+        echo 'Server was successfully started ! Good !'. PHP_EOL;
     }
 
     /**

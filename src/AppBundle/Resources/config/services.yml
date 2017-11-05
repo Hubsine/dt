@@ -32,6 +32,7 @@ services:
             
     gos_web_socket_server.client_event.listener:
         class: AppBundle\EventListener\AppClientEventListener
+        arguments: ["@gos_web_socket.websocket.client_manipulator"]
         tags:
             - { name: kernel.event_listener, event: 'gos_web_socket.client_connected', method: onClientConnect }
             - { name: kernel.event_listener, event: 'gos_web_socket.client_disconnected', method: onClientDisconnect }

@@ -33,14 +33,14 @@ dt_search:
 
 dt_user:
     resource: "@DtUserBundle/Resources/config/routing.yml"
-    prefix:   /users
+    prefix:   /membres
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /users
+    prefix: /members
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"

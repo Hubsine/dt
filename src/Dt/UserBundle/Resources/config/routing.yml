@@ -3,8 +3,7 @@ dt_user_aboutusersreply:
     prefix:   /aboutusersreply
 
 dt_user_members:
-    path:     /
-    defaults: { _controller: DtUserBundle:Members:members }
+    resource: "@DtUserBundle/Resources/config/routing/members.yml"
     
 dt_user_members_history:
     path: /{id}/historique

@@ -1,3 +1,13 @@
-dt_user_members:
+dt_user_members_index:
     path:     /
-    defaults: { _controller: DtUserBundle:Members:members }
+    defaults: { _controller: "DtUserBundle:Members:index" }
+    methods:  GET
+
+dt_user_members_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtUserBundle:Members:show" }
+    methods:  GET
+
+
+
+    

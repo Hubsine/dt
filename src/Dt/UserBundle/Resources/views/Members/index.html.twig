@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Users list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Slug</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>Facebookid</th>
+                <th>Googleid</th>
+                <th>Facebookurl</th>
+                <th>Twitterurl</th>
+                <th>Instagramurl</th>
+                <th>Snapchatname</th>
+                <th>Deletedat</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('members_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.slug }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.gender }}</td>
+                <td>{% if user.birthday %}{{ user.birthday|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ user.facebookId }}</td>
+                <td>{{ user.googleId }}</td>
+                <td>{{ user.facebookUrl }}</td>
+                <td>{{ user.twitterUrl }}</td>
+                <td>{{ user.instagramUrl }}</td>
+                <td>{{ user.snapchatName }}</td>
+                <td>{% if user.deletedAt %}{{ user.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if user.createdAt %}{{ user.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if user.updatedAt %}{{ user.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dt_user_members_show', { 'id': user.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

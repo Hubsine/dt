@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ user.slug }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ user.gender }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{% if user.birthday %}{{ user.birthday|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Facebookid</th>
+                <td>{{ user.facebookId }}</td>
+            </tr>
+            <tr>
+                <th>Googleid</th>
+                <td>{{ user.googleId }}</td>
+            </tr>
+            <tr>
+                <th>Facebookurl</th>
+                <td>{{ user.facebookUrl }}</td>
+            </tr>
+            <tr>
+                <th>Twitterurl</th>
+                <td>{{ user.twitterUrl }}</td>
+            </tr>
+            <tr>
+                <th>Instagramurl</th>
+                <td>{{ user.instagramUrl }}</td>
+            </tr>
+            <tr>
+                <th>Snapchatname</th>
+                <td>{{ user.snapchatName }}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if user.deletedAt %}{{ user.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if user.createdAt %}{{ user.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if user.updatedAt %}{{ user.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('members_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

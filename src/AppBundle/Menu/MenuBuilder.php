@@ -108,6 +108,11 @@ class MenuBuilder{
             'route' => 'homepage'
         ))->setExtra('translation_domain', 'menu');
         
+        $menu->addChild('members', array(
+            'icon'  => 'users',
+            'route' => 'dt_user_members_index'
+        ))->setExtra('translation_domain', 'menu');
+        
         $menu->addChild('my_profile', array(
             'icon'  => 'user',
             'route' => 'fos_user_profile_show', // Il s'agit de montrer le profile public que tout le monde peut voir

@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends '@FOSUser/layout.html.twig' %}
 
-{% block body %}
+{% block content_page %}
     <h1>User</h1>
 
     <table>
@@ -74,7 +74,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('members_index') }}">Back to the list</a>
+            <a href="{{ path('dt_user_members_index') }}">Back to the list</a>
         </li>
     </ul>
-{% endblock %}
+{% endblock content_page %}

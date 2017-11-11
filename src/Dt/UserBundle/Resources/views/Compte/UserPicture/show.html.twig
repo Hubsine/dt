@@ -2,14 +2,8 @@
 <div class="row userPictureContainer">
 {% for picture in userPictures %}
     
-    {% set picturePath = 
-        [
-            app.request.server.get('DOCUMENT_ROOT'),
-            constant('USER_UPLOADED_FOLDER', picture)|replace({'%d': app.user.id}),
-            picture.name
-        ]|join('/')
-    %}
-    
+    {% set picturePath = app.request.server.get('DOCUMENT_ROOT') ~ picture|getUserPictureUrl %}
+
     {% if picturePath|fileExists %}
     {% include 'DtUserBundle:Compte:UserPicture/item.html.twig' %}
     {% endif %}

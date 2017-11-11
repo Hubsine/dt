@@ -1,3 +1,9 @@
 <span>
-    {{ user.birthday|getAge }}
+    {{ user.birthday|getAge }}{% if user.userLocation is not empty %},{% endif %}
+</span>
+
+<span>
+    {% if user.userLocation is not empty %}
+        {{ app.user.userLocation.city }}
+    {% endif %}
 </span>

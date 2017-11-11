@@ -22,7 +22,7 @@ class UserPicture extends Picture
 {
     
     /** Dossier d'upload des fichiers de 'lutilisateur. %d is user id. */
-    const USER_UPLOADED_FOLDER = 'uploads/users/%d';
+    const USER_UPLOADED_FOLDER = '/uploads/users/%d';
 
     /**
      * @var \stdClass

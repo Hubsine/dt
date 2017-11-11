@@ -4,10 +4,12 @@
 
     {% if users is defined %}
 
-        {% for user in users %}
-            {% include '@FOSUser/MembersLoop/container.html.twig' %}
-        {% endfor %}
-        
+        <div class="row">
+            {% for user in users %}
+                {% include '@FOSUser/MembersLoop/container.html.twig' %}
+            {% endfor %}
+        </div>
+
     {% endif %} 
 
 {% endblock content_page %}

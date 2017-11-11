@@ -3,6 +3,7 @@
   "dependencies": {
     "swipebox": "latest",
     "ScrollToFixed": "latest",
-    "anchor-js": "^4.1.0"
+    "anchor-js": "^4.1.0",
+    "holderjs": "^2.9.4"
   }
 }

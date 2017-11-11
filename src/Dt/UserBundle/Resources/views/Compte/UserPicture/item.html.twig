@@ -2,7 +2,7 @@
 
     {% set pictureUrl = 
         [
-            constant('USER_UPLODED_FOLDER', picture)|replace({'%d': app.user.id}),
+            constant('USER_UPLOADED_FOLDER', picture)|replace({'%d': app.user.id}),
             picture.name
         ]|join('/') 
     %}

@@ -22,7 +22,7 @@ class UserPicture extends Picture
 {
     
     /** Dossier d'upload des fichiers de 'lutilisateur. %d is user id. */
-    const USER_UPLODED_FOLDER = 'uploads/users/%d';
+    const USER_UPLOADED_FOLDER = 'uploads/users/%d';
 
     /**
      * @var \stdClass
@@ -45,7 +45,7 @@ class UserPicture extends Picture
     public function getUploadPathFolder($defaultPath)
     {
         $userId             = $this->getUser()->getId();
-        $userUploadFolder   = sprintf( self::USER_UPLODED_FOLDER, $userId );
+        $userUploadFolder   = sprintf( self::USER_UPLOADED_FOLDER, $userId );
         
         return parent::getAbsolutetUploadRootDir() . '/' . $userUploadFolder;
     }

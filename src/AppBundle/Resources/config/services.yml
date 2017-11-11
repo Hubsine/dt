@@ -4,6 +4,7 @@ parameters:
     app.twig.country_extension.class: AppBundle\Twig\Extensions\CountryExtension
     app.twig.file_exists_extension.class: AppBundle\Twig\Extensions\FileExistsExtension
     app.twig.user_picture_extension.class: AppBundle\Twig\Extensions\UserPictureExtension
+    app.twig.age_from_date_extension.class: AppBundle\Twig\Extensions\AgeFromDateExtension
     # Manager Class
     app_bundle.base.manager.class: AppBundle\Doctrine\BaseManager
     
@@ -69,7 +70,13 @@ services:
         class: '%app.twig.user_picture_extension.class%'
         public: false
         tags:
-            - { name: twig.extension }         
+            - { name: twig.extension }  
+            
+    app.twig.age_from_date_extension:
+        class: '%app.twig.age_from_date_extension.class%'
+        public: false
+        tags:
+            - { name: twig.extension } 
 
     # Manager
     base.manager:

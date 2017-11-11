@@ -10,7 +10,7 @@ use Dt\UserBundle\Entity\UserPicture;
  *
  * @author Hubsine
  */
-class GetUserPictureUrlExtension extends \Twig_Extension 
+class UserPictureExtension extends \Twig_Extension 
 {
     public function getFilters()
     {

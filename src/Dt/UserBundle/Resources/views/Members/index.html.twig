@@ -1,6 +1,13 @@
 {% extends '@FOSUser/layout.html.twig' %}
 
 {% block content_page %}
-    <h1>Users list</h1>
+
+    {% if users is defined %}
+
+        {% for user in users %}
+            {% include '@FOSUser/MembersLoop/container.html.twig' %}
+        {% endfor %}
+        
+    {% endif %} 
 
 {% endblock content_page %}

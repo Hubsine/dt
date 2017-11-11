@@ -3,6 +3,7 @@ parameters:
     # Extensions Class
     app.twig.country_extension.class: AppBundle\Twig\Extensions\CountryExtension
     app.twig.file_exists_extension.class: AppBundle\Twig\Extensions\FileExistsExtension
+    app.twig.get_user_picture_url_extension.class: AppBundle\Twig\Extensions\GetUserPictureUrlExtension
     # Manager Class
     app_bundle.base.manager.class: AppBundle\Doctrine\BaseManager
     
@@ -62,7 +63,13 @@ services:
         class: '%app.twig.file_exists_extension.class%'
         public: false
         tags:
-            - { name: twig.extension }        
+            - { name: twig.extension } 
+            
+    app.twig.get_user_picture_url_extension:
+        class: '%app.twig.get_user_picture_url_extension.class%'
+        public: false
+        tags:
+            - { name: twig.extension }         
 
     # Manager
     base.manager:

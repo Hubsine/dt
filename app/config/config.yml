@@ -157,7 +157,7 @@ swiftmailer:
 assetic:
     bundle: ['DtAdminBundle', 'DtUserBundle', 'MopaBootstrapBundle']
     debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
+    #use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
         less:

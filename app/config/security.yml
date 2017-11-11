@@ -66,5 +66,5 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/membres, access: "hasRole('ROLE_USER')" }
+        - { path: ^/members, access: "hasRole('ROLE_USER')" }
         - { path: ^/admin/, access: "hasRole('ROLE_ADMIN')" }        

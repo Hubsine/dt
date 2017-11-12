@@ -354,14 +354,14 @@ gos_web_socket:
     server:
         origin_check: false
         port: 8843       #The port the socket server will listen on
-        host: donneton06.com  #The host ip to bind to    
+        host: 192.168.1.24  #The host ip to bind to    
     origins:
         - donneton06.com
         - https://www.donneton06.com
         - https://donneton06.com
         - www.donneton06.com
     client:
-        firewall: main #can be an array of firewalls
+        firewall: user
         session_handler: @session.handler.pdo
         #storage:
             #driver: @gos_web_socket.client_storage.driver.redis

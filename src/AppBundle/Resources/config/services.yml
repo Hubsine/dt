@@ -5,6 +5,7 @@ parameters:
     app.twig.file_exists_extension.class: AppBundle\Twig\Extensions\FileExistsExtension
     app.twig.user_picture_extension.class: AppBundle\Twig\Extensions\UserPictureExtension
     app.twig.age_from_date_extension.class: AppBundle\Twig\Extensions\AgeFromDateExtension
+    app.twig.user_extension.class: AppBundle\Twig\Extensions\UserExtension
     # Manager Class
     app_bundle.base.manager.class: AppBundle\Doctrine\BaseManager
     
@@ -77,6 +78,13 @@ services:
         public: false
         tags:
             - { name: twig.extension } 
+            
+    app.twig.user_extension:
+        class: '%app.twig.user_extension.class%'
+        arguments: ["@gos_web_socket_server.client_event.listener"]
+        public: false
+        tags:
+            - { name: twig.extension }         
 
     # Manager
     base.manager:

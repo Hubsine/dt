@@ -33,6 +33,7 @@ security:
 #                oauth_user_provider:
 #                    service: dt.oauth.user_provider
         main:
+            context: user
             switch_user: { role: ROLE_USER, parameter: switch_user }
             pattern: ^/
             form_login:

@@ -109,15 +109,27 @@ class AppClientEventListener
      */
     public function userIsOnline(UserInterface $user)
     {
+        
         $userId = $user->getId();
         $connection = ( isset($this->connections[$userId]) ) ? $this->connections[$userId] : null;
         
-        if( $connection instanceof ConnectionInterface)
+        var_dump(count($this->connections));
+        if( $connection instanceof ConnectionInterface )
         {
             return true;
         }
         
         return false;
         
+    }
+    
+    /**
+     * Get number connection on WebSocket
+     * 
+     * @return integer 
+     */
+    public function getNumberConnections()
+    {
+        return count( $this->connections );
     }
 }

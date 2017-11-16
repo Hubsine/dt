@@ -102,28 +102,6 @@ class AppClientEventListener
     }
     
     /**
-     * Check if user is online or not
-     * 
-     * @param UserInterface $user
-     * @return boolean
-     */
-    public function userIsOnline(UserInterface $user)
-    {
-        
-        $userId = $user->getId();
-        $connection = ( isset($this->connections[$userId]) ) ? $this->connections[$userId] : null;
-        
-        var_dump(count($this->connections));
-        if( $connection instanceof ConnectionInterface )
-        {
-            return true;
-        }
-        
-        return false;
-        
-    }
-    
-    /**
      * Get number connection on WebSocket
      * 
      * @return integer 

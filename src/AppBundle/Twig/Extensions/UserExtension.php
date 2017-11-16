@@ -12,13 +12,6 @@ use AppBundle\EventListener\AppClientEventListener;
  */
 class UserExtension extends \Twig_Extension 
 {
-    private $gosAppClient;
-
-    public function __construct(AppClientEventListener $gosAppClient) 
-    {
-        $this->gosAppClient = $gosAppClient;
-    }
-
     public function getFunctions() {
         return array(
             new \Twig_SimpleFunction('getUserOnlineOrOfflineClass', array($this, 'getUserOnlineOrOfflineClassFunction')),
@@ -27,6 +20,36 @@ class UserExtension extends \Twig_Extension
 
     public function getUserOnlineOrOfflineClassFunction(UserInterface $user) 
     {
-        return ($this->gosAppClient->userIsOnline($user)) ? "online " . $this->gosAppClient->getNumberConnections() : "offline " . $this->gosAppClient->getNumberConnections();
+        echo count($this->connections);
+        return ($this->userIsOnline($user)) ? "online" : "offline";
+    }
+    
+    public function addConnections($user, $connection)
+    {
+        if( $user instanceof UserInterface )
+        {
+            $this->connections[$user->getId()] = $connection;
+        }
+    }
+    
+    /**
+     * Check if user is online or not
+     * 
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function userIsOnline(UserInterface $user)
+    {
+        
+        $userId = $user->getId();
+        $connection = ( isset($this->connections[$userId]) ) ? $this->connections[$userId] : null;
+        
+        if( $connection instanceof ConnectionInterface )
+        {
+            return true;
+        }
+        
+        return false;
+        
     }
 }

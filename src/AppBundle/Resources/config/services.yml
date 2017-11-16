@@ -35,13 +35,13 @@ services:
             
     gos_web_socket_server.client_event.listener:
         class: AppBundle\EventListener\AppClientEventListener
-        arguments: ["@gos_web_socket.websocket.client_manipulator"]
+        arguments: ["@gos_web_socket.websocket.client_manipulator", "@app.twig.user_extension"]
         tags:
-            - { name: kernel.event_listener, event: 'gos_web_socket.client_connected', method: onClientConnect }
-            - { name: kernel.event_listener, event: 'gos_web_socket.client_disconnected', method: onClientDisconnect }
-            - { name: kernel.event_listener, event: 'gos_web_socket.client_error', method: onClientError }
-            - { name: kernel.event_listener, event: 'gos_web_socket.server_launched', method: onServerStart }
-            - { name: kernel.event_listener, event: 'gos_web_socket.client_rejected', method: onClientRejected }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_connected', method: onClientConnect, priority: 10 }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_disconnected', method: onClientDisconnect, priority: 10 }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_error', method: onClientError, priority: 10 }
+            - { name: kernel.event_listener, event: 'gos_web_socket.server_launched', method: onServerStart, priority: 10 }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_rejected', method: onClientRejected, priority: 10 }
             
     # End Gos WebSocket Bundle
         
@@ -81,7 +81,7 @@ services:
             
     app.twig.user_extension:
         class: '%app.twig.user_extension.class%'
-        arguments: ["@gos_web_socket_server.client_event.listener"]
+        #arguments: ["@gos_web_socket_server.client_event.listener"]
         public: false
         tags:
             - { name: twig.extension }         

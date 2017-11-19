@@ -1,3 +1,5 @@
 <div class="avatarContainer media-left">
-    <img class="avatar" src="{{ user.profilePicture|getUserPictureUrl }}" data-src="holder.js/50x50?auto=yes" alt="{{ user.username }}">
+    <a href="{{ path('fos_user_profile_show', {'id': user.id}) }}" title="{{ user.username }}">
+        <img class="avatar" src="{{ user.profilePicture|getUserPictureUrl }}" data-src="holder.js/50x50?auto=yes" alt="{{ user.username }}">
+    </a>
 </div>

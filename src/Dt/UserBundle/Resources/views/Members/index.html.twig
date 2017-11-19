@@ -5,9 +5,11 @@
     {% if users is defined %}
 
         <div class="row">
+            <div class="col-md-12">
             {% for user in users %}
                 {% include '@FOSUser/MembersLoop/container.html.twig' %}
             {% endfor %}
+            </div>
         </div>
 
     {% endif %} 

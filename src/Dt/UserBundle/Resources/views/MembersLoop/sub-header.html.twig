@@ -1,9 +1,9 @@
 <div class="subHeader">
     <span>
-        {{ user.birthday|getAge }}{% if user.userLocation is not empty and user.location.city is defined %},{% endif %}
+        {{ user.birthday|getAge }}{% if user.userLocation is not empty %},{% endif %}
     </span>
     <span>
-        {% if user.userLocation is not empty and user.location.city is defined %}
+        {% if user.userLocation is not empty %}
             {{ app.user.userLocation.city }}
         {% endif %}
     </span>

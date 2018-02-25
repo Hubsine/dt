@@ -11,16 +11,16 @@ parameters:
     auth_mode: login
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
-    mailer_user: shonen.shojo@gmail.com
-    mailer_password: 16781741
+    mailer_user: @gmail.com
+    mailer_password: null
     secret: 81914aeb848449b8f000368dd4c977392a421edd
 
-    fb_client_id: 416091748765235
-    fb_client_secret: 42b9c13d2379ac060279438db339bcc5
-    test_fb_client_id: 416100258764384
-    test_fb_client_secret: bf7443e02cbed7db12e6a9309c5aa71c
+    fb_client_id: 
+    fb_client_secret: 
+    test_fb_client_id: 
+    test_fb_client_secret: 
 
-    google_client_id:  392314135321-b2uun47jopmnvp16np3llejerqqvvtp2.apps.googleusercontent.com 
-    google_client_secret:  3miqgGwipNohXqDVxtNeWJ0X 
+    google_client_id:  
+    google_client_secret:  
 
     knp_menu.renderer.twig.template: MopaBootstrapBundle:Menu:menu.html.twig
